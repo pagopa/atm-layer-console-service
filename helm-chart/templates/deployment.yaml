@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    App: {{ .Values.deployment.name }}
+  annotations:
+    {{- toYaml .Values.deployment.annotations | nindent 4 }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      App: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        App: {{ .Values.deployment.name }}
+        force-recreate: {{ randAlphaNum 5 | quote }}
+    spec:
+      serviceAccountName: {{ include "atm-layer-mil-authenticator.serviceAccountName" . }}
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true 
+          volumeAttributes:
+            secretProviderClass: {{ .Values.secretProviderClass.name }}
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          imagePullPolicy: Always
+          env:
+            - name: MIL_AUTHENTICATOR_ENVIRONMENT
+              value: "{{ .Values.milAuthenticator.environment }}"
+            - name: MIL_AUTHENTICATOR_EXECUTION_MODE
+              value: "{{ .Values.milAuthenticator.executionMode }}"
+            - name: MIL_AUTHENTICATOR_LOG_LEVEL
+              value: "{{ .Values.milAuthenticator.logLevel }}"
+            - name: MIL_AUTHENTICATOR_APPLICATION_BASE_PATH
+              value: "{{ .Values.milAuthenticator.applicationBasePath }}"
+            - name: MIL_AUTHENTICATOR_SWAGGER_PATH
+              value: "{{ .Values.milAuthenticator.swaggerPath }}"
+            - name: MIL_AUTHENTICATOR_HEALTH_PATH
+              value: "{{ .Values.milAuthenticator.healthPath }}"
+            - name: MIL_AUTHENTICATOR_OPENAPI_PATH
+              value: "{{ .Values.milAuthenticator.openapiPath }}"
+            - name: MIL_AUTHENTICATOR_AUTH_CLIENT_CREDENTIALS
+              value: "{{ .Values.milAuth.clientCredentials }}"
+            - name: MIL_BASE_PATH
+              value: "{{ .Values.milBasePath }}"
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redis.credentialsSecretName }}
+                  key: {{ .Values.redis.credentialsSecretKeys.host }}
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redis.credentialsSecretName }}
+                  key: {{ .Values.redis.credentialsSecretKeys.port }}
+            - name: MIL_AUTHENTICATOR_MIL_AUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.milAuth.credentialsSecretName }}
+                  key: {{ .Values.milAuth.credentialsSecretKeys.clientId }}
+            - name: MIL_AUTHENTICATOR_MIL_AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.milAuth.credentialsSecretName }}
+                  key: {{ .Values.milAuth.credentialsSecretKeys.clientSecret }}
+          volumeMounts:
+          - name: secrets-store-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+
+  strategy:
+    type: Recreate
