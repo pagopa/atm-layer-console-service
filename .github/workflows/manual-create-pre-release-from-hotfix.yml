@@ -1,4 +1,4 @@
-name: Manual create pre-release from dev
+name: Manual create pre-release from hotfix
 
 on:
   workflow_dispatch:
@@ -21,10 +21,10 @@ permissions: write-all
 
 jobs:
   manual-create-pre-release:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/heads/hotfix/')
     strategy:
       matrix:
-        environment: [dev]
+        environment: [uat] #pre-prod
 
     name: "manual-create-pre-release"
     runs-on: ubuntu-latest
