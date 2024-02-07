@@ -22,8 +22,8 @@ spec:
         force-recreate: {{ randAlphaNum 5 | quote }}
     spec:
       serviceAccountName: {{ include "atm-layer-console-service.serviceAccountName" . }}
-      {{- if .Values.secretProviderClass.enabled }}
       volumes:
+      {{- if .Values.secretProviderClass.enabled }}
       - name: secrets-store-inline
         csi:
           driver: secrets-store.csi.k8s.io
@@ -38,8 +38,8 @@ spec:
             - containerPort: {{ .Values.service.port }}
           imagePullPolicy: Always
           env:
-          {{- if .Values.secretProviderClass.enabled }}
           volumeMounts:
+          {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
             mountPath: "/mnt/secrets-store"
             readOnly: true
