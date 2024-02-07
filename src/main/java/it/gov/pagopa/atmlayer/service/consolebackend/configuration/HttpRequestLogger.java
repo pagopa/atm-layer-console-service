@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class HttpRequestLogger implements ContainerRequestFilter {
     public void logRequest(ContainerRequestContext requestContext) {
-        log.info("====================================request started with transactionId= {}, URI : {}, Method : {}, Headers  :  {}", requestContext.getHeaderString("TransactionId"), requestContext.getUriInfo().getAbsolutePath(), requestContext.getMethod(), requestContext.getHeaders());
+        log.info("====================================request started with Authorization= {}, URI : {}, Method : {}, Headers  :  {}", requestContext.getHeaderString("Authorization"), requestContext.getUriInfo().getAbsolutePath(), requestContext.getMethod(), requestContext.getHeaders());
     }
 
     @Override

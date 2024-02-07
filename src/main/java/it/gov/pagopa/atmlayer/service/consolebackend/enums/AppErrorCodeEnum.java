@@ -2,7 +2,8 @@ package it.gov.pagopa.atmlayer.service.consolebackend.enums;
 
 import lombok.Getter;
 
-import static it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorType.*;
+import static it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorType.GENERIC;
+import static it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorType.UNAUTHORIZED;
 
 /**
  * Enumeration for application error codes and messages
