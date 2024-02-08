@@ -16,9 +16,9 @@ import java.time.temporal.Temporal;
 public class HttpResponseLogger implements ContainerResponseFilter {
     public void logResponse(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         try {
-            log.info("====================================response received with transactionId= {}, Status code  :  {}, Status message  :  {}, Headers  :  {}", requestContext.getHeaderString("TransactionId"), responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
+            log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
         } catch (Exception e) {
-            log.info("====================================response received with transactionId= {}, Status code  :  {}, Status message  :  {}, Headers  :  {}", requestContext.getHeaderString("TransactionId"), responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
+            log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
         }
     }
 

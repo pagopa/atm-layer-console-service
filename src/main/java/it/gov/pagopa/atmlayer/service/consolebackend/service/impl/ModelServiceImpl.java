@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.ModelWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ModelService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -21,5 +22,10 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(int pageIndex, int pageSize, String functionType, String modelVersion, String status, String acquirerId, String filename) {
         return modelWebClient.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, status, acquirerId, filename);
+    }
+
+    @Override
+    public Uni<UserProfileDto> findByUserId(String userId) {
+        return modelWebClient.findByUserId(userId);
     }
 }

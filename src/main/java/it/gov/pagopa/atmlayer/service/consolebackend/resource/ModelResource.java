@@ -3,7 +3,9 @@ package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ModelService;
@@ -51,20 +53,21 @@ public class ModelResource {
                                                                  @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) String status,
                                                                  @QueryParam("acquirerId") String acquirerId,
                                                                  @QueryParam("fileName") String fileName) {
-        String email = getEmailJWT(containerRequestContext);
-        log.info("Email trovata nel jwt: {}", email);
 
-        if("antonio.tarricone@pagopa.it".equals(email)){
-            return this.modelService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, status, acquirerId, fileName)
-                    .onItem()
-                    .transform(Unchecked.function(pagedList -> {
-                        if (pagedList.getResults().isEmpty()) {
-                            log.info("No Bpmn file meets the applied filters");
-                        }
-                        return pagedList;
-                    }));
-        }
-        throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+        return modelService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (userProfile != null && UserProfileEnum.ADMIN.equals(userProfile.getProfile())) {
+                return this.modelService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, status, acquirerId, fileName)
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No Bpmn file meets the applied filters");
+                            }
+                            return pagedList;
+                        }));
+            } else {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+        });
     }
 
 }

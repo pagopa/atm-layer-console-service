@@ -2,7 +2,9 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -10,12 +12,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+@Path("/api/v1/model")
 @RegisterRestClient(configKey = "model-path-api")
 public interface ModelWebClient {
 
 
     @GET
-    @Path("/api/v1/model/bpmn/filter")
+    @Path("/bpmn/filter")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
@@ -27,6 +30,9 @@ public interface ModelWebClient {
                                                           @QueryParam("acquirerId") String acquirerId,
                                                           @QueryParam("fileName") String fileName);
 
-
+    @GET
+    @Path("/users/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<UserProfileDto> findByUserId(@NotNull @QueryParam("userId") String userId);
 
 }
