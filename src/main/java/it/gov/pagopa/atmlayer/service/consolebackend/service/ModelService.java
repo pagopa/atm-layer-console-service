@@ -4,8 +4,6 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.QueryParam;
 
 public interface ModelService {
 
