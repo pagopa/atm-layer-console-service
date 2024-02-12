@@ -3,6 +3,8 @@ package it.gov.pagopa.atmlayer.service.consolebackend.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import jakarta.ws.rs.container.ContainerRequestContext;
 
 import java.util.Base64;
@@ -37,4 +39,18 @@ public class HeadersUtils {
         return getPayload(middlePart).get(CLAIM_EMAIL).asText();
 
     }
+
+    public static boolean havePermission(UserProfileDto userProfileDto, UserProfileEnum vision) {
+        if (userProfileDto == null) {
+            return false;
+        }
+        if (vision == UserProfileEnum.GUEST) {
+            return true;
+        } else if (vision == UserProfileEnum.OPERATOR) {
+            return userProfileDto.getProfile() == UserProfileEnum.OPERATOR || userProfileDto.getProfile() == UserProfileEnum.ADMIN;
+        } else {
+            return userProfileDto.getProfile() == UserProfileEnum.ADMIN;
+        }
+    }
+
 }
