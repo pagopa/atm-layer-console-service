@@ -34,6 +34,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.UUID;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
+import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
 
 @Path("/model")
 @Tag(name = "Model", description = "Model proxy")
@@ -69,7 +70,7 @@ public class ModelResource {
                                                                  @QueryParam("fileName") String fileName) {
 
         return modelService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (userProfile != null && UserProfileEnum.ADMIN.equals(userProfile.getProfile())) {
+            if (havePermission(userProfile, UserProfileEnum.ADMIN)) {
                 return this.modelService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, status, acquirerId, fileName)
                         .onItem()
                         .transform(Unchecked.function(pagedList -> {
