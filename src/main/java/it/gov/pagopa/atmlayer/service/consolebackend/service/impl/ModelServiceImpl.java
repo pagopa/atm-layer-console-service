@@ -6,6 +6,9 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankConfigTriplet
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnBankConfigDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ModelService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -51,5 +54,12 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Uni<BpmnBankConfigDTO> replaceSingleAssociation(UUID bpmnId, Long version, BankConfigTripletDto bankConfigTripletDto) {
         return modelWebClient.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto);
+    }
+
+    @Override
+    public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(int pageIndex, int pageSize, StatusEnum status, UUID workflowResourceId, String deployedFileName, String definitionKey,
+                                                                                  DeployableResourceType resourceType, String sha256, String definitionVersionCamunda, String camundaDefinitionId, String description, String resource, UUID deploymentId, String fileName) {
+        return modelWebClient.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey,
+                resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName);
     }
 }

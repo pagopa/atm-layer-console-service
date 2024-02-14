@@ -5,6 +5,9 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankConfigTriplet
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnBankConfigDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.ws.rs.DefaultValue;
@@ -17,8 +20,9 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import java.util.UUID;
 
-public interface ModelService {
+import java.util.UUID;
 
+public interface ModelService {
     Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(int pageIndex, int pageSize, String functionType, String modelVersion, String status, String acquirerId, String filename);
 
     Uni<UserProfileDto> findByUserId(String userId);
@@ -30,5 +34,9 @@ public interface ModelService {
     Uni<Void> deleteSingleAssociation(UUID bpmnId, Long version, String acquirerId, String branchId, String terminalId);
 
     Uni<BpmnBankConfigDTO> replaceSingleAssociation(UUID bpmnId, Long version, BankConfigTripletDto bankConfigTripletDto);
+
+    Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(int page, int pageSize, StatusEnum status, UUID workflowResourceId, String deployedFileName, String definitionKey,
+                                                                          DeployableResourceType resourceType, String sha256, String definitionVersionCamunda, String camundaDefinitionId,
+                                                                          String description, String resource, UUID deploymentId, String fileName);
 
 }

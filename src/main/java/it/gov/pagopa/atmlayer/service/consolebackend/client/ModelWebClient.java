@@ -5,6 +5,9 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankConfigTriplet
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnBankConfigDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -69,4 +72,24 @@ public interface ModelWebClient {
     @Produces(MediaType.APPLICATION_JSON)
     Uni<UserProfileDto> findByUserId(@NotNull @QueryParam("userId") String userId);
 
+    @GET
+    @Path("/workflow-resource/filter")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
+                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer page,
+                                                                 @QueryParam("pageSize") @DefaultValue("10")
+                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer size,
+                                                                 @QueryParam("status")
+                                                                 @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
+                                                                 @QueryParam("workflowResourceId") UUID workflowResourceId,
+                                                                 @QueryParam("deployedFileName") String deployedFileName,
+                                                                 @QueryParam("definitionKey") String definitionKey,
+                                                                 @QueryParam("resourceType") DeployableResourceType resourceType,
+                                                                 @QueryParam("sha256") String sha256,
+                                                                 @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
+                                                                 @QueryParam("camundaDefinitionId") String camundaDefinitionId,
+                                                                 @QueryParam("description") String description,
+                                                                 @QueryParam("resource") String resource,
+                                                                 @QueryParam("deploymentId") UUID deploymentId,
+                                                                 @QueryParam("fileName") String fileName);
 }

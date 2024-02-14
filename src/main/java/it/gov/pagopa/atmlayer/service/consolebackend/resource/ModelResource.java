@@ -5,7 +5,10 @@ import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankConfigTripletDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnBankConfigDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
@@ -27,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -46,11 +50,11 @@ import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.h
                 scheme = "bearer",
                 bearerFormat = "JWT")
 })
+@SecurityRequirement(name = "bearerAuth")
 public class ModelResource {
 
     @Inject
     ModelService modelService;
-
 
     @GET
     @Path("/bpmn/filtred")
@@ -100,6 +104,43 @@ public class ModelResource {
                         .transform(Unchecked.function(pagedList -> {
                             if (pagedList.getResults().isEmpty()) {
                                 log.info("No associations found for BpmnInd= {} and modelVersion= {}", bpmnId, version);
+                            }
+                            return pagedList;
+                        }));
+            } else {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+        });
+    }
+    @GET
+    @Path("/workflow-resource/filtred")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Restituisce i Workflow filtrati paginati")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@Context ContainerRequestContext containerRequestContext,
+                                                                          @QueryParam("pageIndex") @DefaultValue("0")
+                                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer pageIndex,
+                                                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer pageSize,
+                                                                          @QueryParam("status") @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
+                                                                          @QueryParam("workflowResourceId") UUID workflowResourceId,
+                                                                          @QueryParam("deployedFileName") String deployedFileName,
+                                                                          @QueryParam("definitionKey") String definitionKey,
+                                                                          @QueryParam("resourceType") DeployableResourceType resourceType,
+                                                                          @QueryParam("sha256") String sha256,
+                                                                          @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
+                                                                          @QueryParam("camundaDefinitionId") String camundaDefinitionId,
+                                                                          @QueryParam("description") String description,
+                                                                          @QueryParam("resource") String resource,
+                                                                          @QueryParam("deploymentId") UUID deploymentId,
+                                                                          @QueryParam("fileName") String fileName) {
+
+        return modelService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (userProfile != null && UserProfileEnum.ADMIN.equals(userProfile.getProfile())) {
+                return this.modelService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No Workflow resources meets the applied filters");
                             }
                             return pagedList;
                         }));
