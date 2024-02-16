@@ -2,9 +2,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.ModelWebClient;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
@@ -23,16 +21,6 @@ public class ModelServiceImpl implements ModelService {
     @Inject
     @RestClient
     ModelWebClient modelWebClient;
-
-    @Override
-    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(int pageIndex, int pageSize, String functionType, String modelVersion, String status, String acquirerId, String filename) {
-        return modelWebClient.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, status, acquirerId, filename);
-    }
-
-    @Override
-    public Uni<UserProfileDto> findByUserId(String userId) {
-        return modelWebClient.findByUserId(userId);
-    }
 
     @Override
     public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(int pageIndex, int pageSize, StatusEnum status, UUID workflowResourceId, String deployedFileName, String definitionKey,

@@ -1,13 +1,10 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -17,31 +14,11 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.UUID;
 
-@Path("/api/v1/model")
-@RegisterRestClient(configKey = "model-path-api")
+@RegisterRestClient(configKey = "workflow-client")
 public interface ModelWebClient {
 
-
     @GET
-    @Path("/bpmn/filter")
-    @Produces(MediaType.APPLICATION_JSON)
-    Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
-                                                          @QueryParam("pageSize") @DefaultValue("10")
-                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
-                                                          @QueryParam("functionType") String functionType,
-                                                          @QueryParam("modelVersion") String modelVersion,
-                                                          @QueryParam("status") String status,
-                                                          @QueryParam("acquirerId") String acquirerId,
-                                                          @QueryParam("fileName") String fileName);
-
-    @GET
-    @Path("/users/search")
-    @Produces(MediaType.APPLICATION_JSON)
-    Uni<UserProfileDto> findByUserId(@NotNull @QueryParam("userId") String userId);
-
-    @GET
-    @Path("/workflow-resource/filter")
+    @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                  @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer page,
