@@ -1,31 +1,27 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.UUID;
 
 @RegisterRestClient(configKey = "workflow-client")
 public interface WorkflowWebClient {
-
-
-    @GET
-    @Path("/users/search")
-    @Produces(MediaType.APPLICATION_JSON)
-    Uni<UserProfileDto> findByUserId(@NotNull @QueryParam("userId") String userId);
 
     @GET
     @Path("/filter")
@@ -63,5 +59,10 @@ public interface WorkflowWebClient {
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
+
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @NonBlocking
+    Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto);
 
 }

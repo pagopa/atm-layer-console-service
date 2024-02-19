@@ -2,6 +2,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
@@ -18,6 +19,8 @@ public interface WorkflowService {
                                                                           String description, String resource, UUID deploymentId, String fileName);
 
     Uni<FileS3Dto> downloadFrontEnd (UUID workflowResourceId);
+
+    Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
 
     Uni<WorkflowResourceDTO> deploy(UUID uuid);
 
