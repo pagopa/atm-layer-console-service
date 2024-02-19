@@ -15,7 +15,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import java.util.UUID;
 
 @RegisterRestClient(configKey = "workflow-client")
-public interface ModelWebClient {
+public interface WorkflowWebClient {
 
     @GET
     @Path("/filter")
@@ -37,4 +37,10 @@ public interface ModelWebClient {
                                                                  @QueryParam("resource") String resource,
                                                                  @QueryParam("deploymentId") UUID deploymentId,
                                                                  @QueryParam("fileName") String fileName);
+
+    @GET
+    @Path("/downloadFrontEnd/{uuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID workflowResourceId);
+
 }

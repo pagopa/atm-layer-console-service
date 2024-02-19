@@ -38,7 +38,7 @@ import java.util.UUID;
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
 
-@Path("/model/bpmn")
+@Path("/bpmn")
 @Tag(name = "BPMN", description = "BPMN proxy")
 @Slf4j
 @ApplicationScoped
@@ -58,7 +58,7 @@ public class BpmnResource {
     UserService userService;
 
     @GET
-    @Path("/filtred")
+    @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Restituisce i Bpmn filtrati paginati", description = "Esegue la GET dei Bpmn sul Model filtrando sui campi desiderati gestendo la paginazione")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))

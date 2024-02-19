@@ -8,7 +8,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceT
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.ModelService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -32,7 +31,7 @@ import java.util.UUID;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
 
-@Path("/model/resources")
+@Path("/resources")
 @Tag(name = "Resource", description = "Resource proxy")
 @Slf4j
 @ApplicationScoped
