@@ -4,10 +4,6 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 import java.util.UUID;
 public interface BpmnService {
