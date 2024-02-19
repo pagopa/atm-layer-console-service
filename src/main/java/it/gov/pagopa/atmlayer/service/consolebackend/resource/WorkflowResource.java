@@ -13,6 +13,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -25,6 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
@@ -78,18 +80,17 @@ public class WorkflowResource {
                                                                           @QueryParam("fileName") String fileName) {
 
         return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (userProfile != null && UserProfileEnum.ADMIN.equals(userProfile.getProfile())) {
-                return this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
-                        .onItem()
-                        .transform(Unchecked.function(pagedList -> {
-                            if (pagedList.getResults().isEmpty()) {
-                                log.info("No Workflow resources meets the applied filters");
-                            }
-                            return pagedList;
-                        }));
-            } else {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
                 throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
             }
+            return this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
+                    .onItem()
+                    .transform(Unchecked.function(pagedList -> {
+                        if (pagedList.getResults().isEmpty()) {
+                            log.info("No Workflow resources meets the applied filters");
+                        }
+                        return pagedList;
+                    }));
         });
     }
 
@@ -108,4 +109,18 @@ public class WorkflowResource {
         });
     }
 
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<WorkflowResourceDTO> create(@Context ContainerRequestContext containerRequestContext,
+                                            @RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+            return this.workflowService.create(workflowResourceCreationDto)
+                    .onFailure()
+                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        });
+    }
 }

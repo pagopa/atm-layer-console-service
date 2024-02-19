@@ -5,7 +5,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-
 import java.util.UUID;
 
 public interface WorkflowService {
@@ -15,4 +14,6 @@ public interface WorkflowService {
                                                                           String description, String resource, UUID deploymentId, String fileName);
 
     Uni<FileS3Dto> downloadFrontEnd (UUID workflowResourceId);
+
+    Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
 }

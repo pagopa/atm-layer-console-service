@@ -33,4 +33,9 @@ public class WorkflowServiceImpl implements WorkflowService {
     public Uni<FileS3Dto> downloadFrontEnd(UUID workflowResourceId) {
         return workflowWebClient.downloadFrontEnd(workflowResourceId);
     }
+
+    @Override
+    public Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto) {
+        return workflowWebClient.create(workflowResourceCreationDto);
+    }
 }

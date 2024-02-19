@@ -1,15 +1,18 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.UUID;
@@ -43,4 +46,9 @@ public interface WorkflowWebClient {
     @Produces(MediaType.APPLICATION_JSON)
     Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID workflowResourceId);
 
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @NonBlocking
+    Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto);
 }
