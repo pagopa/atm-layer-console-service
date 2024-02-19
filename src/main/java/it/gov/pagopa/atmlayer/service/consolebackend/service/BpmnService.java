@@ -23,5 +23,7 @@ public interface BpmnService {
     Uni<Void> deleteSingleAssociation(UUID bpmnId, Long version, String acquirerId,  String branchId, String terminalId);
     Uni<BpmnBankConfigDTO> replaceSingleAssociation(UUID bpmnId,Long version,BankConfigTripletDto bankConfigTripletDto);
     Uni<BpmnDTO> deployBPMN(UUID uuid, Long version);
+    Uni<Void> disableBPMN(UUID bpmnId, Long version);
+    Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto);
 
 }

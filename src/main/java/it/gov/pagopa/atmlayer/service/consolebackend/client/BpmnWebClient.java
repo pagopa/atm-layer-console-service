@@ -86,5 +86,15 @@ public interface BpmnWebClient {
     @Produces(MediaType.APPLICATION_JSON)
     Uni<BpmnDTO> deployBPMN(@PathParam("uuid") UUID uuid, @PathParam("version") Long version);
 
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/upgrade")
+    public Uni<BpmnDTO> upgradeBPMN(@Valid BpmnUpgradeDto bpmnUpgradeDto);
+
+    @POST
+    @Path("/disable/{uuid}/version/{version}")
+    public Uni<Void> disableBPMN(@PathParam("uuid") UUID bpmnId, @PathParam("version") Long version);
+
 
 }
