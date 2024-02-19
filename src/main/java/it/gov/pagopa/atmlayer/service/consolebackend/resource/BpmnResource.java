@@ -237,7 +237,7 @@ public class BpmnResource {
     }
 
     @POST
-    @Path("/bpmn/disable/{uuid}/version/{version}")
+    @Path("/disable/{uuid}/version/{version}")
     public Uni<Void> disableBPMN(@Context ContainerRequestContext containerRequestContext,
                                  @PathParam("uuid") UUID bpmnId,
                                  @PathParam("version") Long version) {
@@ -255,7 +255,7 @@ public class BpmnResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/bpmn/upgrade")
+    @Path("/upgrade")
     public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
         return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
