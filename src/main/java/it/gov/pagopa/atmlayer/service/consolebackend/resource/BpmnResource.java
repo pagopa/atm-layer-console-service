@@ -227,4 +227,37 @@ public class BpmnResource {
                     .onFailure().transform(e -> new AtmLayerException(e));
         });
     }
+
+    @POST
+    @Path("/disable/{uuid}/version/{version}")
+    public Uni<Void> disableBPMN(@Context ContainerRequestContext containerRequestContext,
+                                 @PathParam("uuid") UUID bpmnId,
+                                 @PathParam("version") Long version) {
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                return this.bpmnService.disableBPMN(bpmnId, version)
+                        .onItem()
+                        .transform(Unchecked.function( res -> res));
+            } else {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+        });
+    }
+
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/upgrade")
+    public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
+                                    @Valid BpmnUpgradeDto bpmnUpgradeDto) {
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                return this.bpmnService.upgradeBPMN(bpmnUpgradeDto)
+                        .onItem()
+                        .transform(Unchecked.function( res -> res));
+            } else {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+        });
+    }
 }

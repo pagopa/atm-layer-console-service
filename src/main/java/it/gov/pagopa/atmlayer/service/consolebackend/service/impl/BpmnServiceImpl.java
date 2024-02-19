@@ -60,4 +60,14 @@ public class BpmnServiceImpl implements BpmnService {
     public Uni<BpmnDTO> deployBPMN(UUID uuid, Long version) {
         return bpmnWebClient.deployBPMN(uuid, version);
     }
+
+    @Override
+    public Uni<Void> disableBPMN(UUID bpmnId, Long version) {
+        return bpmnWebClient.disableBPMN(bpmnId, version);
+    }
+
+    @Override
+    public Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto) {
+        return bpmnWebClient.upgradeBPMN(bpmnUpgradeDto);
+    }
 }

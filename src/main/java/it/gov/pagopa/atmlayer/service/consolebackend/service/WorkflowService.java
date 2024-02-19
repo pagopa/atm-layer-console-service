@@ -17,3 +17,4 @@ public interface WorkflowService {
 
     Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
 }
+
