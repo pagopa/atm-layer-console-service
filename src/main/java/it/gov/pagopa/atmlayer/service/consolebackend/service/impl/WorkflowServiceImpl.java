@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.WorkflowWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
@@ -33,5 +34,15 @@ public class WorkflowServiceImpl implements WorkflowService {
     @Override
     public Uni<FileS3Dto> downloadFrontEnd(UUID workflowResourceId) {
         return workflowWebClient.downloadFrontEnd(workflowResourceId);
+    }
+
+    @Override
+    public Uni<WorkflowResourceDTO> deploy(UUID uuid) {
+        return workflowWebClient.deploy(uuid);
+    }
+
+    @Override
+    public Uni<WorkflowResourceDTO> rollback(UUID uuid) {
+        return workflowWebClient.rollback(uuid);
     }
 }

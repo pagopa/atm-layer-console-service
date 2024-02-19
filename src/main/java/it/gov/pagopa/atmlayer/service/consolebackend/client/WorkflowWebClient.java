@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
@@ -51,5 +52,16 @@ public interface WorkflowWebClient {
     @Path("/downloadFrontEnd/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID workflowResourceId);
+
+    @POST
+    @Path("/deploy/{uuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid);
+
+    @PUT
+    @Path("/rollback/{uuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
 
 }

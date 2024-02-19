@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
@@ -109,4 +110,37 @@ public class WorkflowResource {
         });
     }
 
+    @POST
+    @Path("/deploy/{uuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<WorkflowResourceDTO> deploy(@Context ContainerRequestContext containerRequestContext,
+                                           @PathParam("uuid") UUID uuid) {
+
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+            return this.workflowService.deploy(uuid)
+                    .onFailure()
+                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        });
+
+    }
+
+    @PUT
+    @Path("/rollback/{uuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<WorkflowResourceDTO> rollback(@Context ContainerRequestContext containerRequestContext,
+                                             @PathParam("uuid") UUID uuid) {
+
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+            return this.workflowService.rollback(uuid)
+                    .onFailure()
+                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        });
+    }
 }
