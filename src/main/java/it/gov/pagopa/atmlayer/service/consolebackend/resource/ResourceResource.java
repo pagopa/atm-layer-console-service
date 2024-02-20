@@ -5,21 +5,15 @@ import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.container.ContainerRequestContext;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
@@ -33,9 +27,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.io.File;
 import java.util.UUID;
-
-import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
-import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
 
 @Path("/resources")
 @Tag(name = "Resource", description = "Resource proxy")
@@ -53,14 +44,10 @@ public class ResourceResource {
     @Inject
     ResourceService resourceService;
 
-    @Inject
-    UserService userService;
-
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@Context ContainerRequestContext containerRequestContext,
-                                                                  @QueryParam("pageIndex") @DefaultValue("0")
+    public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                   @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10")
                                                                   @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
@@ -70,67 +57,45 @@ public class ResourceResource {
                                                                   @QueryParam("fileName") String fileName,
                                                                   @QueryParam("storageKey") String storageKey,
                                                                   @QueryParam("extension") String extension){
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.resourceService.getResourceFiltered(pageIndex, pageSize, resourceId, sha256, noDeployableResourceType, fileName, storageKey, extension)
-                    .onItem()
-                    .transform(Unchecked.function(pagedList -> {
-                        if (pagedList.getResults().isEmpty()) {
-                            log.info("No Resources meets the applied filters");
-                        }
-                        return pagedList;
-                    }));
-        });
+
+        return this.resourceService.getResourceFiltered(pageIndex, pageSize, resourceId, sha256, noDeployableResourceType, fileName, storageKey, extension)
+                .onItem()
+                .transform(Unchecked.function(pagedList -> {
+                    if (pagedList.getResults().isEmpty()) {
+                        log.info("No Resources meets the applied filters");
+                    }
+                    return pagedList;
+                }));
     }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<ResourceDTO> createResource(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.resourceService.createResource(resourceCreationDto)
-                    .onItem()
-                    .transformToUni(resource -> Uni.createFrom().item(resource))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+    public Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
+         return this.resourceService.createResource(resourceCreationDto)
+                 .onItem()
+                 .transformToUni(resource -> Uni.createFrom().item(resource))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @PUT
     @Path("/{uuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<ResourceDTO> updateResource(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @FormParam("file") File file,
+    public Uni<ResourceDTO> updateResource(@RequestBody(required = true) @FormParam("file") File file,
                                            @PathParam("uuid") UUID uuid) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.resourceService.updateResource(file, uuid)
-                    .onItem()
-                    .transformToUni(resource -> Uni.createFrom().item(resource))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+        return resourceService.updateResource(file, uuid)
+                .onItem()
+                .transformToUni(resource -> Uni.createFrom().item(resource))
+                .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @POST
     @Path("/disable/{uuid}")
-    public Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
-                             @PathParam("uuid") UUID uuid) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.resourceService.disable(uuid)
-                    .onItem()
-                    .transformToUni(resource -> Uni.createFrom().item(resource))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+    public Uni<Void> disable(@PathParam("uuid") UUID uuid) {
+        return resourceService.disable(uuid)
+                .onItem()
+                .transformToUni(resource -> Uni.createFrom().item(resource))
+                .onFailure().transform(e -> new AtmLayerException(e));
     }
 }
