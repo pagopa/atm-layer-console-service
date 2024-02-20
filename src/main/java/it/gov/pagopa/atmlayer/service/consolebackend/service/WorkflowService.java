@@ -10,6 +10,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.ws.rs.PathParam;
 
+import java.io.File;
 import java.util.UUID;
 
 public interface WorkflowService {
@@ -25,4 +26,8 @@ public interface WorkflowService {
     Uni<WorkflowResourceDTO> deploy(UUID uuid);
 
     Uni<WorkflowResourceDTO> rollback(UUID uuid);
+
+    Uni<WorkflowResourceDTO> update(File file, UUID uuid);
+
+    Uni<Void> disable( UUID uuid);
 }

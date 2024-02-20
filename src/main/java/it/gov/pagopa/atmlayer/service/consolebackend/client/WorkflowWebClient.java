@@ -10,6 +10,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceTyp
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -18,6 +19,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+import java.io.File;
 import java.util.UUID;
 
 @RegisterRestClient(configKey = "workflow-client")
@@ -60,9 +62,21 @@ public interface WorkflowWebClient {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
 
+    @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @NonBlocking
     Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto);
+
+    @PUT
+    @Path("/update/{uuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<WorkflowResourceDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
+                                    @PathParam("uuid") UUID uuid);
+
+    @POST
+    @Path("/disable/{uuid}")
+    Uni<Void> disable(@PathParam("uuid") UUID uuid);
 
 }

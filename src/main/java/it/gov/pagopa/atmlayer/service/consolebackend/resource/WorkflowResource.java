@@ -17,6 +17,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -36,6 +37,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import java.io.File;
 import java.util.UUID;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
@@ -157,6 +159,39 @@ public class WorkflowResource {
                 throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
             }
             return this.workflowService.rollback(uuid)
+                    .onFailure()
+                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        });
+    }
+
+    @PUT
+    @Path("/update/{uuid}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<WorkflowResourceDTO> update(@Context ContainerRequestContext containerRequestContext,
+                                    @RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
+                                    @PathParam("uuid") UUID uuid){
+
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+            return this.workflowService.update(file, uuid)
+                    .onFailure()
+                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        });
+    }
+
+    @POST
+    @Path("/disable/{uuid}")
+    Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
+                      @PathParam("uuid") UUID uuid){
+
+        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
+            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
+                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+            }
+            return this.workflowService.disable(uuid)
                     .onFailure()
                     .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
         });

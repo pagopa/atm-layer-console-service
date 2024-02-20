@@ -15,6 +15,7 @@ import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.io.File;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -45,6 +46,16 @@ public class WorkflowServiceImpl implements WorkflowService {
     @Override
     public Uni<WorkflowResourceDTO> rollback(UUID uuid) {
         return workflowWebClient.rollback(uuid);
+    }
+
+    @Override
+    public Uni<WorkflowResourceDTO> update(File file, UUID uuid) {
+        return workflowWebClient.update(file, uuid);
+    }
+
+    @Override
+    public Uni<Void> disable(UUID uuid) {
+        return workflowWebClient.disable(uuid);
     }
 
     @Override
