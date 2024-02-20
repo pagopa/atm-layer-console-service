@@ -3,13 +3,10 @@ package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -18,7 +15,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -35,9 +31,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
-import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
-import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
-
 @Path("/bpmn")
 @Tag(name = "BPMN", description = "BPMN proxy")
 @Slf4j
@@ -53,9 +46,6 @@ public class BpmnResource {
 
     @Inject
     BpmnService bpmnService;
-
-    @Inject
-    UserService userService;
 
     @GET
     @Path("/filter")
@@ -83,19 +73,14 @@ public class BpmnResource {
                                                                  @QueryParam("terminalId") String terminalId,
                                                                  @QueryParam("fileName") String fileName) {
 
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
-                    .onItem()
-                    .transform(Unchecked.function(pagedList -> {
-                        if (pagedList.getResults().isEmpty()) {
-                            log.info("No Bpmn file meets the applied filters");
-                        }
-                        return pagedList;
-                    }));
-        });
+         return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
+                 .onItem()
+                 .transform(Unchecked.function(pagedList -> {
+                     if (pagedList.getResults().isEmpty()) {
+                         log.info("No Bpmn file meets the applied filters");
+                     }
+                     return pagedList;
+                 }));
     }
 
     @POST
@@ -105,15 +90,10 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
     public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
                                    @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.createBpmn(bpmnCreationDto)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+         return this.bpmnService.createBpmn(bpmnCreationDto)
+                 .onItem()
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @GET
@@ -123,19 +103,14 @@ public class BpmnResource {
                                                                   @PathParam("uuid") UUID uuid, @PathParam("version") Long version,
                                                                   @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
-                    .onItem()
-                    .transform(Unchecked.function(pagedList -> {
-                        if (pagedList.getResults().isEmpty()) {
-                            log.info("No BPMN meets the applied filters");
-                        }
-                        return pagedList;
-                    }));
-        });
+         return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
+                 .onItem()
+                 .transform(Unchecked.function(pagedList -> {
+                     if (pagedList.getResults().isEmpty()) {
+                         log.info("No BPMN meets the applied filters");
+                     }
+                     return pagedList;
+                 }));
     }
 
     @POST
@@ -146,15 +121,10 @@ public class BpmnResource {
                                                        @PathParam("uuid") UUID bpmnId,
                                                        @PathParam("version") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+         return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto)
+                 .onItem()
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @DELETE
@@ -165,15 +135,10 @@ public class BpmnResource {
                                              @QueryParam("acquirerId") @NotEmpty String acquirerId,
                                              @QueryParam("branchId") String branchId,
                                              @QueryParam("terminalId") String terminalId) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+        return this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId)
+                .onItem()
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @PUT
@@ -183,15 +148,10 @@ public class BpmnResource {
     public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@Context ContainerRequestContext containerRequestContext,
                                                            @PathParam("uuid") UUID bpmnId, @PathParam("version") Long version,
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+         return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto)
+                 .onItem()
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @POST
@@ -200,15 +160,10 @@ public class BpmnResource {
     public Uni<BpmnDTO> deployBPMN(@Context ContainerRequestContext containerRequestContext,
                                    @PathParam("uuid") UUID uuid,
                                    @PathParam("version") Long version) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.deployBPMN(uuid, version)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+         return this.bpmnService.deployBPMN(uuid, version)
+                 .onItem()
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @GET
@@ -217,15 +172,10 @@ public class BpmnResource {
     public Uni<FileS3Dto> downloadBpmnFrontEnd(@Context ContainerRequestContext containerRequestContext,
                                                @PathParam("uuid") UUID bpmnId,
                                                @PathParam("version") Long modelVersion){
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-            return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion)
-                    .onItem()
-                    .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                    .onFailure().transform(e -> new AtmLayerException(e));
-        });
+         return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion)
+                 .onItem()
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
+                 .onFailure().transform(e -> new AtmLayerException(e));
     }
 
     @POST
@@ -233,15 +183,9 @@ public class BpmnResource {
     public Uni<Void> disableBPMN(@Context ContainerRequestContext containerRequestContext,
                                  @PathParam("uuid") UUID bpmnId,
                                  @PathParam("version") Long version) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                return this.bpmnService.disableBPMN(bpmnId, version)
-                        .onItem()
-                        .transform(Unchecked.function( res -> res));
-            } else {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-        });
+         return this.bpmnService.disableBPMN(bpmnId, version)
+                   .onItem()
+                   .transform(Unchecked.function( res -> res));
     }
 
     @POST
@@ -250,14 +194,8 @@ public class BpmnResource {
     @Path("/upgrade")
     public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
-        return userService.findByUserId(getEmailJWT(containerRequestContext)).onItem().transformToUni(userProfile -> {
-            if (havePermission(userProfile, UserProfileEnum.ADMIN)) {
-                return this.bpmnService.upgradeBPMN(bpmnUpgradeDto)
-                        .onItem()
-                        .transform(Unchecked.function( res -> res));
-            } else {
-                throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
-            }
-        });
+        return this.bpmnService.upgradeBPMN(bpmnUpgradeDto)
+                .onItem()
+                .transform(Unchecked.function( res -> res));
     }
 }
