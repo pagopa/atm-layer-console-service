@@ -7,7 +7,7 @@ COPY --chown=quarkus:quarkus .mvn /app/.mvn
 COPY --chown=quarkus:quarkus pom.xml .
 RUN chmod +x mvnw
 RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
-COPY src
+COPY src src
 ARG QUARKUS_PROFILE
 ARG APP_NAME
 RUN ./mvnw package -Pnative -Dquarkus.application.name=atm-layer-console-service -Dquarkus.profile=prod -DskipTests=true
