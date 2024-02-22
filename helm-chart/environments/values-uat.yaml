@@ -1,0 +1,136 @@
+# Default values for atm-layer-console-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+
+image:
+  repository: 00000000000.dkr.ecr.eu-south-1.amazonaws.com/xxxxxxx
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+namespace: pagopa
+
+consoleService:
+  environment: "uat"
+  executionMode: "READ_WRITE"
+  logLevel: "INFO"
+  applicationBasePath: "/api/v1/console-service"
+  swaggerPath: "/swagger-ui"
+  healthPath: "/health/v1/console-backend"
+  openapiPath: "/openapi"
+
+modelBasePath: "http://pagopa-uat-atm-layer-model.pagopa.svc.cluster.local:8080"
+
+bpmnRouteBasePath: "/bpmn"
+
+workflowRouteBasePath: "/workflow-resource"
+
+resourceRouteBasePath: "/resources"
+
+usersRouteBasePath: "/users"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+secretProviderClass:
+  enabled: false
+  name: atm-layer-console-service-secrets
+  env: uat
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::00000000000:role/pagopa-uat-atm-layer-xxxxxx-serviceaccount-role
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: pagopa-uat-atm-layer-console-service
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+deployment:
+  name: pagopa-uat-atm-layer-console-service
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secret.reloader.stakater.com/reload: #secrets-name
+
+service:
+  name: pagopa-uat-atm-layer-console-service
+  type: NodePort
+  port: 8080
+
+ingress:
+  enabled: true
+  name: pagopa-uat-atm-layer-console-serviceconsole-service
+  className: ""
+  annotations: 
+    kubernetes.io/ingress.class: "alb"
+    alb.ingress.kubernetes.io/scheme: "internal"
+    alb.ingress.kubernetes.io/group.name: "alb-controller"
+    alb.ingress.kubernetes.io/load-balancer-name: "pagopa-uat-atm-layer-alb-int"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTP": 8080}]'
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
+    alb.ingress.kubernetes.io/healthcheck-path: "/health/v1/console-backend"
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '20'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '8'
+    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+  hosts:
+    - host:
+      paths:
+        - path: /api/v1/console-service
+          pathType: Prefix
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  memoryLimits: 600Mi
+  memoryRequests: 300Mi
+  cpuLimits: 600m
+  cpuRequest: 300m
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+Release:
+  Time:
+    Seconds: 60

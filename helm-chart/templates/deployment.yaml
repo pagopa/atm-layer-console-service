@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    App: {{ .Values.deployment.name }}
+  annotations:
+    {{- toYaml .Values.deployment.annotations | nindent 4 }}
+
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      App: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        App: {{ .Values.deployment.name }}
+        force-recreate: {{ randAlphaNum 5 | quote }}
+    spec:
+      serviceAccountName: {{ include "atm-layer-console-service.serviceAccountName" . }}
+      volumes:
+      {{- if .Values.secretProviderClass.enabled }}
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true 
+          volumeAttributes:
+            secretProviderClass: {{ .Values.secretProviderClass.name }}
+      {{- end }}
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          imagePullPolicy: Always
+          env:
+            - name: CONSOLE_SERVICE_ENVIRONMENT
+              value: "{{ .Values.consoleService.environment }}"
+            - name: CONSOLE_SERVICE_EXECUTION_MODE
+              value: "{{ .Values.consoleService.executionMode }}"
+            - name: CONSOLE_SERVICE_LOG_LEVEL
+              value: "{{ .Values.consoleService.logLevel }}"
+            - name: CONSOLE_SERVICE_APPLICATION_BASE_PATH
+              value: "{{ .Values.consoleService.applicationBasePath }}"
+            - name: CONSOLE_SERVICE_SWAGGER_PATH
+              value: "{{ .Values.consoleService.swaggerPath }}"
+            - name: CONSOLE_SERVICE_HEALTH_PATH
+              value: "{{ .Values.consoleService.healthPath }}"
+            - name: CONSOLE_SERVICE_OPENAPI_PATH
+              value: "{{ .Values.consoleService.openapiPath }}"
+            - name: MODEL_BASE_PATH
+              value: "{{ .Values.modelBasePath }}"
+            - name: BPMN_ROUTE_BASE_PATH
+              value: "{{ .Values.bpmnRouteBasePath }}"
+            - name: WORKFLOW_ROUTE_BASE_PATH
+              value: "{{ .Values.workflowRouteBasePath }}"
+            - name: RESOURCE_ROUTE_BASE_PATH
+              value: "{{ .Values.resourceRouteBasePath }}"
+            - name: USERS_ROUTE_BASE_PATH
+              value: "{{ .Values.usersRouteBasePath }}"
+          volumeMounts:
+          {{- if .Values.secretProviderClass.enabled }}
+          - name: secrets-store-inline
+            mountPath: "/mnt/secrets-store"
+            readOnly: true
+          {{- end }}
+          {{- if .Values.autoscaling.enabled }}
+          resources:
+            limits:
+              cpu: {{ .Values.autoscaling.cpuLimits }}
+              memory: {{ .Values.autoscaling.memoryLimits }}
+            requests:
+              cpu: {{ .Values.autoscaling.cpuRequest }}
+              memory: {{ .Values.autoscaling.memoryRequests }}
+          {{- end }}
+
+  strategy:
+    type: Recreate
