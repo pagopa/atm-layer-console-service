@@ -53,7 +53,9 @@ spec:
             - name: CONSOLE_SERVICE_OPENAPI_PATH
               value: "{{ .Values.consoleService.openapiPath }}"
             - name: MODEL_BASE_PATH
-              value: "{{ .Values.modelBasePath }}"
+              value: "{{ .Values.model.basePath }}"
+            - name: MODEL_RELATIVE_PATH
+              value: "{{ .Values.model.relativePath }}"
             - name: BPMN_ROUTE_BASE_PATH
               value: "{{ .Values.bpmnRouteBasePath }}"
             - name: WORKFLOW_ROUTE_BASE_PATH
