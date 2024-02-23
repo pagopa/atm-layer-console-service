@@ -64,6 +64,8 @@ spec:
               value: "{{ .Values.resourceRouteBasePath }}"
             - name: USERS_ROUTE_BASE_PATH
               value: "{{ .Values.usersRouteBasePath }}"
+            - name: ALLOWED_CROSS_ORIGINS
+              value: "{{ .Values.allowedCrossOrigins }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline

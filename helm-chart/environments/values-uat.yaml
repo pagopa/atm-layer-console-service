@@ -12,6 +12,10 @@ image:
 
 namespace: pagopa
 
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
 consoleService:
   environment: "uat"
   executionMode: "READ_WRITE"
@@ -33,9 +37,7 @@ resourceRouteBasePath: "/resources"
 
 usersRouteBasePath: "/users"
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+allowedCrossOrigins: "*"
 
 secretProviderClass:
   enabled: false
