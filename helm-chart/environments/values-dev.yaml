@@ -16,6 +16,29 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+consoleService:
+  environment: "dev"
+  executionMode: "READ_WRITE"
+  logLevel: "INFO"
+  applicationBasePath: "/api/v1/console-service"
+  swaggerPath: "/swagger-ui"
+  healthPath: "/health/v1/console-backend"
+  openapiPath: "/openapi"
+
+model:
+  basePath: "http://pagopa-dev-atm-layer-model.pagopa.svc.cluster.local:8080"
+  relativePath: "/api/v1/model"
+
+bpmnRouteBasePath: "/bpmn"
+
+workflowRouteBasePath: "/workflow-resource"
+
+resourceRouteBasePath: "/resources"
+
+usersRouteBasePath: "/users"
+
+allowedCrossOrigins: "*"
+
 secretProviderClass:
   enabled: false
   name: atm-layer-console-service-secrets
@@ -67,7 +90,7 @@ ingress:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTP": 8080}]'
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
-    alb.ingress.kubernetes.io/healthcheck-path: /health/v1/console-service
+    alb.ingress.kubernetes.io/healthcheck-path: "/health/v1/console-backend"
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: '20'
     alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '8'
     alb.ingress.kubernetes.io/success-codes: '200'

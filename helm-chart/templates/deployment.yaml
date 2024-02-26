@@ -38,6 +38,34 @@ spec:
             - containerPort: {{ .Values.service.port }}
           imagePullPolicy: Always
           env:
+            - name: CONSOLE_SERVICE_ENVIRONMENT
+              value: "{{ .Values.consoleService.environment }}"
+            - name: CONSOLE_SERVICE_EXECUTION_MODE
+              value: "{{ .Values.consoleService.executionMode }}"
+            - name: CONSOLE_SERVICE_LOG_LEVEL
+              value: "{{ .Values.consoleService.logLevel }}"
+            - name: CONSOLE_SERVICE_APPLICATION_BASE_PATH
+              value: "{{ .Values.consoleService.applicationBasePath }}"
+            - name: CONSOLE_SERVICE_SWAGGER_PATH
+              value: "{{ .Values.consoleService.swaggerPath }}"
+            - name: CONSOLE_SERVICE_HEALTH_PATH
+              value: "{{ .Values.consoleService.healthPath }}"
+            - name: CONSOLE_SERVICE_OPENAPI_PATH
+              value: "{{ .Values.consoleService.openapiPath }}"
+            - name: MODEL_BASE_PATH
+              value: "{{ .Values.model.basePath }}"
+            - name: MODEL_RELATIVE_PATH
+              value: "{{ .Values.model.relativePath }}"
+            - name: BPMN_ROUTE_BASE_PATH
+              value: "{{ .Values.bpmnRouteBasePath }}"
+            - name: WORKFLOW_ROUTE_BASE_PATH
+              value: "{{ .Values.workflowRouteBasePath }}"
+            - name: RESOURCE_ROUTE_BASE_PATH
+              value: "{{ .Values.resourceRouteBasePath }}"
+            - name: USERS_ROUTE_BASE_PATH
+              value: "{{ .Values.usersRouteBasePath }}"
+            - name: ALLOWED_CROSS_ORIGINS
+              value: "{{ .Values.allowedCrossOrigins }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
