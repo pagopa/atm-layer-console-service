@@ -61,7 +61,7 @@ public class BpmnResourceTest {
                 .queryParam("status",CREATED)
                 .queryParam("acquirerId","acquirerId")
                 .queryParam("fileName","fileName")
-                .when().get("/api/v1/console-backend/bpmn/filter")
+                .when().get("/api/v1/console-service/bpmn/filter")
                 .then()
                 .statusCode(200)
                 .extract()
