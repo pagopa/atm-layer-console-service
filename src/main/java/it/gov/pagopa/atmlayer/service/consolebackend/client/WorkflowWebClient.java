@@ -1,8 +1,5 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
-import io.quarkus.arc.NoClassInterceptors;
-import io.quarkus.rest.client.reactive.ClientExceptionMapper;
-import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceCreationDto;
@@ -10,13 +7,20 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerExceptionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -28,37 +32,26 @@ import java.util.UUID;
 
 @RegisterRestClient(configKey = "workflow-client")
 public interface WorkflowWebClient {
-
-    @NoClassInterceptors
-    @ClientExceptionMapper
-    static RuntimeException clientErrorException(Response response) {
-        if (response.getStatus() >= 400 && response.getStatus() < 500) {
-            AtmLayerExceptionDTO responseData=response.readEntity(AtmLayerExceptionDTO.class);
-            return new RuntimeException(responseData.getMessage());
-        }
-        return new RuntimeException("Unmapped client error, see logs for details");
-    }
-
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer page,
-                                                                 @QueryParam("pageSize") @DefaultValue("10")
-                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer size,
-                                                                 @QueryParam("status")
-                                                                 @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
-                                                                 @QueryParam("workflowResourceId") UUID workflowResourceId,
-                                                                 @QueryParam("deployedFileName") String deployedFileName,
-                                                                 @QueryParam("definitionKey") String definitionKey,
-                                                                 @QueryParam("resourceType") DeployableResourceType resourceType,
-                                                                 @QueryParam("sha256") String sha256,
-                                                                 @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
-                                                                 @QueryParam("camundaDefinitionId") String camundaDefinitionId,
-                                                                 @QueryParam("description") String description,
-                                                                 @QueryParam("resource") String resource,
-                                                                 @QueryParam("deploymentId") UUID deploymentId,
-                                                                 @QueryParam("fileName") String fileName);
+                                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer page,
+                                                                           @QueryParam("pageSize") @DefaultValue("10")
+                                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer size,
+                                                                           @QueryParam("status")
+                                                                           @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
+                                                                           @QueryParam("workflowResourceId") UUID workflowResourceId,
+                                                                           @QueryParam("deployedFileName") String deployedFileName,
+                                                                           @QueryParam("definitionKey") String definitionKey,
+                                                                           @QueryParam("resourceType") DeployableResourceType resourceType,
+                                                                           @QueryParam("sha256") String sha256,
+                                                                           @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
+                                                                           @QueryParam("camundaDefinitionId") String camundaDefinitionId,
+                                                                           @QueryParam("description") String description,
+                                                                           @QueryParam("resource") String resource,
+                                                                           @QueryParam("deploymentId") UUID deploymentId,
+                                                                           @QueryParam("fileName") String fileName);
 
     @GET
     @Path("/downloadFrontEnd/{uuid}")
@@ -91,5 +84,4 @@ public interface WorkflowWebClient {
     @POST
     @Path("/disable/{uuid}")
     Uni<Void> disable(@PathParam("uuid") UUID uuid);
-
 }

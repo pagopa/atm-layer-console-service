@@ -74,8 +74,7 @@ public class ResourceResource {
     public Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
          return this.resourceService.createResource(resourceCreationDto)
                  .onItem()
-                 .transformToUni(resource -> Uni.createFrom().item(resource))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+                 .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 
     @PUT
@@ -86,8 +85,7 @@ public class ResourceResource {
                                            @PathParam("uuid") UUID uuid) {
         return resourceService.updateResource(file, uuid)
                 .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource))
-                .onFailure().transform(e -> new AtmLayerException(e));
+                .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 
     @POST
@@ -95,7 +93,6 @@ public class ResourceResource {
     public Uni<Void> disable(@PathParam("uuid") UUID uuid) {
         return resourceService.disable(uuid)
                 .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource))
-                .onFailure().transform(e -> new AtmLayerException(e));
+                .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 }

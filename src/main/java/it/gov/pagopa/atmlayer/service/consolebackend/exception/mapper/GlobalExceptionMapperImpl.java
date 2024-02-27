@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.exception.mapper;
 import io.quarkus.arc.properties.IfBuildProperty;
 import io.smallrye.mutiny.CompositeException;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerExceptionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerValidationErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.utils.ConstraintViolationMappingUtils;
@@ -12,6 +13,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.resteasy.reactive.ClientWebApplicationException;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 import org.slf4j.Logger;
@@ -52,6 +54,18 @@ public class GlobalExceptionMapperImpl {
         String message = "Generic Error";
         logger.error("Generic error found: ", exception);
         return buildErrorResponse(message);
+    }
+
+    @ServerExceptionMapper
+    public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception){
+        AtmLayerExceptionDTO responseData=exception.getResponse().readEntity(AtmLayerExceptionDTO.class);
+        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
+                .type(responseData.getType())
+                .statusCode(exception.getResponse().getStatus())
+                .message(responseData.getMessage())
+                .errorCode(responseData.getErrorCode())
+                .build();
+        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
     }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
