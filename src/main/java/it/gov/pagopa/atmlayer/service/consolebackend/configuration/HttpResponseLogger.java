@@ -15,19 +15,11 @@ import java.time.temporal.Temporal;
 @Slf4j
 public class HttpResponseLogger implements ContainerResponseFilter {
     public void logResponse(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-        try {
-            log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
-        } catch (Exception e) {
-            log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
-        }
+        log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
     }
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         logResponse(requestContext, responseContext);
-        LocalDateTime timestampEnd = LocalDateTime.now();
-        log.info("Request finished at : {}", timestampEnd);
-        long duration = Duration.between((Temporal) requestContext.getProperty("timestampStart"), timestampEnd).toMillis();
-        log.info("Request duration : {}ms", duration);
     }
 }

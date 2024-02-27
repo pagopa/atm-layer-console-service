@@ -16,9 +16,6 @@ public class HttpRequestLogger implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        LocalDateTime timestampStart = LocalDateTime.now();
-        log.info("Request started at : {}", timestampStart);
-        requestContext.setProperty("timestampStart",timestampStart);
         logRequest(requestContext);
     }
 }

@@ -102,7 +102,6 @@ public class WorkflowResource {
 
     @POST
     @Path("/deploy/{uuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid) {
         return this.workflowService.deploy(uuid)
