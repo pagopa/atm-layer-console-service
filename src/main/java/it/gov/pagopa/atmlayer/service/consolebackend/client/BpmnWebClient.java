@@ -1,13 +1,31 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankConfigTripletDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnBankConfigDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnCreationDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnUpgradeDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerExceptionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -18,6 +36,15 @@ import java.util.UUID;
 
 @RegisterRestClient(configKey = "bpmn-client")
 public interface BpmnWebClient {
+
+    @ClientExceptionMapper
+    static RuntimeException clientErrorException(Response response) {
+        if (response.getStatus() >= 400 && response.getStatus() < 500) {
+            AtmLayerExceptionDTO responseData=response.readEntity(AtmLayerExceptionDTO.class);
+            return new RuntimeException(responseData.getMessage());
+        }
+        return new RuntimeException("Unmapped client error, see logs for details");
+    }
 
     @GET
     @Path("/filter")
