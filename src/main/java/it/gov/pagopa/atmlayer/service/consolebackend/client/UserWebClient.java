@@ -1,5 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import io.quarkus.arc.NoClassInterceptors;
 import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
@@ -16,6 +17,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @RegisterRestClient(configKey = "user-client")
 public interface UserWebClient {
 
+    @NoClassInterceptors
     @ClientExceptionMapper
     static RuntimeException clientErrorException(Response response) {
         if (response.getStatus() >= 400 && response.getStatus() < 500) {

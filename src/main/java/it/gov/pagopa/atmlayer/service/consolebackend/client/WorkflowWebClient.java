@@ -1,5 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import io.quarkus.arc.NoClassInterceptors;
 import io.quarkus.rest.client.reactive.ClientExceptionMapper;
 import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
@@ -28,6 +29,7 @@ import java.util.UUID;
 @RegisterRestClient(configKey = "workflow-client")
 public interface WorkflowWebClient {
 
+    @NoClassInterceptors
     @ClientExceptionMapper
     static RuntimeException clientErrorException(Response response) {
         if (response.getStatus() >= 400 && response.getStatus() < 500) {
