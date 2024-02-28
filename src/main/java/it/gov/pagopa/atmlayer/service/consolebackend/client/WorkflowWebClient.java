@@ -62,23 +62,23 @@ public interface WorkflowWebClient {
     @Path("/deploy/{uuid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid);
+    public Uni<WorkflowResourceFrontEndDTO> deploy(@PathParam("uuid") UUID uuid);
 
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
+    public Uni<WorkflowResourceFrontEndDTO> rollback(@PathParam("uuid") UUID uuid);
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto);
+    Uni<WorkflowResourceFrontEndDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto);
 
     @PUT
     @Path("/update/{uuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<WorkflowResourceDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
+    Uni<WorkflowResourceFrontEndDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
                                     @PathParam("uuid") UUID uuid);
 
     @POST

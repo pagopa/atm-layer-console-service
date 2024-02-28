@@ -39,17 +39,17 @@ public class WorkflowServiceImpl implements WorkflowService {
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> deploy(UUID uuid) {
+    public Uni<WorkflowResourceFrontEndDTO> deploy(UUID uuid) {
         return workflowWebClient.deploy(uuid);
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> rollback(UUID uuid) {
+    public Uni<WorkflowResourceFrontEndDTO> rollback(UUID uuid) {
         return workflowWebClient.rollback(uuid);
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> update(File file, UUID uuid) {
+    public Uni<WorkflowResourceFrontEndDTO> update(File file, UUID uuid) {
         return workflowWebClient.update(file, uuid);
     }
 
@@ -59,7 +59,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto) {
+    public Uni<WorkflowResourceFrontEndDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto) {
         return workflowWebClient.create(workflowResourceCreationDto);
     }
 }
