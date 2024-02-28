@@ -21,13 +21,13 @@ public interface WorkflowService {
 
     Uni<FileS3Dto> downloadFrontEnd (UUID workflowResourceId);
 
-    Uni<WorkflowResourceFrontEndDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
+    Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
 
-    Uni<WorkflowResourceFrontEndDTO> deploy(UUID uuid);
+    Uni<WorkflowResourceDTO> deploy(UUID uuid);
 
-    Uni<WorkflowResourceFrontEndDTO> rollback(UUID uuid);
+    Uni<WorkflowResourceDTO> rollback(UUID uuid);
 
-    Uni<WorkflowResourceFrontEndDTO> update(File file, UUID uuid);
+    Uni<WorkflowResourceDTO> update(File file, UUID uuid);
 
     Uni<Void> disable( UUID uuid);
 }
