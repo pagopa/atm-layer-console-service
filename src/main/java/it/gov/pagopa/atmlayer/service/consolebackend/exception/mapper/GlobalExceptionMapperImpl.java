@@ -3,7 +3,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.exception.mapper;
 import io.quarkus.arc.properties.IfBuildProperty;
 import io.smallrye.mutiny.CompositeException;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerExceptionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerValidationErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.utils.ConstraintViolationMappingUtils;
@@ -32,6 +31,11 @@ public class GlobalExceptionMapperImpl {
     ConstraintViolationMappingUtils constraintViolationMappingUtils;
 
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionMapperImpl.class);
+    private final String EXCEPTION_TYPE="type";
+    private final String EXCEPTION_ERROR_CODE="errorCode";
+    private final String EXCEPTION_MESSAGE="message";
+    private final String EXCEPTION_STATUS_CODE="statusCode";
+
 
     @ServerExceptionMapper
     public RestResponse<ATMLayerValidationErrorResponse> constraintViolationExceptionMapper(ConstraintViolationException exception) {
@@ -59,27 +63,7 @@ public class GlobalExceptionMapperImpl {
 
     @ServerExceptionMapper
     public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception){
-//            LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
-//            String type = hashMap.get("type").toString();
-//            String errorCode = hashMap.get("errorCode").toString();
-//            String message = hashMap.get("message").toString();
-//            String statusCode = hashMap.get("statusCode").toString();
-//            ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-//                    .type(type)
-//                    .errorCode(errorCode)
-//                    .statusCode(Integer.parseInt(statusCode))
-//                    .message(message)
-//                    .build();
-//            return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
-
-        AtmLayerExceptionDTO responseData=exception.getResponse().readEntity(AtmLayerExceptionDTO.class);
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(responseData.getType())
-                .statusCode(exception.getResponse().getStatus())
-                .message(responseData.getMessage())
-                .errorCode(responseData.getErrorCode())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
+            return buildErrorResponse(exception);
     }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
@@ -109,6 +93,17 @@ public class GlobalExceptionMapperImpl {
                 .message(message)
                 .build();
         return RestResponse.status(Response.Status.BAD_REQUEST, payload);
+    }
+
+    private RestResponse<ATMLayerErrorResponse> buildErrorResponse (ClientWebApplicationException exception){
+        LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
+        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
+                .type(hashMap.get(EXCEPTION_TYPE).toString())
+                .errorCode(hashMap.get(EXCEPTION_ERROR_CODE).toString())
+                .statusCode(Integer.parseInt(hashMap.get(EXCEPTION_STATUS_CODE).toString()))
+                .message(hashMap.get(EXCEPTION_MESSAGE).toString())
+                .build();
+        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
     }
 
 
