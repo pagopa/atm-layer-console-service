@@ -59,27 +59,27 @@ public class GlobalExceptionMapperImpl {
 
     @ServerExceptionMapper
     public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception){
-            LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
-            String type = hashMap.get("type").toString();
-            String errorCode = hashMap.get("errorCode").toString();
-            String message = hashMap.get("message").toString();
-            String statusCode = hashMap.get("statusCode").toString();
-            ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                    .type(type)
-                    .errorCode(errorCode)
-                    .statusCode(Integer.parseInt(statusCode))
-                    .message(message)
-                    .build();
-            return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
+//            LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
+//            String type = hashMap.get("type").toString();
+//            String errorCode = hashMap.get("errorCode").toString();
+//            String message = hashMap.get("message").toString();
+//            String statusCode = hashMap.get("statusCode").toString();
+//            ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
+//                    .type(type)
+//                    .errorCode(errorCode)
+//                    .statusCode(Integer.parseInt(statusCode))
+//                    .message(message)
+//                    .build();
+//            return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
 
-//        AtmLayerExceptionDTO responseData=exception.getResponse().readEntity(AtmLayerExceptionDTO.class);
-//        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-//                .type(responseData.getType())
-//                .statusCode(exception.getResponse().getStatus())
-//                .message(responseData.getMessage())
-//                .errorCode(responseData.getErrorCode())
-//                .build();
-//        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
+        AtmLayerExceptionDTO responseData=exception.getResponse().readEntity(AtmLayerExceptionDTO.class);
+        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
+                .type(responseData.getType())
+                .statusCode(exception.getResponse().getStatus())
+                .message(responseData.getMessage())
+                .errorCode(responseData.getErrorCode())
+                .build();
+        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
     }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
