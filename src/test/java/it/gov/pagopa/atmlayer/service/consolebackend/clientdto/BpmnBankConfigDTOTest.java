@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class BpmnBankConfigDTOTest {
@@ -61,5 +62,29 @@ class BpmnBankConfigDTOTest {
         int hashCodeDto = dto.hashCode();
         int hashCodeDto1 = dto1.hashCode();
         assertEquals(hashCodeDto, hashCodeDto1);
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        BpmnBankConfigDTO bpmnBankConfigDTO = new BpmnBankConfigDTO(
+                UUID.randomUUID(), 1L, "acquirerId", "branchId",
+                "terminalId", "functionType", Timestamp.valueOf("2018-09-01 09:01:15"),
+                Timestamp.valueOf("2018-09-01 09:01:15"), "createdBy", "lastUpdatedBy");
+        assertNotNull(bpmnBankConfigDTO);
+    }
+
+    @Test
+    void testBuilder(){
+        BpmnBankConfigDTO bpmnBankConfigDTO = BpmnBankConfigDTO.builder()
+                .bpmnId(UUID.randomUUID())
+                .build();
+        assertNotNull(bpmnBankConfigDTO);
+    }
+
+    @Test
+    void testToString(){
+        BpmnBankConfigDTO bpmnBankConfigDTO = new BpmnBankConfigDTO();
+        String bpmnBankConfigString = bpmnBankConfigDTO.toString();
+        assertNotNull(bpmnBankConfigString);
     }
 }

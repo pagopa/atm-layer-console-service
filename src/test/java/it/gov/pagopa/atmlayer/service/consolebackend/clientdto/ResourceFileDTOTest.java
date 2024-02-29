@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class ResourceFileDTOTest {
@@ -73,5 +74,17 @@ class ResourceFileDTOTest {
         stringBuilder.append("createdBy=email@domain.com, ");
         stringBuilder.append("lastUpdatedBy=email@domain.com)");
         assertEquals(stringBuilder.toString(), dto.toString());
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        ResourceFileDTO resourceFileDTO = new ResourceFileDTO(
+                UUID.randomUUID(), S3ResourceTypeEnum.BPMN,
+                "storageKey", "fileName", "extension",
+                Timestamp.valueOf("2018-09-01 09:01:15"),
+                Timestamp.valueOf("2018-09-01 09:01:15"),
+                "createdBy", "lastUpdatedBy"
+        );
+        assertNotNull(resourceFileDTO);
     }
 }

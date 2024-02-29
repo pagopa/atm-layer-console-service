@@ -1,8 +1,10 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 
 import io.quarkus.test.junit.QuarkusTest;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.S3ResourceTypeEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class ResourceFrontEndDTOTest {
@@ -68,5 +71,17 @@ class ResourceFrontEndDTOTest {
         assertEquals(defaultUpdateDate, dto.getResourceFileLastUpdatedAt());
         assertEquals("user@domain.com", dto.getResourceFileCreatedBy());
         assertEquals("user@domain.com", dto.getResourceFileLastUpdatedBy());
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        ResourceFrontEndDTO resourceFrontEndDTO = new ResourceFrontEndDTO(
+                UUID.randomUUID(), "sha256", true, NoDeployableResourceType.HTML,
+                Timestamp.valueOf("2018-09-01 09:01:15"), Timestamp.valueOf("2018-09-01 09:01:15"),
+                "createdBy", "lastUpdatedBy", "cdnUrl",
+                UUID.randomUUID(), S3ResourceTypeEnum.HTML, "storageKey", "fileName", "extension",
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "resourceFileCreatedBy","resourceFileLastUpdatedBy");
+        assertNotNull(resourceFrontEndDTO);
     }
 }

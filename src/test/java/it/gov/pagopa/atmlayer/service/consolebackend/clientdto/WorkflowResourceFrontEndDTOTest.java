@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class WorkflowResourceFrontEndDTOTest {
@@ -122,5 +123,34 @@ class WorkflowResourceFrontEndDTOTest {
         stringBuilder.append("createdBy=username.domain.com, ");
         stringBuilder.append("lastUpdatedBy=username.domain.com)");
         assertEquals(stringBuilder.toString(), dto.toString());
+    }
+
+    @Test
+    void testBuilder(){
+        WorkflowResourceDTO workflowResourceDTO = WorkflowResourceDTO.builder()
+                .workflowResourceId(UUID.randomUUID())
+                .build();
+        assertNotNull(workflowResourceDTO);
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        WorkflowResourceFrontEndDTO workflowResourceFrontEndDTO = new WorkflowResourceFrontEndDTO(
+                UUID.randomUUID(), "deployedFileName","definitionKey",StatusEnum.DEPLOYED,
+                "sha256",1,"camundaDefinitionId",
+                "description", UUID.randomUUID(), S3ResourceTypeEnum.BPMN, "storageKey", "fileName", "extension",
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "resourceCreatedBy","resourceLastUpdatedBy", "resource", DeployableResourceType.BPMN, UUID.randomUUID(),
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "createdBy", "lastUpdatedBy");
+        assertNotNull(workflowResourceFrontEndDTO);
+    }
+
+    @Test
+    void testBuilderAnnotation(){
+        WorkflowResourceFrontEndDTO workflowResourceFrontEndDTO = WorkflowResourceFrontEndDTO.builder()
+                .workflowResourceId(UUID.randomUUID())
+                .build();
+        assertNotNull(workflowResourceFrontEndDTO);
     }
 }
