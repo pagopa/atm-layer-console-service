@@ -7,6 +7,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -20,8 +21,8 @@ public class UserServiceImplTest {
     @Mock
     private UserWebClient userWebClient;
 
-    @Mock
-    private UserService userService;
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @BeforeEach
     public void setUp() {

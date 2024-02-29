@@ -2,17 +2,20 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum.CREATED;
@@ -29,8 +32,8 @@ public class BpmnServiceImplTest {
     @Mock
     private BpmnWebClient bpmnWebClient;
 
-    @Mock
-    private BpmnService bpmnService;
+    @InjectMocks
+    private BpmnServiceImpl bpmnService;
 
     @BeforeEach
     public void setUp() {
@@ -46,10 +49,9 @@ public class BpmnServiceImplTest {
         PageInfo<BpmnVersionFrontEndDTO> response = new PageInfo<>(0, 1, 1, 1, dtoList);
         when(bpmnWebClient.getBpmnFiltered(anyInt(), anyInt(), anyString(), anyString(), anyString(), eq(uuid), eq(uuid), anyString(), anyString(), anyString(), anyString(), anyString(), eq(CREATED), anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(Uni.createFrom().item(response));
-        Uni<PageInfo<BpmnVersionFrontEndDTO>> result = bpmnService.getBpmnFiltered(0, 1, "functionType", "modelVersion", "1", uuid, uuid, "camundaDefinitionId", "definitionKey", "deployedFileName", "resource", "sha256", CREATED, "acquirerId", "branchId", "terminalId", "fileName");
-
-        assertNotNull(result);
-        assertNull(result.await().indefinitely());
+        bpmnService.getBpmnFiltered(0, 1, "functionType", "modelVersion", "1", uuid, uuid, "camundaDefinitionId", "definitionKey", "deployedFileName", "resource", "sha256", CREATED, "acquirerId", "branchId", "terminalId", "fileName")
+                .subscribe().withSubscriber(UniAssertSubscriber.create())
+                .assertCompleted();
     }
 
     @Test

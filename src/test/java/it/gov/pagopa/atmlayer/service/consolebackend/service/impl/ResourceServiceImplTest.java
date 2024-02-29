@@ -11,6 +11,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -30,8 +31,8 @@ public class ResourceServiceImplTest {
     @Mock
     private ResourceWebClient resourceWebClient;
 
-    @Mock
-    private ResourceService resourceService;
+    @InjectMocks
+    private ResourceServiceImpl resourceService;
 
     @BeforeEach
     public void setUp() {

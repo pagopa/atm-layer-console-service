@@ -2,6 +2,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.WorkflowWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceCreationDto;
@@ -12,6 +13,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -32,8 +34,8 @@ public class WorkflowServiceImplTest {
     @Mock
     private WorkflowWebClient workflowWebClient;
 
-    @Mock
-    private WorkflowService workflowService;
+    @InjectMocks
+    private WorkflowServiceImpl workflowService;
 
     @BeforeEach
     public void setUp() {
@@ -51,10 +53,9 @@ public class WorkflowServiceImplTest {
         PageInfo<WorkflowResourceFrontEndDTO> response = new PageInfo<>(0, 1, 1, 1, dtoList);
         when(workflowWebClient.getWorkflowResourceFiltered(anyInt(), anyInt(), eq(CREATED), eq(uuid),  anyString(), anyString(),  any(DeployableResourceType.class), anyString(), anyString(), anyString(), anyString(), anyString(), eq(uuid), anyString()))
                 .thenReturn(Uni.createFrom().item(response));
-        Uni<PageInfo<WorkflowResourceFrontEndDTO>> result = workflowService.getWorkflowResourceFiltered(0, 1, CREATED, uuid, "deployedFileName", "definitionKey", deployableResourceType, "sha256", "definitionVersionCamunda", "camundaDefinition", "description", "resource", uuid, "filename");
-
-        assertNotNull(result);
-        assertNull(result.await().indefinitely());
+        workflowService.getWorkflowResourceFiltered(0, 1, CREATED, uuid, "deployedFileName", "definitionKey", deployableResourceType, "sha256", "definitionVersionCamunda", "camundaDefinition", "description", "resource", uuid, "filename")
+                .subscribe().withSubscriber(UniAssertSubscriber.create())
+                .assertCompleted();
     }
 
     @Test
