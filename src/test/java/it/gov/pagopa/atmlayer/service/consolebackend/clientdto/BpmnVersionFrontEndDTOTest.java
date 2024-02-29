@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 import io.quarkus.test.junit.QuarkusTest;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.S3ResourceTypeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class BpmnVersionFrontEndDTOTest {
@@ -99,5 +101,34 @@ class BpmnVersionFrontEndDTOTest {
         int hashCodeDto = dto.hashCode();
         int hashCodeDto1 = dto1.hashCode();
         assertEquals(hashCodeDto, hashCodeDto1);
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        BpmnVersionFrontEndDTO bpmnVersionFrontEndDTO=new BpmnVersionFrontEndDTO(
+                UUID.randomUUID(),
+                1L, "deployedFileName","definitionKey","functionType",
+                StatusEnum.DEPLOYED,"sha256",true,1,"camundaDefinitionId",
+                "description", UUID.randomUUID(), S3ResourceTypeEnum.BPMN, "storageKey", "fileName", "extension",
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "resourceCreatedBy","resourceLastUpdatedBy", "resource", UUID.randomUUID(),
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "createdBy", "lastUpdatedBy");
+        assertNotNull(bpmnVersionFrontEndDTO);
+    }
+
+    @Test
+    void testBuilder(){
+        BpmnVersionFrontEndDTO bpmnVersionFrontEndDTO = BpmnVersionFrontEndDTO.builder()
+                .bpmnId(UUID.randomUUID())
+                .build();
+        assertNotNull(bpmnVersionFrontEndDTO);
+    }
+
+    @Test
+    void testToString(){
+        BpmnVersionFrontEndDTO bpmnVersionFrontEndDTO = new BpmnVersionFrontEndDTO();
+        String bpmnVersionFrontEndString = bpmnVersionFrontEndDTO.toString();
+        assertNotNull(bpmnVersionFrontEndString);
     }
 }

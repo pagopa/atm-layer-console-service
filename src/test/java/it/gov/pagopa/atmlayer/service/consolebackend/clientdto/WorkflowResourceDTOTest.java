@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class WorkflowResourceDTOTest {
@@ -77,5 +78,32 @@ class WorkflowResourceDTOTest {
         int hashCodeDto = dto.hashCode();
         int hashCodeDto1 = dto1.hashCode();
         assertEquals(hashCodeDto, hashCodeDto1);
+    }
+
+    @Test
+    void testAllArgsConstrucotr(){
+        ResourceFileDTO resourceFileDTO = new ResourceFileDTO();
+        WorkflowResourceDTO workflowResourceDTO = new WorkflowResourceDTO(
+                UUID.randomUUID(), "deployedFileName", "definitionKey",
+                StatusEnum.DEPLOYED, "sha256", 1, "camundaDefinitionId",
+                "description", resourceFileDTO, "resource", DeployableResourceType.BPMN,
+                UUID.randomUUID(), Timestamp.valueOf("2018-09-01 09:01:15"),
+                Timestamp.valueOf("2018-09-01 09:01:15"), "createdBy", "lastUpdatedBy");
+        assertNotNull(workflowResourceDTO);
+    }
+
+    @Test
+    void testBuilder(){
+        WorkflowResourceDTO workflowResourceDTO = WorkflowResourceDTO.builder()
+                .workflowResourceId(UUID.randomUUID())
+                .build();
+        assertNotNull(workflowResourceDTO);
+    }
+
+    @Test
+    void testToString(){
+        WorkflowResourceDTO workflowResourceDTO = new WorkflowResourceDTO();
+        String workflowResourceString = workflowResourceDTO.toString();
+        assertNotNull(workflowResourceString);
     }
 }
