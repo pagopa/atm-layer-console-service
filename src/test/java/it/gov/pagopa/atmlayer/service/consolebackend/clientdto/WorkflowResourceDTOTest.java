@@ -2,8 +2,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 
 import io.quarkus.test.junit.QuarkusTest;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.S3ResourceTypeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 class WorkflowResourceDTOTest {

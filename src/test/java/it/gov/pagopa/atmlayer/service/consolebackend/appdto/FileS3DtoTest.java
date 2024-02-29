@@ -2,7 +2,8 @@ package it.gov.pagopa.atmlayer.service.consolebackend.appdto;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 class FileS3DtoTest {

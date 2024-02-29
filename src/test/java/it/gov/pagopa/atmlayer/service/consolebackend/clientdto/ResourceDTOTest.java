@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 @QuarkusTest

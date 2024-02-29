@@ -6,7 +6,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import jakarta.enterprise.context.ApplicationScoped;

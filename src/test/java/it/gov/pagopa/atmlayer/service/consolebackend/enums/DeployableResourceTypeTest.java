@@ -3,7 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.enums;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 class DeployableResourceTypeTest {
