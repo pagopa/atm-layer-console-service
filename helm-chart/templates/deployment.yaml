@@ -66,6 +66,8 @@ spec:
               value: "{{ .Values.usersRouteBasePath }}"
             - name: ALLOWED_CROSS_ORIGINS
               value: "{{ .Values.allowedCrossOrigins }}"
+            - name: MODEL_EMULATOR_BASE_PATH
+              value: "{{ .Values.modelEmulatorBasePath }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
