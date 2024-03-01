@@ -6,6 +6,7 @@
   <artifactId>atm-layer-console-service</artifactId>
   <version>1.0.0-dev.13</version>
   <properties>
+    <jacoco.version>0.8.11</jacoco.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -141,6 +142,11 @@
       <artifactId>testcontainers</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jacoco</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -196,6 +202,24 @@
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
+              <destFile>${project.build.directory}/jacoco-quarkus.exec</destFile>
+              <append>true</append>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
