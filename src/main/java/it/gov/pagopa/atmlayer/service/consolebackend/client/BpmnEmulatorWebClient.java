@@ -2,9 +2,14 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
@@ -12,6 +17,29 @@ import java.util.UUID;
 
 @RegisterRestClient(configKey = "bpmn-emulator-client")
 public interface BpmnEmulatorWebClient {
+
+    @GET
+    @Path("/filter")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
+                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
+                                                          @QueryParam("pageSize") @DefaultValue("10")
+                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
+                                                          @QueryParam("functionType") String functionType,
+                                                          @QueryParam("modelVersion") String modelVersion,
+                                                          @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
+                                                          @QueryParam("bpmnId") UUID bpmnId,
+                                                          @QueryParam("deploymentId") UUID deploymentId,
+                                                          @QueryParam("camundaDefinitionId") String camundaDefinitionId,
+                                                          @QueryParam("definitionKey") String definitionKey,
+                                                          @QueryParam("deployedFileName") String deployedFileName,
+                                                          @QueryParam("resource") String resource,
+                                                          @QueryParam("sha256") String sha256,
+                                                          @QueryParam("status") StatusEnum status,
+                                                          @QueryParam("acquirerId") String acquirerId,
+                                                          @QueryParam("branchId") String branchId,
+                                                          @QueryParam("terminalId") String terminalId,
+                                                          @QueryParam("fileName") String fileName);
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -38,5 +66,11 @@ public interface BpmnEmulatorWebClient {
     @Path("/deploy/{uuid}/version/{version}")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<BpmnDTO> deployBPMN(@PathParam("uuid") UUID uuid, @PathParam("version") Long version);
+
+    @GET
+    @Path("/downloadFrontEnd/{uuid}/version/{version}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<FileS3Dto> downloadBpmnFrontEnd(@PathParam("uuid") UUID bpmnId,
+                                               @PathParam("version") Long version);
 
 }
