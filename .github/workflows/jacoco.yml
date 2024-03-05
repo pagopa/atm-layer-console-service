@@ -13,25 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@67fbcbb121271f7775d2e7715933280b06314838
+      - name: Setup JDK
+        uses: graalvm/setup-graalvm@v1
         with:
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-          aws-region: ${{ vars.AWS_REGION }}
+          java-version: '17'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build docker image
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ vars.DOCKER_IMAGE_NAME}}
-          DOCKER_IMAGE_TAG: ${{ github.sha }}
+      - name: Test and Integration tests
         run: |
-          docker build -f src/main/java/it/gov/pagopa/atmlayer/service/consolebackend/docker/Dockerfile.native-micro -t $REGISTRY/$REPOSITORY:$DOCKER_IMAGE_TAG . \
-          --build-arg QUARKUS_PROFILE=prod \
-          --build-arg APP_NAME=atm-layer-console-service
+          mvn test -Dquarkus.package.type=native -Dquarkus.application.name=atm-layer-console-service -Dquarkus.profile=prod
 
       - name: Add coverage to PR
         id: jacoco
