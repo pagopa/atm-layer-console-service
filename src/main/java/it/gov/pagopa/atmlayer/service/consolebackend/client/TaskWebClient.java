@@ -3,13 +3,16 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.mapper.TaskClientExceptionMapper;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient(configKey = "task-client")
+@RegisterProvider(TaskClientExceptionMapper.class)
 public interface TaskWebClient {
 
     @Path("/main")
