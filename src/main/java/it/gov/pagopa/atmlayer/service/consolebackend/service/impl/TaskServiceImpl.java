@@ -7,10 +7,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.validation.constraints.NotNull;
-import jakarta.ws.rs.PathParam;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
