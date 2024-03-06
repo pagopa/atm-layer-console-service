@@ -1,14 +1,10 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.core.MediaType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.jboss.resteasy.reactive.PartType;
 
-import java.io.File;
 import java.util.UUID;
 
 @Data

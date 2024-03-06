@@ -1,15 +1,17 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
-import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
+import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.TaskWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.PathParam;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.jboss.resteasy.reactive.RestResponse;
 
 @ApplicationScoped
 @Slf4j
@@ -21,7 +23,11 @@ public class TaskServiceImpl implements TaskService {
     TaskWebClient taskWebClient;
 
     @Override
-    public RestResponse<Scene> createMainScene(State state) {
+    public Uni<Scene> createMainScene(State state) {
         return taskWebClient.createMainScene(state);
+    }
+    @Override
+    public Uni<Scene> createNextScene(String transactionId, State state){
+        return taskWebClient.createNextScene(transactionId, state);
     }
 }
