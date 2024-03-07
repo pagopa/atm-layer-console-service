@@ -16,5 +16,4 @@ public enum OutcomeEnum {
         this.value = value;
         this.description = description;
     }
-
 }
