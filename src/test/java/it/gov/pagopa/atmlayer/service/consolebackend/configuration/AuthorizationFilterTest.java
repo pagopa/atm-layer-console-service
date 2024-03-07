@@ -41,7 +41,7 @@ public class AuthorizationFilterTest {
     }
 
     @Test
-    public void testFilterWithAuthorizationEnabled() throws IOException {
+    void testFilterWithAuthorizationEnabled() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
@@ -51,14 +51,14 @@ public class AuthorizationFilterTest {
     }
 
     @Test
-    public void testFilterWithAuthorizationDisabled() throws IOException {
+    void testFilterWithAuthorizationDisabled() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         authorizationFilter.enableAuthorization = false;
         authorizationFilter.filter(requestContext);
     }
 
     @Test
-    public void testFilterWithAuthorizationEnabledAndAdminUser() throws IOException {
+    void testFilterWithAuthorizationEnabledAndAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
@@ -68,7 +68,7 @@ public class AuthorizationFilterTest {
     }
 
     @Test
-    public void testFilterWithAuthorizationEnabledAndNonAdminUser() throws IOException {
+    void testFilterWithAuthorizationEnabledAndNonAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
@@ -80,7 +80,7 @@ public class AuthorizationFilterTest {
     }
 
     @Test
-    public void testFilterWithAuthorizationEnabledAndUserServiceError() throws IOException {
+    void testFilterWithAuthorizationEnabledAndUserServiceError() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().failure(new RuntimeException("Errore nel servizio utente")));
@@ -112,7 +112,7 @@ public class AuthorizationFilterTest {
     void testFilter(){
         when(userService.findByUserId(any(String.class))).thenReturn(Uni.createFrom().item(userProfileDto));
         assertTrue(havePermission(userProfileDto, UserProfileEnum.ADMIN));
-        assertFalse(!havePermission(userProfileDto, UserProfileEnum.GUEST));
-        assertFalse(!havePermission(userProfileDto, UserProfileEnum.OPERATOR));
+        assertTrue(havePermission(userProfileDto, UserProfileEnum.GUEST));
+        assertTrue(havePermission(userProfileDto, UserProfileEnum.OPERATOR));
     }
 }
