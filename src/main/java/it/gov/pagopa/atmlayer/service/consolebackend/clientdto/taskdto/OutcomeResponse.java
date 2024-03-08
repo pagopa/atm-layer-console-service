@@ -22,21 +22,4 @@ public class OutcomeResponse {
 
     @JsonIgnore
     private OutcomeEnum outcomeEnum;
-
-    public OutcomeResponse(OutcomeEnum outcomeEnum) {
-        this.result = outcomeEnum.getValue();
-        this.description = outcomeEnum.getDescription();
-        this.outcomeEnum = outcomeEnum;
-    }
-
-    public void setOutcomeEnum(OutcomeEnum outcomeEnum) {
-        this.result = outcomeEnum.getValue();
-        this.description = outcomeEnum.getDescription();
-        this.outcomeEnum = outcomeEnum;
-    }
-
-    public OutcomeEnum getOutcomeEnum() {
-        return outcomeEnum;
-    }
-
 }
