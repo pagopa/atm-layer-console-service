@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 91.45%               |
-| :heavy_check_mark: Number of Lines Covered | 321    |
+| Code Coverage %         | 91.43%               |
+| :heavy_check_mark: Number of Lines Covered | 320    |
 | :x: Number of Lines Missed  | 30     |
-| Total Number of Lines   | 351     |
+| Total Number of Lines   | 350     |
 
 
 ## Details:
@@ -536,30 +536,6 @@
 
         
 #### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: ModelClientExceptionMapper.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: TaskClientExceptionMapper.java
-    </summary>
-
-        
-#### All Lines Covered!
         
 </details>
 
