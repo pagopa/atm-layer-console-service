@@ -6,7 +6,6 @@ import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum.CREATED;

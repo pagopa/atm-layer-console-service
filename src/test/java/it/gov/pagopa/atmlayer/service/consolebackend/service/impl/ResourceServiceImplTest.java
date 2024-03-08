@@ -8,7 +8,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -2,8 +2,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.exception;
 
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.smallrye.mutiny.CompositeException;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.mapper.GlobalExceptionMapperImpl;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerValidationErrorResponse;
@@ -11,22 +9,17 @@ import it.gov.pagopa.atmlayer.service.consolebackend.utils.ConstraintViolationMa
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Response;
-import org.jboss.resteasy.reactive.ClientWebApplicationException;
 import org.jboss.resteasy.reactive.RestResponse;
-import org.jboss.resteasy.reactive.common.jaxrs.ResponseImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class GlobalExceptionMapperImplTest {

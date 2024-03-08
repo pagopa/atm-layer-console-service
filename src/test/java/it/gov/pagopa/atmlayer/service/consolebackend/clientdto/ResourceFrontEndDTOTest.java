@@ -1,10 +1,8 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 
 import io.quarkus.test.junit.QuarkusTest;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.S3ResourceTypeEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

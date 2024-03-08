@@ -10,7 +10,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

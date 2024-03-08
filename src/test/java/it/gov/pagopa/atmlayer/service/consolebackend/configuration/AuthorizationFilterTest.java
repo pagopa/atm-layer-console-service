@@ -21,7 +21,6 @@ import java.io.IOException;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
