@@ -12,11 +12,13 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.jboss.resteasy.reactive.ClientWebApplicationException;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +31,16 @@ public class GlobalExceptionMapperImpl {
     ConstraintViolationMappingUtils constraintViolationMappingUtils;
 
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionMapperImpl.class);
-    private final String EXCEPTION_TYPE="type";
-    private final String EXCEPTION_ERROR_CODE="errorCode";
-    private final String EXCEPTION_MESSAGE="message";
-    private final String EXCEPTION_STATUS_CODE="statusCode";
+    private final String MODEL_EXCEPTION_TYPE="type";
+    private final String MODEL_EXCEPTION_ERROR_CODE="errorCode";
+    private final String MODEL_EXCEPTION_MESSAGE="message";
+    private final String MODEL_EXCEPTION_STATUS_CODE="statusCode";
+
+    private final String TASK_STATUS = "status";
+    private final String TASK_ERROR_CODE = "errorCode";
+    private final String TASK_DESCRIPTION = "description";
+    private final String TASK_EXCEPTION = "TASC_EXCEPTION";
+
 
 
     @ServerExceptionMapper
@@ -52,6 +60,11 @@ public class GlobalExceptionMapperImpl {
         return buildErrorResponse(new AtmLayerException(exception));
     }
 
+    @ServerExceptionMapper
+    public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception) {
+        return buildErrorResponse(exception);
+    }
+
 
 
     @ServerExceptionMapper
@@ -59,6 +72,17 @@ public class GlobalExceptionMapperImpl {
         String message = "Generic Error";
         logger.error("Generic error found: ", exception);
         return buildErrorResponse(message);
+    }
+
+    public RestResponse<ATMLayerErrorResponse> buildErrorResponse(ClientWebApplicationException exception) {
+        LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
+        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
+                .type(hashMap.get(MODEL_EXCEPTION_TYPE) == null ? TASK_EXCEPTION : hashMap.get(MODEL_EXCEPTION_TYPE).toString())
+                .errorCode(hashMap.get(MODEL_EXCEPTION_ERROR_CODE) == null ? hashMap.get(TASK_ERROR_CODE).toString() : hashMap.get(MODEL_EXCEPTION_ERROR_CODE).toString())
+                .statusCode(Integer.parseInt(hashMap.get(MODEL_EXCEPTION_STATUS_CODE) == null ? hashMap.get(TASK_STATUS).toString() : hashMap.get(MODEL_EXCEPTION_STATUS_CODE).toString()))
+                .message(hashMap.get(MODEL_EXCEPTION_MESSAGE) == null ? hashMap.get(TASK_DESCRIPTION).toString() : hashMap.get(MODEL_EXCEPTION_MESSAGE).toString())
+                .build();
+        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
     }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
