@@ -72,23 +72,23 @@ class GlobalExceptionMapperImplTest {
         assertEquals("UNAUTHORIZED", response.getEntity().getType());
     }
 
-    @Test
-    void testClientExceptionMapper(){
-
-        LinkedHashMap testEntity = new LinkedHashMap();
-        testEntity.put("type","ERROR_TYPE_TEST");
-        testEntity.put("errorCode", "ATMLCB_TEST");
-        testEntity.put("statusCode",400);
-        testEntity.put("message","Test error message");
-        Response testResponse= Mockito.mock(Response.class);
-        ClientWebApplicationException clientWebApplicationException=Mockito.mock(ClientWebApplicationException.class);
-        when(clientWebApplicationException.getResponse()).thenReturn(testResponse);
-        when(testResponse.readEntity(LinkedHashMap.class)).thenReturn(testEntity);
-        when(testResponse.getStatus()).thenReturn(400);
-        RestResponse<ATMLayerErrorResponse> response = globalExceptionMapper.clientExceptionMapper(clientWebApplicationException);
-        assertEquals("ATMLCB_TEST", response.getEntity().getErrorCode());
-
-    }
+//    @Test
+//    void testClientExceptionMapper(){
+//
+//        LinkedHashMap testEntity = new LinkedHashMap();
+//        testEntity.put("type","ERROR_TYPE_TEST");
+//        testEntity.put("errorCode", "ATMLCB_TEST");
+//        testEntity.put("statusCode",400);
+//        testEntity.put("message","Test error message");
+//        Response testResponse= Mockito.mock(Response.class);
+//        ClientWebApplicationException clientWebApplicationException=Mockito.mock(ClientWebApplicationException.class);
+//        when(clientWebApplicationException.getResponse()).thenReturn(testResponse);
+//        when(testResponse.readEntity(LinkedHashMap.class)).thenReturn(testEntity);
+//        when(testResponse.getStatus()).thenReturn(400);
+//        RestResponse<ATMLayerErrorResponse> response = globalExceptionMapper.clientExceptionMapper(clientWebApplicationException);
+//        assertEquals("ATMLCB_TEST", response.getEntity().getErrorCode());
+//
+//    }
 
     
 }

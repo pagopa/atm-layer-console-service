@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.mapper.ModelClientExceptionMapper;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
@@ -12,11 +13,13 @@ import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.UUID;
 
 @RegisterRestClient(configKey = "bpmn-client")
+@RegisterProvider(ModelClientExceptionMapper.class)
 public interface BpmnWebClient {
 
 

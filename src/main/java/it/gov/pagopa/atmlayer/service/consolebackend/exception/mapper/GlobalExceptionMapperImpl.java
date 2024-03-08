@@ -12,13 +12,11 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.jboss.resteasy.reactive.ClientWebApplicationException;
 import org.jboss.resteasy.reactive.RestResponse;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -54,16 +52,13 @@ public class GlobalExceptionMapperImpl {
         return buildErrorResponse(new AtmLayerException(exception));
     }
 
+
+
     @ServerExceptionMapper
     public RestResponse<ATMLayerErrorResponse> genericExceptionMapper(Exception exception) {
         String message = "Generic Error";
         logger.error("Generic error found: ", exception);
         return buildErrorResponse(message);
-    }
-
-    @ServerExceptionMapper
-    public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception){
-            return buildErrorResponse(exception);
     }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
@@ -95,16 +90,6 @@ public class GlobalExceptionMapperImpl {
         return RestResponse.status(Response.Status.BAD_REQUEST, payload);
     }
 
-    private RestResponse<ATMLayerErrorResponse> buildErrorResponse (ClientWebApplicationException exception){
-        LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(hashMap.get(EXCEPTION_TYPE).toString())
-                .errorCode(hashMap.get(EXCEPTION_ERROR_CODE).toString())
-                .statusCode(Integer.parseInt(hashMap.get(EXCEPTION_STATUS_CODE).toString()))
-                .message(hashMap.get(EXCEPTION_MESSAGE).toString())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(exception.getResponse().getStatus()), errorResponse);
-    }
 
 
 }
