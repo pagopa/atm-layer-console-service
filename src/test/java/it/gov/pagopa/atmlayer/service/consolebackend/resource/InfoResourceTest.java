@@ -45,4 +45,21 @@ class InfoResourceTest {
         assertEquals(response, result);
 
     }
+
+    @Test
+    void testGetTokenEmail_Exception() {
+        String email = "utente@pagopa.it";
+        HashMap<String, String> response = new HashMap<>();
+        response.put("email", email);
+        HashMap result = given()
+                .contentType(MediaType.APPLICATION_JSON)
+                .when().get("/api/v1/console-service/info/email")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(HashMap.class);
+        assertEquals(response, result);
+
+    }
 }
