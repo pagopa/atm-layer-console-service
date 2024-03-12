@@ -77,9 +77,9 @@ public class GlobalExceptionMapperImpl {
     public RestResponse<ATMLayerErrorResponse> buildErrorResponse(ClientWebApplicationException exception) {
         LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
         if (hashMap.containsKey(MODEL_EXCEPTION_TYPE)) {
-            return buildErrorResponseTask(hashMap);
-        } else {
             return buildErrorResponseModel(hashMap);
+        } else {
+            return buildErrorResponseTask(hashMap);
         }
     }
 
