@@ -6,9 +6,9 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 91.43%               |
-| :heavy_check_mark: Number of Lines Covered | 320    |
-| :x: Number of Lines Missed  | 30     |
+| Code Coverage %         | 96%               |
+| :heavy_check_mark: Number of Lines Covered | 336    |
+| :x: Number of Lines Missed  | 14     |
 | Total Number of Lines   | 350     |
 
 
@@ -92,11 +92,11 @@
 
 <details>
     <summary>
-:x: TaskResource.java
+:heavy_check_mark: TaskResource.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
@@ -116,16 +116,12 @@
 
 <details>
     <summary>
-:x: InfoResource.java
+:heavy_check_mark: InfoResource.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
-- Line #42
-```
-        }catch (Exception e){
-```
 </details>
 
     
@@ -575,16 +571,12 @@
 
 <details>
     <summary>
-:x: AtmLayerException.java
+:heavy_check_mark: AtmLayerException.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
-- Line #61
-```
-    }
-```
 </details>
 
     
