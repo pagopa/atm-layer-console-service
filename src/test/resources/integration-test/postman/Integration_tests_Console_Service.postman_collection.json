@@ -1,0 +1,1003 @@
+{
+	"info": {
+		"_postman_id": "96ccc411-ce65-475d-a37f-e799b037e742",
+		"name": "Integration_tests_Console_Service",
+		"description": "# ⛓️ Get started here\n\nPostman allows you to test your APIs using simple Javascript code. You can evaluate your response body, headers, cookies, and more using the [ChaiJS BDD](https://www.chaijs.com/api/bdd/) syntax.\n\nThis template guides you through the process of setting up an integration test to ensure that all individual components of an API function together seamlessly.\n\nThe API under test in this collection includes three endpoints for registering and receiving a token, accessing your unique generated name, and unregistering a token:\n\n- POST `/register`\n- POST `/unregister`\n- GET `/my-name`\n    \n\nBy setting up requests in the order of the operation, we can test the flow of data to and from the endpoints and ensure they work together as expected. We also verify that the data persists between requests on the back end.\n\n## 🔖 **How to use this template**\n\n**Step 1:** Check out the requests' documentation to learn more about -\n\n- what each request is meant to do.\n- the tests we've added against each one.\n    \n\n**Step 2:** Run this collection by clicking on \"Run\".\n\n<img src=\"https://content.pstmn.io/84019b0f-69c8-4c5f-98b9-2c90a6f9a0b1/Y29sbGVjdGlvbi1ydW5uZXItYnV0dG9uLmpwZWc=\" alt=\"\" height=\"103\" width=\"266\">\n\n**Step 3:** To customize this template, replace the request URLs with your API endpoints and add or edit the tests if needed.\n\n## ℹ️ Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8145532"
+	},
+	"item": [
+		{
+			"name": "BPMN",
+			"item": [
+				{
+					"name": "Lista BPMN filtrati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 1\", function () {\r",
+									"    pm.expect(1, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/filter?pageSize=10&pageIndex=0&functionType=TEST",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "functionType",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista BPMN filtrati non trovati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 0\", function () {\r",
+									"    var items = jsonData.itemsFound;\r",
+									"    pm.expect(0, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"functionType\", \"TEST\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/filter?pageSize=10&pageIndex=0&functionType=TEST",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "functionType",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_file_created\", responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_id\", jsonData.bpmnId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "TestFile",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000012\", function(){\r",
+									"    pm.expect(\"ATMLM_4000012\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "TestFileFail",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{association_triplet_create}}\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000047\", function(){\r",
+									"    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{association_triplet_create}}\""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifica Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{association_triplet_update}}\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifica Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000003\", function(){\r",
+									"    pm.expect(\"ATMLM_4000003\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{association_triplet_update}}\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista Associazioni BPMN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 1\", function () {\r",
+									"    pm.expect(1, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"{{association_triplet_update}}\"",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version?acquirerId={{aquirerId_delete}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "acquirerId",
+									"value": "{{aquirerId_delete}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000048\", function(){\r",
+									"    pm.expect(\"ATMLM_4000048\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/associations/:uuid/version/:version?acquirerId={{not_found_acquirerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "acquirerId",
+									"value": "{{not_found_acquirerId}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_file_deployed\", responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_id_deployed\", jsonData.bpmnId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/deploy/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"deploy",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000047\", function(){\r",
+									"    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/deploy/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"deploy",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/disable/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"disable",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000004\", function(){\r",
+									"    pm.expect(\"ATMLM_4000004\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/disable/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"disable",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://postman-integration-testing.glitch.me/"
+		},
+		{
+			"key": "functionType",
+			"value": ""
+		},
+		{
+			"key": "bpmn_file_input",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_file_created",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "association_triplet_create",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "association_triplet_update",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_version",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "aquirerId_delete",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_file_deployed",
+			"value": ""
+		},
+		{
+			"key": "bpmn_id_deployed",
+			"value": ""
+		},
+		{
+			"key": "not_found_uuid",
+			"value": ""
+		},
+		{
+			"key": "not_found_acquirerId",
+			"value": ""
+		}
+	]
+}

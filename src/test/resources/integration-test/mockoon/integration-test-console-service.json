@@ -1,0 +1,662 @@
+{
+  "uuid": "169cdae8-d9c2-463c-ac7b-b2190bf665a1",
+  "lastMigration": 32,
+  "name": "Integration test console service",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/bpmn/filter",
+      "responses": [
+        {
+          "uuid": "a6984aba-79b3-4f0b-b877-4dd51393a5a2",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 0,\r\n  \"totalPages\": 0,\r\n  \"results\": []\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "functionType",
+              "value": "TEST",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9107bee3-61ea-4956-bb5b-be52b279238b",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 0,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": [\r\n    {\r\n      \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"modelVersion\": 0,\r\n      \"deployedFileName\": \"string\",\r\n      \"definitionKey\": \"string\",\r\n      \"functionType\": \"string\",\r\n      \"status\": \"CREATED\",\r\n      \"sha256\": \"string\",\r\n      \"enabled\": true,\r\n      \"definitionVersionCamunda\": 0,\r\n      \"camundaDefinitionId\": \"string\",\r\n      \"description\": \"string\",\r\n      \"resourceId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"resourceType\": \"BPMN\",\r\n      \"storageKey\": \"string\",\r\n      \"fileName\": \"string\",\r\n      \"extension\": \"string\",\r\n      \"resourceCreatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"resourceLastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"resourceCreatedBy\": \"string\",\r\n      \"resourceLastUpdatedBy\": \"string\",\r\n      \"resource\": \"string\",\r\n      \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"createdBy\": \"string\",\r\n      \"lastUpdatedBy\": \"string\"\r\n    }\r\n  ]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e76cd534-ee91-44c2-bf85-542ad8d45492",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/bpmn",
+      "responses": [
+        {
+          "uuid": "e3b3b1ac-f81b-4d59-b939-aa3f1f5dfcce",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "fileName",
+              "value": "TestFile",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "functionType",
+              "value": "MENU",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "01743c15-be45-411f-a3e0-d5ff33ad6e92",
+          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000012\",\r\n  \"message\": \"Esiste già un BPMN con la stessa chiave di definizione\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "fileName",
+              "value": "TestFileFail",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "functionType",
+              "value": "MENU",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "14e9aff5-1ae9-4230-aa57-d67c09dd3589",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "1a4834fd-8d1b-4ec1-8367-7008f8d19b03",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"bpmnModelVersion\": 0,\r\n  \"acquirerId\": \"string\",\r\n  \"branchId\": \"string\",\r\n  \"terminalId\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0b4618d4-7058-4cec-8f02-2b8a9bb9d748",
+          "body": "{\r\n  \"type\": \"CANNOT_ASSOCIATE\",\r\n  \"errorCode\": \"ATMLM_4000047\",\r\n  \"message\": \"La banca/filiale/terminale indicata è già associata a una risorsa di processo\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "c5a93979-c0db-4526-bc1b-566e4b07341c",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "api/v1/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "f8d73f54-54a7-4a2c-9db8-327083e5f767",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"bpmnModelVersion\": 0,\r\n  \"acquirerId\": \"string\",\r\n  \"branchId\": \"string\",\r\n  \"terminalId\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "15c506f0-8148-460a-aeee-9320f84a3613",
+          "body": "{\r\n  \"type\": \"NOT_DEPLOYED_STATUS\",\r\n  \"errorCode\": \"ATMLM_4000003\",\r\n  \"message\": \"Il file di processo non è in stato DEPLOYED\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b7d1aa4c-07ca-4dda-8cfb-ba99c2021f39",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "ceb802da-a7d4-4190-8e7c-70972effb85c",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 0,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": [{\r\n    \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"bpmnModelVersion\": 0,\r\n    \"acquirerId\": \"string\",\r\n    \"branchId\": \"string\",\r\n    \"terminalId\": \"string\",\r\n    \"functionType\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  }]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cc27005a-4f16-417b-a7cc-c41f6abb9c1b",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "api/v1/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "e80f6e77-8c50-4143-bc97-dcea76726eed",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "acquirerId",
+              "value": "123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3d3cbeec-bd4d-4592-9a3f-c9b74cacfb3c",
+          "body": "{\r\n  \"type\": \"NOT_EXISTING_REFERENCED_ENTITY\",\r\n  \"errorCode\": \"ATMLM_4000048\",\r\n  \"message\": \"Impossibile cancellare la configurazione BpmnBankConfigPK(bpmnId=3fa85f64-5717-4562-b3fc-2c963f66afa6, bpmnModelVersion=1, acquirerId=123456, branchId=null, terminalId=null): non esiste oppure si è verificato un errore durante la cancellazione\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "acquirerId",
+              "value": "124567",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "70f9f90c-4af7-4990-b45a-3e84746c3eb3",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/bpmn/deploy/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "2fd22952-08fa-4926-a656-564abae3847b",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ee30c602-02fb-484c-a0bc-5d5ea2c95f7b",
+          "body": "{\r\n  \"type\": \"CANNOT_ASSOCIATE\",\r\n  \"errorCode\": \"ATMLM_4000047\",\r\n  \"message\": \"La banca/filiale/terminale indicata è già associata a una risorsa di processo\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4158d264-4054-4657-9a7c-33b2f07bffe0",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/bpmn/disable/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "b57576a2-0fb4-4a7b-b39e-d004bf2d4c48",
+          "body": "",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1406d74f-9c34-439f-90cb-1cfb1718c0a9",
+          "body": "{\r\n  \"type\": \"NOT_DEPLOYABLE_STATUS\",\r\n  \"errorCode\": \"ATMLM_4000004\",\r\n  \"message\": \"Il file BPMN di riferimento non può essere rilasciato\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10a"
+    },
+    {
+      "type": "route",
+      "uuid": "e76cd534-ee91-44c2-bf85-542ad8d45492"
+    },
+    {
+      "type": "route",
+      "uuid": "14e9aff5-1ae9-4230-aa57-d67c09dd3589"
+    },
+    {
+      "type": "route",
+      "uuid": "c5a93979-c0db-4526-bc1b-566e4b07341c"
+    },
+    {
+      "type": "route",
+      "uuid": "b7d1aa4c-07ca-4dda-8cfb-ba99c2021f39"
+    },
+    {
+      "type": "route",
+      "uuid": "cc27005a-4f16-417b-a7cc-c41f6abb9c1b"
+    },
+    {
+      "type": "route",
+      "uuid": "70f9f90c-4af7-4990-b45a-3e84746c3eb3"
+    },
+    {
+      "type": "route",
+      "uuid": "4158d264-4054-4657-9a7c-33b2f07bffe0"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
