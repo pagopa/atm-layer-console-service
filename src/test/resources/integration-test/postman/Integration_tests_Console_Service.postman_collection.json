@@ -911,6 +911,702 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Download file frontend OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/downloadFrontend/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"downloadFrontend",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download file frontend KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000002\", function(){\r",
+									"    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/downloadFrontend/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"downloadFrontend",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade file BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "TestFile",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/upgrade",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade file BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000002\", function(){\r",
+									"    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "TestFileFail",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/bpmn/upgrade",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bpmn",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "INFO",
+			"item": [
+				{
+					"name": "Info utente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/info/email",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"info",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESOURCE",
+			"item": [
+				{
+					"name": "Creazione RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"resource_file_created\", responseBody);\r",
+									"    pm.collectionVariables.set(\"resource_id\", jsonData.resourceId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "Test.html",
+									"type": "text"
+								},
+								{
+									"key": "resourceType",
+									"value": "HTML",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000019\", function(){\r",
+									"    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "fileName",
+									"value": "TestFail.html",
+									"type": "text"
+								},
+								{
+									"key": "resourceType",
+									"value": "HTML",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista RESOURCE filtrati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 5\", function () {\r",
+									"    pm.expect(5, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/filter?pageSize=10&pageIndex=0&extension=html",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "extension",
+									"value": "html"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista RESOURCE filtrati non trovati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 0\", function () {\r",
+									"    pm.expect(0, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/filter?extension=other&pageSize=10&pageIndex=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "extension",
+									"value": "other"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/disable/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								"disable",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{resource_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000029\", function(){\r",
+									"    pm.expect(\"ATMLM_4000029\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/disable/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								"disable",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{not_found_resourceId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggiorna RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{resource_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggiorna RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000019\", function(){\r",
+									"    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/resources/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"resources",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{not_found_resourceId}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -998,6 +1694,24 @@
 		{
 			"key": "not_found_acquirerId",
 			"value": ""
+		},
+		{
+			"key": "resource_file_input",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "resource_file_created",
+			"value": ""
+		},
+		{
+			"key": "resource_id",
+			"value": ""
+		},
+		{
+			"key": "not_found_resourceId",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
