@@ -7,13 +7,13 @@ COPY ./run-postman.sh /postman
 RUN npm install -g newman
 RUN npm install -g newman-reporter-htmlextra
 
-# Cancella il file precedente se esiste
-RUN rm -f /postman/Integration_tests_Console_Service2.postman_collection.json
-# Cancella il file precedente se esiste
-RUN rm -f /postman/Integration_tests_Console_Service.postman_collection.json
-
-# Copia il nuovo file
-COPY ./postman/Integration_tests_Console_Service2.postman_collection.json /postman
+## Cancella il file precedente se esiste
+#RUN rm -f /postman/Integration_tests_Console_Service2.postman_collection.json
+## Cancella il file precedente se esiste
+#RUN rm -f /postman/Integration_tests_Console_Service.postman_collection.json
+#
+## Copia il nuovo file
+#COPY ./postman/Integration_tests_Console_Service2.postman_collection.json /postman
 
 RUN chmod 777 /postman/run-postman.sh \
   && chown -R 1001 /postman/run-postman.sh \
