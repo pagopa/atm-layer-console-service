@@ -2,7 +2,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.integrationtests;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -39,7 +38,6 @@ public class IntegrationTest {
 
     @Test
     void executePostmanCollectionWithNewmann() {
-
         NEWMAN.start();
         log.info(NEWMAN.getLogs());
         assertEquals(0, NEWMAN.getCurrentContainerInfo().getState().getExitCodeLong());
