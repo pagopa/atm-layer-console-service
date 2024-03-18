@@ -61,10 +61,9 @@ public class GlobalExceptionMapperImpl {
     }
 
     @ServerExceptionMapper
-    public RestResponse<ATMLayerErrorResponse> clientExceptionMapper(ClientWebApplicationException exception) {
-        return buildErrorResponse(exception);
+    public Response clientExceptionMapper(ClientWebApplicationException exception) {
+        return exception.getResponse();
     }
-
 
 
     @ServerExceptionMapper
@@ -74,34 +73,6 @@ public class GlobalExceptionMapperImpl {
         return buildErrorResponse(message);
     }
 
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponse(ClientWebApplicationException exception) {
-        LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
-        if (hashMap.containsKey(MODEL_EXCEPTION_TYPE)) {
-            return buildErrorResponseModel(hashMap);
-        } else {
-            return buildErrorResponseTask(hashMap);
-        }
-    }
-
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponseTask(LinkedHashMap hashMap) {
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(TASK_EXCEPTION)
-                .errorCode(hashMap.get(TASK_ERROR_CODE).toString())
-                .statusCode(Integer.parseInt(hashMap.get(TASK_STATUS).toString()))
-                .message(hashMap.get(TASK_DESCRIPTION).toString())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(Integer.parseInt(hashMap.get(TASK_STATUS).toString())), errorResponse);
-    }
-
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponseModel(LinkedHashMap hashMap) {
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(hashMap.get(MODEL_EXCEPTION_TYPE).toString())
-                .errorCode(hashMap.get(MODEL_EXCEPTION_ERROR_CODE).toString())
-                .statusCode(Integer.parseInt(hashMap.get(MODEL_EXCEPTION_STATUS_CODE).toString()))
-                .message(hashMap.get(MODEL_EXCEPTION_MESSAGE).toString())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(Integer.parseInt(hashMap.get(MODEL_EXCEPTION_STATUS_CODE).toString())), errorResponse);
-    }
 
     private RestResponse<ATMLayerErrorResponse> buildErrorResponse(AtmLayerException e) {
         ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()

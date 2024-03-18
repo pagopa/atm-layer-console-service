@@ -16,7 +16,7 @@ public interface TaskWebClient {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    Uni<Scene> createMainScene(@Parameter @NotNull  State state);
+    Uni<Scene> createMainScene(@Parameter @NotNull  State state, @HeaderParam("Authorization") String authorization);
 
     @Path("/next/trns/{transactionId}")
     @POST
@@ -24,6 +24,6 @@ public interface TaskWebClient {
     @Consumes(MediaType.APPLICATION_JSON)
     Uni<Scene> createNextScene(
             @Parameter @NotNull @PathParam("transactionId") String transactionId,
-            @Parameter @NotNull State state);
+            @Parameter @NotNull State state, @HeaderParam("Authorization") String authorization);
 
 }

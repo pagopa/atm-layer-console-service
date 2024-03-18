@@ -157,7 +157,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFile",
 									"type": "text"
 								},
@@ -216,7 +216,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFileFail",
 									"type": "text"
 								},
@@ -965,7 +965,7 @@
 		},
 		{
 			"key": "bpmn_file_input",
-			"value": "",
+			"value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0jcpj0q\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.15.2\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.19.0\">\n  <bpmn:process id=\"demo11_06\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:extensionElements>\n        <camunda:executionListener delegateExpression=\"${populateBusinessKey}\" event=\"start\" />\n      </bpmn:extensionElements>\n      <bpmn:outgoing>Flow_0m1t6c8</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:sequenceFlow id=\"Flow_0m1t6c8\" sourceRef=\"StartEvent_1\" targetRef=\"rest_call\" />\n    <bpmn:serviceTask id=\"rest_call\" name=\"firstTask\">\n      <bpmn:extensionElements>\n        <camunda:connector>\n          <camunda:inputOutput>\n            <camunda:inputParameter name=\"method\">GET</camunda:inputParameter>\n            <camunda:inputParameter name=\"url\">https://reqres.in/api/users?page=2</camunda:inputParameter>\n            <camunda:inputParameter name=\"headers\">\n              <camunda:map>\n                <camunda:entry key=\"Content-Type\">application/json</camunda:entry>\n              </camunda:map>\n            </camunda:inputParameter>\n            <camunda:outputParameter name=\"res\">${S(response).prop(\"data\")}</camunda:outputParameter>\n          </camunda:inputOutput>\n          <camunda:connectorId>http-connector</camunda:connectorId>\n        </camunda:connector>\n      </bpmn:extensionElements>\n      <bpmn:incoming>Flow_0m1t6c8</bpmn:incoming>\n      <bpmn:outgoing>Flow_06v2pm6</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:sequenceFlow id=\"Flow_06v2pm6\" sourceRef=\"rest_call\" targetRef=\"Activity_1ni0zi6\" />\n    <bpmn:userTask id=\"Activity_1ni0zi6\">\n      <bpmn:incoming>Flow_06v2pm6</bpmn:incoming>\n    </bpmn:userTask>\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1qxsvpd\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_1gek9ke_di\" bpmnElement=\"rest_call\">\n        <dc:Bounds x=\"310\" y=\"77\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_158am8k_di\" bpmnElement=\"Activity_1ni0zi6\">\n        <dc:Bounds x=\"710\" y=\"77\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0m1t6c8_di\" bpmnElement=\"Flow_0m1t6c8\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"310\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_06v2pm6_di\" bpmnElement=\"Flow_06v2pm6\">\n        <di:waypoint x=\"410\" y=\"117\" />\n        <di:waypoint x=\"710\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
 			"type": "string"
 		},
 		{
