@@ -20,7 +20,7 @@ public class CognitoServiceImpl implements CognitoService {
 
     @Override
     public Uni<CognitoToken> createToken(){
-        return cognitoWebClient.createToken("client_credentials", "dev/tasks", "Basic Nmw3MmRvaGNsZ2c1OXJ2Z3RxdW44M3ZvYWg6aGRoMXUzZTk1cHZiNjY2OGY3dGh1OXRhdmVudTQ3cHFmcmgydXZua29lNXVvZW9jOTZl");
+        return cognitoWebClient.createToken("client_credentials", "dev/tasks", "Basic Aggiungere qui il basicAuth per Cognito");
     }
 
 }
