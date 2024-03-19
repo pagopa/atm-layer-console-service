@@ -25,28 +25,4 @@ public class ConstraintViolationMappingUtilsImpl implements ConstraintViolationM
         return field.asString().concat(" ").concat(error.getMessage());
 
     }
-
-    public static <T> T buildObjectFromMap(Class<T> clazz, Map<String, Object> map) throws Exception {
-        Constructor<T> constructor = clazz.getDeclaredConstructor();
-        constructor.setAccessible(true);
-        T obj = constructor.newInstance();
-
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            String fieldName = entry.getKey();
-            Object value = entry.getValue();
-
-            Field field = clazz.getDeclaredField(fieldName);
-            field.setAccessible(true);
-
-            if (value instanceof Map) {
-                // If the value is a nested map, recursively build the object
-                Class<?> fieldType = field.getType();
-                field.set(obj, buildObjectFromMap(fieldType, (Map<String, Object>) value));
-            } else {
-                field.set(obj, value);
-            }
-        }
-
-        return obj;
-    }
 }
