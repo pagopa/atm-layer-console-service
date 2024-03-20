@@ -39,7 +39,7 @@ public class GlobalExceptionMapperImpl {
     private final String TASK_STATUS = "status";
     private final String TASK_ERROR_CODE = "errorCode";
     private final String TASK_DESCRIPTION = "description";
-    private final String TASK_EXCEPTION = "TASC_EXCEPTION";
+    private final String TASK_EXCEPTION = "TASK_EXCEPTION";
 
 
 
@@ -105,8 +105,10 @@ public class GlobalExceptionMapperImpl {
         LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
         if (hashMap.containsKey(MODEL_EXCEPTION_TYPE)) {
             return buildErrorResponseModel(hashMap);
-        } else {
+        } else if(hashMap.containsKey(TASK_DESCRIPTION)){
             return buildErrorResponseTask(hashMap);
+        }else {
+            return buildErrorResponse("Generic Client Error");
         }
     }
 
