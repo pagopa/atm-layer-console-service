@@ -236,5 +236,26 @@
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
     </profile>
+    <profile>
+      <id>skip-integration-tests</id>
+      <activation>
+        <property>
+          <name>skip-integration-tests</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <configuration>
+              <excludes>
+                <exclude>**/IntegrationTest.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
