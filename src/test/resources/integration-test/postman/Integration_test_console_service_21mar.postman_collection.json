@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "96ccc411-ce65-475d-a37f-e799b037e742",
-		"name": "prova",
+		"_postman_id": "fb49007d-0fe2-4f72-8f76-d378d72ccebb",
+		"name": "Integration_test_console_service_21mar",
 		"description": "# ⛓️ Get started here\n\nPostman allows you to test your APIs using simple Javascript code. You can evaluate your response body, headers, cookies, and more using the [ChaiJS BDD](https://www.chaijs.com/api/bdd/) syntax.\n\nThis template guides you through the process of setting up an integration test to ensure that all individual components of an API function together seamlessly.\n\nThe API under test in this collection includes three endpoints for registering and receiving a token, accessing your unique generated name, and unregistering a token:\n\n- POST `/register`\n- POST `/unregister`\n- GET `/my-name`\n    \n\nBy setting up requests in the order of the operation, we can test the flow of data to and from the endpoints and ensure they work together as expected. We also verify that the data persists between requests on the back end.\n\n## 🔖 **How to use this template**\n\n**Step 1:** Check out the requests' documentation to learn more about -\n\n- what each request is meant to do.\n- the tests we've added against each one.\n    \n\n**Step 2:** Run this collection by clicking on \"Run\".\n\n<img src=\"https://content.pstmn.io/84019b0f-69c8-4c5f-98b9-2c90a6f9a0b1/Y29sbGVjdGlvbi1ydW5uZXItYnV0dG9uLmpwZWc=\" alt=\"\" height=\"103\" width=\"266\">\n\n**Step 3:** To customize this template, replace the request URLs with your API endpoints and add or edit the tests if needed.\n\n## ℹ️ Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8145532"
+		"_exporter_id": "31632207"
 	},
 	"item": [
 		{
@@ -143,6 +143,32 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"window = {};\r",
+									"\r",
+									"pm.sendRequest(\"https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js\", (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"\r",
+									"    eval(response.text());\r",
+									"\r",
+									"    // This is where you can set the locale. See faker.js docs for all available locales.\r",
+									"    window.faker.locale=\"it\";\r",
+									"    var id = window.faker.lorem.word(10)+ \"_\" + new Date().getTime();\r",
+									"    pm.collectionVariables.set(\"bpmn_1\",\r",
+									"    pm.collectionVariables.get(\"bpmn_part1\")+id+pm.collectionVariables.get(\"bpmn1_part2\"));\r",
+									"    pm.collectionVariables.set(\"bpmn_1_definition_key\",id); \r",
+									"   \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"request": {
@@ -153,11 +179,11 @@
 							"formdata": [
 								{
 									"key": "file",
-									"value": "{{bpmn_file_input}}",
+									"value": "{{bpmn_1}}",
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFile",
 									"type": "text"
 								},
@@ -212,11 +238,11 @@
 							"formdata": [
 								{
 									"key": "file",
-									"value": "{{bpmn_file_input}}",
+									"value": "{{bpmn_1}}",
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFileFail",
 									"type": "text"
 								},
@@ -264,10 +290,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\"{{association_triplet_create}}\"",
+							"raw": "{{association_triplet_create}}",
 							"options": {
 								"raw": {
-									"language": "text"
+									"language": "json"
 								}
 							}
 						},
@@ -326,7 +352,12 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\"{{association_triplet_create}}\""
+							"raw": "{{association_triplet_create}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version",
@@ -350,7 +381,7 @@
 								},
 								{
 									"key": "version",
-									"value": "{{bpmn_version}}"
+									"value": "{{bpmn_version_2}}"
 								}
 							]
 						}
@@ -379,10 +410,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\"{{association_triplet_update}}\"",
+							"raw": "{{association_triplet_update}}",
 							"options": {
 								"raw": {
-									"language": "text"
+									"language": "json"
 								}
 							}
 						},
@@ -441,10 +472,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\"{{association_triplet_update}}\"",
+							"raw": "{{association_triplet_update}}",
 							"options": {
 								"raw": {
-									"language": "text"
+									"language": "json"
 								}
 							}
 						},
@@ -506,10 +537,10 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\"{{association_triplet_update}}\"",
+							"raw": "{{association_triplet_update}}",
 							"options": {
 								"raw": {
-									"language": "text"
+									"language": "json"
 								}
 							}
 						},
@@ -824,8 +855,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
 									"})"
 								],
 								"type": "text/javascript",
@@ -947,15 +978,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/bpmn/downloadFrontend/:bpmn/version/:version",
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/downloadFrontEnd/:bpmn/version/:version",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"bpmn",
-								"downloadFrontend",
+								"downloadFrontEnd",
 								":bpmn",
 								"version",
 								":version"
@@ -1000,15 +1032,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/bpmn/downloadFrontend/:bpmn/version/:version",
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/downloadFrontEnd/:bpmn/version/:version",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"bpmn",
-								"downloadFrontend",
+								"downloadFrontEnd",
 								":bpmn",
 								"version",
 								":version"
@@ -1055,7 +1088,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFile",
 									"type": "text"
 								},
@@ -1072,13 +1105,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/bpmn/upgrade",
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/upgrade",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"bpmn",
 								"upgrade"
 							]
@@ -1119,7 +1153,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFileFail",
 									"type": "text"
 								},
@@ -1136,13 +1170,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/bpmn/upgrade",
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/upgrade",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"bpmn",
 								"upgrade"
 							]
@@ -1175,13 +1210,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/info/email",
+							"raw": "{{baseUrl}}/api/v1/console-service/info/email",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"info",
 								"email"
 							]
@@ -1225,7 +1261,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "Test.html",
 									"type": "text"
 								},
@@ -1237,13 +1273,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources"
 							]
 						}
@@ -1283,7 +1320,7 @@
 									"type": "text"
 								},
 								{
-									"key": "fileName",
+									"key": "filename",
 									"value": "TestFail.html",
 									"type": "text"
 								},
@@ -1295,13 +1332,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources"
 							]
 						}
@@ -1332,13 +1370,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/filter?pageSize=10&pageIndex=0&extension=html",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/filter?pageSize=10&pageIndex=0&extension=html",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								"filter"
 							],
@@ -1394,13 +1433,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/filter?extension=other&pageSize=10&pageIndex=0",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/filter?extension=other&pageSize=10&pageIndex=0",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								"filter"
 							],
@@ -1446,13 +1486,14 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/disable/:resourceId",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/disable/:resourceId",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								"disable",
 								":resourceId"
@@ -1497,13 +1538,14 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/disable/:resourceId",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/disable/:resourceId",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								"disable",
 								":resourceId"
@@ -1548,13 +1590,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/:resourceId",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/:resourceId",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								":resourceId"
 							],
@@ -1603,13 +1646,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/resources/:resourceId",
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/:resourceId",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"v1",
+								"console-service",
 								"resources",
 								":resourceId"
 							],
@@ -1660,7 +1704,7 @@
 			"value": ""
 		},
 		{
-			"key": "bpmn_file_input",
+			"key": "bpmn_1",
 			"value": "",
 			"type": "string"
 		},
@@ -1671,27 +1715,27 @@
 		},
 		{
 			"key": "bpmn_id",
-			"value": "",
+			"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
 			"type": "string"
 		},
 		{
 			"key": "association_triplet_create",
-			"value": "",
+			"value": "{\n    \"acquirerId\":\"1234\",\n    \"branchId\":\"1\",\n    \"terminalId\":\"1\"\n}",
 			"type": "string"
 		},
 		{
 			"key": "association_triplet_update",
-			"value": "",
+			"value": "{\n    \"acquirerId\":\"1234\",\n    \"branchId\":\"1\",\n    \"terminalId\":\"1\"\n}",
 			"type": "string"
 		},
 		{
 			"key": "bpmn_version",
-			"value": "",
+			"value": "1",
 			"type": "string"
 		},
 		{
 			"key": "aquirerId_delete",
-			"value": "",
+			"value": "123456",
 			"type": "string"
 		},
 		{
@@ -1704,11 +1748,11 @@
 		},
 		{
 			"key": "not_found_uuid",
-			"value": ""
+			"value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d"
 		},
 		{
 			"key": "not_found_acquirerId",
-			"value": ""
+			"value": "124567"
 		},
 		{
 			"key": "resource_file_input",
@@ -1725,7 +1769,27 @@
 		},
 		{
 			"key": "not_found_resourceId",
+			"value": "a04342fa-263a-43ab-919a-c06913febefe",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_part1",
+			"value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"",
+			"type": "string"
+		},
+		{
+			"key": "bpmn1_part2",
+			"value": "\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_1_definition_key",
 			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_version_2",
+			"value": "2",
 			"type": "string"
 		}
 	]

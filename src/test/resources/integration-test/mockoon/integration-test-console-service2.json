@@ -114,7 +114,7 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "fileName",
+              "modifier": "filename",
               "value": "TestFile",
               "invert": false,
               "operator": "equals"
@@ -148,7 +148,7 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "fileName",
+              "modifier": "filename",
               "value": "TestFileFail",
               "invert": false,
               "operator": "equals"
@@ -234,15 +234,15 @@
             {
               "target": "params",
               "modifier": "version",
-              "value": "",
-              "invert": true,
+              "value": "2",
+              "invert": false,
               "operator": "equals"
             }
           ],
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -596,7 +596,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "api/v1/bpmn/downloadFrontend/:uuid/version/:version",
+      "endpoint": "api/v1/model/bpmn/downloadFrontEnd/:uuid/version/:version",
       "responses": [
         {
           "uuid": "5e47e60e-e574-4018-b236-d4930adfa1fe",
@@ -674,7 +674,7 @@
       "type": "http",
       "documentation": "",
       "method": "post",
-      "endpoint": "api/v1/bpmn/upgrade",
+      "endpoint": "api/v1/model/bpmn/upgrade",
       "responses": [
         {
           "uuid": "1c1b18e7-e36b-46b5-8a93-62f558ac6563",
@@ -767,7 +767,7 @@
       "type": "http",
       "documentation": "",
       "method": "post",
-      "endpoint": "api/v1/resources",
+      "endpoint": "api/v1/model/resources",
       "responses": [
         {
           "uuid": "ace44816-b6a9-41d3-a187-150bd9563663",
@@ -783,13 +783,20 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "fileName",
+              "modifier": "filename",
               "value": "Test.html",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "resourceType",
+              "value": "HTML",
               "invert": false,
               "operator": "equals"
             }
           ],
-          "rulesOperator": "OR",
+          "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
@@ -798,7 +805,7 @@
         },
         {
           "uuid": "c1e07a59-cc7a-4b97-83f5-d36535ca688f",
-          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000019\",\r\n  \"message\": \"Esiste già una risorsa con lo stesso contenuto\",\r\n  \"statusCode\": 4\r\n}",
+          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000019\",\r\n  \"message\": \"Esiste già una risorsa con lo stesso contenuto\",\r\n  \"statusCode\": 400\r\n}",
           "latency": 0,
           "statusCode": 400,
           "label": "",
@@ -810,16 +817,23 @@
           "rules": [
             {
               "target": "body",
-              "modifier": "fileName",
+              "modifier": "filename",
               "value": "TestFail.html",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "resourceType",
+              "value": "HTML",
               "invert": false,
               "operator": "equals"
             }
           ],
-          "rulesOperator": "OR",
+          "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -831,7 +845,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "api/v1/resources/filter",
+      "endpoint": "api/v1/model/resources/filter",
       "responses": [
         {
           "uuid": "18ae0055-580c-4f21-82b9-1b5e28a94e37",
@@ -876,7 +890,7 @@
         },
         {
           "uuid": "cd25a686-9df6-499f-9504-50f43e78b84c",
-          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": []\r\n}",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 0,\r\n  \"totalPages\": 1,\r\n  \"results\": []\r\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -911,7 +925,7 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -923,7 +937,7 @@
       "type": "http",
       "documentation": "",
       "method": "post",
-      "endpoint": "api/v1/resources/disable/:uuid",
+      "endpoint": "api/v1/model/resources/disable/:uuid",
       "responses": [
         {
           "uuid": "b9c24116-157b-49d2-94be-536df74bce0e",
@@ -975,7 +989,7 @@
           "rulesOperator": "AND",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
@@ -987,7 +1001,7 @@
       "type": "http",
       "documentation": "",
       "method": "put",
-      "endpoint": "api/v1/resources/:uuid",
+      "endpoint": "api/v1/model/resources/:uuid",
       "responses": [
         {
           "uuid": "9ed3c53e-84ee-47cc-8c86-ec044c3dfe7b",
@@ -1039,7 +1053,7 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false,
+          "default": true,
           "crudKey": "id",
           "callbacks": []
         }
