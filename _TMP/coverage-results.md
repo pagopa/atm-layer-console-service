@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 92.05%               |
-| :heavy_check_mark: Number of Lines Covered | 336    |
-| :x: Number of Lines Missed  | 29     |
-| Total Number of Lines   | 365     |
+| Code Coverage %         | 95.74%               |
+| :heavy_check_mark: Number of Lines Covered | 337    |
+| :x: Number of Lines Missed  | 15     |
+| Total Number of Lines   | 352     |
 
 
 ## Details:
@@ -347,20 +347,12 @@
 
 <details>
     <summary>
-:x: ConstraintViolationMappingUtilsImpl.java
+:heavy_check_mark: ConstraintViolationMappingUtilsImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
-- Line #45
-```
-            } else {
-```
-- Line #48
-```
-        }
-```
 </details>
 
     
