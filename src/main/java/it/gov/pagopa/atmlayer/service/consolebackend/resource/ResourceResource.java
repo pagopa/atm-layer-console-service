@@ -71,9 +71,7 @@ public class ResourceResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
-         return this.resourceService.createResource(resourceCreationDto)
-                 .onItem()
-                 .transformToUni(resource -> Uni.createFrom().item(resource));
+         return this.resourceService.createResource(resourceCreationDto);
     }
 
     @PUT
@@ -82,16 +80,12 @@ public class ResourceResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<ResourceDTO> updateResource(@RequestBody(required = true) @FormParam("file") File file,
                                            @PathParam("uuid") UUID uuid) {
-        return resourceService.updateResource(file, uuid)
-                .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource));
+        return resourceService.updateResource(file, uuid);
     }
 
     @POST
     @Path("/disable/{uuid}")
     public Uni<Void> disable(@PathParam("uuid") UUID uuid) {
-        return resourceService.disable(uuid)
-                .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource));
+        return resourceService.disable(uuid);
     }
 }

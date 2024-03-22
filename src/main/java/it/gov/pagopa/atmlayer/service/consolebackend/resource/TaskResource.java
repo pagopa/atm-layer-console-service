@@ -43,9 +43,7 @@ public class TaskResource {
     public Uni<Scene> createMainScene(
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return this.taskService.createMainScene(state)
-                .onItem()
-                .transformToUni(scene -> Uni.createFrom().item(scene));
+        return this.taskService.createMainScene(state);
     }
 
     @Path("/next/trns/{transactionId}")
@@ -57,9 +55,7 @@ public class TaskResource {
             @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") String transactionId,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return this.taskService.createNextScene(transactionId, state)
-                .onItem()
-                .transformToUni(scene -> Uni.createFrom().item(scene));
+        return this.taskService.createNextScene(transactionId, state);
     }
 
 
