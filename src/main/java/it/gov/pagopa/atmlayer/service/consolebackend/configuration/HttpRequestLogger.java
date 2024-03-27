@@ -5,8 +5,6 @@ import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
-
 @Provider
 @Slf4j
 public class HttpRequestLogger implements ContainerRequestFilter {
@@ -16,9 +14,6 @@ public class HttpRequestLogger implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        LocalDateTime timestampStart = LocalDateTime.now();
-        log.info("Request started at : {}", timestampStart);
-        requestContext.setProperty("timestampStart",timestampStart);
         logRequest(requestContext);
     }
 }

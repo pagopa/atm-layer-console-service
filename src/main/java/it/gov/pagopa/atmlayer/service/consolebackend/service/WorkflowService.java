@@ -8,7 +8,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceF
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import jakarta.ws.rs.PathParam;
 
 import java.io.File;
 import java.util.UUID;

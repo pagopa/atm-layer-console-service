@@ -6,10 +6,8 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.FileS3Dto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,7 +16,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -86,37 +83,28 @@ public class WorkflowResource {
     @Path("/downloadFrontEnd/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID uuid){
-        return this.workflowService.downloadFrontEnd(uuid)
-                .onFailure()
-                .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        return this.workflowService.downloadFrontEnd(uuid);
     }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
-        return this.workflowService.create(workflowResourceCreationDto)
-                .onFailure()
-                .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+        return this.workflowService.create(workflowResourceCreationDto);
     }
 
     @POST
     @Path("/deploy/{uuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid) {
-        return this.workflowService.deploy(uuid)
-                .onFailure()
-                .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST, AppErrorCodeEnum.ATMLCB_500));
+        return this.workflowService.deploy(uuid);
     }
 
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid) {
-        return this.workflowService.rollback(uuid)
-                .onFailure()
-                .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST, AppErrorCodeEnum.ATMLCB_500));
+        return this.workflowService.rollback(uuid);
     }
 
     @PUT
@@ -125,16 +113,12 @@ public class WorkflowResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
                                     @PathParam("uuid") UUID uuid){
-            return this.workflowService.update(file, uuid)
-                    .onFailure()
-                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+            return this.workflowService.update(file, uuid);
     }
 
     @POST
     @Path("/disable/{uuid}")
     public Uni<Void> disable(@PathParam("uuid") UUID uuid){
-            return this.workflowService.disable(uuid)
-                    .onFailure()
-                    .transform(failure -> new AtmLayerException(failure.getMessage(), Response.Status.BAD_REQUEST,AppErrorCodeEnum.ATMLCB_500));
+            return this.workflowService.disable(uuid);
     }
 }

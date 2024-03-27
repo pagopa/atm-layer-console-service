@@ -1,6 +1,5 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
-import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
@@ -18,10 +17,8 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.io.File;
 import java.util.UUID;
-
 @RegisterRestClient(configKey = "resource-client")
 public interface ResourceWebClient {
-
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)

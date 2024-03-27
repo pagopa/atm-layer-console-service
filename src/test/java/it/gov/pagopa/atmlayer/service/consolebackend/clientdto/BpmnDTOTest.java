@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @QuarkusTest
 class BpmnDTOTest {
@@ -82,5 +83,34 @@ class BpmnDTOTest {
         int hashCodeDto = dto.hashCode();
         int hashCodeDto1 = dto1.hashCode();
         assertEquals(hashCodeDto, hashCodeDto1);
+    }
+
+    @Test
+    void testAllArgsConstructor(){
+        ResourceFileDTO resourceFileDTO=new ResourceFileDTO();
+        BpmnDTO bpmnDTO=new BpmnDTO(
+                UUID.randomUUID(),
+                1L, "deployedFileName","definitionKey","functionType",
+                StatusEnum.DEPLOYED,"sha256",true,1,"camundaDefinitionId",
+                "description", resourceFileDTO, "resource", UUID.randomUUID(),
+                Timestamp.valueOf("2018-09-01 09:01:15"),Timestamp.valueOf("2018-09-01 09:01:15"),
+                "createdBy","lastUpdatedBy");
+        assertNotNull(bpmnDTO);
+    }
+
+    @Test
+    void testBuilder(){
+        BpmnDTO bpmnDTO = BpmnDTO.builder()
+                .bpmnId(UUID.randomUUID())
+                .modelVersion(1L)
+                .build();
+        assertNotNull(bpmnDTO);
+    }
+
+    @Test
+    void testToString(){
+        BpmnDTO bpmnDTO = new BpmnDTO();
+        String bpmDTOstring=bpmnDTO.toString();
+        assertNotNull(bpmDTOstring);
     }
 }

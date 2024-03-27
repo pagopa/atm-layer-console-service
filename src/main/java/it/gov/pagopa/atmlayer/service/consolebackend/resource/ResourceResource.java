@@ -6,7 +6,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -74,8 +73,7 @@ public class ResourceResource {
     public Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
          return this.resourceService.createResource(resourceCreationDto)
                  .onItem()
-                 .transformToUni(resource -> Uni.createFrom().item(resource))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+                 .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 
     @PUT
@@ -86,8 +84,7 @@ public class ResourceResource {
                                            @PathParam("uuid") UUID uuid) {
         return resourceService.updateResource(file, uuid)
                 .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource))
-                .onFailure().transform(e -> new AtmLayerException(e));
+                .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 
     @POST
@@ -95,7 +92,6 @@ public class ResourceResource {
     public Uni<Void> disable(@PathParam("uuid") UUID uuid) {
         return resourceService.disable(uuid)
                 .onItem()
-                .transformToUni(resource -> Uni.createFrom().item(resource))
-                .onFailure().transform(e -> new AtmLayerException(e));
+                .transformToUni(resource -> Uni.createFrom().item(resource));
     }
 }

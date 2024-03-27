@@ -4,7 +4,6 @@ import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -43,7 +42,6 @@ import java.util.UUID;
 })
 @SecurityRequirement(name = "bearerAuth")
 public class BpmnResource {
-
     @Inject
     BpmnService bpmnService;
 
@@ -72,15 +70,14 @@ public class BpmnResource {
                                                                  @QueryParam("branchId") String branchId,
                                                                  @QueryParam("terminalId") String terminalId,
                                                                  @QueryParam("fileName") String fileName) {
-
-         return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
-                 .onItem()
-                 .transform(Unchecked.function(pagedList -> {
-                     if (pagedList.getResults().isEmpty()) {
-                         log.info("No Bpmn file meets the applied filters");
-                     }
-                     return pagedList;
-                 }));
+        return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
+                .onItem()
+                .transform(Unchecked.function(pagedList -> {
+                    if (pagedList.getResults().isEmpty()) {
+                        log.info("No Bpmn file meets the applied filters");
+                    }
+                    return pagedList;
+                }));
     }
 
     @POST
@@ -90,10 +87,9 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
     public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
                                    @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
-         return this.bpmnService.createBpmn(bpmnCreationDto)
-                 .onItem()
-                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+        return this.bpmnService.createBpmn(bpmnCreationDto)
+                .onItem()
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @GET
@@ -103,14 +99,14 @@ public class BpmnResource {
                                                                   @PathParam("uuid") UUID uuid, @PathParam("version") Long version,
                                                                   @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize) {
-         return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
-                 .onItem()
-                 .transform(Unchecked.function(pagedList -> {
-                     if (pagedList.getResults().isEmpty()) {
-                         log.info("No BPMN meets the applied filters");
-                     }
-                     return pagedList;
-                 }));
+        return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
+                .onItem()
+                .transform(Unchecked.function(pagedList -> {
+                    if (pagedList.getResults().isEmpty()) {
+                        log.info("No BPMN meets the applied filters");
+                    }
+                    return pagedList;
+                }));
     }
 
     @POST
@@ -121,10 +117,9 @@ public class BpmnResource {
                                                        @PathParam("uuid") UUID bpmnId,
                                                        @PathParam("version") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-         return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto)
-                 .onItem()
-                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+        return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto)
+                .onItem()
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @DELETE
@@ -137,8 +132,7 @@ public class BpmnResource {
                                              @QueryParam("terminalId") String terminalId) {
         return this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId)
                 .onItem()
-                .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                .onFailure().transform(e -> new AtmLayerException(e));
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @PUT
@@ -148,10 +142,9 @@ public class BpmnResource {
     public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@Context ContainerRequestContext containerRequestContext,
                                                            @PathParam("uuid") UUID bpmnId, @PathParam("version") Long version,
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-         return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto)
-                 .onItem()
-                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+        return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto)
+                .onItem()
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @POST
@@ -160,10 +153,9 @@ public class BpmnResource {
     public Uni<BpmnDTO> deployBPMN(@Context ContainerRequestContext containerRequestContext,
                                    @PathParam("uuid") UUID uuid,
                                    @PathParam("version") Long version) {
-         return this.bpmnService.deployBPMN(uuid, version)
-                 .onItem()
-                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+        return this.bpmnService.deployBPMN(uuid, version)
+                .onItem()
+                .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @GET
@@ -174,8 +166,7 @@ public class BpmnResource {
                                                @PathParam("version") Long modelVersion){
          return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion)
                  .onItem()
-                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn))
-                 .onFailure().transform(e -> new AtmLayerException(e));
+                 .transformToUni(bpmn -> Uni.createFrom().item(bpmn));
     }
 
     @POST
@@ -183,9 +174,9 @@ public class BpmnResource {
     public Uni<Void> disableBPMN(@Context ContainerRequestContext containerRequestContext,
                                  @PathParam("uuid") UUID bpmnId,
                                  @PathParam("version") Long version) {
-         return this.bpmnService.disableBPMN(bpmnId, version)
-                   .onItem()
-                   .transform(Unchecked.function( res -> res));
+        return this.bpmnService.disableBPMN(bpmnId, version)
+                .onItem()
+                .transform(Unchecked.function(res -> res));
     }
 
     @POST
@@ -196,6 +187,6 @@ public class BpmnResource {
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
         return this.bpmnService.upgradeBPMN(bpmnUpgradeDto)
                 .onItem()
-                .transform(Unchecked.function( res -> res));
+                .transform(Unchecked.function(res -> res));
     }
 }

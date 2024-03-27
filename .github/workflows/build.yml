@@ -34,6 +34,37 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Setup JDK
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '17'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test and Integration tests
+        run: |
+          mvn test -Dquarkus.package.type=native -Dquarkus.application.name=atm-layer-console-service -Dquarkus.profile=prod
+
+      - name: JaCoCo Code Coverage Report
+        id: jacoco_reporter
+        uses: PavanMudigonda/jacoco-reporter@v4.9
+        with:
+          coverage_results_path: target/jacoco-report/jacoco.xml
+          coverage_report_name: 'Coverage build ${{ github.run_number }}'
+          coverage_report_title: JaCoCo
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_check_run: false
+          minimum_coverage: 90
+          fail_below_threshold: false
+          publish_only_summary: false
+
+      - name: Fail Build if overall coverage is less than 90%
+        if: steps.jacoco_reporter.outputs.coverage_percentage < 90.0 
+        uses: actions/github-script@v6
+        with:
+          script: |
+            core.setFailed('Overall coverage is less than 90%!')
+
       - name: Build docker image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -43,4 +74,3 @@ jobs:
           docker build -f src/main/java/it/gov/pagopa/atmlayer/service/consolebackend/docker/Dockerfile.native-micro -t $REGISTRY/$REPOSITORY:$DOCKER_IMAGE_TAG . \
           --build-arg QUARKUS_PROFILE=prod \
           --build-arg APP_NAME=atm-layer-console-service
- 

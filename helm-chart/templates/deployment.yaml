@@ -53,7 +53,9 @@ spec:
             - name: CONSOLE_SERVICE_OPENAPI_PATH
               value: "{{ .Values.consoleService.openapiPath }}"
             - name: MODEL_BASE_PATH
-              value: "{{ .Values.modelBasePath }}"
+              value: "{{ .Values.model.basePath }}"
+            - name: MODEL_RELATIVE_PATH
+              value: "{{ .Values.model.relativePath }}"
             - name: BPMN_ROUTE_BASE_PATH
               value: "{{ .Values.bpmnRouteBasePath }}"
             - name: WORKFLOW_ROUTE_BASE_PATH
@@ -62,21 +64,21 @@ spec:
               value: "{{ .Values.resourceRouteBasePath }}"
             - name: USERS_ROUTE_BASE_PATH
               value: "{{ .Values.usersRouteBasePath }}"
+            - name: ALLOWED_CROSS_ORIGINS
+              value: "{{ .Values.allowedCrossOrigins }}"
+            - name: MODEL_EMULATOR_BASE_PATH
+              value: "{{ .Values.modelEmulatorBasePath }}"
+            - name: TASK_BASE_PATH
+              value: "{{ .Values.task.basePath }}"
+            - name: TASK_RELATIVE_PATH
+              value: "{{ .Values.task.relativePath }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
             mountPath: "/mnt/secrets-store"
             readOnly: true
           {{- end }}
-          {{- if .Values.autoscaling.enabled }}
           resources:
-            limits:
-              cpu: {{ .Values.autoscaling.cpuLimits }}
-              memory: {{ .Values.autoscaling.memoryLimits }}
-            requests:
-              cpu: {{ .Values.autoscaling.cpuRequest }}
-              memory: {{ .Values.autoscaling.memoryRequests }}
-          {{- end }}
-
+            {{- toYaml .Values.resources | nindent 12 }}
   strategy:
     type: Recreate

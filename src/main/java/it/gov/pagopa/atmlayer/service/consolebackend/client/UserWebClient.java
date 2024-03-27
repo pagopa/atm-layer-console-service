@@ -12,7 +12,6 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient(configKey = "user-client")
 public interface UserWebClient {
-
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)

@@ -1,14 +1,13 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
 
 import io.quarkus.test.junit.QuarkusTest;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 class UserProfileDtoTest {

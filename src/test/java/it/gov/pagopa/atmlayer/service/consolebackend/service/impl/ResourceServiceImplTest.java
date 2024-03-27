@@ -3,12 +3,14 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.ResourceWebClient;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -28,8 +30,8 @@ public class ResourceServiceImplTest {
     @Mock
     private ResourceWebClient resourceWebClient;
 
-    @Mock
-    private ResourceService resourceService;
+    @InjectMocks
+    private ResourceServiceImpl resourceService;
 
     @BeforeEach
     public void setUp() {

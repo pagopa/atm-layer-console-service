@@ -19,6 +19,7 @@ import java.util.UUID;
 @RegisterRestClient(configKey = "bpmn-client")
 public interface BpmnWebClient {
 
+
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
