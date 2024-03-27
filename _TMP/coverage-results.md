@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96%               |
-| :heavy_check_mark: Number of Lines Covered | 336    |
-| :x: Number of Lines Missed  | 14     |
-| Total Number of Lines   | 350     |
+| Code Coverage %         | 96.02%               |
+| :heavy_check_mark: Number of Lines Covered | 314    |
+| :x: Number of Lines Missed  | 13     |
+| Total Number of Lines   | 327     |
 
 
 ## Details:
@@ -80,11 +80,11 @@
 
 <details>
     <summary>
-:x: ResourceResource.java
+:heavy_check_mark: ResourceResource.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 

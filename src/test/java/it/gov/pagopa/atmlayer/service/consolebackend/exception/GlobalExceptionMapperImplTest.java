@@ -103,6 +103,4 @@ class GlobalExceptionMapperImplTest {
         assertEquals("ATMLCB_TEST", response.getEntity().getErrorCode());
 
     }
-
-    
 }

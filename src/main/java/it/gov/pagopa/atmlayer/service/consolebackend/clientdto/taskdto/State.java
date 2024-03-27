@@ -30,8 +30,7 @@ public class State {
     @Schema(hidden = true)
     private String transactionId;
 
-    @ToString.Exclude
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     @Schema(description = "Codice Fiscale dell'utente (dato sensibile)")
     private String fiscalCode;
 
