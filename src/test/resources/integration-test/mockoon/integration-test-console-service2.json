@@ -1,0 +1,1159 @@
+{
+  "uuid": "169cdae8-d9c2-463c-ac7b-b2190bf665a1",
+  "lastMigration": 32,
+  "name": "ATMLayerModel",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/model/bpmn/filter",
+      "responses": [
+        {
+          "uuid": "a6984aba-79b3-4f0b-b877-4dd51393a5a2",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 0,\r\n  \"totalPages\": 0,\r\n  \"results\": []\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "functionType",
+              "value": "TEST",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9107bee3-61ea-4956-bb5b-be52b279238b",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 0,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": [\r\n    {\r\n      \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"modelVersion\": 0,\r\n      \"deployedFileName\": \"string\",\r\n      \"definitionKey\": \"string\",\r\n      \"functionType\": \"string\",\r\n      \"status\": \"CREATED\",\r\n      \"sha256\": \"string\",\r\n      \"enabled\": true,\r\n      \"definitionVersionCamunda\": 0,\r\n      \"camundaDefinitionId\": \"string\",\r\n      \"description\": \"string\",\r\n      \"resourceId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"resourceType\": \"BPMN\",\r\n      \"storageKey\": \"string\",\r\n      \"fileName\": \"string\",\r\n      \"extension\": \"string\",\r\n      \"resourceCreatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"resourceLastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"resourceCreatedBy\": \"string\",\r\n      \"resourceLastUpdatedBy\": \"string\",\r\n      \"resource\": \"string\",\r\n      \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n      \"createdBy\": \"string\",\r\n      \"lastUpdatedBy\": \"string\"\r\n    }\r\n  ]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "e76cd534-ee91-44c2-bf85-542ad8d45492",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/bpmn",
+      "responses": [
+        {
+          "uuid": "e3b3b1ac-f81b-4d59-b939-aa3f1f5dfcce",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "filename",
+              "value": "TestFile",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "functionType",
+              "value": "MENU",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "01743c15-be45-411f-a3e0-d5ff33ad6e92",
+          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000012\",\r\n  \"message\": \"Esiste già un BPMN con la stessa chiave di definizione\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "filename",
+              "value": "TestFileFail",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "functionType",
+              "value": "MENU",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "14e9aff5-1ae9-4230-aa57-d67c09dd3589",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "1a4834fd-8d1b-4ec1-8367-7008f8d19b03",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"bpmnModelVersion\": 0,\r\n  \"acquirerId\": \"string\",\r\n  \"branchId\": \"string\",\r\n  \"terminalId\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "0b4618d4-7058-4cec-8f02-2b8a9bb9d748",
+          "body": "{\r\n  \"type\": \"CANNOT_ASSOCIATE\",\r\n  \"errorCode\": \"ATMLM_4000047\",\r\n  \"message\": \"La banca/filiale/terminale indicata è già associata a una risorsa di processo\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "2",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "c5a93979-c0db-4526-bc1b-566e4b07341c",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "api/v1/model/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "f8d73f54-54a7-4a2c-9db8-327083e5f767",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"bpmnModelVersion\": 0,\r\n  \"acquirerId\": \"string\",\r\n  \"branchId\": \"string\",\r\n  \"terminalId\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "15c506f0-8148-460a-aeee-9320f84a3613",
+          "body": "{\r\n  \"type\": \"NOT_DEPLOYED_STATUS\",\r\n  \"errorCode\": \"ATMLM_4000003\",\r\n  \"message\": \"Il file di processo non è in stato DEPLOYED\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "b7d1aa4c-07ca-4dda-8cfb-ba99c2021f39",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/model/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "ceb802da-a7d4-4190-8e7c-70972effb85c",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 0,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": [{\r\n    \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"bpmnModelVersion\": 0,\r\n    \"acquirerId\": \"string\",\r\n    \"branchId\": \"string\",\r\n    \"terminalId\": \"string\",\r\n    \"functionType\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  }]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cc27005a-4f16-417b-a7cc-c41f6abb9c1b",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "api/v1/model/bpmn/associations/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "e80f6e77-8c50-4143-bc97-dcea76726eed",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "acquirerId",
+              "value": "123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3d3cbeec-bd4d-4592-9a3f-c9b74cacfb3c",
+          "body": "{\r\n  \"type\": \"NOT_EXISTING_REFERENCED_ENTITY\",\r\n  \"errorCode\": \"ATMLM_4000048\",\r\n  \"message\": \"Impossibile cancellare la configurazione BpmnBankConfigPK(bpmnId=3fa85f64-5717-4562-b3fc-2c963f66afa6, bpmnModelVersion=1, acquirerId=123456, branchId=null, terminalId=null): non esiste oppure si è verificato un errore durante la cancellazione\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "acquirerId",
+              "value": "124567",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "70f9f90c-4af7-4990-b45a-3e84746c3eb3",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/bpmn/deploy/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "2fd22952-08fa-4926-a656-564abae3847b",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ee30c602-02fb-484c-a0bc-5d5ea2c95f7b",
+          "body": "{\r\n  \"type\": \"CANNOT_ASSOCIATE\",\r\n  \"errorCode\": \"ATMLM_4000047\",\r\n  \"message\": \"La banca/filiale/terminale indicata è già associata a una risorsa di processo\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "4158d264-4054-4657-9a7c-33b2f07bffe0",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/bpmn/disable/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "b57576a2-0fb4-4a7b-b39e-d004bf2d4c48",
+          "body": "",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1406d74f-9c34-439f-90cb-1cfb1718c0a9",
+          "body": "{\r\n  \"type\": \"NOT_DEPLOYABLE_STATUS\",\r\n  \"errorCode\": \"ATMLM_4000004\",\r\n  \"message\": \"Il file BPMN di riferimento non può essere rilasciato\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6e84810f-73af-41b3-8a8a-f7ae8e952d97",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/model/bpmn/downloadFrontEnd/:uuid/version/:version",
+      "responses": [
+        {
+          "uuid": "5e47e60e-e574-4018-b236-d4930adfa1fe",
+          "body": "{\n  \"fileContent\": \"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGJwbW46ZGVmaW5pdGlvbnMgeG1sbnM6YnBtbj0iaHR0cDovL3d3dy5vbWcub3JnL3NwZWMvQlBNTi8yMDEwMDUyNC9NT0RFTCIgeG1sbnM6YnBtbmRpPSJodHRwOi8vd3d3Lm9tZy5vcmcvc3BlYy9CUE1OLzIwMTAwNTI0L0RJIiB4bWxuczpkYz0iaHR0cDovL3d3dy5vbWcub3JnL3NwZWMvREQvMjAxMDA1MjQvREMiIHhtbG5zOmNhbXVuZGE9Imh0dHA6Ly9jYW11bmRhLm9yZy9zY2hlbWEvMS4wL2JwbW4iIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRpPSJodHRwOi8vd3d3Lm9tZy5vcmcvc3BlYy9ERC8yMDEwMDUyNC9ESSIgeG1sbnM6bW9kZWxlcj0iaHR0cDovL2NhbXVuZGEub3JnL3NjaGVtYS9tb2RlbGVyLzEuMCIgaWQ9IkRlZmluaXRpb25zXzBxd2Q4M3IiIHRhcmdldE5hbWVzcGFjZT0iaHR0cDovL2JwbW4uaW8vc2NoZW1hL2JwbW4iIGV4cG9ydGVyPSJDYW11bmRhIE1vZGVsZXIiIGV4cG9ydGVyVmVyc2lvbj0iNS4xNS4yIiBtb2RlbGVyOmV4ZWN1dGlvblBsYXRmb3JtPSJDYW11bmRhIFBsYXRmb3JtIiBtb2RlbGVyOmV4ZWN1dGlvblBsYXRmb3JtVmVyc2lvbj0iNy4xOS4wIj4KICA8YnBtbjpwcm9jZXNzIGlkPSJwYXltZW50LXJldHJpZXZhbC03IiBuYW1lPSJQYXltZW50IFJldHJpZXZhbCIgaXNFeGVjdXRhYmxlPSJ0cnVlIiBjYW11bmRhOmhpc3RvcnlUaW1lVG9MaXZlPSIxMDAwMCI+CiAgICA8YnBtbjpzdGFydEV2ZW50IGlkPSJTdGFydEV2ZW50XzEiIG5hbWU9IlBheW1lbnQgUmV0cmlldmFsJiMxMDvCoFJlcXVlc3RlZCI+CiAgICAgIDxicG1uOm91dGdvaW5nPkZsb3dfMWF6MDNsMTwvYnBtbjpvdXRnb2luZz4KICAgIDwvYnBtbjpzdGFydEV2ZW50PgogICAgPGJwbW46c2VxdWVuY2VGbG93IGlkPSJGbG93XzFhejAzbDEiIHNvdXJjZVJlZj0iU3RhcnRFdmVudF8xIiB0YXJnZXRSZWY9IkdhdGV3YXlfMHlzNDFsNCIgLz4KICAgIDxicG1uOnNlcnZpY2VUYXNrIGlkPSJBY3Rpdml0eV8xd2w5aW1tIiBuYW1lPSJDaGFyZ2UgQ3JlZGl0IENhcmQiIGNhbXVuZGE6dHlwZT0iZXh0ZXJuYWwiIGNhbXVuZGE6dG9waWM9ImNoYXJnZS1jYXJkIj4KICAgICAgPGJwbW46aW5jb21pbmc+Rmxvd18xcnVtN3l6PC9icG1uOmluY29taW5nPgogICAgICA8YnBtbjppbmNvbWluZz5GbG93XzBpZnV5c2s8L2JwbW46aW5jb21pbmc+CiAgICAgIDxicG1uOm91dGdvaW5nPkZsb3dfMWZwMTA1djwvYnBtbjpvdXRnb2luZz4KICAgIDwvYnBtbjpzZXJ2aWNlVGFzaz4KICAgIDxicG1uOmVuZEV2ZW50IGlkPSJFdmVudF8wajJ4OTNtIiBuYW1lPSJQYXltZW50IFJlY2VpdmVkIj4KICAgICAgPGJwbW46aW5jb21pbmc+Rmxvd18xZnAxMDV2PC9icG1uOmluY29taW5nPgogICAgPC9icG1uOmVuZEV2ZW50PgogICAgPGJwbW46c2VxdWVuY2VGbG93IGlkPSJGbG93XzFmcDEwNXYiIHNvdXJjZVJlZj0iQWN0aXZpdHlfMXdsOWltbSIgdGFyZ2V0UmVmPSJFdmVudF8wajJ4OTNtIiAvPgogICAgPGJwbW46ZXhjbHVzaXZlR2F0ZXdheSBpZD0iR2F0ZXdheV8weXM0MWw0IiBuYW1lPSJQYXltZW50IEFtb3VudD8iPgogICAgICA8YnBtbjppbmNvbWluZz5GbG93XzFhejAzbDE8L2JwbW46aW5jb21pbmc+CiAgICAgIDxicG1uOm91dGdvaW5nPkZsb3dfMGJwejczcjwvYnBtbjpvdXRnb2luZz4KICAgICAgPGJwbW46b3V0Z29pbmc+Rmxvd18waWZ1eXNrPC9icG1uOm91dGdvaW5nPgogICAgPC9icG1uOmV4Y2x1c2l2ZUdhdGV3YXk+CiAgICA8YnBtbjpzZXF1ZW5jZUZsb3cgaWQ9IkZsb3dfMGJwejczciIgbmFtZT0iJiM2Mjs9IDY0NDU2ODQ4NjQ4NTcz4oKsIiBzb3VyY2VSZWY9IkdhdGV3YXlfMHlzNDFsNCIgdGFyZ2V0UmVmPSJBY3Rpdml0eV8wcmFmZHZxIj4KICAgICAgPGJwbW46Y29uZGl0aW9uRXhwcmVzc2lvbiB4c2k6dHlwZT0iYnBtbjp0Rm9ybWFsRXhwcmVzc2lvbiI+JHthbW91bnQmZ3Q7PTEwMDB9PC9icG1uOmNvbmRpdGlvbkV4cHJlc3Npb24+CiAgICA8L2JwbW46c2VxdWVuY2VGbG93PgogICAgPGJwbW46ZXhjbHVzaXZlR2F0ZXdheSBpZD0iR2F0ZXdheV8xa2NjZXE3IiBuYW1lPSJBcHByb3ZlZD8iPgogICAgICA8YnBtbjppbmNvbWluZz5GbG93XzFtY3N5Zm48L2JwbW46aW5jb21pbmc+CiAgICAgIDxicG1uOm91dGdvaW5nPkZsb3dfMXJ1bTd5ejwvYnBtbjpvdXRnb2luZz4KICAgICAgPGJwbW46b3V0Z29pbmc+Rmxvd18wMnp1ZWl0PC9icG1uOm91dGdvaW5nPgogICAgPC9icG1uOmV4Y2x1c2l2ZUdhdGV3YXk+CiAgICA8YnBtbjpzZXF1ZW5jZUZsb3cgaWQ9IkZsb3dfMXJ1bTd5eiIgbmFtZT0iWWVzIiBzb3VyY2VSZWY9IkdhdGV3YXlfMWtjY2VxNyIgdGFyZ2V0UmVmPSJBY3Rpdml0eV8xd2w5aW1tIj4KICAgICAgPGJwbW46Y29uZGl0aW9uRXhwcmVzc2lvbiB4c2k6dHlwZT0iYnBtbjp0Rm9ybWFsRXhwcmVzc2lvbiI+JHthcHByb3ZlZH08L2JwbW46Y29uZGl0aW9uRXhwcmVzc2lvbj4KICAgIDwvYnBtbjpzZXF1ZW5jZUZsb3c+CiAgICA8YnBtbjplbmRFdmVudCBpZD0iRXZlbnRfMHRtYmZzNiIgbmFtZT0iUGF5bWVudCBSZXRyaWV2YWwgUmVqZWN0ZWQiPgogICAgICA8YnBtbjppbmNvbWluZz5GbG93XzAyenVlaXQ8L2JwbW46aW5jb21pbmc+CiAgICA8L2JwbW46ZW5kRXZlbnQ+CiAgICA8YnBtbjpzZXF1ZW5jZUZsb3cgaWQ9IkZsb3dfMDJ6dWVpdCIgbmFtZT0iTm8iIHNvdXJjZVJlZj0iR2F0ZXdheV8xa2NjZXE3IiB0YXJnZXRSZWY9IkV2ZW50XzB0bWJmczYiPgogICAgICA8YnBtbjpjb25kaXRpb25FeHByZXNzaW9uIHhzaTp0eXBlPSJicG1uOnRGb3JtYWxFeHByZXNzaW9uIj4keyFhcHByb3ZlZH08L2JwbW46Y29uZGl0aW9uRXhwcmVzc2lvbj4KICAgIDwvYnBtbjpzZXF1ZW5jZUZsb3c+CiAgICA8YnBtbjpzZXF1ZW5jZUZsb3cgaWQ9IkZsb3dfMW1jc3lmbiIgc291cmNlUmVmPSJBY3Rpdml0eV8wcmFmZHZxIiB0YXJnZXRSZWY9IkdhdGV3YXlfMWtjY2VxNyIgLz4KICAgIDxicG1uOnNlcXVlbmNlRmxvdyBpZD0iRmxvd18waWZ1eXNrIiBuYW1lPSImIzYwOzEwMDAg4oKsIiBzb3VyY2VSZWY9IkdhdGV3YXlfMHlzNDFsNCIgdGFyZ2V0UmVmPSJBY3Rpdml0eV8xd2w5aW1tIj4KICAgICAgPGJwbW46Y29uZGl0aW9uRXhwcmVzc2lvbiB4c2k6dHlwZT0iYnBtbjp0Rm9ybWFsRXhwcmVzc2lvbiI+JHthbW91bnQmbHQ7MTAwMH08L2JwbW46Y29uZGl0aW9uRXhwcmVzc2lvbj4KICAgIDwvYnBtbjpzZXF1ZW5jZUZsb3c+CiAgICA8YnBtbjpidXNpbmVzc1J1bGVUYXNrIGlkPSJBY3Rpdml0eV8wcmFmZHZxIiBuYW1lPSJBcHByb3ZlIFBheW1lbnQiIGNhbXVuZGE6cmVzdWx0VmFyaWFibGU9ImFwcHJvdmVkIiBjYW11bmRhOmRlY2lzaW9uUmVmPSJhcHByb3ZlLXBheW1lbnQiIGNhbXVuZGE6bWFwRGVjaXNpb25SZXN1bHQ9InNpbmdsZUVudHJ5Ij4KICAgICAgPGJwbW46ZXh0ZW5zaW9uRWxlbWVudHMgLz4KICAgICAgPGJwbW46aW5jb21pbmc+Rmxvd18wYnB6NzNyPC9icG1uOmluY29taW5nPgogICAgICA8YnBtbjpvdXRnb2luZz5GbG93XzFtY3N5Zm48L2JwbW46b3V0Z29pbmc+CiAgICA8L2JwbW46YnVzaW5lc3NSdWxlVGFzaz4KICA8L2JwbW46cHJvY2Vzcz4KICA8YnBtbmRpOkJQTU5EaWFncmFtIGlkPSJCUE1ORGlhZ3JhbV8xIj4KICAgIDxicG1uZGk6QlBNTlBsYW5lIGlkPSJCUE1OUGxhbmVfMSIgYnBtbkVsZW1lbnQ9InBheW1lbnQtcmV0cmlldmFsIj4KICAgICAgPGJwbW5kaTpCUE1OU2hhcGUgaWQ9Il9CUE1OU2hhcGVfU3RhcnRFdmVudF8yIiBicG1uRWxlbWVudD0iU3RhcnRFdmVudF8xIj4KICAgICAgICA8ZGM6Qm91bmRzIHg9IjE3OSIgeT0iOTkiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgLz4KICAgICAgICA8YnBtbmRpOkJQTU5MYWJlbD4KICAgICAgICAgIDxkYzpCb3VuZHMgeD0iMTY5IiB5PSIxNDIiIHdpZHRoPSI1NyIgaGVpZ2h0PSI0MCIgLz4KICAgICAgICA8L2JwbW5kaTpCUE1OTGFiZWw+CiAgICAgIDwvYnBtbmRpOkJQTU5TaGFwZT4KICAgICAgPGJwbW5kaTpCUE1OU2hhcGUgaWQ9IkFjdGl2aXR5XzEwNjM4eHZfZGkiIGJwbW5FbGVtZW50PSJBY3Rpdml0eV8xd2w5aW1tIj4KICAgICAgICA8ZGM6Qm91bmRzIHg9IjYwMCIgeT0iNzciIHdpZHRoPSIxMDAiIGhlaWdodD0iODAiIC8+CiAgICAgIDwvYnBtbmRpOkJQTU5TaGFwZT4KICAgICAgPGJwbW5kaTpCUE1OU2hhcGUgaWQ9IkV2ZW50XzBqMng5M21fZGkiIGJwbW5FbGVtZW50PSJFdmVudF8wajJ4OTNtIj4KICAgICAgICA8ZGM6Qm91bmRzIHg9Ijc3MiIgeT0iOTkiIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgLz4KICAgICAgICA8YnBtbmRpOkJQTU5MYWJlbD4KICAgICAgICAgIDxkYzpCb3VuZHMgeD0iNzY3IiB5PSIxNDIiIHdpZHRoPSI0NiIgaGVpZ2h0PSIyNyIgLz4KICAgICAgICA8L2JwbW5kaTpCUE1OTGFiZWw+CiAgICAgIDwvYnBtbmRpOkJQTU5TaGFwZT4KICAgICAgPGJwbW5kaTpCUE1OU2hhcGUgaWQ9IkdhdGV3YXlfMHlzNDFsNF9kaSIgYnBtbkVsZW1lbnQ9IkdhdGV3YXlfMHlzNDFsNCIgaXNNYXJrZXJWaXNpYmxlPSJ0cnVlIj4KICAgICAgICA8ZGM6Qm91bmRzIHg9IjI1NSIgeT0iOTIiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgLz4KICAgICAgICA8YnBtbmRpOkJQTU5MYWJlbD4KICAgICAgICAgIDxkYzpCb3VuZHMgeD0iMjM1IiB5PSI2MiIgd2lkdGg9IjkwIiBoZWlnaHQ9IjE0IiAvPgogICAgICAgIDwvYnBtbmRpOkJQTU5MYWJlbD4KICAgICAgPC9icG1uZGk6QlBNTlNoYXBlPgogICAgICA8YnBtbmRpOkJQTU5TaGFwZSBpZD0iR2F0ZXdheV8xa2NjZXE3X2RpIiBicG1uRWxlbWVudD0iR2F0ZXdheV8xa2NjZXE3IiBpc01hcmtlclZpc2libGU9InRydWUiPgogICAgICAgIDxkYzpCb3VuZHMgeD0iNjI1IiB5PSIyMDUiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgLz4KICAgICAgICA8YnBtbmRpOkJQTU5MYWJlbD4KICAgICAgICAgIDxkYzpCb3VuZHMgeD0iNjI0IiB5PSIyNjIiIHdpZHRoPSI1MyIgaGVpZ2h0PSIxNCIgLz4KICAgICAgICA8L2JwbW5kaTpCUE1OTGFiZWw+CiAgICAgIDwvYnBtbmRpOkJQTU5TaGFwZT4KICAgICAgPGJwbW5kaTpCUE1OU2hhcGUgaWQ9IkV2ZW50XzB0bWJmczZfZGkiIGJwbW5FbGVtZW50PSJFdmVudF8wdG1iZnM2Ij4KICAgICAgICA8ZGM6Qm91bmRzIHg9Ijc4MiIgeT0iMjEyIiB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIC8+CiAgICAgICAgPGJwbW5kaTpCUE1OTGFiZWw+CiAgICAgICAgICA8ZGM6Qm91bmRzIHg9Ijc1NSIgeT0iMjU1IiB3aWR0aD0iOTAiIGhlaWdodD0iMjciIC8+CiAgICAgICAgPC9icG1uZGk6QlBNTkxhYmVsPgogICAgICA8L2JwbW5kaTpCUE1OU2hhcGU+CiAgICAgIDxicG1uZGk6QlBNTlNoYXBlIGlkPSJBY3Rpdml0eV8wN2w0bHRyX2RpIiBicG1uRWxlbWVudD0iQWN0aXZpdHlfMHJhZmR2cSI+CiAgICAgICAgPGRjOkJvdW5kcyB4PSI0MjAiIHk9IjE5MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI4MCIgLz4KICAgICAgPC9icG1uZGk6QlBNTlNoYXBlPgogICAgICA8YnBtbmRpOkJQTU5FZGdlIGlkPSJGbG93XzFhejAzbDFfZGkiIGJwbW5FbGVtZW50PSJGbG93XzFhejAzbDEiPgogICAgICAgIDxkaTp3YXlwb2ludCB4PSIyMTUiIHk9IjExNyIgLz4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iMjU1IiB5PSIxMTciIC8+CiAgICAgIDwvYnBtbmRpOkJQTU5FZGdlPgogICAgICA8YnBtbmRpOkJQTU5FZGdlIGlkPSJGbG93XzFmcDEwNXZfZGkiIGJwbW5FbGVtZW50PSJGbG93XzFmcDEwNXYiPgogICAgICAgIDxkaTp3YXlwb2ludCB4PSI3MDAiIHk9IjExNyIgLz4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iNzcyIiB5PSIxMTciIC8+CiAgICAgIDwvYnBtbmRpOkJQTU5FZGdlPgogICAgICA8YnBtbmRpOkJQTU5FZGdlIGlkPSJGbG93XzBicHo3M3JfZGkiIGJwbW5FbGVtZW50PSJGbG93XzBicHo3M3IiPgogICAgICAgIDxkaTp3YXlwb2ludCB4PSIyODAiIHk9IjE0MiIgLz4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iMjgwIiB5PSIyMzAiIC8+CiAgICAgICAgPGRpOndheXBvaW50IHg9IjQyMCIgeT0iMjMwIiAvPgogICAgICAgIDxicG1uZGk6QlBNTkxhYmVsPgogICAgICAgICAgPGRjOkJvdW5kcyB4PSIyOTQiIHk9IjE4MyIgd2lkdGg9IjUxIiBoZWlnaHQ9IjE0IiAvPgogICAgICAgIDwvYnBtbmRpOkJQTU5MYWJlbD4KICAgICAgPC9icG1uZGk6QlBNTkVkZ2U+CiAgICAgIDxicG1uZGk6QlBNTkVkZ2UgaWQ9IkZsb3dfMXJ1bTd5el9kaSIgYnBtbkVsZW1lbnQ9IkZsb3dfMXJ1bTd5eiI+CiAgICAgICAgPGRpOndheXBvaW50IHg9IjY1MCIgeT0iMjA1IiAvPgogICAgICAgIDxkaTp3YXlwb2ludCB4PSI2NTAiIHk9IjE1NyIgLz4KICAgICAgICA8YnBtbmRpOkJQTU5MYWJlbD4KICAgICAgICAgIDxkYzpCb3VuZHMgeD0iNjU2IiB5PSIxNzgiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxNCIgLz4KICAgICAgICA8L2JwbW5kaTpCUE1OTGFiZWw+CiAgICAgIDwvYnBtbmRpOkJQTU5FZGdlPgogICAgICA8YnBtbmRpOkJQTU5FZGdlIGlkPSJGbG93XzAyenVlaXRfZGkiIGJwbW5FbGVtZW50PSJGbG93XzAyenVlaXQiPgogICAgICAgIDxkaTp3YXlwb2ludCB4PSI2NzUiIHk9IjIzMCIgLz4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iNzgyIiB5PSIyMzAiIC8+CiAgICAgICAgPGJwbW5kaTpCUE1OTGFiZWw+CiAgICAgICAgICA8ZGM6Qm91bmRzIHg9IjcyMSIgeT0iMjEyIiB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIC8+CiAgICAgICAgPC9icG1uZGk6QlBNTkxhYmVsPgogICAgICA8L2JwbW5kaTpCUE1ORWRnZT4KICAgICAgPGJwbW5kaTpCUE1ORWRnZSBpZD0iRmxvd18xbWNzeWZuX2RpIiBicG1uRWxlbWVudD0iRmxvd18xbWNzeWZuIj4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iNTIwIiB5PSIyMzAiIC8+CiAgICAgICAgPGRpOndheXBvaW50IHg9IjYyNSIgeT0iMjMwIiAvPgogICAgICA8L2JwbW5kaTpCUE1ORWRnZT4KICAgICAgPGJwbW5kaTpCUE1ORWRnZSBpZD0iRmxvd18waWZ1eXNrX2RpIiBicG1uRWxlbWVudD0iRmxvd18waWZ1eXNrIj4KICAgICAgICA8ZGk6d2F5cG9pbnQgeD0iMzA1IiB5PSIxMTciIC8+CiAgICAgICAgPGRpOndheXBvaW50IHg9IjYwMCIgeT0iMTE3IiAvPgogICAgICAgIDxicG1uZGk6QlBNTkxhYmVsPgogICAgICAgICAgPGRjOkJvdW5kcyB4PSI0MzIiIHk9Ijk5IiB3aWR0aD0iNDIiIGhlaWdodD0iMTQiIC8+CiAgICAgICAgPC9icG1uZGk6QlBNTkxhYmVsPgogICAgICA8L2JwbW5kaTpCUE1ORWRnZT4KICAgIDwvYnBtbmRpOkJQTU5QbGFuZT4KICA8L2JwbW5kaTpCUE1ORGlhZ3JhbT4KPC9icG1uOmRlZmluaXRpb25zPg==\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "95d96a03-5dea-4924-9c3e-c8bd459c3d8a",
+          "body": "{\r\n  \"type\": \"NOT_EXISTING_REFERENCED_ENTITY\",\r\n  \"errorCode\": \"ATMLM_4000002\",\r\n  \"message\": \"La risorsa di processo indicata non esiste\",\r\n  \"statusCode\": 404\r\n}",
+          "latency": 0,
+          "statusCode": 404,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "version",
+              "value": "1",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "28b240ee-07fa-4754-bd60-bacf0be229b3",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/bpmn/upgrade",
+      "responses": [
+        {
+          "uuid": "1c1b18e7-e36b-46b5-8a93-62f558ac6563",
+          "body": "{\r\n  \"bpmnId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"modelVersion\": 0,\r\n  \"deployedFileName\": \"string\",\r\n  \"definitionKey\": \"string\",\r\n  \"functionType\": \"string\",\r\n  \"status\": \"CREATED\",\r\n  \"sha256\": \"string\",\r\n  \"enabled\": true,\r\n  \"definitionVersionCamunda\": 0,\r\n  \"camundaDefinitionId\": \"string\",\r\n  \"description\": \"string\",\r\n  \"resourceFile\": {\r\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n    \"resourceType\": \"BPMN\",\r\n    \"storageKey\": \"string\",\r\n    \"fileName\": \"string\",\r\n    \"extension\": \"string\",\r\n    \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n    \"createdBy\": \"string\",\r\n    \"lastUpdatedBy\": \"string\"\r\n  },\r\n  \"resource\": \"string\",\r\n  \"deploymentId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"createdAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"lastUpdatedAt\": \"2023-11-03T14:18:36.635+00:00\",\r\n  \"createdBy\": \"string\",\r\n  \"lastUpdatedBy\": \"string\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "uuid",
+              "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a15c014a-29d7-4d8d-8f20-ec9304e3d7dc",
+          "body": "{\r\n  \"type\": \"NOT_EXISTING_REFERENCED_ENTITY\",\r\n  \"errorCode\": \"ATMLM_4000002\",\r\n  \"message\": \"Non esiste alcun BPMN con l'Id e il tipo di funzione specificati\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "uuid",
+              "value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "bc4f7a41-d16a-4d59-b71b-122c8c2531f0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/info/email",
+      "responses": [
+        {
+          "uuid": "943e831b-dc32-4bca-b301-088eb18b5732",
+          "body": "{\r\n  \"email\": \"utente@pagopa.it\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "88b1df21-dd85-441c-99e1-7bc5eab6afa3",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/resources",
+      "responses": [
+        {
+          "uuid": "ace44816-b6a9-41d3-a187-150bd9563663",
+          "body": "{\r\n  \"resourceId\": \"b815145a-d201-424f-8b2b-24b5d73a76d4\",\r\n  \"sha256\": \"11af8441a64079e4df4b8216df2c31bab5f4d6d29d577bc169040eb821fb223c\",\r\n  \"enabled\": true,\r\n  \"noDeployableResourceType\": \"HTML\",\r\n  \"createdAt\": \"2024-03-14T17:35:27.332+00:00\",\r\n  \"lastUpdatedAt\": \"2024-03-14T17:35:27.333+00:00\",\r\n  \"createdBy\": null,\r\n  \"lastUpdatedBy\": null,\r\n  \"cdnUrl\": \"https://example_cdn.cloudfront.net/files/HTML/Test.html\",\r\n  \"resourceFile\": {\r\n    \"id\": \"6813108c-be14-4740-9129-cb2fe02fb273\",\r\n    \"resourceType\": \"HTML\",\r\n    \"storageKey\": \"RESOURCE/files/HTML/Test.html\",\r\n    \"fileName\": \"Test\",\r\n    \"extension\": \"html\",\r\n    \"createdAt\": \"2024-03-14T17:35:27.348+00:00\",\r\n    \"lastUpdatedAt\": \"2024-03-14T17:35:27.348+00:00\",\r\n    \"createdBy\": null,\r\n    \"lastUpdatedBy\": null\r\n  },\r\n  \"description\": \"\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "filename",
+              "value": "Test.html",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "resourceType",
+              "value": "HTML",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c1e07a59-cc7a-4b97-83f5-d36535ca688f",
+          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000019\",\r\n  \"message\": \"Esiste già una risorsa con lo stesso contenuto\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "filename",
+              "value": "TestFail.html",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "resourceType",
+              "value": "HTML",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "191618b0-6275-41a7-a1cd-9207382b42a5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "api/v1/model/resources/filter",
+      "responses": [
+        {
+          "uuid": "18ae0055-580c-4f21-82b9-1b5e28a94e37",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 1,\r\n  \"totalPages\": 1,\r\n  \"results\": [\r\n    {\r\n      \"resourceId\": \"b815145a-d201-424f-8b2b-24b5d73a76d4\",\r\n      \"sha256\": \"11af8441a64079e4df4b8216df2c31bab5f4d6d29d577bc169040eb821fb223c\",\r\n      \"enabled\": true,\r\n      \"noDeployableResourceType\": \"HTML\",\r\n      \"createdAt\": \"2024-03-14T17:35:27.332+00:00\",\r\n      \"lastUpdatedAt\": \"2024-03-14T17:35:27.333+00:00\",\r\n      \"createdBy\": null,\r\n      \"lastUpdatedBy\": null,\r\n      \"cdnUrl\": \"https://example_cdn.cloudfront.net/files/HTML/Test.html\",\r\n      \"resourceFileId\": \"6813108c-be14-4740-9129-cb2fe02fb273\",\r\n      \"resourceType\": \"HTML\",\r\n      \"storageKey\": \"RESOURCE/files/HTML/Test.html\",\r\n      \"fileName\": \"Test\",\r\n      \"extension\": \"html\",\r\n      \"resourceFileCreatedAt\": \"2024-03-14T17:35:27.348+00:00\",\r\n      \"resourceFileLastUpdatedAt\": \"2024-03-14T17:35:27.348+00:00\",\r\n      \"resourceFileCreatedBy\": null,\r\n      \"resourceFileLastUpdatedBy\": null\r\n    }\r\n  ]\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "params",
+              "modifier": "extension",
+              "value": "html",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cd25a686-9df6-499f-9504-50f43e78b84c",
+          "body": "{\r\n  \"page\": 0,\r\n  \"limit\": 10,\r\n  \"itemsFound\": 0,\r\n  \"totalPages\": 1,\r\n  \"results\": []\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "extension",
+              "value": "other",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageIndex",
+              "value": "0",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "pageSize",
+              "value": "10",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "9add064c-e03e-4223-8803-eb48d61e027a",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "api/v1/model/resources/disable/:uuid",
+      "responses": [
+        {
+          "uuid": "b9c24116-157b-49d2-94be-536df74bce0e",
+          "body": "",
+          "latency": 0,
+          "statusCode": 204,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "b815145a-d201-424f-8b2b-24b5d73a76d4",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "3fa909e7-6ee4-4c23-9729-7160540d96d0",
+          "body": "{\r\n  \"type\": \"NOT_EXISTING_REFERENCED_ENTITY\",\r\n  \"errorCode\": \"ATMLM_4000029\",\r\n  \"message\": \"La risorsa con Id b815145a-d201-424f-8b2b-24b5d73a76d8 non esiste\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "a04342fa-263a-43ab-919a-c06913febefe",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "0e7df29a-dd94-4c2f-b41c-5acbfcf396c8",
+      "type": "http",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "api/v1/model/resources/:uuid",
+      "responses": [
+        {
+          "uuid": "9ed3c53e-84ee-47cc-8c86-ec044c3dfe7b",
+          "body": "{\r\n  \"resourceId\": \"0eead640-75f4-4e25-a71b-0c54d23753f5\",\r\n  \"sha256\": \"6bcf6a39325120b463f0e894780dcbab7da6883fd13ce5a57be3c1eb4d0e3ea0\",\r\n  \"enabled\": true,\r\n  \"noDeployableResourceType\": \"HTML\",\r\n  \"createdAt\": \"2024-03-14T17:46:42.906+00:00\",\r\n  \"lastUpdatedAt\": \"2024-03-14T17:48:47.072+00:00\",\r\n  \"createdBy\": null,\r\n  \"lastUpdatedBy\": null,\r\n  \"cdnUrl\": \"https://example_cdn.cloudfront.net/files/HTML/Test1.html\",\r\n  \"resourceFile\": {\r\n    \"id\": \"068dedc7-361d-4490-8e95-9b01ca6aad63\",\r\n    \"resourceType\": \"HTML\",\r\n    \"storageKey\": \"RESOURCE/files/HTML/Test1.html\",\r\n    \"fileName\": \"Test1\",\r\n    \"extension\": \"html\",\r\n    \"createdAt\": \"2024-03-14T17:46:42.907+00:00\",\r\n    \"lastUpdatedAt\": \"2024-03-14T17:48:47.074+00:00\",\r\n    \"createdBy\": null,\r\n    \"lastUpdatedBy\": null\r\n  },\r\n  \"description\": \"\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "b815145a-d201-424f-8b2b-24b5d73a76d4",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "24aaa7be-c302-472d-b41d-8367339e2148",
+          "body": "{\r\n  \"type\": \"CONSTRAINT_VIOLATION\",\r\n  \"errorCode\": \"ATMLM_4000019\",\r\n  \"message\": \"La risorsa è già presente\",\r\n  \"statusCode\": 400\r\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "uuid",
+              "value": "a04342fa-263a-43ab-919a-c06913febefe",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10a"
+    },
+    {
+      "type": "route",
+      "uuid": "e76cd534-ee91-44c2-bf85-542ad8d45492"
+    },
+    {
+      "type": "route",
+      "uuid": "14e9aff5-1ae9-4230-aa57-d67c09dd3589"
+    },
+    {
+      "type": "route",
+      "uuid": "c5a93979-c0db-4526-bc1b-566e4b07341c"
+    },
+    {
+      "type": "route",
+      "uuid": "b7d1aa4c-07ca-4dda-8cfb-ba99c2021f39"
+    },
+    {
+      "type": "route",
+      "uuid": "cc27005a-4f16-417b-a7cc-c41f6abb9c1b"
+    },
+    {
+      "type": "route",
+      "uuid": "70f9f90c-4af7-4990-b45a-3e84746c3eb3"
+    },
+    {
+      "type": "route",
+      "uuid": "4158d264-4054-4657-9a7c-33b2f07bffe0"
+    },
+    {
+      "type": "route",
+      "uuid": "6e84810f-73af-41b3-8a8a-f7ae8e952d97"
+    },
+    {
+      "type": "route",
+      "uuid": "28b240ee-07fa-4754-bd60-bacf0be229b3"
+    },
+    {
+      "type": "route",
+      "uuid": "bc4f7a41-d16a-4d59-b71b-122c8c2531f0"
+    },
+    {
+      "type": "route",
+      "uuid": "88b1df21-dd85-441c-99e1-7bc5eab6afa3"
+    },
+    {
+      "type": "route",
+      "uuid": "191618b0-6275-41a7-a1cd-9207382b42a5"
+    },
+    {
+      "type": "route",
+      "uuid": "9add064c-e03e-4223-8803-eb48d61e027a"
+    },
+    {
+      "type": "route",
+      "uuid": "0e7df29a-dd94-4c2f-b41c-5acbfcf396c8"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
