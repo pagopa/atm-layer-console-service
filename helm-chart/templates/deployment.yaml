@@ -38,6 +38,8 @@ spec:
             - containerPort: {{ .Values.service.port }}
           imagePullPolicy: Always
           env:
+            - name: TZ
+              value: Europe/Rome
             - name: CONSOLE_SERVICE_ENVIRONMENT
               value: "{{ .Values.consoleService.environment }}"
             - name: CONSOLE_SERVICE_EXECUTION_MODE
