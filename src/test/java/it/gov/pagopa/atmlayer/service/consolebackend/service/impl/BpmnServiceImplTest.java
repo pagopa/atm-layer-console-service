@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -54,7 +55,8 @@ public class BpmnServiceImplTest {
 
     @Test
     void createBpmnTest() {
-        BpmnCreationDto bpmnCreationDto = mock();
+        BpmnCreationDto bpmnCreationDto = new BpmnCreationDto();
+        bpmnCreationDto.setFile(new File("src/test/resources/Test.bpmn"));
         when(bpmnWebClient.createBpmn(any(BpmnCreationDto.class))).thenReturn(Uni.createFrom().nullItem());
         Uni<BpmnDTO> result = bpmnService.createBpmn(bpmnCreationDto);
 
@@ -136,7 +138,8 @@ public class BpmnServiceImplTest {
 
     @Test
     void  upgradeBPMNTest() {
-        BpmnUpgradeDto bpmnUpgradeDto = mock();
+        BpmnUpgradeDto bpmnUpgradeDto = new BpmnUpgradeDto();
+        bpmnUpgradeDto.setFile(new File("src/test/resources/Test.bpmn"));
         when(bpmnWebClient.upgradeBPMN(any(BpmnUpgradeDto.class))).thenReturn(Uni.createFrom().nullItem());
         Uni<BpmnDTO> result = bpmnService.upgradeBPMN(bpmnUpgradeDto);
 

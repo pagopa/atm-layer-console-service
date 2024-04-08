@@ -13,7 +13,7 @@ public class InternalUtils {
         try {
             Bpmn.readModelFromFile(file);
         } catch (Exception e) {
-            throw new AtmLayerException("Il file non  è un valido BPMN "+ e.getCause().getMessage(), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
+            throw new AtmLayerException("Il file non  è un valido BPMN "+ (e.getCause() == null? e.getMessage() : e.getCause().getMessage()), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
         }
     }
 }
