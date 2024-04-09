@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96.02%               |
-| :heavy_check_mark: Number of Lines Covered | 314    |
-| :x: Number of Lines Missed  | 13     |
-| Total Number of Lines   | 327     |
+| Code Coverage %         | 95.24%               |
+| :heavy_check_mark: Number of Lines Covered | 320    |
+| :x: Number of Lines Missed  | 16     |
+| Total Number of Lines   | 336     |
 
 
 ## Details:
@@ -341,6 +341,22 @@
     </summary>
 
         
+</details>
+
+    
+
+<details>
+    <summary>
+:x: InternalUtils.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+- Line #15
+```
+        } catch (Exception e) {
+```
 </details>
 
     
