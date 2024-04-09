@@ -7,6 +7,8 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.client.ResponseProcessingException;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -20,11 +22,12 @@ public class TaskServiceImpl implements TaskService {
     TaskWebClient taskWebClient;
 
     @Override
-    public Uni<Scene> createMainScene(State state) {
+    public Uni<Response> createMainScene(State state) {
         return taskWebClient.createMainScene(state);
     }
     @Override
-    public Uni<Scene> createNextScene(String transactionId, State state){
+    public Uni<Response> createNextScene(String transactionId, State state){
         return taskWebClient.createNextScene(transactionId, state);
     }
+
 }

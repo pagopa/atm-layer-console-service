@@ -32,7 +32,7 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> createBpmn(BpmnCreationDto bpmnCreationDto) {
-        InternalUtils.validateBPMN(bpmnCreationDto.getFile());
+//        InternalUtils.validateBPMN(bpmnCreationDto.getFile());
         return bpmnWebClient.createBpmn(bpmnCreationDto);
     }
 
@@ -73,7 +73,7 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto) {
-        InternalUtils.validateBPMN(bpmnUpgradeDto.getFile());
+//        InternalUtils.validateBPMN(bpmnUpgradeDto.getFile());
         return bpmnWebClient.upgradeBPMN(bpmnUpgradeDto);
     }
 }
