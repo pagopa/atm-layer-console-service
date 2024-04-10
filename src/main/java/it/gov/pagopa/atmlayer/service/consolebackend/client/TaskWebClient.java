@@ -1,7 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;

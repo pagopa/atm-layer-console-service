@@ -3,15 +3,11 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
-import it.gov.pagopa.atmlayer.service.consolebackend.utils.InternalUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -32,7 +28,6 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> createBpmn(BpmnCreationDto bpmnCreationDto) {
-        InternalUtils.validateBPMN(bpmnCreationDto.getFile());
         return bpmnWebClient.createBpmn(bpmnCreationDto);
     }
 
@@ -73,7 +68,6 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto) {
-//        InternalUtils.validateBPMN(bpmnUpgradeDto.getFile());
         return bpmnWebClient.upgradeBPMN(bpmnUpgradeDto);
     }
 }
