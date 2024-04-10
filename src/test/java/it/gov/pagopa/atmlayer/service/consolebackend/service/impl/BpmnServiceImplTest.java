@@ -4,6 +4,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
+import it.gov.pagopa.atmlayer.service.consolebackend.client.CamundaWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,9 @@ public class BpmnServiceImplTest {
 
     @Mock
     private BpmnWebClient bpmnWebClient;
+
+    @Mock
+    private CamundaWebClient camundaWebClient;
 
     @InjectMocks
     private BpmnServiceImpl bpmnService;
@@ -58,6 +62,7 @@ public class BpmnServiceImplTest {
         BpmnCreationDto bpmnCreationDto = new BpmnCreationDto();
         bpmnCreationDto.setFile(new File("src/test/resources/Test.bpmn"));
         when(bpmnWebClient.createBpmn(any(BpmnCreationDto.class))).thenReturn(Uni.createFrom().nullItem());
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(Boolean.TRUE);
         Uni<BpmnDTO> result = bpmnService.createBpmn(bpmnCreationDto);
 
         assertNotNull(result);
@@ -140,6 +145,7 @@ public class BpmnServiceImplTest {
     void  upgradeBPMNTest() {
         BpmnUpgradeDto bpmnUpgradeDto = new BpmnUpgradeDto();
         bpmnUpgradeDto.setFile(new File("src/test/resources/Test.bpmn"));
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(Boolean.TRUE);
         when(bpmnWebClient.upgradeBPMN(any(BpmnUpgradeDto.class))).thenReturn(Uni.createFrom().nullItem());
         Uni<BpmnDTO> result = bpmnService.upgradeBPMN(bpmnUpgradeDto);
 

@@ -1,5 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.CamundaWebClient;
@@ -15,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.io.File;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -34,12 +36,20 @@ public class BpmnServiceImpl implements BpmnService {
         return bpmnWebClient.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName);
     }
 
+    private Boolean blockingVerified(File file){
+       return camundaWebClient.verifyBpmn(file);
+    }
+
     @Override
     public Uni<BpmnDTO> createBpmn(BpmnCreationDto bpmnCreationDto) {
-        if(!camundaWebClient.verifyBpmn(bpmnCreationDto.getFile())) {
-           throw new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
-        }
-        return bpmnWebClient.createBpmn(bpmnCreationDto);
+        return Uni.createFrom().item(bpmnCreationDto)
+                .flatMap(bpmnDto -> {
+                    if (blockingVerified(bpmnCreationDto.getFile())) {
+                        return bpmnWebClient.createBpmn(bpmnDto);
+                    } else {
+                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
+                    }
+                });
     }
 
     @Override
@@ -79,9 +89,13 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto) {
-        if(!camundaWebClient.verifyBpmn(bpmnUpgradeDto.getFile())) {
-            throw new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
-        }
-        return bpmnWebClient.upgradeBPMN(bpmnUpgradeDto);
+        return Uni.createFrom().item(bpmnUpgradeDto)
+                .flatMap(bpmnDto -> {
+                    if (blockingVerified(bpmnUpgradeDto.getFile())) {
+                        return bpmnWebClient.upgradeBPMN(bpmnDto);
+                    } else {
+                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
+                    }
+                });
     }
 }

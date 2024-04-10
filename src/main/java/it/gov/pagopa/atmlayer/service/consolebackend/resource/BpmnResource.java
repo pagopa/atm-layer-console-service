@@ -1,5 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
@@ -79,6 +80,7 @@ public class BpmnResource {
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Blocking
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Carica un file BPMN")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
@@ -157,6 +159,7 @@ public class BpmnResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @Blocking
     @Path("/upgrade")
     public Uni<BpmnDTO> upgradeBPMN(@Valid BpmnUpgradeDto bpmnUpgradeDto) {
         return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
