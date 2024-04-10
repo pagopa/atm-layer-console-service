@@ -2,12 +2,16 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
+import it.gov.pagopa.atmlayer.service.consolebackend.client.CamundaWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -21,6 +25,10 @@ public class BpmnServiceImpl implements BpmnService {
     @RestClient
     BpmnWebClient bpmnWebClient;
 
+    @Inject
+    @RestClient
+    CamundaWebClient camundaWebClient;
+
     @Override
     public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(int pageIndex, int pageSize, String functionType, String modelVersion, String definitionVersionCamunda, UUID bpmnId, UUID deploymentId, String camundaDefinitionId, String definitionKey, String deployedFileName, String resource, String sha256, StatusEnum status, String acquirerId, String branchId, String terminalId, String fileName) {
         return bpmnWebClient.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName);
@@ -28,6 +36,9 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> createBpmn(BpmnCreationDto bpmnCreationDto) {
+        if(!camundaWebClient.verifyBpmn(bpmnCreationDto.getFile())) {
+           throw new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
+        }
         return bpmnWebClient.createBpmn(bpmnCreationDto);
     }
 
@@ -68,6 +79,9 @@ public class BpmnServiceImpl implements BpmnService {
 
     @Override
     public Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto) {
+        if(!camundaWebClient.verifyBpmn(bpmnUpgradeDto.getFile())) {
+            throw new AtmLayerException("Il file Bpmn non è valido", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID);
+        }
         return bpmnWebClient.upgradeBPMN(bpmnUpgradeDto);
     }
 }
