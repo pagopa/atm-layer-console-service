@@ -74,6 +74,8 @@ spec:
               value: "{{ .Values.task.basePath }}"
             - name: TASK_RELATIVE_PATH
               value: "{{ .Values.task.relativePath }}"
+            - name: CAMUNDA_BASE_PATH
+              value: "{{ .Values.camundaBasePath }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
