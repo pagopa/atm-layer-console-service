@@ -43,7 +43,7 @@ public class BpmnServiceImpl implements BpmnService {
                         camundaWebClient.verifyBpmn(bpmnCreationDto.getFile());
                         return bpmnWebClient.createBpmn(bpmnDto);
                     } catch (Exception e) {
-                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido " + Arrays.toString(e.getStackTrace()), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
+                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido " + e.getMessage(), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
                     }
                 });
     }
