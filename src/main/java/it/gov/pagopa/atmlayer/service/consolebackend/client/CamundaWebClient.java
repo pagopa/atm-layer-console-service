@@ -11,6 +11,7 @@ public interface CamundaWebClient {
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/camunda/verify/bpmn")
     Boolean verifyBpmn(@FormParam("file") File file);
 
