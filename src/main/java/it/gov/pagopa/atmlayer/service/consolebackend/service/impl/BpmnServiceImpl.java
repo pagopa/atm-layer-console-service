@@ -15,6 +15,7 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -42,7 +43,7 @@ public class BpmnServiceImpl implements BpmnService {
                         camundaWebClient.verifyBpmn(bpmnCreationDto.getFile());
                         return bpmnWebClient.createBpmn(bpmnDto);
                     } catch (Exception e) {
-                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido " + (e.getCause() == null ? e.getMessage() : e.getCause().getMessage()), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
+                        return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido " + Arrays.toString(e.getStackTrace()), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
                     }
                 });
     }
