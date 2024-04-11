@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96.04%               |
-| :heavy_check_mark: Number of Lines Covered | 315    |
-| :x: Number of Lines Missed  | 13     |
-| Total Number of Lines   | 328     |
+| Code Coverage %         | 95.55%               |
+| :heavy_check_mark: Number of Lines Covered | 322    |
+| :x: Number of Lines Missed  | 15     |
+| Total Number of Lines   | 337     |
 
 
 ## Details:
@@ -688,11 +688,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: BpmnServiceImpl.java
+:x: BpmnServiceImpl.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -770,6 +770,16 @@
 <details>
     <summary>
 :x: UserWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: CamundaWebClient.java
     </summary>
 
         
