@@ -60,9 +60,11 @@ public class BpmnServiceImplTest {
     @Test
     void createBpmnTest() {
         BpmnCreationDto bpmnCreationDto = new BpmnCreationDto();
+        VerifyResponse verifyResponse = new VerifyResponse();
+        verifyResponse.setIsVerified(Boolean.TRUE);
         bpmnCreationDto.setFile(new File("src/test/resources/Test.bpmn"));
         when(bpmnWebClient.createBpmn(any(BpmnCreationDto.class))).thenReturn(Uni.createFrom().nullItem());
-        when(camundaWebClient.verifyBpmn(any())).thenReturn(Boolean.TRUE);
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(verifyResponse);
         Uni<BpmnDTO> result = bpmnService.createBpmn(bpmnCreationDto);
 
         assertNotNull(result);
@@ -145,7 +147,9 @@ public class BpmnServiceImplTest {
     void  upgradeBPMNTest() {
         BpmnUpgradeDto bpmnUpgradeDto = new BpmnUpgradeDto();
         bpmnUpgradeDto.setFile(new File("src/test/resources/Test.bpmn"));
-        when(camundaWebClient.verifyBpmn(any())).thenReturn(Boolean.TRUE);
+        VerifyResponse verifyResponse = new VerifyResponse();
+        verifyResponse.setIsVerified(Boolean.TRUE);
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(verifyResponse);
         when(bpmnWebClient.upgradeBPMN(any(BpmnUpgradeDto.class))).thenReturn(Uni.createFrom().nullItem());
         Uni<BpmnDTO> result = bpmnService.upgradeBPMN(bpmnUpgradeDto);
 

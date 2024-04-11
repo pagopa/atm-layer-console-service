@@ -1,5 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.VerifyResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
@@ -13,7 +14,7 @@ public interface CamundaWebClient {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/camunda/verify/bpmn")
-    Boolean verifyBpmn(@FormParam("file") File file);
+    VerifyResponse verifyBpmn(@FormParam("file") File file);
 
 
 }
