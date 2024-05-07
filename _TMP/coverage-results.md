@@ -1,7 +1,7 @@
 
 # Coverage Report: JaCoCo
 
-* quarkus-application
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
