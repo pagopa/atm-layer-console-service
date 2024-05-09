@@ -1,7 +1,7 @@
 
 # Coverage Report: JaCoCo
 
-* quarkus-application
+* IntegrationTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
