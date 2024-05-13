@@ -2,16 +2,19 @@ package it.gov.pagopa.atmlayer.service.consolebackend.configuration;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
+
+import java.net.URI;
 
 @Provider
 @Slf4j
 public class HttpRequestLogger implements ContainerRequestFilter {
     public void logRequest(ContainerRequestContext requestContext) {
-        String uri = requestContext.getUriInfo().getAbsolutePath().toString();
+        URI uri = requestContext.getUriInfo().getAbsolutePath();
         String method = requestContext.getMethod();
-        String headers = requestContext.getHeaders().toString();
+        MultivaluedMap<String, String> headers = requestContext.getHeaders();
         log.info("====================================request started with, URI : {}, Method : {}, Headers  :  {}", uri, method, headers);
     }
 
