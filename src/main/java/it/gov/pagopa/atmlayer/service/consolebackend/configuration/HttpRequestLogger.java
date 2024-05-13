@@ -9,7 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HttpRequestLogger implements ContainerRequestFilter {
     public void logRequest(ContainerRequestContext requestContext) {
-        log.info("====================================request started with, URI : {}, Method : {}, Headers  :  {}", requestContext.getUriInfo().getAbsolutePath(), requestContext.getMethod(), requestContext.getHeaders());
+        String uri = requestContext.getUriInfo().getAbsolutePath().toString();
+        String method = requestContext.getMethod();
+        String headers = requestContext.getHeaders().toString();
+        log.info("====================================request started with, URI : {}, Method : {}, Headers  :  {}", uri, method, headers);
     }
 
     @Override
