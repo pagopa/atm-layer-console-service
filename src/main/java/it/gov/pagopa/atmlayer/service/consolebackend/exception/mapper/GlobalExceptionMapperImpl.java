@@ -129,5 +129,4 @@ public class GlobalExceptionMapperImpl {
                 .build();
         return RestResponse.status(Response.Status.BAD_REQUEST, payload);
     }
-
 }
