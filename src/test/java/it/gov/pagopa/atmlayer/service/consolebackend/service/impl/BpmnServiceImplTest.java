@@ -4,6 +4,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.helpers.test.UniAssertSubscriber;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BpmnWebClient;
+import it.gov.pagopa.atmlayer.service.consolebackend.client.CamundaWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +31,9 @@ public class BpmnServiceImplTest {
 
     @Mock
     private BpmnWebClient bpmnWebClient;
+
+    @Mock
+    private CamundaWebClient camundaWebClient;
 
     @InjectMocks
     private BpmnServiceImpl bpmnService;
@@ -54,8 +59,12 @@ public class BpmnServiceImplTest {
 
     @Test
     void createBpmnTest() {
-        BpmnCreationDto bpmnCreationDto = mock();
+        BpmnCreationDto bpmnCreationDto = new BpmnCreationDto();
+        VerifyResponse verifyResponse = new VerifyResponse();
+        verifyResponse.setIsVerified(Boolean.TRUE);
+        bpmnCreationDto.setFile(new File("src/test/resources/Test.bpmn"));
         when(bpmnWebClient.createBpmn(any(BpmnCreationDto.class))).thenReturn(Uni.createFrom().nullItem());
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(verifyResponse);
         Uni<BpmnDTO> result = bpmnService.createBpmn(bpmnCreationDto);
 
         assertNotNull(result);
@@ -136,7 +145,11 @@ public class BpmnServiceImplTest {
 
     @Test
     void  upgradeBPMNTest() {
-        BpmnUpgradeDto bpmnUpgradeDto = mock();
+        BpmnUpgradeDto bpmnUpgradeDto = new BpmnUpgradeDto();
+        bpmnUpgradeDto.setFile(new File("src/test/resources/Test.bpmn"));
+        VerifyResponse verifyResponse = new VerifyResponse();
+        verifyResponse.setIsVerified(Boolean.TRUE);
+        when(camundaWebClient.verifyBpmn(any())).thenReturn(verifyResponse);
         when(bpmnWebClient.upgradeBPMN(any(BpmnUpgradeDto.class))).thenReturn(Uni.createFrom().nullItem());
         Uni<BpmnDTO> result = bpmnService.upgradeBPMN(bpmnUpgradeDto);
 

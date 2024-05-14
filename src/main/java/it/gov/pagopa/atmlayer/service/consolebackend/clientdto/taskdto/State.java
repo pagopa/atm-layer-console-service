@@ -1,11 +1,9 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.ToString;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;

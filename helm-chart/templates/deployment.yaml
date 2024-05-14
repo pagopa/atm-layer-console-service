@@ -38,6 +38,8 @@ spec:
             - containerPort: {{ .Values.service.port }}
           imagePullPolicy: Always
           env:
+            - name: TZ
+              value: Europe/Rome
             - name: CONSOLE_SERVICE_ENVIRONMENT
               value: "{{ .Values.consoleService.environment }}"
             - name: CONSOLE_SERVICE_EXECUTION_MODE
@@ -64,14 +66,14 @@ spec:
               value: "{{ .Values.resourceRouteBasePath }}"
             - name: USERS_ROUTE_BASE_PATH
               value: "{{ .Values.usersRouteBasePath }}"
-            - name: ALLOWED_CROSS_ORIGINS
-              value: "{{ .Values.allowedCrossOrigins }}"
             - name: MODEL_EMULATOR_BASE_PATH
               value: "{{ .Values.modelEmulatorBasePath }}"
             - name: TASK_BASE_PATH
               value: "{{ .Values.task.basePath }}"
             - name: TASK_RELATIVE_PATH
               value: "{{ .Values.task.relativePath }}"
+            - name: CAMUNDA_BASE_PATH
+              value: "{{ .Values.camundaBasePath }}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline

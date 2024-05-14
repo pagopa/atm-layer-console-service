@@ -4,21 +4,19 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnCreationDto;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.*;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.OutcomeEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.OutcomeResponse;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
@@ -36,10 +34,11 @@ public class TaskResourceTest {
 
     @Test
     void testCreateNext() {
-        Scene response= new Scene();
-        response.setTransactionId("transactionId");
+        Scene scene= new Scene();
+        scene.setTransactionId("transactionId");
         OutcomeResponse outcomeResponse = new OutcomeResponse("result", "description", null);
-        response.setOutcome(outcomeResponse);
+        scene.setOutcome(outcomeResponse);
+        Response response = Response.ok(scene).build();
         State request = new State();
         request.setTransactionId("transactionId");
         when(taskService.createNextScene(anyString(), eq(request)))
@@ -55,17 +54,18 @@ public class TaskResourceTest {
                 .extract()
                 .body()
                 .as(Scene.class);
-        assertEquals(response, result);
+        Assertions.assertEquals(response.getEntity(), result);
     }
 
     @Test
     void testCreateMain() {
-        Scene response= new Scene();
-        response.setTransactionId("transactionId");
+        Scene scene= new Scene();
+        scene.setTransactionId("transactionId");
         OutcomeResponse outcomeResponse = new OutcomeResponse("result", "description", null);
-        response.setOutcome(outcomeResponse);
+        scene.setOutcome(outcomeResponse);
         State request = new State();
         request.setTransactionId("transactionId");
+        Response response = Response.ok(scene).build();
         when(taskService.createMainScene(eq(request)))
                 .thenReturn(Uni.createFrom().item(response));
         Scene result = given()
@@ -78,6 +78,6 @@ public class TaskResourceTest {
                 .extract()
                 .body()
                 .as(Scene.class);
-        assertEquals(response, result);
+        Assertions.assertEquals(response.getEntity(), result);
     }
 }
