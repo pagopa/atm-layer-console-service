@@ -16,7 +16,7 @@ public class HttpRequestLogger implements ContainerRequestFilter {
     public void logRequest(ContainerRequestContext requestContext) {
         String uri = Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString());
         String method = requestContext.getMethod();
-        MultivaluedMap<String, String> headers = requestContext.getHeaders();
+        String headers = Encode.forJava(requestContext.getHeaders().toString());
         log.info("====================================request started with, URI : {}, Method : {}, Headers  :  {}", uri, method, headers);
     }
 
