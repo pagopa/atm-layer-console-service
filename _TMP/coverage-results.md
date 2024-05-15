@@ -37,6 +37,14 @@
         
 #### All Lines Covered!
         
+- Line #17
+```
+        String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
+```
+- Line #19
+```
+        String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
+```
 </details>
 
     
