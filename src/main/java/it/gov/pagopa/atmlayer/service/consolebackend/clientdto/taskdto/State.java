@@ -28,6 +28,7 @@ public class State {
     @Schema(hidden = true)
     private String transactionId;
 
+
     @Schema(description = "Codice Fiscale dell'utente (dato sensibile)")
     private String fiscalCode;
 
