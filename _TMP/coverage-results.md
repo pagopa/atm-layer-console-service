@@ -1,15 +1,15 @@
 
 # Coverage Report: JaCoCo
 
-* quarkus-application
+* IntegrationTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96.02%               |
-| :heavy_check_mark: Number of Lines Covered | 314    |
-| :x: Number of Lines Missed  | 13     |
-| Total Number of Lines   | 327     |
+| Code Coverage %         | 95.6%               |
+| :heavy_check_mark: Number of Lines Covered | 326    |
+| :x: Number of Lines Missed  | 15     |
+| Total Number of Lines   | 341     |
 
 
 ## Details:
@@ -37,6 +37,14 @@
         
 #### All Lines Covered!
         
+- Line #17
+```
+        String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
+```
+- Line #19
+```
+        String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
+```
 </details>
 
     
@@ -357,6 +365,16 @@
 
     
 ### it/gov/pagopa/atmlayer/service/consolebackend/clientdto
+
+<details>
+    <summary>
+:x: VerifyResponse.java
+    </summary>
+
+        
+</details>
+
+    
 
 <details>
     <summary>
@@ -688,11 +706,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: BpmnServiceImpl.java
+:x: BpmnServiceImpl.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -770,6 +788,16 @@
 <details>
     <summary>
 :x: UserWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: CamundaWebClient.java
     </summary>
 
         

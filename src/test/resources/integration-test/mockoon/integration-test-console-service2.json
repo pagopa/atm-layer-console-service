@@ -94,6 +94,35 @@
       "responseMode": null
     },
     {
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10b",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "camunda/verify/bpmn",
+      "responses": [
+        {
+          "uuid": "d011822c-9d36-4b7f-b14d-1acc56644cb3",
+          "body": "{\n  \"isVerified\": true,\n  \"message\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
       "uuid": "e76cd534-ee91-44c2-bf85-542ad8d45492",
       "type": "http",
       "documentation": "",
@@ -1065,6 +1094,10 @@
     {
       "type": "route",
       "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10a"
+    },
+    {
+      "type": "route",
+      "uuid": "199ee510-ea43-4ff7-bcc2-335c6a10a10b"
     },
     {
       "type": "route",

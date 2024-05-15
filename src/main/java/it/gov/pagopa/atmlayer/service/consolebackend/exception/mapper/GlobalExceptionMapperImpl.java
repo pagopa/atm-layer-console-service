@@ -129,36 +129,4 @@ public class GlobalExceptionMapperImpl {
                 .build();
         return RestResponse.status(Response.Status.BAD_REQUEST, payload);
     }
-
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponse(ClientWebApplicationException exception) {
-        LinkedHashMap hashMap = exception.getResponse().readEntity(LinkedHashMap.class);
-        if (hashMap.containsKey(MODEL_EXCEPTION_TYPE)) {
-            return buildErrorResponseModel(hashMap);
-        } else if(hashMap.containsKey(TASK_DESCRIPTION)){
-            return buildErrorResponseTask(hashMap);
-        }else {
-            return buildErrorResponse("Generic Client Error");
-        }
-    }
-
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponseTask(LinkedHashMap hashMap) {
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(TASK_EXCEPTION)
-                .errorCode(hashMap.get(TASK_ERROR_CODE).toString())
-                .statusCode(Integer.parseInt(hashMap.get(TASK_STATUS).toString()))
-                .message(hashMap.get(TASK_DESCRIPTION).toString())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(Integer.parseInt(hashMap.get(TASK_STATUS).toString())), errorResponse);
-    }
-
-    public RestResponse<ATMLayerErrorResponse> buildErrorResponseModel(LinkedHashMap hashMap) {
-        ATMLayerErrorResponse errorResponse = ATMLayerErrorResponse.builder()
-                .type(hashMap.get(MODEL_EXCEPTION_TYPE).toString())
-                .errorCode(hashMap.get(MODEL_EXCEPTION_ERROR_CODE).toString())
-                .statusCode(Integer.parseInt(hashMap.get(MODEL_EXCEPTION_STATUS_CODE).toString()))
-                .message(hashMap.get(MODEL_EXCEPTION_MESSAGE).toString())
-                .build();
-        return RestResponse.status(Response.Status.fromStatusCode(Integer.parseInt(hashMap.get(MODEL_EXCEPTION_STATUS_CODE).toString())), errorResponse);
-    }
-
 }

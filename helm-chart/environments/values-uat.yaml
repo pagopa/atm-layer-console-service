@@ -37,9 +37,9 @@ resourceRouteBasePath: "/resources"
 
 usersRouteBasePath: "/users"
 
-allowedCrossOrigins: "*"
-
 modelEmulatorBasePath: "http://pagopa-uat-atm-layer-model.pagopa.svc.cluster.local:8080"
+
+camundaBasePath: "http://pagopa-uat-atm-layer-wf-engine.pagopa.svc.cluster.local:8080"
 
 task:
   basePath: http://pagopa-uat-atm-layer-wf-task.pagopa.svc.cluster.local:8080
@@ -125,11 +125,11 @@ resources:
   #   memory: 300Mi
 
 autoscaling:
-  enabled: false
-  minReplicas: 2
-  maxReplicas: 4
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 40
+  targetMemoryUtilizationPercentage: 90
 
 nodeSelector: {}
 

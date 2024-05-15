@@ -57,6 +57,7 @@ public class HttpRequestLoggerTest {
         MultivaluedMap<String, String> headers = new MultivaluedHashMap<>();
         headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
         headers.add(HttpHeaders.ACCEPT, "application/json");
+        when(requestContext.getHeaders()).thenReturn(headers);
         httpRequestLogger.filter(requestContext);
     }
 }

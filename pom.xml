@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.acme</groupId>
   <artifactId>atm-layer-console-service</artifactId>
-  <version>1.2.0</version>
+  <version>1.0.0-dev.49</version>
   <properties>
     <jacoco.version>0.8.11</jacoco.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
@@ -13,11 +13,11 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.2.5.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.8.4</quarkus.platform.version>
     <mockito.core.version>5.4.0</mockito.core.version>
     <easy.random.version>5.0.0</easy.random.version>
     <skipITs>true</skipITs>
-    <lombok.version>1.18.26</lombok.version>
+    <lombok.version>1.18.30</lombok.version>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
     <quarkus-openapi-generator.version>2.2.10</quarkus-openapi-generator.version>
   </properties>
@@ -147,6 +147,11 @@
       <artifactId>quarkus-jacoco</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.owasp.encoder</groupId>
+      <artifactId>encoder</artifactId>
+      <version>1.2.3</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -235,6 +240,27 @@
         <skipITs>false</skipITs>
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
+    </profile>
+    <profile>
+      <id>skip-integration-tests</id>
+      <activation>
+        <property>
+          <name>skip-integration-tests</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <configuration>
+              <excludes>
+                <exclude>**/IntegrationTest.java</exclude>
+              </excludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 </project>

@@ -16,7 +16,6 @@ import java.util.List;
 public class PanInfo {
 
     @ToString.Exclude
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Schema(description = "Pan (dato sensibile)")
     private String pan;
 
