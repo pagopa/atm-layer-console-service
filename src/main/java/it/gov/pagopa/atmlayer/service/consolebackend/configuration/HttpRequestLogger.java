@@ -14,9 +14,9 @@ import java.net.URI;
 @Slf4j
 public class HttpRequestLogger implements ContainerRequestFilter {
     public void logRequest(ContainerRequestContext requestContext) {
-        String uri = Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString());
+        String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
         String method = requestContext.getMethod();
-        String headers = Encode.forJava(requestContext.getHeaders().toString());
+        String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
         log.info("====================================request started with, URI : {}, Method : {}, Headers  :  {}", uri, method, headers);
     }
 
