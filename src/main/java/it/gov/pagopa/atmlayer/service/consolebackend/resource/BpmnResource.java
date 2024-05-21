@@ -42,7 +42,11 @@ import java.util.UUID;
 @SecurityRequirement(name = "bearerAuth")
 public class BpmnResource {
     @Inject
-    BpmnService bpmnService;
+    public BpmnResource(BpmnService bpmnService) {
+        this.bpmnService = bpmnService;
+    }
+
+    private final BpmnService bpmnService;
 
     @GET
     @Path("/filter")

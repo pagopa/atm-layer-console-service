@@ -11,12 +11,12 @@ import java.io.IOException;
 @Provider
 @Slf4j
 public class HttpResponseLogger implements ContainerResponseFilter {
-    public void logResponse(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
+    public void logResponse(ContainerResponseContext responseContext) {
         log.info("====================================response received with Status code  :  {}, Status message  :  {}, Headers  :  {}", responseContext.getStatus(), responseContext.getStatusInfo().getReasonPhrase(), responseContext.getHeaders());
     }
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        logResponse(requestContext, responseContext);
+        logResponse(responseContext);
     }
 }

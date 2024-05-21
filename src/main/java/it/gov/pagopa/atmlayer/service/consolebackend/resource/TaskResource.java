@@ -38,7 +38,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 public class TaskResource {
 
     @Inject
-    TaskService taskService;
+    public TaskResource(TaskService taskService) {
+        this.taskService = taskService;
+    }
+    private final TaskService taskService;
 
     @Path("/main")
     @POST

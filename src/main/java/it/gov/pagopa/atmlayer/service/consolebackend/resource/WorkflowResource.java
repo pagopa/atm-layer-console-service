@@ -47,7 +47,10 @@ import java.util.UUID;
 public class WorkflowResource {
 
     @Inject
-    WorkflowService workflowService;
+    public WorkflowResource(WorkflowService workflowService) {
+        this.workflowService = workflowService;
+    }
+    private final WorkflowService workflowService;
 
     @GET
     @Path("/filter")

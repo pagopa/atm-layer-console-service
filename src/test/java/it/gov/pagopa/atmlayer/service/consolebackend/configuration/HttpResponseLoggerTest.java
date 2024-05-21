@@ -50,7 +50,7 @@ public class HttpResponseLoggerTest {
             }
         });
         when(responseContext.getHeaders()).thenReturn(new MultivaluedHashMap<>());
-        httpResponseLogger.logResponse(requestContext, responseContext);
+        httpResponseLogger.logResponse(responseContext);
 
         verify(logger).info(argThat(argument ->
                 argument.contains("Response Status: 200 OK") &&
