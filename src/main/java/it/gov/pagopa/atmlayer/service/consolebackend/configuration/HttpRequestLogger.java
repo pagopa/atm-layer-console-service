@@ -2,13 +2,9 @@ package it.gov.pagopa.atmlayer.service.consolebackend.configuration;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
-import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.encoder.Encode;
-
-
-import java.net.URI;
 
 @Provider
 @Slf4j

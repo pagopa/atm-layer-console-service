@@ -15,8 +15,7 @@ import org.slf4j.Logger;
 
 import java.net.URI;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @QuarkusTest
 public class HttpRequestLoggerTest {
@@ -46,6 +45,8 @@ public class HttpRequestLoggerTest {
         headers.add(HttpHeaders.ACCEPT, "application/json");
         when(requestContext.getHeaders()).thenReturn(headers);
         httpRequestLogger.logRequest(requestContext);
+        verify(requestContext, times(2)).getUriInfo();
+        verify(requestContext, times(2)).getHeaders();
     }
 
     @Test
@@ -59,5 +60,8 @@ public class HttpRequestLoggerTest {
         headers.add(HttpHeaders.ACCEPT, "application/json");
         when(requestContext.getHeaders()).thenReturn(headers);
         httpRequestLogger.filter(requestContext);
+        verify(requestContext, times(3)).getUriInfo();
+        verify(requestContext, times(2)).getHeaders();
+
     }
 }

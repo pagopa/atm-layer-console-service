@@ -6,9 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import jakarta.ws.rs.container.ContainerRequestContext;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Base64;
 
+@NoArgsConstructor
 public class HeadersUtils {
 
     private static final String  HEADER_AUTHORIZATION = "Authorization";

@@ -23,7 +23,6 @@ public class EnvironmentTestServicesResource {
 
             dockerComposeContainer = new DockerComposeContainer<>(new File("src/test/resources/integration-test/docker-compose.yml"))
                     .withExposedService("mockoon", 3000);
-//                    .withLogConsumer("createbuckets", new Slf4jLogConsumer(LOGGER).withPrefix("minio-mc"));
 
             dockerComposeContainer.withLogConsumer("mockoon", new Slf4jLogConsumer(LOGGER).withPrefix("mockoon"));
 

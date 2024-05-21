@@ -41,7 +41,10 @@ import java.util.UUID;
 public class ResourceResource {
 
     @Inject
-    ResourceService resourceService;
+    public ResourceResource(ResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
+    private final ResourceService resourceService;
 
     @GET
     @Path("/filter")
