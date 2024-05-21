@@ -11,8 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class HttpResponseLoggerTest {
 
@@ -52,5 +51,10 @@ public class HttpResponseLoggerTest {
         });
         when(responseContext.getHeaders()).thenReturn(new MultivaluedHashMap<>());
         httpResponseLogger.logResponse(requestContext, responseContext);
+
+        verify(logger).info(argThat(argument ->
+                argument.contains("Response Status: 200 OK") &&
+                        argument.contains("Headers: {}")
+        ));
     }
 }

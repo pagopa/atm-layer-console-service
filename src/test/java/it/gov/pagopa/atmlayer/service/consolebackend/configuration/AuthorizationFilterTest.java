@@ -47,6 +47,7 @@ public class AuthorizationFilterTest {
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
@@ -54,6 +55,7 @@ public class AuthorizationFilterTest {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         authorizationFilter.enableAuthorization = false;
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
@@ -64,6 +66,7 @@ public class AuthorizationFilterTest {
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
@@ -76,6 +79,7 @@ public class AuthorizationFilterTest {
         doThrow(new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED,
                 AppErrorCodeEnum.ATMLCB_401)).when(requestContext).abortWith(any());
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
