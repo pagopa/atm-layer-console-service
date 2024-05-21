@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.acme</groupId>
   <artifactId>atm-layer-console-service</artifactId>
-  <version>1.0.0-dev.49</version>
+  <version>1.7.0</version>
   <properties>
     <jacoco.version>0.8.11</jacoco.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
@@ -20,6 +20,8 @@
     <lombok.version>1.18.30</lombok.version>
     <surefire-plugin.version>3.0.0</surefire-plugin.version>
     <quarkus-openapi-generator.version>2.2.10</quarkus-openapi-generator.version>
+    <sonarsource.scanner.version>3.11.0.3922</sonarsource.scanner.version>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -151,6 +153,11 @@
       <groupId>org.owasp.encoder</groupId>
       <artifactId>encoder</artifactId>
       <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>${sonarsource.scanner.version}</version>
     </dependency>
   </dependencies>
   <build>

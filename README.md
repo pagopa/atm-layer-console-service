@@ -1,1 +1,1 @@
-# atm-layer-resource-mapper
+# atm-layer-console-service
