@@ -230,7 +230,6 @@ public class BpmnResourceTest {
     void testUpgradeBPMN() {
         UUID uuid = UUID.randomUUID();
         BpmnDTO response = new BpmnDTO();
-        BpmnUpgradeDto inputDto = new BpmnUpgradeDto();
         when(bpmnService.upgradeBPMN(any(BpmnUpgradeDto.class))).thenReturn(Uni.createFrom().item(response));
         BpmnDTO result = given()
                 .header(authHeader)

@@ -37,8 +37,8 @@ class DeployableResourceTypeTest {
 
     @Test
     void testValueOf() {
-        assertEquals(DeployableResourceType.valueOf("BPMN"), DeployableResourceType.BPMN);
-        assertEquals(DeployableResourceType.valueOf("DMN"), DeployableResourceType.DMN);
-        assertEquals(DeployableResourceType.valueOf("FORM"), DeployableResourceType.FORM);
+        assertEquals(DeployableResourceType.BPMN, DeployableResourceType.valueOf("BPMN"));
+        assertEquals(DeployableResourceType.DMN, DeployableResourceType.valueOf("DMN"));
+        assertEquals(DeployableResourceType.FORM, DeployableResourceType.valueOf("FORM"));
     }
 }

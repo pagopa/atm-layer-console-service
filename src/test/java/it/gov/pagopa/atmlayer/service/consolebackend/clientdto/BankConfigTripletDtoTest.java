@@ -19,10 +19,10 @@ class BankConfigTripletDtoTest {
 
     @Test
     void testGettersAndSetters(){
-       assertEquals(dto.getAcquirerId(), "acquirerId");
-       assertEquals(dto.getBranchId(), "branchId");
+       assertEquals("acquirerId", dto.getAcquirerId());
+       assertEquals("branchId", dto.getBranchId());
        dto.setTerminalId("terminalId");
-       assertEquals(dto.getTerminalId(), "terminalId");
+       assertEquals( "terminalId", dto.getTerminalId());
     }
 
     @Test

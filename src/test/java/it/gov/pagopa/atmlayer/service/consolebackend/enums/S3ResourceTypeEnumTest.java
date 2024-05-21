@@ -55,10 +55,10 @@ class S3ResourceTypeEnumTest {
 
     @Test
     void testValueOf() {
-        assertEquals(S3ResourceTypeEnum.valueOf("BPMN"), S3ResourceTypeEnum.BPMN);
-        assertEquals(S3ResourceTypeEnum.valueOf("DMN"), S3ResourceTypeEnum.DMN);
-        assertEquals(S3ResourceTypeEnum.valueOf("FORM"), S3ResourceTypeEnum.FORM);
-        assertEquals(S3ResourceTypeEnum.valueOf("HTML"), S3ResourceTypeEnum.HTML);
-        assertEquals(S3ResourceTypeEnum.valueOf("OTHER"), S3ResourceTypeEnum.OTHER);
+        assertEquals(S3ResourceTypeEnum.BPMN, S3ResourceTypeEnum.valueOf("BPMN"));
+        assertEquals(S3ResourceTypeEnum.DMN, S3ResourceTypeEnum.valueOf("DMN"));
+        assertEquals(S3ResourceTypeEnum.FORM, S3ResourceTypeEnum.valueOf("FORM"));
+        assertEquals(S3ResourceTypeEnum.HTML, S3ResourceTypeEnum.valueOf("HTML"));
+        assertEquals(S3ResourceTypeEnum.OTHER, S3ResourceTypeEnum.valueOf("OTHER"));
     }
 }

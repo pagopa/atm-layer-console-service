@@ -54,7 +54,6 @@ class UserProfileDtoTest {
 
     @Test
     void testToString() {
-        Timestamp createdDate = new Timestamp(System.currentTimeMillis());
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UserProfileDto(userId=id12345, ");
         stringBuilder.append("profile=ADMIN, ");

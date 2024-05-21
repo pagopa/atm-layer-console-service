@@ -149,7 +149,6 @@ class WorkflowResourceTest {
     void testUpdate() {
         UUID uuid = UUID.randomUUID();
         WorkflowResourceDTO response = new WorkflowResourceDTO();
-        File file = new File("src/test/resources/diagram_1.dmn");
         when(workflowService.update(any(File.class), any(UUID.class))).thenReturn(Uni.createFrom().item(response));
         WorkflowResourceDTO result = given()
                 .header(authHeader)

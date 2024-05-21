@@ -58,31 +58,31 @@ class WorkflowResourceFrontEndDTOTest {
         dto.setLastUpdatedAt(defaultUpdateDate);
     }
     @Test
-    void testGettersAndSetters(){
-        assertEquals(dto.getWorkflowResourceId(), defaultId);
-        assertEquals(dto.getDeployedFileName(), "fileName");
-        assertEquals(dto.getDefinitionKey(), "definitionKey");
-        assertEquals(dto.getStatus(), StatusEnum.CREATED);
-        assertEquals(dto.getSha256(), "abc123456");
-        assertEquals(dto.getDefinitionVersionCamunda(), 1);
-        assertEquals(dto.getCamundaDefinitionId(), "camunda");
-        assertEquals(dto.getDescription(), "description");
-        assertEquals(dto.getResourceId(), defaultResourceId);
-        assertEquals(dto.getResourceS3Type(), S3ResourceTypeEnum.BPMN);;
-        assertEquals(dto.getStorageKey(), "storageKey");
-        assertEquals(dto.getFileName(), "fileName");
-        assertEquals(dto.getExtension(), "extension");
-        assertEquals(dto.getResourceCreatedAt(), defaultCreateDate);
-        assertEquals(dto.getResourceLastUpdatedAt(), defaultUpdateDate);
-        assertEquals(dto.getResourceCreatedBy(), "username@domain.com");
-        assertEquals(dto.getResourceLastUpdatedBy(), "username@domain.com");
-        assertEquals(dto.getResource(), "resource");
-        assertEquals(dto.getResourceType(), DeployableResourceType.BPMN);
-        assertEquals(dto.getDeploymentId(), defaultDeploymentId);
-        assertEquals(dto.getCreatedAt(), defaultCreateDate);
-        assertEquals(dto.getCreatedBy(), "username.domain.com");
-        assertEquals(dto.getLastUpdatedBy(), "username.domain.com");
-        assertEquals(dto.getLastUpdatedAt(), defaultUpdateDate);
+    void testGettersAndSetters() {
+        assertEquals(defaultId, dto.getWorkflowResourceId());
+        assertEquals("fileName", dto.getDeployedFileName());
+        assertEquals("definitionKey", dto.getDefinitionKey());
+        assertEquals(StatusEnum.CREATED, dto.getStatus());
+        assertEquals("abc123456", dto.getSha256());
+        assertEquals(1, dto.getDefinitionVersionCamunda());
+        assertEquals("camunda", dto.getCamundaDefinitionId());
+        assertEquals("description", dto.getDescription());
+        assertEquals(defaultResourceId, dto.getResourceId());
+        assertEquals(S3ResourceTypeEnum.BPMN, dto.getResourceS3Type());
+        assertEquals("storageKey", dto.getStorageKey());
+        assertEquals("fileName", dto.getFileName());
+        assertEquals("extension", dto.getExtension());
+        assertEquals(defaultCreateDate, dto.getResourceCreatedAt());
+        assertEquals(defaultUpdateDate, dto.getResourceLastUpdatedAt());
+        assertEquals("username@domain.com", dto.getResourceCreatedBy());
+        assertEquals("username@domain.com", dto.getResourceLastUpdatedBy());
+        assertEquals("resource", dto.getResource());
+        assertEquals(DeployableResourceType.BPMN, dto.getResourceType());
+        assertEquals(defaultDeploymentId, dto.getDeploymentId());
+        assertEquals(defaultCreateDate, dto.getCreatedAt());
+        assertEquals("username.domain.com", dto.getCreatedBy());
+        assertEquals("username.domain.com", dto.getLastUpdatedBy());
+        assertEquals(defaultUpdateDate, dto.getLastUpdatedAt());
     }
 
     @Test

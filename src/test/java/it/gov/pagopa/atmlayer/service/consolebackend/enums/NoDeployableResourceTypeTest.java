@@ -27,8 +27,8 @@ class NoDeployableResourceTypeTest {
 
     @Test
     void testValueOf() {
-        assertEquals(NoDeployableResourceType.valueOf("HTML"), NoDeployableResourceType.HTML);
-        assertEquals(NoDeployableResourceType.valueOf("OTHER"), NoDeployableResourceType.OTHER);
+        assertEquals(NoDeployableResourceType.HTML, NoDeployableResourceType.valueOf("HTML"));
+        assertEquals(NoDeployableResourceType.OTHER, NoDeployableResourceType.valueOf("OTHER"));
     }
 
 }

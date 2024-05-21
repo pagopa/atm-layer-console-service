@@ -42,8 +42,7 @@ public class AuthorizationFilterTest {
     @Test
     void testFilterWithAuthorizationEnabled() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
-        userProfileDto.setProfile(UserProfileEnum.ADMIN);
+        userProfileDto.setProfile(UserProfileEnum.GUEST);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         authorizationFilter.filter(requestContext);
@@ -61,7 +60,6 @@ public class AuthorizationFilterTest {
     @Test
     void testFilterWithAuthorizationEnabledAndAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
@@ -72,7 +70,6 @@ public class AuthorizationFilterTest {
     @Test
     void testFilterWithAuthorizationEnabledAndNonAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
