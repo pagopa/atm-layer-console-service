@@ -24,8 +24,14 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     @ConfigProperty(name = "enable.authorization", defaultValue = "true")
     boolean enableAuthorization;
 
+    private final UserService userService;
+
     @Inject
-    UserService userService;
+    public AuthorizationFilter(UserService userService){
+        this.userService = userService;
+    }
+
+
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {

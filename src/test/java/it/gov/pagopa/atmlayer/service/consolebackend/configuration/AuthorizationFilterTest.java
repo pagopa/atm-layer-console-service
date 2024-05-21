@@ -42,11 +42,11 @@ public class AuthorizationFilterTest {
     @Test
     void testFilterWithAuthorizationEnabled() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
-        userProfileDto.setProfile(UserProfileEnum.ADMIN);
+        userProfileDto.setProfile(UserProfileEnum.GUEST);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
@@ -54,28 +54,29 @@ public class AuthorizationFilterTest {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
         authorizationFilter.enableAuthorization = false;
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
     void testFilterWithAuthorizationEnabledAndAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test
     void testFilterWithAuthorizationEnabledAndNonAdminUser() throws IOException {
         ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
-        UserProfileDto userProfileDto = new UserProfileDto();
         userProfileDto.setProfile(UserProfileEnum.ADMIN);
         when(userService.findByUserId(anyString())).thenReturn(
                 Uni.createFrom().item(userProfileDto));
         doThrow(new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED,
                 AppErrorCodeEnum.ATMLCB_401)).when(requestContext).abortWith(any());
         authorizationFilter.filter(requestContext);
+        verify(requestContext, never()).abortWith(any());
     }
 
     @Test

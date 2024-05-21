@@ -14,7 +14,6 @@
 | Total Number of Lines   | 339     |
 
 
-
 ## Details:
 
     
@@ -40,11 +39,11 @@
         
 #### All Lines Covered!
         
-- Line #17
+- Line #13
 ```
         String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
 ```
-- Line #19
+- Line #15
 ```
         String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
 ```
@@ -336,11 +335,11 @@
 
 <details>
     <summary>
-:x: HeadersUtils.java
+:heavy_check_mark: HeadersUtils.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 

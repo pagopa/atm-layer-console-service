@@ -23,10 +23,10 @@ class StatusEnumTest {
 
     @Test
     void testValueOf() {
-        assertEquals(StatusEnum.valueOf("CREATED"), StatusEnum.CREATED);
-        assertEquals(StatusEnum.valueOf("WAITING_DEPLOY"), StatusEnum.WAITING_DEPLOY);
-        assertEquals(StatusEnum.valueOf("UPDATED_BUT_NOT_DEPLOYED"), StatusEnum.UPDATED_BUT_NOT_DEPLOYED);
-        assertEquals(StatusEnum.valueOf("DEPLOYED"), StatusEnum.DEPLOYED);
-        assertEquals(StatusEnum.valueOf("DEPLOY_ERROR"), StatusEnum.DEPLOY_ERROR);
+        assertEquals(StatusEnum.CREATED, StatusEnum.valueOf("CREATED"));
+        assertEquals(StatusEnum.WAITING_DEPLOY, StatusEnum.valueOf("WAITING_DEPLOY"));
+        assertEquals(StatusEnum.UPDATED_BUT_NOT_DEPLOYED, StatusEnum.valueOf("UPDATED_BUT_NOT_DEPLOYED"));
+        assertEquals(StatusEnum.DEPLOYED, StatusEnum.valueOf("DEPLOYED"));
+        assertEquals(StatusEnum.DEPLOY_ERROR, StatusEnum.valueOf("DEPLOY_ERROR"));
     }
 }

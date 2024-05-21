@@ -40,7 +40,7 @@ class AppErrorCodeEnumTest {
 
     @Test
     void testValueOf() {
-        assertEquals(AppErrorCodeEnum.valueOf("ATMLCB_500"), AppErrorCodeEnum.ATMLCB_500);
-        assertEquals(AppErrorCodeEnum.valueOf("ATMLCB_401"), AppErrorCodeEnum.ATMLCB_401);
+        assertEquals(AppErrorCodeEnum.ATMLCB_500, AppErrorCodeEnum.valueOf("ATMLCB_500"));
+        assertEquals(AppErrorCodeEnum.ATMLCB_401, AppErrorCodeEnum.valueOf("ATMLCB_401"));
     }
 }
