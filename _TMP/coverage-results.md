@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 95.87%               |
-| :heavy_check_mark: Number of Lines Covered | 325    |
-| :x: Number of Lines Missed  | 14     |
-| Total Number of Lines   | 339     |
+| Code Coverage %         | 96.29%               |
+| :heavy_check_mark: Number of Lines Covered | 337    |
+| :x: Number of Lines Missed  | 13     |
+| Total Number of Lines   | 350     |
 
 
 ## Details:
@@ -37,11 +37,11 @@
         
 #### All Lines Covered!
         
-- Line #17
+- Line #13
 ```
         String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
 ```
-- Line #19
+- Line #15
 ```
         String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
 ```
@@ -333,11 +333,11 @@
 
 <details>
     <summary>
-:x: HeadersUtils.java
+:heavy_check_mark: HeadersUtils.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
