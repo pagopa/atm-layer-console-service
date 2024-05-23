@@ -1,7 +1,7 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
