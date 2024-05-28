@@ -36,7 +36,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         if(enableAuthorization){
-            userService.findByUserId(getEmailJWT(requestContext)).onItem().transformToUni(userProfile -> {
+            userService.getUserById(getEmailJWT(requestContext)).onItem().transformToUni(userProfile -> {
                 if (!havePermission(userProfile, UserProfileEnum.ADMIN)) {
                     throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
                 }

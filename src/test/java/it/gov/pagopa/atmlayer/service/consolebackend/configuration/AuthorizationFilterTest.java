@@ -4,7 +4,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.configuration;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;

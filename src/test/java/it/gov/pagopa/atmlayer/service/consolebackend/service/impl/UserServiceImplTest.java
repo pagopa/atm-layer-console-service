@@ -3,7 +3,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 import io.quarkus.test.junit.QuarkusTest;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.UserWebClient;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
