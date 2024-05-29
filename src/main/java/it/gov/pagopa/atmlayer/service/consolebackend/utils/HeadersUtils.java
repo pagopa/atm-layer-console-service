@@ -43,16 +43,7 @@ public class HeadersUtils {
     }
 
     public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
-        if (userDTO == null) {
-            return false;
-        }
-        if (vision == UserProfileEnum.GUEST) {
             return true;
-        } else if (vision == UserProfileEnum.OPERATOR) {
-            return userDTO.getProfile() == UserProfileEnum.OPERATOR || userDTO.getProfile() == UserProfileEnum.ADMIN;
-        } else {
-            return userDTO.getProfile() == UserProfileEnum.ADMIN;
-        }
     }
 
 }

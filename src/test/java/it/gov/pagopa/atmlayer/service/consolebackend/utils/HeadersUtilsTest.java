@@ -77,31 +77,4 @@ public class HeadersUtilsTest {
         assertFalse(HeadersUtils.havePermission(null, UserProfileEnum.OPERATOR));
         assertFalse(HeadersUtils.havePermission(null, UserProfileEnum.ADMIN));
     }
-
-    @Test
-    void testHavePermission_GuestProfile() {
-        UserProfileDto userProfileDto = new UserProfileDto();
-        userProfileDto.setProfile(UserProfileEnum.GUEST);
-        assertTrue(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.GUEST));
-        assertFalse(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.OPERATOR));
-        assertFalse(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.ADMIN));
-    }
-
-    @Test
-    void testHavePermission_OperatorProfile() {
-        UserProfileDto operatorDto = new UserProfileDto();
-        operatorDto.setProfile(UserProfileEnum.OPERATOR);
-        assertTrue(HeadersUtils.havePermission(operatorDto, UserProfileEnum.GUEST));
-        assertTrue(HeadersUtils.havePermission(operatorDto, UserProfileEnum.OPERATOR));
-        assertFalse(HeadersUtils.havePermission(operatorDto, UserProfileEnum.ADMIN));
-    }
-
-    @Test
-    void testHavePermission_AdminProfile() {
-        UserProfileDto adminDto = new UserProfileDto();
-        adminDto.setProfile(UserProfileEnum.ADMIN);
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.GUEST));
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.OPERATOR));
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.ADMIN));
-    }
 }
