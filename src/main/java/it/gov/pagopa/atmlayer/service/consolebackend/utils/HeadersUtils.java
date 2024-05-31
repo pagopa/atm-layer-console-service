@@ -3,9 +3,13 @@ package it.gov.pagopa.atmlayer.service.consolebackend.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ProfileDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Response;
 import lombok.NoArgsConstructor;
 
 import java.util.Base64;
@@ -38,12 +42,24 @@ public class HeadersUtils {
 
     public static String getEmailJWT(ContainerRequestContext containerRequestContext) {
         String middlePart = extractTokenMiddlePart(containerRequestContext.getHeaderString(HEADER_AUTHORIZATION));
-        return getPayload(middlePart).get(CLAIM_EMAIL).asText();
+        try {
+            return getPayload(middlePart).get(CLAIM_EMAIL).asText();
+        }catch (Exception exception){
+            throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+        }
 
     }
 
+//    public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
+//        return userDTO.getProfiles().get(0).getDescription().equals(vision.getDescription());
+////        return userDTO.getProfiles().stream().map(ProfileDTO::toString).toList().contains(vision.getDescription());
+//    }
+
     public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
-            return true;
+        if (userDTO.getProfiles().isEmpty()) {
+            return false;
+        }
+        return userDTO.getProfiles().get(0).getProfileId() == vision.getValue();
     }
 
 }

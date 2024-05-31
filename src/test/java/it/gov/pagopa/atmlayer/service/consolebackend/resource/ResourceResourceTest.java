@@ -10,6 +10,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndD
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ class ResourceResourceTest {
 
     @InjectMock
     ResourceService resourceService;
+
+    @InjectMock
+    UserService userService;
     Header authHeader;
 
     @BeforeEach
@@ -43,6 +47,7 @@ class ResourceResourceTest {
         List<ResourceFrontEndDTO> dtoList = new ArrayList<>();
         dtoList.add(dto);
         PageInfo<ResourceFrontEndDTO> response = new PageInfo<>(0, 1, 1, 1 , dtoList);
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(resourceService.getResourceFiltered(0, 1, resourceId, "sha256", NoDeployableResourceType.OTHER, "fileName", "storageKey", "extension"))
                 .thenReturn(Uni.createFrom().item(response));
         PageInfo result = given()
@@ -67,6 +72,7 @@ class ResourceResourceTest {
     @Test
     void testCreateResource() {
         ResourceDTO response= new ResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(resourceService.createResource(any(ResourceCreationDto.class)))
                 .thenReturn(Uni.createFrom().item(response));
 
@@ -90,6 +96,7 @@ class ResourceResourceTest {
     @Test
     void testUpdateResource() {
         ResourceDTO response= new ResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(resourceService.updateResource(any(File.class), any(UUID.class)))
                 .thenReturn(Uni.createFrom().item(response));
         UUID uuid = UUID.randomUUID();
@@ -110,6 +117,7 @@ class ResourceResourceTest {
 
     @Test
     void testDisableResource() {
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(resourceService.disable(any(UUID.class)))
                 .thenReturn(Uni.createFrom().voidItem());
         UUID uuid = UUID.randomUUID();

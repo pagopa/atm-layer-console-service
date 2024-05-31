@@ -6,7 +6,6 @@ import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -20,8 +19,6 @@ import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
-import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.havePermission;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 

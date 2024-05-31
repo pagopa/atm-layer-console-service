@@ -8,6 +8,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.OutcomeRe
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
@@ -15,8 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
@@ -24,6 +25,9 @@ public class TaskResourceTest {
 
     @InjectMock
     TaskService taskService;
+
+    @InjectMock
+    UserService userService;
 
     Header authHeader;
 
@@ -41,6 +45,7 @@ public class TaskResourceTest {
         Response response = Response.ok(scene).build();
         State request = new State();
         request.setTransactionId("transactionId");
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(taskService.createNextScene(anyString(), eq(request)))
                 .thenReturn(Uni.createFrom().item(response));
         Scene result = given()
@@ -66,6 +71,7 @@ public class TaskResourceTest {
         State request = new State();
         request.setTransactionId("transactionId");
         Response response = Response.ok(scene).build();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(taskService.createMainScene(eq(request)))
                 .thenReturn(Uni.createFrom().item(response));
         Scene result = given()

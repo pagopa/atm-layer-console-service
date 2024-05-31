@@ -2,8 +2,11 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionDTO;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.List;
@@ -12,9 +15,9 @@ import java.util.List;
 public interface UserWebClient {
 
     @POST
-    @Path("/insert/userId/{userId}")
+    @Path("/insert")
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<UserDTO> createUser(@PathParam("userId") String userId);
+    Uni<UserDTO> createUser(@RequestBody(required = true) @Valid UserInsertionDTO userInsertionDTO);
 
     @DELETE
     @Path("/delete/userId/{userId}")
