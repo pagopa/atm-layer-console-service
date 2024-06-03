@@ -4,7 +4,6 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserProfileService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;

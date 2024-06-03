@@ -3,7 +3,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ProfileDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;

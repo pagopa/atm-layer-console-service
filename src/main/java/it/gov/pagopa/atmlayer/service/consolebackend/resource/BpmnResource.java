@@ -102,6 +102,8 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
     public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
                                    @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
+        //todo inserire il check sull autorizzazione (se lo inserisco non funzionano gli integrazion perche c'è @Bloking)
+        userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
         return this.bpmnService.createBpmn(bpmnCreationDto);
     }
 
@@ -201,6 +203,8 @@ public class BpmnResource {
     @Path("/upgrade")
     public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
+        //todo inserire il check sull autorizzazione (se lo inserisco non funzionano gli integrazion perche c'è @Bloking)
+        userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
         return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
     }
 }

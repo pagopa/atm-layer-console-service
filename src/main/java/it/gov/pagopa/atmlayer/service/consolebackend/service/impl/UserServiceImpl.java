@@ -50,11 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Uni<Void> checkAuthorizationUser(ContainerRequestContext containerRequestContext, UserProfileEnum userProfileEnum) {
-        log.info("prova");
         return getUserById(getEmailJWT(containerRequestContext))
                 .onItem()
                 .transform(userProfile -> {
-                    log.info("user = {}", userProfile.toString());
                     if (!havePermission(userProfile, userProfileEnum)) {
                         throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
                     }
