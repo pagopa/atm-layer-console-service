@@ -82,7 +82,7 @@ public class BpmnResource {
                                                                  @QueryParam("terminalId") String terminalId,
                                                                  @QueryParam("fileName") String fileName) {
 
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
                         .onItem()
@@ -102,9 +102,7 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
     public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
                                    @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
-                .onItem()
-                .transformToUni(voidItem -> this.bpmnService.createBpmn(bpmnCreationDto));
+        return this.bpmnService.createBpmn(bpmnCreationDto);
     }
 
     @GET
@@ -114,7 +112,7 @@ public class BpmnResource {
                                                                   @PathParam("uuid") UUID uuid, @PathParam("version") Long version,
                                                                   @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
                 .onItem()
@@ -170,7 +168,7 @@ public class BpmnResource {
     public Uni<BpmnDTO> deployBPMN(@Context ContainerRequestContext containerRequestContext,
                                    @PathParam("uuid") UUID uuid,
                                    @PathParam("version") Long version) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
                 .onItem()
                 .transformToUni(voidItem -> this.bpmnService.deployBPMN(uuid, version));
     }
@@ -181,7 +179,7 @@ public class BpmnResource {
     public Uni<FileS3Dto> downloadBpmnFrontEnd(@Context ContainerRequestContext containerRequestContext,
                                                @PathParam("uuid") UUID bpmnId,
                                                @PathParam("version") Long modelVersion){
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion));
     }
@@ -203,8 +201,6 @@ public class BpmnResource {
     @Path("/upgrade")
     public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
-                .onItem()
-                .transformToUni(voidItem -> this.bpmnService.upgradeBPMN(bpmnUpgradeDto));
+        return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
     }
 }

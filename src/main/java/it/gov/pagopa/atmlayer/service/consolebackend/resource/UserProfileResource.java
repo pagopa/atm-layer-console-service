@@ -52,7 +52,7 @@ public class UserProfileResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<UserProfilesDTO>> insert(@Context ContainerRequestContext containerRequestContext,
                                              @RequestBody(required = true) @Valid UserProfilesInsertionDTO userProfilesInsertionDTO) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userProfileService.insertUserProfiles(userProfilesInsertionDTO));
     }
@@ -63,7 +63,7 @@ public class UserProfileResource {
     public Uni<UserProfilesDTO> getById(@Context ContainerRequestContext containerRequestContext,
                                         @PathParam("userId") String userId,
                                         @PathParam("profileId") int profileId) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userProfileService.findById(userId, profileId));
     }
@@ -73,7 +73,7 @@ public class UserProfileResource {
     public Uni<Void> deleteUserProfiles(@Context ContainerRequestContext containerRequestContext,
                                         @PathParam("userId") String userId,
                                         @PathParam("profileId") int profileId) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userProfileService.deleteUserProfiles(userId, profileId));
     }

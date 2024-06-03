@@ -63,7 +63,7 @@ public class TaskResource {
     public Uni<Response> createMainScene(@Context ContainerRequestContext containerRequestContext,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
                 .onItem()
                 .transformToUni(voidItem -> this.taskService.createMainScene(state));
     }
@@ -83,7 +83,7 @@ public class TaskResource {
             @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") String transactionId,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
                 .onItem()
                 .transformToUni(voidItem -> this.taskService.createNextScene(transactionId, state));
     }

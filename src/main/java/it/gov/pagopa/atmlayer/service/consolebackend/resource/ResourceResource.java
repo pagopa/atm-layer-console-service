@@ -68,7 +68,7 @@ public class ResourceResource {
                                                                   @QueryParam("storageKey") String storageKey,
                                                                   @QueryParam("extension") String extension){
 
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.resourceService.getResourceFiltered(pageIndex, pageSize, resourceId, sha256, noDeployableResourceType, fileName, storageKey, extension)
                 .onItem()

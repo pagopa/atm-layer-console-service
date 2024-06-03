@@ -80,7 +80,7 @@ public class WorkflowResource {
                                                                           @QueryParam("resource") String resource,
                                                                           @QueryParam("deploymentId") UUID deploymentId,
                                                                           @QueryParam("fileName") String fileName) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
                  .onItem()
@@ -97,7 +97,7 @@ public class WorkflowResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<FileS3Dto> downloadFrontEnd(@Context ContainerRequestContext containerRequestContext,
                                            @PathParam("uuid") UUID uuid){
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.downloadFrontEnd(uuid));
     }
@@ -117,7 +117,7 @@ public class WorkflowResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<WorkflowResourceDTO> deploy(@Context ContainerRequestContext containerRequestContext,
                                            @PathParam("uuid") UUID uuid) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.deploy(uuid));
     }

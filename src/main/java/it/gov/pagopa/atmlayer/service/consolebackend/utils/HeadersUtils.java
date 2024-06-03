@@ -50,16 +50,12 @@ public class HeadersUtils {
 
     }
 
-//    public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
-//        return userDTO.getProfiles().get(0).getDescription().equals(vision.getDescription());
-////        return userDTO.getProfiles().stream().map(ProfileDTO::toString).toList().contains(vision.getDescription());
-//    }
-
     public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
-        if (userDTO.getProfiles().isEmpty()) {
+        if (userDTO.getProfiles() == null || userDTO.getProfiles().isEmpty()) {
             return false;
         }
-        return userDTO.getProfiles().get(0).getProfileId() == vision.getValue();
+        return userDTO.getProfiles().stream()
+                .anyMatch(profile -> profile.getProfileId() == vision.getValue());
     }
 
 }

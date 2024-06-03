@@ -48,7 +48,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<UserDTO> insert(@Context ContainerRequestContext containerRequestContext,
                                @RequestBody(required = true) @Valid UserInsertionDTO userInsertionDTO) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userService.createUser(userInsertionDTO));
     }
@@ -59,7 +59,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Void> delete(@Context ContainerRequestContext containerRequestContext,
                             @PathParam("userId") String userId) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userService.deleteUser(userId));
     }
@@ -69,7 +69,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<UserDTO> getUserById(@Context ContainerRequestContext containerRequestContext,
                                     @PathParam("userId") String userId) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userService.getUserById(userId));
     }
@@ -77,7 +77,7 @@ public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<List<UserDTO>> getAll(@Context ContainerRequestContext containerRequestContext) {
-        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userService.getAllUsers());
     }
