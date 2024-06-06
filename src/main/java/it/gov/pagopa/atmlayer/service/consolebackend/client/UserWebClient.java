@@ -33,4 +33,9 @@ public interface UserWebClient {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     Uni<List<UserDTO>> getAll();
+
+    @POST
+    @Path("/first-access/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<UserDTO> firstAccess(@PathParam("userId") String userId);
 }

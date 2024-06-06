@@ -22,6 +22,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
+import static it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils.getEmailJWT;
+
 @Path("/user")
 @Tag(name = "User")
 @Slf4j
@@ -80,5 +82,13 @@ public class UserResource {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> this.userService.getAllUsers());
+    }
+
+    @POST
+    @Path("/first-access")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<UserDTO> firstAccess(@Context ContainerRequestContext containerRequestContext) {
+
+        return this.userService.checkFirstAccess(getEmailJWT(containerRequestContext));
     }
 }

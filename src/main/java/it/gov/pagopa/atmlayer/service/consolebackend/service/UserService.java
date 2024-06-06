@@ -19,5 +19,6 @@ public interface UserService {
     Uni<List<UserDTO>> getAllUsers();
 
     Uni<Void> checkAuthorizationUser(ContainerRequestContext containerRequestContext, UserProfileEnum userProfileEnum);
+    Uni<UserDTO> checkFirstAccess(String userId);
 
 }

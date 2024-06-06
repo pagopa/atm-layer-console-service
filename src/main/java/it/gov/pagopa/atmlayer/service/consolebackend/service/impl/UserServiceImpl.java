@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
+    @Override
+    public Uni<UserDTO> checkFirstAccess(String userId){
+        return userWebClient.firstAccess(userId);
+    }
+
 }
