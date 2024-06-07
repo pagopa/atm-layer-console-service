@@ -5,6 +5,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.client.ResourceWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.ResourceService;
@@ -32,6 +33,11 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public Uni<ResourceDTO> createResource(ResourceCreationDto resourceCreationDto) {
         return resoureWebClient.createResource(resourceCreationDto);
+    }
+
+    @Override
+    public Uni<ResourceDTO> createResource(ResourceMultipleCreationDto resourceMultipleCreationDto){
+        return resoureWebClient.createResourceMultiple(resourceMultipleCreationDto);
     }
 
     @Override

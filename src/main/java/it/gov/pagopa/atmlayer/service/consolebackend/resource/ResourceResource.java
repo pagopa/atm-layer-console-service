@@ -5,6 +5,7 @@ import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
@@ -88,6 +89,17 @@ public class ResourceResource {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.resourceService.createResource(resourceCreationDto));
+    }
+
+    @POST
+    @Path("/multiple")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<ResourceDTO> createResourceMultiple(@Context ContainerRequestContext containerRequestContext,
+                                           @RequestBody(required = true) @Valid ResourceMultipleCreationDto resourceMultipleCreationDto){
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.resourceService.createResource(resourceMultipleCreationDto));
     }
 
     @PUT
