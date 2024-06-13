@@ -13,8 +13,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.reactive.client.impl.multipart.QuarkusMultipartForm;
+import org.jboss.resteasy.reactive.server.core.multipart.FormData;
+import org.jboss.resteasy.reactive.server.multipart.MultipartFormDataInput;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -36,8 +40,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public Uni<ResourceDTO> createResource(ResourceMultipleCreationDto resourceMultipleCreationDto){
-        return resoureWebClient.createResourceMultiple(resourceMultipleCreationDto);
+    public Uni<List<String>> createResourceMultiple(ResourceMultipleCreationDto multipartFormDataInput){
+        return resoureWebClient.createResourceMultiple(multipartFormDataInput);
     }
 
     @Override

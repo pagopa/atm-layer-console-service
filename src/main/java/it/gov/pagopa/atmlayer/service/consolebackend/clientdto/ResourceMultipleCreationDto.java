@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.core.MediaType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.jboss.resteasy.reactive.PartType;
 
 import java.io.File;
 import java.util.List;
@@ -18,18 +20,17 @@ public class ResourceMultipleCreationDto {
 
     @FormParam("file")
     @NotNull(message = "resource file is required")
+    @PartType("application/octet-stream")
     private List<File> fileList;
 
     @FormParam("filename")
     @NotNull(message = "filename  is required")
-    @Pattern(regexp = "^[a-zA-Z0-9_-]+\\.[a-zA-Z]+$", message = "it must be of form ${regexp}")
-    @Schema(description = "Description of the filename parameter: example_filename.txt",
-            required = true,
-            pattern = "^[a-zA-Z0-9_-]+\\.[a-zA-Z]+$")
+    @PartType(MediaType.APPLICATION_JSON)
     private List<String> filenameList;
 
     @FormParam("resourceType")
     @NotNull(message = "resource type is required")
+    @PartType("text/plain")
     private NoDeployableResourceType resourceType;
 
     @FormParam("path")
@@ -37,7 +38,9 @@ public class ResourceMultipleCreationDto {
     @DefaultValue("")
     @Schema(description = "Description of the path parameter: example/path",
             pattern = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)")
+    @PartType("text/plain")
     private String path;
     @FormParam("description")
+    @PartType("text/plain")
     private String description;
 }

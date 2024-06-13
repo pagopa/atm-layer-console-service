@@ -28,8 +28,11 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.reactive.client.impl.multipart.QuarkusMultipartForm;
+import org.jboss.resteasy.reactive.server.multipart.MultipartFormDataInput;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 @Path("/resources")
@@ -95,11 +98,11 @@ public class ResourceResource {
     @Path("/multiple")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<ResourceDTO> createResourceMultiple(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @Valid ResourceMultipleCreationDto resourceMultipleCreationDto){
+    public Uni<List<String>> createResourceMultiple(@Context ContainerRequestContext containerRequestContext,
+                                           @RequestBody(required = true) ResourceMultipleCreationDto resourceMultipleCreationDto){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.resourceService.createResource(resourceMultipleCreationDto));
+                .transformToUni(voidItem -> this.resourceService.createResourceMultiple(resourceMultipleCreationDto));
     }
 
     @PUT

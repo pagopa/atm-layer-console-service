@@ -15,8 +15,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.jboss.resteasy.reactive.RestForm;
+import org.jboss.resteasy.reactive.client.impl.multipart.QuarkusMultipartForm;
+import org.jboss.resteasy.reactive.server.core.multipart.FormData;
+import org.jboss.resteasy.reactive.server.multipart.MultipartFormDataInput;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 @RegisterRestClient(configKey = "resource-client")
 public interface ResourceWebClient {
@@ -41,9 +46,9 @@ public interface ResourceWebClient {
 
     @POST
     @Path("/multiple")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<ResourceDTO> createResourceMultiple(@RequestBody(required = true) @Valid ResourceMultipleCreationDto resourceMultipleCreationDto);
+    Uni<List<String>> createResourceMultiple(@RequestBody(required = true) ResourceMultipleCreationDto multipartFormDataInput);
 
     @PUT
     @Path("/{uuid}")
