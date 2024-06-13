@@ -4,7 +4,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDto;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDtoJSON;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
@@ -15,10 +15,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import org.jboss.resteasy.reactive.RestForm;
-import org.jboss.resteasy.reactive.client.impl.multipart.QuarkusMultipartForm;
-import org.jboss.resteasy.reactive.server.core.multipart.FormData;
-import org.jboss.resteasy.reactive.server.multipart.MultipartFormDataInput;
 
 import java.io.File;
 import java.util.List;
@@ -48,7 +44,7 @@ public interface ResourceWebClient {
     @Path("/multiple")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<List<String>> createResourceMultiple(@RequestBody(required = true) ResourceMultipleCreationDto multipartFormDataInput);
+    Uni<List<String>> createResourceMultiple(@RequestBody(required = true) ResourceMultipleCreationDtoJSON resourceMultipleCreationDto);
 
     @PUT
     @Path("/{uuid}")

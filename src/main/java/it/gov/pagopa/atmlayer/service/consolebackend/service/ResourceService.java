@@ -7,8 +7,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
-import org.jboss.resteasy.reactive.client.impl.multipart.QuarkusMultipartForm;
-import org.jboss.resteasy.reactive.server.multipart.MultipartFormDataInput;
 
 import java.io.File;
 import java.util.List;

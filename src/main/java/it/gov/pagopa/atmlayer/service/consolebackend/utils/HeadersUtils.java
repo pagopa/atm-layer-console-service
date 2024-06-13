@@ -10,8 +10,14 @@ import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Response;
 import lombok.NoArgsConstructor;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class HeadersUtils {
@@ -55,6 +61,20 @@ public class HeadersUtils {
         }
         return userDTO.getProfiles().stream()
                 .anyMatch(profile -> profile.getProfileId() == vision.getValue());
+    }
+
+    public static List<String> fromFileListToStringList(List<File> fileList){
+        return fileList.stream().map(HeadersUtils::fromFileToString).collect(Collectors.toList());
+    }
+
+    public static String fromFileToString(File file) {
+        byte[] encoded;
+        try {
+            encoded = Base64.getEncoder().encode(FileUtils.readFileToByteArray(file));
+        } catch (IOException e) {
+            throw new AtmLayerException("Errore nella codifica del file", Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.ATMLCB_500);
+        }
+        return new String(encoded, StandardCharsets.US_ASCII);
     }
 
 }
