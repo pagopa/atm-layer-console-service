@@ -52,7 +52,8 @@ public class BpmnResource {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Restituisce i Bpmn filtrati paginati", description = "Esegue la GET dei Bpmn sul Model filtrando sui campi desiderati gestendo la paginazione")
-    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati processi cercati.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                                  @QueryParam("pageSize") @DefaultValue("10")
@@ -87,7 +88,8 @@ public class BpmnResource {
     @Blocking
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Carica un file BPMN")
-    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnDTO> createBpmn(@RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
         return this.bpmnService.createBpmn(bpmnCreationDto);
     }
@@ -95,6 +97,8 @@ public class BpmnResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati terminali associati al BPMN cercato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@PathParam("uuid") UUID uuid, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                                                   @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize) {
@@ -112,6 +116,8 @@ public class BpmnResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Aggiunta singola associazione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnBankConfigDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnBankConfigDTO> addSingleAssociation(@PathParam("uuid") UUID bpmnId,
                                                        @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
@@ -120,6 +126,8 @@ public class BpmnResource {
 
     @DELETE
     @Path("/associations/{uuid}/version/{version}")
+    @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Eliminata singola associazione")
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Void> deleteSingleAssociation(@PathParam("uuid") UUID bpmnId,
                                              @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                              @QueryParam("acquirerId") @NotEmpty @Schema(format = "byte", maxLength = 255) String acquirerId,
@@ -132,6 +140,8 @@ public class BpmnResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Sostituita singola associazione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnBankConfigDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@PathParam("uuid") UUID bpmnId, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto);
@@ -140,6 +150,8 @@ public class BpmnResource {
     @POST
     @Path("/deploy/{uuid}/version/{version}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è stato deployato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnDTO> deployBPMN(@PathParam("uuid") UUID uuid,
                                    @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
         return this.bpmnService.deployBPMN(uuid, version);
@@ -148,6 +160,8 @@ public class BpmnResource {
     @GET
     @Path("/downloadFrontEnd/{uuid}/version/{version}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato scaricato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileS3Dto.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<FileS3Dto> downloadBpmnFrontEnd(@PathParam("uuid") UUID bpmnId,
                                                @PathParam("version") @Schema(minimum="1", maximum="10000") Long modelVersion){
          return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion);
@@ -155,6 +169,8 @@ public class BpmnResource {
 
     @POST
     @Path("/disable/{uuid}/version/{version}")
+    @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Il processo è stato disabilitato.")
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Void> disableBPMN(@PathParam("uuid") UUID bpmnId,
                                  @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
         return this.bpmnService.disableBPMN(bpmnId, version);
@@ -165,6 +181,8 @@ public class BpmnResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Blocking
     @Path("/upgrade")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è stato aggiornato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnDTO> upgradeBPMN(@Valid BpmnUpgradeDto bpmnUpgradeDto) {
         return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
     }

@@ -56,7 +56,8 @@ public class WorkflowResource {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Restituisce i Workflow filtrati paginati")
-    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperate risorse cercate.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                           @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) Integer pageIndex,
                                                                           @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum="1", maximum="100")) Integer pageSize,
@@ -85,6 +86,8 @@ public class WorkflowResource {
     @GET
     @Path("/downloadFrontEnd/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa scaricata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileS3Dto.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID uuid){
         return this.workflowService.downloadFrontEnd(uuid);
     }
@@ -92,6 +95,8 @@ public class WorkflowResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa creata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
         return this.workflowService.create(workflowResourceCreationDto);
     }
@@ -99,6 +104,8 @@ public class WorkflowResource {
     @POST
     @Path("/deploy/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa deployata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid) {
         return this.workflowService.deploy(uuid);
     }
@@ -106,6 +113,8 @@ public class WorkflowResource {
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Versione precedente ripristinata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid) {
         return this.workflowService.rollback(uuid);
     }
@@ -114,6 +123,8 @@ public class WorkflowResource {
     @Path("/update/{uuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<WorkflowResourceDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
                                     @PathParam("uuid") UUID uuid){
             return this.workflowService.update(file, uuid);
@@ -121,6 +132,8 @@ public class WorkflowResource {
 
     @POST
     @Path("/disable/{uuid}")
+    @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Risorsa disabilitata.")
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Void> disable(@PathParam("uuid") UUID uuid){
             return this.workflowService.disable(uuid);
     }
