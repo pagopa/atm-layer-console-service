@@ -11,7 +11,7 @@ import java.util.Map;
 @Schema(description = "Oggetto bottone")
 public class Button {
 
-    @Schema(description = "Id del bottone")
+    @Schema(description = "Id del bottone", format = "byte", maxLength = 255)
     private String id;
 
     @Schema(description = "Mappa delle variabili del bottone")

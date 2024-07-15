@@ -25,27 +25,27 @@ public class Device {
      * Device bank ID.
      */
     @NotNull(message = "BankID non può essere null")
-    @Schema(required = true, description = "Il codice identificativo della banca (o codice ABI)", example = "02008")
+    @Schema(required = true, description = "Il codice identificativo della banca (o codice ABI)", example = "02008", format = "byte", maxLength = 255)
     private String bankId;
 
     /*
      * Device branch ID.
      */
-    @Schema(required = true, description = "Il codice identificativo della filiale (o codice CAB)", example = "12345")
+    @Schema(required = true, description = "Il codice identificativo della filiale (o codice CAB)", example = "12345", format = "byte", maxLength = 255)
     private String branchId;
 
     /*
      * Device ID.
      */
     @Pattern(regexp = "^[0-9]{1,4}$", message = "Device ID deve matchare l'espressione regolare")
-    @Schema(description = "Il codice identificativo dello sportello ATM (Codice Sportello o S.A. del Quadro Informativo. SPE-DEF-200)", example = "0001")
+    @Schema(description = "Il codice identificativo dello sportello ATM (Codice Sportello o S.A. del Quadro Informativo. SPE-DEF-200)", example = "0001", format = "byte", maxLength = 255)
     private String code;
 
     /*
      * Terminal ID.
      */
     @Pattern(regexp = "^[0-9a-zA-Z]{1,10}$", message = "Terminal ID deve matchare l'espressione regolare\"")
-    @Schema(description = "Il codice identificativo del dispositivo (o Terminal ID)", example = "ABCD1234")
+    @Schema(description = "Il codice identificativo del dispositivo (o Terminal ID)", example = "ABCD1234", format = "byte", maxLength = 255)
     private String terminalId;
 
     /*
@@ -60,6 +60,6 @@ public class Device {
     @Schema(description = "Identificativo del canale del dispositivo")
     private Channel channel;
 
-    @Schema(description = "Lista delle periferiche del device")
+    @Schema(description = "Lista delle periferiche del device", maxItems = 1000)
     private List<Peripheral> peripherals;
 }

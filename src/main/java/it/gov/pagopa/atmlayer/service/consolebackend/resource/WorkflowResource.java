@@ -58,20 +58,20 @@ public class WorkflowResource {
     @Operation(summary = "Restituisce i Workflow filtrati paginati")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer pageIndex,
-                                                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer pageSize,
+                                                                          @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) Integer pageIndex,
+                                                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum="1", maximum="100")) Integer pageSize,
                                                                           @QueryParam("status") @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
                                                                           @QueryParam("workflowResourceId") UUID workflowResourceId,
-                                                                          @QueryParam("deployedFileName") String deployedFileName,
-                                                                          @QueryParam("definitionKey") String definitionKey,
+                                                                          @QueryParam("deployedFileName") @Schema(format = "byte", maxLength = 255) String deployedFileName,
+                                                                          @QueryParam("definitionKey") @Schema(format = "byte", maxLength = 255) String definitionKey,
                                                                           @QueryParam("resourceType") DeployableResourceType resourceType,
-                                                                          @QueryParam("sha256") String sha256,
-                                                                          @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
-                                                                          @QueryParam("camundaDefinitionId") String camundaDefinitionId,
-                                                                          @QueryParam("description") String description,
-                                                                          @QueryParam("resource") String resource,
+                                                                          @QueryParam("sha256") @Schema(format = "byte", maxLength = 255) String sha256,
+                                                                          @QueryParam("definitionVersionCamunda") @Schema(format = "byte", maxLength = 5) String definitionVersionCamunda,
+                                                                          @QueryParam("camundaDefinitionId") @Schema(format = "byte", maxLength = 255) String camundaDefinitionId,
+                                                                          @QueryParam("description") @Schema(format = "byte", maxLength = 255) String description,
+                                                                          @QueryParam("resource") @Schema(format = "byte", maxLength = 255) String resource,
                                                                           @QueryParam("deploymentId") UUID deploymentId,
-                                                                          @QueryParam("fileName") String fileName) {
+                                                                          @QueryParam("fileName") @Schema(format = "byte", maxLength = 255) String fileName) {
          return this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
                  .onItem()
                  .transform(Unchecked.function(pagedList -> {

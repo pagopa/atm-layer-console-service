@@ -54,24 +54,24 @@ public class BpmnResource {
     @Operation(summary = "Restituisce i Bpmn filtrati paginati", description = "Esegue la GET dei Bpmn sul Model filtrando sui campi desiderati gestendo la paginazione")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
+                                                                 @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                                  @QueryParam("pageSize") @DefaultValue("10")
-                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
-                                                                 @QueryParam("functionType") String functionType,
-                                                                 @QueryParam("modelVersion") String modelVersion,
-                                                                 @QueryParam("definitionVersionCamunda") String definitionVersionCamunda,
+                                                                 @Parameter(required = true, schema = @Schema(minimum="1", maximum="100") ) int pageSize,
+                                                                 @QueryParam("functionType") @Schema(format = "byte", maxLength = 255) String functionType,
+                                                                 @QueryParam("modelVersion") @Schema(format = "byte", maxLength = 5) String modelVersion,
+                                                                 @QueryParam("definitionVersionCamunda") @Schema(format = "byte", maxLength = 5) String definitionVersionCamunda,
                                                                  @QueryParam("bpmnId") UUID bpmnId,
                                                                  @QueryParam("deploymentId") UUID deploymentId,
-                                                                 @QueryParam("camundaDefinitionId") String camundaDefinitionId,
-                                                                 @QueryParam("definitionKey") String definitionKey,
-                                                                 @QueryParam("deployedFileName") String deployedFileName,
-                                                                 @QueryParam("resource") String resource,
-                                                                 @QueryParam("sha256") String sha256,
+                                                                 @QueryParam("camundaDefinitionId") @Schema(format = "byte", maxLength = 255) String camundaDefinitionId,
+                                                                 @QueryParam("definitionKey") @Schema(format = "byte", maxLength = 255) String definitionKey,
+                                                                 @QueryParam("deployedFileName") @Schema(format = "byte", maxLength = 255) String deployedFileName,
+                                                                 @QueryParam("resource") @Schema(format = "byte", maxLength = 255) String resource,
+                                                                 @QueryParam("sha256") @Schema(format = "byte", maxLength = 255) String sha256,
                                                                  @QueryParam("status") StatusEnum status,
-                                                                 @QueryParam("acquirerId") String acquirerId,
-                                                                 @QueryParam("branchId") String branchId,
-                                                                 @QueryParam("terminalId") String terminalId,
-                                                                 @QueryParam("fileName") String fileName) {
+                                                                 @QueryParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId,
+                                                                 @QueryParam("branchId") @Schema(format = "byte", maxLength = 255) String branchId,
+                                                                 @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId,
+                                                                 @QueryParam("fileName") @Schema(format = "byte", maxLength = 255) String fileName) {
         return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
@@ -95,9 +95,9 @@ public class BpmnResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
-    public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@PathParam("uuid") UUID uuid, @PathParam("version") Long version,
-                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
-                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize) {
+    public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@PathParam("uuid") UUID uuid, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
+                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
+                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize) {
         return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
@@ -113,7 +113,7 @@ public class BpmnResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
     public Uni<BpmnBankConfigDTO> addSingleAssociation(@PathParam("uuid") UUID bpmnId,
-                                                       @PathParam("version") Long version,
+                                                       @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto);
     }
@@ -121,10 +121,10 @@ public class BpmnResource {
     @DELETE
     @Path("/associations/{uuid}/version/{version}")
     public Uni<Void> deleteSingleAssociation(@PathParam("uuid") UUID bpmnId,
-                                             @PathParam("version") Long version,
-                                             @QueryParam("acquirerId") @NotEmpty String acquirerId,
-                                             @QueryParam("branchId") String branchId,
-                                             @QueryParam("terminalId") String terminalId) {
+                                             @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
+                                             @QueryParam("acquirerId") @NotEmpty @Schema(format = "byte", maxLength = 255) String acquirerId,
+                                             @QueryParam("branchId") @Schema(format = "byte", maxLength = 255) String branchId,
+                                             @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId) {
         return this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId);
     }
 
@@ -132,7 +132,7 @@ public class BpmnResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/associations/{uuid}/version/{version}")
-    public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@PathParam("uuid") UUID bpmnId, @PathParam("version") Long version,
+    public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@PathParam("uuid") UUID bpmnId, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto);
     }
@@ -141,7 +141,7 @@ public class BpmnResource {
     @Path("/deploy/{uuid}/version/{version}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<BpmnDTO> deployBPMN(@PathParam("uuid") UUID uuid,
-                                   @PathParam("version") Long version) {
+                                   @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
         return this.bpmnService.deployBPMN(uuid, version);
     }
 
@@ -149,14 +149,14 @@ public class BpmnResource {
     @Path("/downloadFrontEnd/{uuid}/version/{version}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<FileS3Dto> downloadBpmnFrontEnd(@PathParam("uuid") UUID bpmnId,
-                                               @PathParam("version") Long modelVersion){
+                                               @PathParam("version") @Schema(minimum="1", maximum="10000") Long modelVersion){
          return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion);
     }
 
     @POST
     @Path("/disable/{uuid}/version/{version}")
     public Uni<Void> disableBPMN(@PathParam("uuid") UUID bpmnId,
-                                 @PathParam("version") Long version) {
+                                 @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
         return this.bpmnService.disableBPMN(bpmnId, version);
     }
 

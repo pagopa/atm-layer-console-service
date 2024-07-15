@@ -72,7 +72,7 @@ public class TaskResource {
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "500", description = "Errore generico, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     public Uni<Response> createNextScene(
-            @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") String transactionId,
+            @Parameter(name = "transactionId", description = "ID della transazione") @Schema(format = "byte", maxLength = 255)  @NotNull @PathParam("transactionId") String transactionId,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
         return this.taskService.createNextScene(transactionId, state);

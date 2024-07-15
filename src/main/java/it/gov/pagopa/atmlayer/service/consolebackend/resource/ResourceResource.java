@@ -50,15 +50,15 @@ public class ResourceResource {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                                  @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
+                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10")
-                                                                  @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
+                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageSize,
                                                                   @QueryParam("resourceId") UUID resourceId,
-                                                                  @QueryParam("sha256") String sha256,
+                                                                  @QueryParam("sha256") @Schema(format = "byte", maxLength = 255) String sha256,
                                                                   @QueryParam("noDeployableResourceType") NoDeployableResourceType noDeployableResourceType,
-                                                                  @QueryParam("fileName") String fileName,
-                                                                  @QueryParam("storageKey") String storageKey,
-                                                                  @QueryParam("extension") String extension){
+                                                                  @QueryParam("fileName") @Schema(format = "byte", maxLength = 255) String fileName,
+                                                                  @QueryParam("storageKey") @Schema(format = "byte", maxLength = 255) String storageKey,
+                                                                  @QueryParam("extension") @Schema(format = "byte", maxLength = 255) String extension){
 
         return this.resourceService.getResourceFiltered(pageIndex, pageSize, resourceId, sha256, noDeployableResourceType, fileName, storageKey, extension)
                 .onItem()
