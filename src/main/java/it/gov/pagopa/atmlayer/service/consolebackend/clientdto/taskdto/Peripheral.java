@@ -14,10 +14,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Schema(description = "Oggetto che rappresenta una periferica del Device e il suo stato")
 public class Peripheral {
 
-    @Schema(required = true, description = "Label che identifica una specifica periferica", example = "PRINTER")
+    @Schema(required = true, description = "Label che identifica una specifica periferica", example = "PRINTER", format = "byte", maxLength = 255)
     private String id;
 
-    @Schema(description = "Nome testuale della periferica", example = "Receipt printer")
+    @Schema(description = "Nome testuale della periferica", example = "Receipt printer", format = "byte", maxLength = 255)
     private String name;
 
     @Schema(required = true, description = "Stato della periferica")
