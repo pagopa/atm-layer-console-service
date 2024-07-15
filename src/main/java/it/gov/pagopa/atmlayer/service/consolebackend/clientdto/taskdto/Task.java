@@ -20,7 +20,7 @@ import java.util.Map;
 @Schema(description = "Oggetto che rappresenta un task")
 public class Task {
 
-    @Schema(required = true, description = "Identificativo del Task")
+    @Schema(required = true, description = "Identificativo del Task", format = "byte", maxLength = 255)
     private String id;
 
     @Schema(description = "Mappa delle variabili generiche")
@@ -29,7 +29,7 @@ public class Task {
     @Schema(description = "Mappa delle variabili da consultare in caso di errore")
     private Map<String, Object> onError;
 
-    @Schema(description = "Valore di durata prima di andare in timeout")
+    @Schema(description = "Valore di durata prima di andare in timeout", minimum = "0", maximum = "600000")
     private int timeout;
 
     @Schema(description = "Mappa delle variabili da consultare in caso di timeout")
@@ -41,15 +41,15 @@ public class Task {
     @Schema(description = "Comando da eseguire")
     private Command command;
 
-    @Schema(description = "Template dello scontrino")
+    @Schema(description = "Template dello scontrino",format = "byte", maxLength = 1000)
     private String receiptTemplate;
 
-    @Schema(description = "Nome della variabile in cui il Device setterà l'esito del Command")
+    @Schema(description = "Nome della variabile in cui il Device setterà l'esito del Command", format = "byte", maxLength = 255)
     private String outcomeVarName;
 
     @Schema(description = "Modalità dell'epp")
     private EppMode eppMode;
 
-    @Schema(description = "Lista dei bottoni")
+    @Schema(description = "Lista dei bottoni", maxItems = 100)
     private List<Button> buttons;
 }
