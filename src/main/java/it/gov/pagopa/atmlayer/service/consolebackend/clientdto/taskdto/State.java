@@ -23,7 +23,7 @@ public class State {
     @Schema(description = "ID del task che da completato", maxLength = 255)
     private String taskId;
 
-    @Schema(description = "Mappa delle variabili inviate dal Device")
+    @Schema(description = "Mappa delle variabili inviate dal Device", maxProperties = 100)
     private Map<String, Object> data;
 
     @Schema(hidden = true)

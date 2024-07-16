@@ -52,6 +52,7 @@ public class ResourceResource {
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperate risorse cercate.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                   @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
@@ -78,6 +79,7 @@ public class ResourceResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa creata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceDTO.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
          return this.resourceService.createResource(resourceCreationDto);
@@ -88,6 +90,7 @@ public class ResourceResource {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceDTO.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<ResourceDTO> updateResource(@RequestBody(required = true) @FormParam("file") File file,
                                            @PathParam("uuid") UUID uuid) {
@@ -97,6 +100,7 @@ public class ResourceResource {
     @POST
     @Path("/disable/{uuid}")
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Risorsa disabilitata.")
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Void> disable(@PathParam("uuid") UUID uuid) {
         return resourceService.disable(uuid);
