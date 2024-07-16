@@ -19,17 +19,17 @@ public class State {
     @Schema(required = true)
     private Device device;
 
-    @Schema(description = "ID del task che da completato")
+    @Schema(description = "ID del task che da completato", format = "byte", maxLength = 255)
     private String taskId;
 
-    @Schema(description = "Mappa delle variabili inviate dal Device")
+    @Schema(description = "Mappa delle variabili inviate dal Device", maxProperties = 100)
     private Map<String, Object> data;
 
     @Schema(hidden = true)
     private String transactionId;
 
 
-    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)")
+    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)", format = "byte", maxLength = 50)
     private String fiscalCode;
 
     @Schema(description = "Informazioni del pan (dato sensibile)")

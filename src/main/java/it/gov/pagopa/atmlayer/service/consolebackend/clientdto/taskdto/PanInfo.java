@@ -15,13 +15,13 @@ import java.util.List;
 public class PanInfo {
 
     @ToString.Exclude
-    @Schema(description = "Pan (dato sensibile)")
+    @Schema(description = "Pan (dato sensibile)", format = "byte", maxLength = 100)
     private String pan;
 
-    @Schema(description = "Circuito del pan")
+    @Schema(description = "Circuito del pan", maxItems = 50)
     private List<String> circuits;
 
-    @Schema(description = "Nome della banca associata al pan")
+    @Schema(description = "Nome della banca associata al pan", format = "byte", maxLength = 255)
     private String bankName;
 
 }
