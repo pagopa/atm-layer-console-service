@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class Task {
     @Schema(description = "Template html")
     private Template template;
 
-    @Schema(description = "Comando da eseguire")
+    @Schema(description = "Comando da eseguire", implementation = Command.class)
     private Command command;
 
     @Schema(description = "Template dello scontrino",format = "byte", maxLength = 1000)
@@ -47,7 +48,7 @@ public class Task {
     @Schema(description = "Nome della variabile in cui il Device setterà l'esito del Command", format = "byte", maxLength = 255)
     private String outcomeVarName;
 
-    @Schema(description = "Modalità dell'epp")
+    @Schema(description = "Modalità dell'epp", implementation = EppMode.class)
     private EppMode eppMode;
 
     @Schema(description = "Lista dei bottoni", maxItems = 100)

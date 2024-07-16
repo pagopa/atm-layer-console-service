@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Data;
 import lombok.ToString;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.List;
 public class PanInfo {
 
     @ToString.Exclude
-    @Schema(description = "Pan (dato sensibile)")
+    @Schema(description = "Pan (dato sensibile)", maxLength = 19)
     private String pan;
 
-    @Schema(description = "Circuito del pan")
+    @Schema(description = "Circuito del pan", type= SchemaType.ARRAY, maxItems = 2)
     private List<String> circuits;
 
-    @Schema(description = "Nome della banca associata al pan")
+    @Schema(description = "Nome della banca associata al pan", maxLength = 255)
     private String bankName;
 
 }

@@ -19,7 +19,7 @@ public class ATMLayerErrorResponse {
     @Schema(format = "byte", maxLength = 255)
     private String errorCode;
 
-    @Schema(example = "Validation Error", format = "byte", maxLength = 255)
+    @Schema(example = "Validation Error", maxLength = 255)
     private String type;
 
     @Schema(example = "500", minimum = "1", maximum = "999")

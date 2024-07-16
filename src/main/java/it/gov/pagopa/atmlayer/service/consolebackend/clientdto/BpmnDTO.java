@@ -41,9 +41,9 @@ public class BpmnDTO implements Serializable {
     @Schema(format = "byte", maxLength = 255)
     private String resource;
     private UUID deploymentId;
-    @Schema(description = "Creation Timestamp", format = "timestamp", pattern = "DD/MM/YYYY", example = "2023-11-03T14:18:36.635+00:00")
+    @Schema(description = "Creation Timestamp", format = "timestamp", pattern = "DD/MM/YYYY", example = "{\"date\":\"2023-11-03T14:18:36.635+00:00\"}")
     private Timestamp createdAt;
-    @Schema(description = "Last Update Timestamp", format = "timestamp", pattern = "DD/MM/YYYY", example = "2023-11-03T14:18:36.635+00:00")
+    @Schema(description = "Last Update Timestamp", format = "timestamp", pattern = "DD/MM/YYYY", example = "{\"date\":\"2023-11-03T14:18:36.635+00:00\"}")
     private Timestamp lastUpdatedAt;
     @Schema(format = "byte", maxLength = 255)
     private String createdBy;
