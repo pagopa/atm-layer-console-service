@@ -30,10 +30,10 @@ public class State {
     private String transactionId;
 
 
-    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)", maxLength = 16)
+    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)", maxLength = 100)
     private String fiscalCode;
 
-    @Schema(description = "Informazioni del pan (dato sensibile)", type = SchemaType.ARRAY, maxItems = 2)
+    @Schema(description = "Informazioni del pan (dato sensibile)", type = SchemaType.ARRAY, maxItems = 50)
     private List<PanInfo> panInfo;
 
 }

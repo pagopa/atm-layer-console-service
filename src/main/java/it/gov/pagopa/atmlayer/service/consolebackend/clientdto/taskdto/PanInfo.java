@@ -16,10 +16,10 @@ import java.util.List;
 public class PanInfo {
 
     @ToString.Exclude
-    @Schema(description = "Pan (dato sensibile)", maxLength = 19)
+    @Schema(description = "Pan (dato sensibile)", maxLength = 50)
     private String pan;
 
-    @Schema(description = "Circuito del pan", type= SchemaType.ARRAY, maxItems = 2)
+    @Schema(description = "Circuito del pan", type= SchemaType.ARRAY, maxItems = 10)
     private List<String> circuits;
 
     @Schema(description = "Nome della banca associata al pan", maxLength = 255)
