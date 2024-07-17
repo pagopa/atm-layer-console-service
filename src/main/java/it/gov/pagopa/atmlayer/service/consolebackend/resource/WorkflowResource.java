@@ -55,7 +55,9 @@ public class WorkflowResource {
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Restituisce i Workflow filtrati paginati")
+    @Operation(operationId = "getAllFiltered",
+               description = "Restituisce i Workflow filtrati paginati"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperate risorse cercate.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -87,6 +89,10 @@ public class WorkflowResource {
     @GET
     @Path("/downloadFrontEnd/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "downloadFrontEnd",
+            description = "Scarica file front-end"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa scaricata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileS3Dto.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -97,6 +103,10 @@ public class WorkflowResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "createWorkflowResource",
+            description = "Creazione file"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa creata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -107,6 +117,10 @@ public class WorkflowResource {
     @POST
     @Path("/deploy/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "deployWorkflowResource",
+            description = "rilascia file"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa deployata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -117,6 +131,10 @@ public class WorkflowResource {
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "rollback",
+            description = "Rollback"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Versione precedente ripristinata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -128,6 +146,10 @@ public class WorkflowResource {
     @Path("/update/{uuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "updateWorkflowResource",
+            description = "Aggiorna file"
+    )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
@@ -138,6 +160,10 @@ public class WorkflowResource {
 
     @POST
     @Path("/disable/{uuid}")
+    @Operation(
+            operationId = "disableWorkflowResource",
+            description = "Disabilita file"
+    )
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Risorsa disabilitata.")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
