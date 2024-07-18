@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96.29%               |
-| :heavy_check_mark: Number of Lines Covered | 337    |
-| :x: Number of Lines Missed  | 13     |
-| Total Number of Lines   | 350     |
+| Code Coverage %         | 91.25%               |
+| :heavy_check_mark: Number of Lines Covered | 365    |
+| :x: Number of Lines Missed  | 35     |
+| Total Number of Lines   | 400     |
 
 
 ## Details:
@@ -88,6 +88,18 @@
 
 <details>
     <summary>
+:heavy_check_mark: UserProfileResource.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :heavy_check_mark: ResourceResource.java
     </summary>
 
@@ -129,6 +141,18 @@
 
         
 #### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserResource.java
+    </summary>
+
+        
+#### Lines Missed:
         
 </details>
 
@@ -209,11 +233,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: UserProfileEnum.java
+:x: UserProfileEnum.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -302,6 +326,16 @@
 
 <details>
     <summary>
+:x: UserProfileService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: ResourceService.java
     </summary>
 
@@ -333,12 +367,16 @@
 
 <details>
     <summary>
-:heavy_check_mark: HeadersUtils.java
+:x: HeadersUtils.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
+- Line #46
+```
+        }catch (Exception exception){
+```
 </details>
 
     
@@ -438,7 +476,17 @@
 
 <details>
     <summary>
-:x: UserProfileDto.java
+:x: ProfileDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfilesInsertionDTO.java
     </summary>
 
         
@@ -449,6 +497,16 @@
 <details>
     <summary>
 :x: BpmnCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfilesDTO.java
     </summary>
 
         
@@ -518,6 +576,16 @@
 
 <details>
     <summary>
+:x: UserDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: BankConfigTripletDto.java
     </summary>
 
@@ -535,6 +603,16 @@
 <details>
     <summary>
 :x: BpmEmulatorUpgradeDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserInsertionDTO.java
     </summary>
 
         
@@ -718,6 +796,18 @@
 
 <details>
     <summary>
+:x: UserProfileServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :heavy_check_mark: WorkflowServiceImpl.java
     </summary>
 
@@ -742,12 +832,16 @@
 
 <details>
     <summary>
-:heavy_check_mark: UserServiceImpl.java
+:x: UserServiceImpl.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
+- Line #55
+```
+                .transform(userProfile -> {
+```
 </details>
 
     
@@ -788,6 +882,16 @@
 <details>
     <summary>
 :x: UserWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfileWebClient.java
     </summary>
 
         
