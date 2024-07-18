@@ -1,7 +1,7 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
@@ -10,6 +10,7 @@
 | :heavy_check_mark: Number of Lines Covered | 337    |
 | :x: Number of Lines Missed  | 13     |
 | Total Number of Lines   | 350     |
+
 
 ## Details:
 
@@ -523,7 +524,7 @@
         
 #### Lines Missed:
         
-- Line #25
+- Line #29
 ```
                 bankConfigTripletDto.terminalId.equals(this.terminalId));
 ```

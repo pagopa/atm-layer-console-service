@@ -11,10 +11,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @RegisterForReflection
 public class Template {
 
-    @Schema(description = "Rappresenta il Base64 della pagina HTML da visualizzare")
+    @Schema(description = "Rappresenta il Base64 della pagina HTML da visualizzare", maxLength = 10000)
     private String content;
 
-    @Schema(description = "Tipo di visualizzazione della schermata HTML", example = "FULL_SCREEN")
+    @Schema(description = "Tipo di visualizzazione della schermata HTML", example = "FULL_SCREEN", maxLength = 255)
     private String type;
 
 }
