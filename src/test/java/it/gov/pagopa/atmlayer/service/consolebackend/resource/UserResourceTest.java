@@ -4,26 +4,23 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.OutcomeResponse;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
-import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class TaskResourceTest {
-
-    @InjectMock
-    TaskService taskService;
+public class UserResourceTest {
 
     @InjectMock
     UserService userService;
@@ -36,53 +33,86 @@ public class TaskResourceTest {
     }
 
     @Test
-    void testCreateNext() {
-        Scene scene= new Scene();
-        scene.setTransactionId("transactionId");
-        OutcomeResponse outcomeResponse = new OutcomeResponse("result", "description", null);
-        scene.setOutcome(outcomeResponse);
-        Response response = Response.ok(scene).build();
-        State request = new State();
-        request.setTransactionId("transactionId");
+    void testGetAllUser() {
+        List<UserDTO> userDTOList = new ArrayList<>();
+        UserDTO userDTO = new UserDTO();
+        userDTOList.add(userDTO);
+
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(taskService.createNextScene(anyString(), eq(request)))
-                .thenReturn(Uni.createFrom().item(response));
-        Scene result = given()
+        when(userService.getAllUsers()).thenReturn(Uni.createFrom().item(userDTOList));
+
+        List result = given()
                 .header(authHeader)
-                .contentType(MediaType.APPLICATION_JSON)
-                .pathParam("transactionId", "transactionId")
-                .body(request)
-                .when().post("/api/v1/console-service/task/next/trns/{transactionId}")
+                .when().get("/api/v1/console-service/user")
                 .then()
                 .statusCode(200)
                 .extract()
-                .body()
-                .as(Scene.class);
-        Assertions.assertEquals(response.getEntity(), result);
+                .body().as(List.class);
+        Assertions.assertEquals(result.size(), userDTOList.size());
     }
 
     @Test
-    void testCreateMain() {
-        Scene scene= new Scene();
-        scene.setTransactionId("transactionId");
-        OutcomeResponse outcomeResponse = new OutcomeResponse("result", "description", null);
-        scene.setOutcome(outcomeResponse);
-        State request = new State();
-        request.setTransactionId("transactionId");
-        Response response = Response.ok(scene).build();
+    void testCreateUser() {
+        UserInsertionDTO request = new UserInsertionDTO();
+        request.setUserId("a@b.it");
+        request.setName("a");
+        request.setSurname("b");
+        UserDTO response= new UserDTO();
+        response.setUserId("a@b.it");
+        response.setName("a");
+        response.setSurname("b");
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(taskService.createMainScene(eq(request)))
+        when(userService.createUser(request))
                 .thenReturn(Uni.createFrom().item(response));
-        Scene result = given()
+        UserDTO result = given()
                 .header(authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
-                .when().post("/api/v1/console-service/task/main")
+                .when().post("/api/v1/console-service/user/insert")
                 .then()
                 .statusCode(200)
                 .extract()
                 .body()
-                .as(Scene.class);
-        Assertions.assertEquals(response.getEntity(), result);
+                .as(UserDTO.class);
+        Assertions.assertEquals(response, result);
+    }
+
+    @Test
+    void testDeleteUser() {
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
+        when(userService.deleteUser( "a@b.it")).thenReturn(Uni.createFrom().voidItem());
+        given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .pathParam("userId", "a@b.it")
+                .when().delete("/api/v1/console-service/user/delete/userId/{userId}")
+                .then()
+                .statusCode(204)
+                .extract()
+                .body();
+    }
+
+    @Test
+    void testGetById() {
+
+        UserDTO response= new UserDTO();
+        response.setUserId("a@b.it");
+        response.setName("a");
+        response.setSurname("b");
+
+
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
+        when(userService.getUserById("a@b.it")).thenReturn(Uni.createFrom().item(response));
+
+        UserDTO result = given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .pathParam("userId", "a@b.it")
+                .when().get("/api/v1/console-service/user/{userId}")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body().as(UserDTO.class);
+        Assertions.assertEquals(result, response);
     }
 }

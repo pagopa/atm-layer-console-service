@@ -10,6 +10,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +33,9 @@ class WorkflowResourceTest {
     @InjectMock
     WorkflowService workflowService;
 
+    @InjectMock
+    UserService userService;
+
     Header authHeader;
 
     @BeforeEach
@@ -46,6 +50,7 @@ class WorkflowResourceTest {
         List<WorkflowResourceFrontEndDTO> dtoList = new ArrayList<>();
         dtoList.add(workflowResourceFrontEndDTO);
         PageInfo<WorkflowResourceFrontEndDTO> response = new PageInfo<>(0, 1, 1, 1 , dtoList);
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.getWorkflowResourceFiltered(0, 1, CREATED, uuid, "deployedFileName", "definitionKey", DeployableResourceType.BPMN, "sha256","definitionVersionCamunda", "camundaDefinitionId", "description", "resource", uuid, "fileName")).thenReturn(Uni.createFrom().item(response));
         PageInfo result = given()
                 .header(authHeader)
@@ -75,6 +80,7 @@ class WorkflowResourceTest {
     void testDownloadFrontEnd() {
         UUID uuid = UUID.randomUUID();
         FileS3Dto response = new FileS3Dto();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.downloadFrontEnd( uuid)).thenReturn(Uni.createFrom().item(response));
         FileS3Dto result = given()
                 .header(authHeader)
@@ -92,6 +98,7 @@ class WorkflowResourceTest {
     @Test
     void testCreate() {
         WorkflowResourceDTO response = new WorkflowResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.create(any(WorkflowResourceCreationDto.class)))
                 .thenReturn(Uni.createFrom().item(response));
         WorkflowResourceDTO result = given()
@@ -113,6 +120,7 @@ class WorkflowResourceTest {
     void testDeploy() {
         UUID uuid = UUID.randomUUID();
         WorkflowResourceDTO response = new WorkflowResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.deploy(any(UUID.class))).thenReturn(Uni.createFrom().item(response));
         WorkflowResourceDTO result = given()
                 .header(authHeader)
@@ -131,6 +139,7 @@ class WorkflowResourceTest {
     void testRollback() {
         UUID uuid = UUID.randomUUID();
         WorkflowResourceDTO response = new WorkflowResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.rollback(any(UUID.class))).thenReturn(Uni.createFrom().item(response));
         WorkflowResourceDTO result = given()
                 .header(authHeader)
@@ -149,6 +158,7 @@ class WorkflowResourceTest {
     void testUpdate() {
         UUID uuid = UUID.randomUUID();
         WorkflowResourceDTO response = new WorkflowResourceDTO();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.update(any(File.class), any(UUID.class))).thenReturn(Uni.createFrom().item(response));
         WorkflowResourceDTO result = given()
                 .header(authHeader)
@@ -167,6 +177,7 @@ class WorkflowResourceTest {
     @Test
     void testDisable() {
         UUID uuid = UUID.randomUUID();
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(workflowService.disable(uuid)).thenReturn(Uni.createFrom().voidItem());
         given()
                 .header(authHeader)
