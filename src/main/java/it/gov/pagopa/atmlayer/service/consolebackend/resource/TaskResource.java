@@ -3,12 +3,16 @@ package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.Scene;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.taskdto.State;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.ATMLayerErrorResponse;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TaskService;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -38,10 +42,12 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 public class TaskResource {
 
     @Inject
-    public TaskResource(TaskService taskService) {
+    public TaskResource(TaskService taskService, UserService userService) {
         this.taskService = taskService;
+        this.userService = userService;
     }
     private final TaskService taskService;
+    private final UserService userService;
 
     @Path("/main")
     @POST
@@ -54,10 +60,12 @@ public class TaskResource {
     @APIResponse(responseCode = "209", description = "Errore durante l'elaborazione del flusso della funzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "500", description = "Errore generico, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
-    public Uni<Response> createMainScene(
+    public Uni<Response> createMainScene(@Context ContainerRequestContext containerRequestContext,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return this.taskService.createMainScene(state);
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
+                .onItem()
+                .transformToUni(voidItem -> this.taskService.createMainScene(state));
     }
 
     @Path("/next/trns/{transactionId}")
@@ -71,11 +79,13 @@ public class TaskResource {
     @APIResponse(responseCode = "209", description = "Errore durante l'elaborazione del flusso della funzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "500", description = "Errore generico, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
-    public Uni<Response> createNextScene(
+    public Uni<Response> createNextScene(@Context ContainerRequestContext containerRequestContext,
             @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") String transactionId,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
-        return this.taskService.createNextScene(transactionId, state);
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
+                .onItem()
+                .transformToUni(voidItem -> this.taskService.createNextScene(transactionId, state));
     }
 
 

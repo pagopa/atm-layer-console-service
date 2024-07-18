@@ -1,0 +1,1811 @@
+{
+	"info": {
+		"_postman_id": "4afe4d16-24e3-4034-ac02-264344f9c27e",
+		"name": "Integration_test_console_service_3giu",
+		"description": "# ⛓️ Get started here\n\nPostman allows you to test your APIs using simple Javascript code. You can evaluate your response body, headers, cookies, and more using the [ChaiJS BDD](https://www.chaijs.com/api/bdd/) syntax.\n\nThis template guides you through the process of setting up an integration test to ensure that all individual components of an API function together seamlessly.\n\nThe API under test in this collection includes three endpoints for registering and receiving a token, accessing your unique generated name, and unregistering a token:\n\n- POST `/register`\n- POST `/unregister`\n- GET `/my-name`\n    \n\nBy setting up requests in the order of the operation, we can test the flow of data to and from the endpoints and ensure they work together as expected. We also verify that the data persists between requests on the back end.\n\n## 🔖 **How to use this template**\n\n**Step 1:** Check out the requests' documentation to learn more about -\n\n- what each request is meant to do.\n- the tests we've added against each one.\n    \n\n**Step 2:** Run this collection by clicking on \"Run\".\n\n<img src=\"https://content.pstmn.io/84019b0f-69c8-4c5f-98b9-2c90a6f9a0b1/Y29sbGVjdGlvbi1ydW5uZXItYnV0dG9uLmpwZWc=\" alt=\"\" height=\"103\" width=\"266\">\n\n**Step 3:** To customize this template, replace the request URLs with your API endpoints and add or edit the tests if needed.\n\n## ℹ️ Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31632207"
+	},
+	"item": [
+		{
+			"name": "BPMN",
+			"item": [
+				{
+					"name": "Lista BPMN filtrati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 1\", function () {\r",
+									"    pm.expect(1, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/filter?pageSize=10&pageIndex=0&functionType=TEST",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "functionType",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista BPMN filtrati non trovati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 0\", function () {\r",
+									"    var items = jsonData.itemsFound;\r",
+									"    pm.expect(0, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"functionType\", \"TEST\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/filter?pageSize=10&pageIndex=0&functionType=TEST",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "functionType",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_file_created\", responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_id\", jsonData.bpmnId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"window = {};\r",
+									"\r",
+									"pm.sendRequest(\"https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js\", (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"\r",
+									"    eval(response.text());\r",
+									"\r",
+									"    // This is where you can set the locale. See faker.js docs for all available locales.\r",
+									"    window.faker.locale=\"it\";\r",
+									"    var id = window.faker.lorem.word(10)+ \"_\" + new Date().getTime();\r",
+									"    pm.collectionVariables.set(\"bpmn_1\",\r",
+									"    pm.collectionVariables.get(\"bpmn_part1\")+id+pm.collectionVariables.get(\"bpmn1_part2\"));\r",
+									"    pm.collectionVariables.set(\"bpmn_1_definition_key\",id); \r",
+									"   \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_1}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "TestFile",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000012\", function(){\r",
+									"    pm.expect(\"ATMLM_4000012\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_1}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "TestFileFail",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{association_triplet_create}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000047\", function(){\r",
+									"    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{association_triplet_create}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version_2}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifica Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{association_triplet_update}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modifica Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000003\", function(){\r",
+									"    pm.expect(\"ATMLM_4000003\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{association_triplet_update}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista Associazioni BPMN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 1\", function () {\r",
+									"    pm.expect(1, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{association_triplet_update}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version?pageIndex=0&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Associazione BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version?acquirerId={{aquirerId_delete}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "acquirerId",
+									"value": "{{aquirerId_delete}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Elimina Associazione BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000048\", function(){\r",
+									"    pm.expect(\"ATMLM_4000048\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/associations/:uuid/version/:version?acquirerId={{not_found_acquirerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"associations",
+								":uuid",
+								"version",
+								":version"
+							],
+							"query": [
+								{
+									"key": "acquirerId",
+									"value": "{{not_found_acquirerId}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_file_deployed\", responseBody);\r",
+									"    pm.collectionVariables.set(\"bpmn_id_deployed\", jsonData.bpmnId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/deploy/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"deploy",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000047\", function(){\r",
+									"    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/deploy/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"deploy",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/disable/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"disable",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000004\", function(){\r",
+									"    pm.expect(\"ATMLM_4000004\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/disable/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"disable",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download file frontend OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/downloadFrontEnd/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"downloadFrontEnd",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{bpmn_id}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download file frontend KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"})\r",
+									"\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000002\", function(){\r",
+									"    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/downloadFrontEnd/:bpmn/version/:version",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"downloadFrontEnd",
+								":bpmn",
+								"version",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "bpmn",
+									"value": "{{not_found_uuid}}"
+								},
+								{
+									"key": "version",
+									"value": "{{bpmn_version}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade file BPMN OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "TestFile",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "{{bpmn_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/upgrade",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade file BPMN KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000002\", function(){\r",
+									"    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{bpmn_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "TestFileFail",
+									"type": "text"
+								},
+								{
+									"key": "functionType",
+									"value": "MENU",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "{{not_found_uuid}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/bpmn/upgrade",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"bpmn",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "INFO",
+			"item": [
+				{
+					"name": "Info utente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/info/email",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"info",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RESOURCE",
+			"item": [
+				{
+					"name": "Creazione RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"resource_file_created\", responseBody);\r",
+									"    pm.collectionVariables.set(\"resource_id\", jsonData.resourceId);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "Test.html",
+									"type": "text"
+								},
+								{
+									"key": "resourceType",
+									"value": "HTML",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creazione RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000019\", function(){\r",
+									"    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "TestFail.html",
+									"type": "text"
+								},
+								{
+									"key": "resourceType",
+									"value": "HTML",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista RESOURCE filtrati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 5\", function () {\r",
+									"    pm.expect(5, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/filter?pageSize=10&pageIndex=0&extension=html",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								},
+								{
+									"key": "extension",
+									"value": "html"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista RESOURCE filtrati non trovati",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Items found = 0\", function () {\r",
+									"    pm.expect(0, jsonData.itemsFound);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/filter?extension=other&pageSize=10&pageIndex=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "extension",
+									"value": "other"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "pageIndex",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/disable/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								"disable",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{resource_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disabilita RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000029\", function(){\r",
+									"    pm.expect(\"ATMLM_4000029\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/disable/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								"disable",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{not_found_resourceId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggiorna RESOURCE OK",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{resource_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggiorna RESOURCE KO",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"})\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.test(\"Error code ATMLM_4000019\", function(){\r",
+									"    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "{{resource_file_input}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/console-service/resources/:resourceId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"console-service",
+								"resources",
+								":resourceId"
+							],
+							"variable": [
+								{
+									"key": "resourceId",
+									"value": "{{not_found_resourceId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJraWQiOiJ5Uk92cjRsa2dmb3U1UURCZGM1RzI5cEtSVWxyRHVONW9oSTN2a0padXFVPSIsImFsZyI6IlJTMjU2In0.eyJhdF9oYXNoIjoiMmhBdXBnaHN3NXkyMUF3TGtxM0p0QSIsInN1YiI6Ijc2Y2U5MjYwLTMwOTEtNzAyMC00ZTMyLTU4ZmE4NDA5ZDUyYSIsImNvZ25pdG86Z3JvdXBzIjpbImV1LXNvdXRoLTFfV2ROc2hXVVNWX0dvb2dsZSJdLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS1zb3V0aC0xLmFtYXpvbmF3cy5jb21cL2V1LXNvdXRoLTFfV2ROc2hXVVNWIiwiY29nbml0bzp1c2VybmFtZSI6Ijc2Y2U5MjYwLTMwOTEtNzAyMC00ZTMyLTU4ZmE4NDA5ZDUyYSIsIm5vbmNlIjoiNzZIVXM1d2JhX2VBZ0VIbUxrRXIyVGpQbDNuMWxvVzg3cDRfbXlfVnZhZl9oT1dyeHZkOW9vQ19oNFlvOFdlUUxsbkh0dVRBNWMzMWQybmVqbEtvanJrQ20zQkFNRlo3aE1RcGJITjZ5VDFaVXhuaE1TU1dndks5TlNrUEwxUjNGcEJFUzh1UFRNR2ZSMHljY09xU0dGSE4zazRtbjJ3eU05NWEzM0NOUjFzIiwiYXVkIjoiMzMxbHNkaXVzNDlwZDk1N245Nmdqc2wyb2siLCJpZGVudGl0aWVzIjpbeyJkYXRlQ3JlYXRlZCI6IjE3MDYxNzkxODQ4NzQiLCJ1c2VySWQiOiIxMDc4ODgxMDAyMzY3MzcwMzQ4OTUiLCJwcm92aWRlck5hbWUiOiJHb29nbGUiLCJwcm92aWRlclR5cGUiOiJHb29nbGUiLCJpc3N1ZXIiOm51bGwsInByaW1hcnkiOiJ0cnVlIn1dLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTcwNjUyMTA2MCwiZXhwIjoxNzA2NjA3NDYwLCJpYXQiOjE3MDY1MjEwNjAsImp0aSI6IjU1YjVjNDEwLTMyZGEtNDA0ZC1hYzk1LTI4OTA3NjQ3ZTg2YyIsImVtYWlsIjoiYW50b25pby50YXJyaWNvbmVAcGFnb3BhLml0In0.OX02xa6siwktsbKbd9PH_C2xFYjpnMckipx6xLcCzx2iAxhV7ghMeDNqe1sk1mcXDxRatUexTS4nvynSlTy6wWLe81GSZTtkAvlUWQ_-mJT90BDxJp8rNC7IPqUS_4Q7QkMOuNHzh_0nYklIa_w8-sV93I3dJ61sAQUw1ye0kxu3lZ7NKUiBU07W2RH2YcdgWP4yr50s9CQMySYymPs_CP1w8eDm0vNndswP9uN4x3YRe-idQ9Q7qUPL4iZzqftahvODzU7mhTnm_IbMr9mZfEuyLNP070PeyGI7giIWdJStTZ0-8tblVAZ_DuoDkkVOHMPAL55yJTx3HRJ5beK4Uw&token_type=Bearer&expires_in=86400",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://postman-integration-testing.glitch.me/"
+		},
+		{
+			"key": "functionType",
+			"value": ""
+		},
+		{
+			"key": "bpmn_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_file_created",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_id",
+			"value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+			"type": "string"
+		},
+		{
+			"key": "association_triplet_create",
+			"value": "{\n    \"acquirerId\":\"1234\",\n    \"branchId\":\"1\",\n    \"terminalId\":\"1\"\n}",
+			"type": "string"
+		},
+		{
+			"key": "association_triplet_update",
+			"value": "{\n    \"acquirerId\":\"1234\",\n    \"branchId\":\"1\",\n    \"terminalId\":\"1\"\n}",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_version",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "aquirerId_delete",
+			"value": "123456",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_file_deployed",
+			"value": ""
+		},
+		{
+			"key": "bpmn_id_deployed",
+			"value": ""
+		},
+		{
+			"key": "not_found_uuid",
+			"value": "0181c1f2-6c58-4e60-8849-eab7b4e1b64d"
+		},
+		{
+			"key": "not_found_acquirerId",
+			"value": "124567"
+		},
+		{
+			"key": "resource_file_input",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "resource_file_created",
+			"value": ""
+		},
+		{
+			"key": "resource_id",
+			"value": ""
+		},
+		{
+			"key": "not_found_resourceId",
+			"value": "a04342fa-263a-43ab-919a-c06913febefe",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_part1",
+			"value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"",
+			"type": "string"
+		},
+		{
+			"key": "bpmn1_part2",
+			"value": "\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_1_definition_key",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_file_input",
+			"value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0qwd83r\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.15.2\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.19.0\">\n  <bpmn:process id=\"payment-retrieval-7\" name=\"Payment Retrieval\" isExecutable=\"true\" camunda:historyTimeToLive=\"10000\">\n    <bpmn:startEvent id=\"StartEvent_1\" name=\"Payment Retrieval&#10; Requested\">\n      <bpmn:outgoing>Flow_1az03l1</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:sequenceFlow id=\"Flow_1az03l1\" sourceRef=\"StartEvent_1\" targetRef=\"Gateway_0ys41l4\" />\n    <bpmn:serviceTask id=\"Activity_1wl9imm\" name=\"Charge Credit Card\" camunda:type=\"external\" camunda:topic=\"charge-card\">\n      <bpmn:incoming>Flow_1rum7yz</bpmn:incoming>\n      <bpmn:incoming>Flow_0ifuysk</bpmn:incoming>\n      <bpmn:outgoing>Flow_1fp105v</bpmn:outgoing>\n    </bpmn:serviceTask>\n    <bpmn:endEvent id=\"Event_0j2x93m\" name=\"Payment Received\">\n      <bpmn:incoming>Flow_1fp105v</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_1fp105v\" sourceRef=\"Activity_1wl9imm\" targetRef=\"Event_0j2x93m\" />\n    <bpmn:exclusiveGateway id=\"Gateway_0ys41l4\" name=\"Payment Amount?\">\n      <bpmn:incoming>Flow_1az03l1</bpmn:incoming>\n      <bpmn:outgoing>Flow_0bpz73r</bpmn:outgoing>\n      <bpmn:outgoing>Flow_0ifuysk</bpmn:outgoing>\n    </bpmn:exclusiveGateway>\n    <bpmn:sequenceFlow id=\"Flow_0bpz73r\" name=\"&#62;= 64456848648573€\" sourceRef=\"Gateway_0ys41l4\" targetRef=\"Activity_0rafdvq\">\n      <bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">${amount&gt;=10000}</bpmn:conditionExpression>\n    </bpmn:sequenceFlow>\n    <bpmn:exclusiveGateway id=\"Gateway_1kcceq7\" name=\"Approved?\">\n      <bpmn:incoming>Flow_1mcsyfn</bpmn:incoming>\n      <bpmn:outgoing>Flow_1rum7yz</bpmn:outgoing>\n      <bpmn:outgoing>Flow_02zueit</bpmn:outgoing>\n    </bpmn:exclusiveGateway>\n    <bpmn:sequenceFlow id=\"Flow_1rum7yz\" name=\"Yes\" sourceRef=\"Gateway_1kcceq7\" targetRef=\"Activity_1wl9imm\">\n      <bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">${approved}</bpmn:conditionExpression>\n    </bpmn:sequenceFlow>\n    <bpmn:endEvent id=\"Event_0tmbfs6\" name=\"Payment Retrieval Rejected\">\n      <bpmn:incoming>Flow_02zueit</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_02zueit\" name=\"No\" sourceRef=\"Gateway_1kcceq7\" targetRef=\"Event_0tmbfs6\">\n      <bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">${!approved}</bpmn:conditionExpression>\n    </bpmn:sequenceFlow>\n    <bpmn:sequenceFlow id=\"Flow_1mcsyfn\" sourceRef=\"Activity_0rafdvq\" targetRef=\"Gateway_1kcceq7\" />\n    <bpmn:sequenceFlow id=\"Flow_0ifuysk\" name=\"&#60;1000 €\" sourceRef=\"Gateway_0ys41l4\" targetRef=\"Activity_1wl9imm\">\n      <bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">${amount&lt;1000}</bpmn:conditionExpression>\n    </bpmn:sequenceFlow>\n    <bpmn:businessRuleTask id=\"Activity_0rafdvq\" name=\"Approve Payment\" camunda:resultVariable=\"approved\" camunda:decisionRef=\"approve-payment\" camunda:mapDecisionResult=\"singleEntry\">\n      <bpmn:extensionElements />\n      <bpmn:incoming>Flow_0bpz73r</bpmn:incoming>\n      <bpmn:outgoing>Flow_1mcsyfn</bpmn:outgoing>\n    </bpmn:businessRuleTask>\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"payment-retrieval\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"169\" y=\"142\" width=\"57\" height=\"40\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_10638xv_di\" bpmnElement=\"Activity_1wl9imm\">\n        <dc:Bounds x=\"600\" y=\"77\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0j2x93m_di\" bpmnElement=\"Event_0j2x93m\">\n        <dc:Bounds x=\"772\" y=\"99\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"767\" y=\"142\" width=\"46\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_0ys41l4_di\" bpmnElement=\"Gateway_0ys41l4\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"255\" y=\"92\" width=\"50\" height=\"50\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"235\" y=\"62\" width=\"90\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Gateway_1kcceq7_di\" bpmnElement=\"Gateway_1kcceq7\" isMarkerVisible=\"true\">\n        <dc:Bounds x=\"625\" y=\"205\" width=\"50\" height=\"50\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"624\" y=\"262\" width=\"53\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0tmbfs6_di\" bpmnElement=\"Event_0tmbfs6\">\n        <dc:Bounds x=\"782\" y=\"212\" width=\"36\" height=\"36\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"755\" y=\"255\" width=\"90\" height=\"27\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_07l4ltr_di\" bpmnElement=\"Activity_0rafdvq\">\n        <dc:Bounds x=\"420\" y=\"190\" width=\"100\" height=\"80\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_1az03l1_di\" bpmnElement=\"Flow_1az03l1\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"255\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1fp105v_di\" bpmnElement=\"Flow_1fp105v\">\n        <di:waypoint x=\"700\" y=\"117\" />\n        <di:waypoint x=\"772\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0bpz73r_di\" bpmnElement=\"Flow_0bpz73r\">\n        <di:waypoint x=\"280\" y=\"142\" />\n        <di:waypoint x=\"280\" y=\"230\" />\n        <di:waypoint x=\"420\" y=\"230\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"294\" y=\"183\" width=\"51\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1rum7yz_di\" bpmnElement=\"Flow_1rum7yz\">\n        <di:waypoint x=\"650\" y=\"205\" />\n        <di:waypoint x=\"650\" y=\"157\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"656\" y=\"178\" width=\"18\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_02zueit_di\" bpmnElement=\"Flow_02zueit\">\n        <di:waypoint x=\"675\" y=\"230\" />\n        <di:waypoint x=\"782\" y=\"230\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"721\" y=\"212\" width=\"15\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_1mcsyfn_di\" bpmnElement=\"Flow_1mcsyfn\">\n        <di:waypoint x=\"520\" y=\"230\" />\n        <di:waypoint x=\"625\" y=\"230\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0ifuysk_di\" bpmnElement=\"Flow_0ifuysk\">\n        <di:waypoint x=\"305\" y=\"117\" />\n        <di:waypoint x=\"600\" y=\"117\" />\n        <bpmndi:BPMNLabel>\n          <dc:Bounds x=\"432\" y=\"99\" width=\"42\" height=\"14\" />\n        </bpmndi:BPMNLabel>\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>",
+			"type": "string"
+		},
+		{
+			"key": "bpmn_version_2",
+			"value": "2",
+			"type": "string"
+		}
+	]
+}

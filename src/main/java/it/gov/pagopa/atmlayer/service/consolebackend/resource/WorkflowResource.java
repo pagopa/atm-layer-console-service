@@ -8,13 +8,17 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceD
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -47,17 +51,21 @@ import java.util.UUID;
 public class WorkflowResource {
 
     @Inject
-    public WorkflowResource(WorkflowService workflowService) {
+    public WorkflowResource(WorkflowService workflowService, UserService userService) {
         this.workflowService = workflowService;
+        this.userService = userService;
     }
     private final WorkflowService workflowService;
+
+    private final UserService userService;
 
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Restituisce i Workflow filtrati paginati")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
-    public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@QueryParam("pageIndex") @DefaultValue("0")
+    public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@Context ContainerRequestContext containerRequestContext,
+                                                                          @QueryParam("pageIndex") @DefaultValue("0")
                                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) Integer pageIndex,
                                                                           @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) Integer pageSize,
                                                                           @QueryParam("status") @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
@@ -72,56 +80,76 @@ public class WorkflowResource {
                                                                           @QueryParam("resource") String resource,
                                                                           @QueryParam("deploymentId") UUID deploymentId,
                                                                           @QueryParam("fileName") String fileName) {
-         return this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
                  .onItem()
                  .transform(Unchecked.function(pagedList -> {
                      if (pagedList.getResults().isEmpty()) {
                          log.info("No Workflow resources meets the applied filters");
                      }
                      return pagedList;
-                 }));
+                 })));
     }
 
     @GET
     @Path("/downloadFrontEnd/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<FileS3Dto> downloadFrontEnd(@PathParam("uuid") UUID uuid){
-        return this.workflowService.downloadFrontEnd(uuid);
+    public Uni<FileS3Dto> downloadFrontEnd(@Context ContainerRequestContext containerRequestContext,
+                                           @PathParam("uuid") UUID uuid){
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.downloadFrontEnd(uuid));
     }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> create(@RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
-        return this.workflowService.create(workflowResourceCreationDto);
+    public Uni<WorkflowResourceDTO> create(@Context ContainerRequestContext containerRequestContext,
+                                           @RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.create(workflowResourceCreationDto));
     }
 
     @POST
     @Path("/deploy/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid) {
-        return this.workflowService.deploy(uuid);
+    public Uni<WorkflowResourceDTO> deploy(@Context ContainerRequestContext containerRequestContext,
+                                           @PathParam("uuid") UUID uuid) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.deploy(uuid));
     }
 
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid) {
-        return this.workflowService.rollback(uuid);
+    public Uni<WorkflowResourceDTO> rollback(@Context ContainerRequestContext containerRequestContext,
+                                             @PathParam("uuid") UUID uuid) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.rollback(uuid));
     }
 
     @PUT
     @Path("/update/{uuid}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> update(@RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
+    public Uni<WorkflowResourceDTO> update(@Context ContainerRequestContext containerRequestContext,
+                                           @RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
                                     @PathParam("uuid") UUID uuid){
-            return this.workflowService.update(file, uuid);
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.update(file, uuid));
     }
 
     @POST
     @Path("/disable/{uuid}")
-    public Uni<Void> disable(@PathParam("uuid") UUID uuid){
-            return this.workflowService.disable(uuid);
+    public Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
+                             @PathParam("uuid") UUID uuid){
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.workflowService.disable(uuid));
     }
 }
