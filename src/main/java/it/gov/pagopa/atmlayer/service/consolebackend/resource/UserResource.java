@@ -137,4 +137,12 @@ public class UserResource {
     public Uni<UserDTO> updateWithProfiles(@RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
         return this.userService.updateWithProfiles(userInsertionWithProfilesDTO);
     }
+
+    @POST
+    @Path("/insert-with-profiles")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<UserDTO> insertWithProfiles(@RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
+        return this.userService.insertWithProfiles(userInsertionWithProfilesDTO);
+    }
 }

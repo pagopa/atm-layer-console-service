@@ -78,4 +78,9 @@ public class UserServiceImpl implements UserService {
         return userWebClient.updateWithProfiles(userInsertionWithProfilesDTO);
     }
 
+    @Override
+    public Uni<UserDTO> insertWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
+        return userWebClient.insertWithProfiles(userInsertionWithProfilesDTO);
+    }
+
 }
