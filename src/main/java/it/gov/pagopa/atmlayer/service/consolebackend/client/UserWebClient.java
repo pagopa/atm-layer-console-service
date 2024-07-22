@@ -23,6 +23,7 @@ import java.util.UUID;
 public interface UserWebClient {
 
     @GET
+    @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
     Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
@@ -30,8 +31,7 @@ public interface UserWebClient {
                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
                                                           @QueryParam("name") String name,
                                                           @QueryParam("surname") String surname,
-                                                          @QueryParam("userId") String userId,
-                                                          @QueryParam("profileId") int profileId);
+                                                          @QueryParam("userId") String userId);
 
     @POST
     @Path("/insert")

@@ -21,7 +21,7 @@ public interface UserService {
 
     Uni<List<UserDTO>> getAllUsers();
 
-    Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId, int profileId);
+    Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId);
 
     Uni<Void> checkAuthorizationUser(ContainerRequestContext containerRequestContext, UserProfileEnum userProfileEnum);
     Uni<UserDTO> checkFirstAccess(String userId);
