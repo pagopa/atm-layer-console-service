@@ -2,11 +2,14 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.UserWebClient;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionWithProfilesDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
+import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -49,6 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId, int profileId) {
+        return userWebClient.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId);
+    }
+
+    @Override
     public Uni<Void> checkAuthorizationUser(ContainerRequestContext containerRequestContext, UserProfileEnum userProfileEnum) {
         return getUserById(getEmailJWT(containerRequestContext))
                 .onItem()
@@ -63,6 +71,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Uni<UserDTO> checkFirstAccess(String userId){
         return userWebClient.firstAccess(userId);
+    }
+
+    @Override
+    public Uni<UserDTO> updateWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
+        return userWebClient.updateWithProfiles(userInsertionWithProfilesDTO);
     }
 
 }
