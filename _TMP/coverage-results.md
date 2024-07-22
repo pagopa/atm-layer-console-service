@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 91.24%               |
+| Code Coverage %         | 90.14%               |
 | :heavy_check_mark: Number of Lines Covered | 375    |
-| :x: Number of Lines Missed  | 36     |
-| Total Number of Lines   | 411     |
+| :x: Number of Lines Missed  | 41     |
+| Total Number of Lines   | 416     |
 
 
 ## Details:
@@ -73,6 +73,18 @@
 
     
 ### it/gov/pagopa/atmlayer/service/consolebackend/resource
+
+<details>
+    <summary>
+:x: ProfileResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
 
 <details>
     <summary>
@@ -347,6 +359,16 @@
 <details>
     <summary>
 :x: UserService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileService.java
     </summary>
 
         
@@ -806,6 +828,18 @@
 
 <details>
     <summary>
+:x: ProfileServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :heavy_check_mark: UserProfileServiceImpl.java
     </summary>
 
@@ -892,6 +926,16 @@
 <details>
     <summary>
 :x: UserWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileWebClient.java
     </summary>
 
         
