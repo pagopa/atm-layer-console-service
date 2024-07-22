@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 91.25%               |
-| :heavy_check_mark: Number of Lines Covered | 365    |
-| :x: Number of Lines Missed  | 35     |
-| Total Number of Lines   | 400     |
+| Code Coverage %         | 91.69%               |
+| :heavy_check_mark: Number of Lines Covered | 375    |
+| :x: Number of Lines Missed  | 34     |
+| Total Number of Lines   | 409     |
 
 
 ## Details:
@@ -209,7 +209,7 @@
 
 <details>
     <summary>
-:heavy_check_mark: AppErrorCodeEnum.java
+:heavy_check_mark: S3ResourceTypeEnum.java
     </summary>
 
         
@@ -221,7 +221,7 @@
 
 <details>
     <summary>
-:heavy_check_mark: S3ResourceTypeEnum.java
+:heavy_check_mark: AppErrorCodeEnum.java
     </summary>
 
         
@@ -466,16 +466,6 @@
 
 <details>
     <summary>
-:x: ResourceCreationDto.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: ProfileDTO.java
     </summary>
 
@@ -486,7 +476,27 @@
 
 <details>
     <summary>
+:x: ResourceCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: UserProfilesInsertionDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserInsertionWithProfilesDTO.java
     </summary>
 
         
@@ -796,11 +806,11 @@
 
 <details>
     <summary>
-:x: UserProfileServiceImpl.java
+:heavy_check_mark: UserProfileServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
@@ -838,7 +848,7 @@
         
 #### Lines Missed:
         
-- Line #55
+- Line #63
 ```
                 .transform(userProfile -> {
 ```
@@ -848,11 +858,11 @@
 
 <details>
     <summary>
-:x: TaskServiceImpl.java
+:heavy_check_mark: TaskServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
