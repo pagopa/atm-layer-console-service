@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId) {
+    public Uni<PageInfo<UserDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId) {
         return userWebClient.getUserFiltered(pageIndex, pageSize, name, surname, userId);
     }
 

@@ -82,11 +82,11 @@ class UserServiceImplTest {
 
     @Test
     void testGetUserFiltered() {
-        List<BpmnVersionFrontEndDTO> bpmnVersionFrontEndDTOList = List.of(new BpmnVersionFrontEndDTO());
-        PageInfo<BpmnVersionFrontEndDTO> pageInfo = new PageInfo<>(0, 10, 1, 1, bpmnVersionFrontEndDTOList);
+        List<UserDTO> userDTOList = List.of(new UserDTO());
+        PageInfo<UserDTO> pageInfo = new PageInfo<>(0, 10, 1, 1, userDTOList);
         when(userWebClient.getUserFiltered(anyInt(), anyInt(), anyString(), anyString(), anyString())).thenReturn(Uni.createFrom().item(pageInfo));
 
-        Uni<PageInfo<BpmnVersionFrontEndDTO>> result = userServiceImpl.getUserFiltered(0, 10, "John", "Doe", "test-user-id");
+        Uni<PageInfo<UserDTO>> result = userServiceImpl.getUserFiltered(0, 10, "John", "Doe", "test-user-id");
 
         assertEquals(pageInfo, result.await().indefinitely());
         verify(userWebClient).getUserFiltered(0, 10, "John", "Doe", "test-user-id");

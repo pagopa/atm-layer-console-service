@@ -104,7 +104,7 @@ public class UserResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati Utenti cercati.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getUserFiltered(@QueryParam("pageIndex") @DefaultValue("0")
+    public Uni<PageInfo<UserDTO>> getUserFiltered(@QueryParam("pageIndex") @DefaultValue("0")
                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                                  @QueryParam("pageSize") @DefaultValue("10")
                                                                  @Parameter(required = true, schema = @Schema(minimum="1", maximum="100") ) int pageSize,
