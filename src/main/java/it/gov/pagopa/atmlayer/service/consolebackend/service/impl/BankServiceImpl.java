@@ -35,8 +35,8 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public Uni<PageInfo<BankDTO>> search(int pageIndex, int pageSize, String acquirerId, String denomination, int rateMin, int rateMax, String clientId) {
-        return bankWebClient.search(pageIndex, pageSize, acquirerId, denomination, rateMin, rateMax, clientId);
+    public Uni<PageInfo<BankDTO>> search(int pageIndex, int pageSize, String acquirerId, String denomination, String clientId) {
+        return bankWebClient.search(pageIndex, pageSize, acquirerId, denomination, clientId);
     }
 
 }

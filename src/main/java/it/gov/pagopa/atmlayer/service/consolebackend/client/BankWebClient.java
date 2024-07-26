@@ -39,8 +39,6 @@ public interface BankWebClient {
                                   @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
                                   @QueryParam("acquirerId") String acquirerId,
                                   @QueryParam("denomination") String denomination,
-                                  @QueryParam("rateMin") int rateMin,
-                                  @QueryParam("rateMax") int rateMax,
                                   @QueryParam("clientId") String clientId);
 
 }

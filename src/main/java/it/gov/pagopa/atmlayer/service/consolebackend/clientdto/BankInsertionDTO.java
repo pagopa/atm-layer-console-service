@@ -14,8 +14,9 @@ public class BankInsertionDTO {
     private String acquirerId;
     @NotBlank
     private String denomination;
-    @NotNull
-    @Range(min = 1)
-    private int rateLimit;
+    @NotBlank
+    private String apiKeyId;
+
+    private String usagePlanId;
 
 }

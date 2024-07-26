@@ -71,10 +71,8 @@ public class BankResource {
                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
                                          @QueryParam("acquirerId") String acquirerId,
                                          @QueryParam("denomination") String denomination,
-                                         @QueryParam("rateMin") int rateMin,
-                                         @QueryParam("rateMax") int rateMax,
                                          @QueryParam("clientId") String clientId) {
-        return this.bankService.search(pageIndex, pageSize, acquirerId, denomination, rateMin, rateMax, clientId)
+        return this.bankService.search(pageIndex, pageSize, acquirerId, denomination, clientId)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
                     if (pagedList.getResults().isEmpty()) {

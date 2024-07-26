@@ -13,6 +13,6 @@ public interface BankService {
 
     Uni<Void> disable(String acquirerId);
 
-    Uni<PageInfo<BankDTO>> search(int pageIndex, int pageSize, String acquirerId, String denomination, int rateMin, int rateMax, String clientId);
+    Uni<PageInfo<BankDTO>> search(int pageIndex, int pageSize, String acquirerId, String denomination, String clientId);
 
 }

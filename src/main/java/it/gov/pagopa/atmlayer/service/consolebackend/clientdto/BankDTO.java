@@ -15,8 +15,8 @@ public class BankDTO {
     private String acquirerId;
     private String denomination;
     private String clientId;
-    private String clientSecret;
-    private int rateLimit;
+    private String apiKeyId;
+    private String usagePlanId;
     private Timestamp createdAt;
     private Timestamp lastUpdatedAt;
 }
