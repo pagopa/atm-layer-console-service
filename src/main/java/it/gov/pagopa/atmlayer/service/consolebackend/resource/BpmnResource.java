@@ -5,13 +5,17 @@ import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
+import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -42,23 +46,26 @@ import java.util.UUID;
 @SecurityRequirement(name = "bearerAuth")
 public class BpmnResource {
     @Inject
-    public BpmnResource(BpmnService bpmnService) {
+    public BpmnResource(BpmnService bpmnService, UserService userService) {
         this.bpmnService = bpmnService;
+        this.userService = userService;
+
     }
 
     private final BpmnService bpmnService;
 
+    private final UserService userService;
+
     @GET
     @Path("/filter")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(operationId = "getBpmnFiltered",
-               description = "Esegue la GET dei Bpmn sul Model filtrando sui campi desiderati gestendo la paginazione"
-    )
-    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati processi cercati.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    @Operation(summary = "Restituisce i Bpmn filtrati paginati", description = "Esegue la GET dei Bpmn sul Model filtrando sui campi desiderati gestendo la paginazione")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@QueryParam("pageIndex") @DefaultValue("0")
-                                                                 @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
+    public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@Context ContainerRequestContext containerRequestContext,
+                                                                 @QueryParam("pageIndex") @DefaultValue("0")
+                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
                                                                  @QueryParam("pageSize") @DefaultValue("10")
                                                                  @Parameter(required = true, schema = @Schema(minimum="1", maximum="100") ) int pageSize,
                                                                  @QueryParam("functionType") @Schema(format = "byte", maxLength = 255) String functionType,
@@ -76,28 +83,29 @@ public class BpmnResource {
                                                                  @QueryParam("branchId") @Schema(format = "byte", maxLength = 255) String branchId,
                                                                  @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId,
                                                                  @QueryParam("fileName") @Schema(format = "byte", maxLength = 255) String fileName) {
-        return this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
-                .transform(Unchecked.function(pagedList -> {
-                    if (pagedList.getResults().isEmpty()) {
-                        log.info("No Bpmn file meets the applied filters");
-                    }
-                    return pagedList;
-                }));
+                .transformToUni(voidItem -> this.bpmnService.getBpmnFiltered(pageIndex, pageSize, functionType, modelVersion, definitionVersionCamunda, bpmnId, deploymentId, camundaDefinitionId, definitionKey, deployedFileName, resource, sha256, status, acquirerId, branchId, terminalId, fileName)
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No Bpmn file meets the applied filters");
+                            }
+                            return pagedList;
+                        })));
     }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Blocking
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            operationId = "createBPMN",
-            description = "Crea un nuovo BPMN"
-    )
-    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
+    @Operation(summary = "Carica un file BPMN")
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato caricato.")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<BpmnDTO> createBpmn(@RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
+    public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
+                                   @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
+        userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
         return this.bpmnService.createBpmn(bpmnCreationDto);
     }
 
@@ -111,17 +119,20 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati terminali associati al BPMN cercato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@PathParam("uuid") UUID uuid, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
-                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
-                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize) {
-        return this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
+    public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@Context ContainerRequestContext containerRequestContext,
+                                                                  @PathParam("uuid") UUID uuid, @PathParam("version") Long version,
+                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
+                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
                     if (pagedList.getResults().isEmpty()) {
                         log.info("No BPMN meets the applied filters");
                     }
                     return pagedList;
-                }));
+                })));
     }
 
     @POST
@@ -135,10 +146,13 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Aggiunta singola associazione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnBankConfigDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<BpmnBankConfigDTO> addSingleAssociation(@PathParam("uuid") UUID bpmnId,
-                                                       @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
+    public Uni<BpmnBankConfigDTO> addSingleAssociation(@Context ContainerRequestContext containerRequestContext,
+                                                       @PathParam("uuid") UUID bpmnId,
+                                                       @PathParam("version") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-        return this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto);
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto));
     }
 
     @DELETE
@@ -150,12 +164,15 @@ public class BpmnResource {
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Eliminata singola associazione")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<Void> deleteSingleAssociation(@PathParam("uuid") UUID bpmnId,
-                                             @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
-                                             @QueryParam("acquirerId") @NotEmpty @Schema(format = "byte", maxLength = 255) String acquirerId,
-                                             @QueryParam("branchId") @Schema(format = "byte", maxLength = 255) String branchId,
-                                             @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId) {
-        return this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId);
+    public Uni<Void> deleteSingleAssociation(@Context ContainerRequestContext containerRequestContext,
+                                             @PathParam("uuid") UUID bpmnId,
+                                             @PathParam("version") Long version,
+                                             @QueryParam("acquirerId") @NotEmpty String acquirerId,
+                                             @QueryParam("branchId") String branchId,
+                                             @QueryParam("terminalId") String terminalId) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId));
     }
 
     @PUT
@@ -169,9 +186,12 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Sostituita singola associazione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnBankConfigDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@PathParam("uuid") UUID bpmnId, @PathParam("version") @Schema(minimum="1", maximum="10000") Long version,
+    public Uni<BpmnBankConfigDTO> replaceSingleAssociation(@Context ContainerRequestContext containerRequestContext,
+                                                           @PathParam("uuid") UUID bpmnId, @PathParam("version") Long version,
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
-        return this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto);
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto));
     }
 
     @POST
@@ -184,9 +204,12 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è stato deployato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<BpmnDTO> deployBPMN(@PathParam("uuid") UUID uuid,
-                                   @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
-        return this.bpmnService.deployBPMN(uuid, version);
+    public Uni<BpmnDTO> deployBPMN(@Context ContainerRequestContext containerRequestContext,
+                                   @PathParam("uuid") UUID uuid,
+                                   @PathParam("version") Long version) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.deployBPMN(uuid, version));
     }
 
     @GET
@@ -199,9 +222,12 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il file è stato scaricato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileS3Dto.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<FileS3Dto> downloadBpmnFrontEnd(@PathParam("uuid") UUID bpmnId,
-                                               @PathParam("version") @Schema(minimum="1", maximum="10000") Long modelVersion){
-         return this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion);
+    public Uni<FileS3Dto> downloadBpmnFrontEnd(@Context ContainerRequestContext containerRequestContext,
+                                               @PathParam("uuid") UUID bpmnId,
+                                               @PathParam("version") Long modelVersion){
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.downloadBpmnFrontEnd(bpmnId, modelVersion));
     }
 
     @POST
@@ -213,9 +239,12 @@ public class BpmnResource {
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Il processo è stato disabilitato.")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<Void> disableBPMN(@PathParam("uuid") UUID bpmnId,
-                                 @PathParam("version") @Schema(minimum="1", maximum="10000") Long version) {
-        return this.bpmnService.disableBPMN(bpmnId, version);
+    public Uni<Void> disableBPMN(@Context ContainerRequestContext containerRequestContext,
+                                 @PathParam("uuid") UUID bpmnId,
+                                 @PathParam("version") Long version) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
+                .onItem()
+                .transformToUni(voidItem -> this.bpmnService.disableBPMN(bpmnId, version));
     }
 
     @POST
@@ -230,7 +259,9 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è stato aggiornato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BpmnDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
-    public Uni<BpmnDTO> upgradeBPMN(@Valid BpmnUpgradeDto bpmnUpgradeDto) {
+    public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
+                                    @Valid BpmnUpgradeDto bpmnUpgradeDto) {
+        userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
         return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
     }
 }

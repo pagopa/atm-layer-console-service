@@ -2,17 +2,22 @@ package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ProfileDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionWithProfilesDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -20,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class UserResourceTest {
+class UserResourceTest {
 
     @InjectMock
     UserService userService;
@@ -38,13 +43,18 @@ public class UserResourceTest {
         request.setUserId("a@b.it");
         request.setName("a");
         request.setSurname("b");
-        UserDTO response= new UserDTO();
+
+        UserDTO response = new UserDTO();
         response.setUserId("a@b.it");
         response.setName("a");
         response.setSurname("b");
+        response.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
+
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(userService.createUser(request))
-                .thenReturn(Uni.createFrom().item(response));
+        when(userService.createUser(request)).thenReturn(Uni.createFrom().item(response));
+
         UserDTO result = given()
                 .header(authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -61,26 +71,26 @@ public class UserResourceTest {
     @Test
     void testDeleteUser() {
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(userService.deleteUser( "a@b.it")).thenReturn(Uni.createFrom().voidItem());
+        when(userService.deleteUser("a@b.it")).thenReturn(Uni.createFrom().voidItem());
+
         given()
                 .header(authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .pathParam("userId", "a@b.it")
                 .when().delete("/api/v1/console-service/user/delete/userId/{userId}")
                 .then()
-                .statusCode(204)
-                .extract()
-                .body();
+                .statusCode(204);
     }
 
     @Test
     void testGetById() {
-
-        UserDTO response= new UserDTO();
+        UserDTO response = new UserDTO();
         response.setUserId("a@b.it");
         response.setName("a");
         response.setSurname("b");
-
+        response.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
 
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(userService.getUserById("a@b.it")).thenReturn(Uni.createFrom().item(response));
@@ -98,6 +108,99 @@ public class UserResourceTest {
     }
 
     @Test
+    void testGetAllUsers() {
+        UserDTO user = new UserDTO();
+        user.setUserId("a@b.it");
+        user.setName("a");
+        user.setSurname("b");
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        user.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        user.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
+
+        List<UserDTO> response = List.of(user);
+
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
+        when(userService.getAllUsers()).thenReturn(Uni.createFrom().item(response));
+
+        List<UserDTO> result = given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .when().get("/api/v1/console-service/user")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body().jsonPath().getList(".", UserDTO.class);
+        Assertions.assertEquals(response, result);
+    }
+
+    @Test
+    void testGetUserFiltered() {
+        // Set up the UserDTO object
+        UserDTO user = new UserDTO();
+        user.setUserId("a@b.it");
+        user.setName("a");
+        user.setSurname("b");
+        user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        user.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        user.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
+
+        // Set up the expected response
+        PageInfo<UserDTO> expectedResponse = new PageInfo<>(0, 10, 1, 1, List.of(user));
+
+        // Mock the service call
+        when(userService.getUserFiltered(
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyInt(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.anyString())
+        ).thenReturn(Uni.createFrom().item(expectedResponse));
+
+        // Perform the request and get the response
+        PageInfo<UserDTO> result = given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .queryParam("pageIndex", 0)
+                .queryParam("pageSize", 10)
+                .queryParam("name", "a")
+                .queryParam("surname", "b")
+                .queryParam("userId", "a@b.it")
+                .when().get("/api/v1/console-service/user/filtered")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(new TypeRef<PageInfo<UserDTO>>() {});
+
+        // Assert the expected and actual values
+        Assertions.assertEquals(expectedResponse, result);
+    }
+
+    @Test
+    void testFirstAccess() {
+        UserDTO response = new UserDTO();
+        response.setUserId("a@b.it");
+        response.setName("a");
+        response.setSurname("b");
+        response.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
+
+        when(userService.checkFirstAccess(any())).thenReturn(Uni.createFrom().item(response));
+
+        UserDTO result = given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .when().post("/api/v1/console-service/user/first-access")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(UserDTO.class);
+        Assertions.assertEquals(response, result);
+    }
+
+    @Test
     void testUpdateWithProfiles() {
         UserInsertionWithProfilesDTO request = UserInsertionWithProfilesDTO.builder()
                 .userId("a@b.it")
@@ -109,6 +212,9 @@ public class UserResourceTest {
         response.setUserId("a@b.it");
         response.setName("a");
         response.setSurname("b");
+        response.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
 
         when(userService.updateWithProfiles(any())).thenReturn(Uni.createFrom().item(response));
 
@@ -117,6 +223,37 @@ public class UserResourceTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .when().put("/api/v1/console-service/user/update-with-profiles")
+                .then()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(UserDTO.class);
+        Assertions.assertEquals(response, result);
+    }
+
+    @Test
+    void testInsertWithProfiles() {
+        UserInsertionWithProfilesDTO request = UserInsertionWithProfilesDTO.builder()
+                .userId("a@b.it")
+                .name("a")
+                .surname("b")
+                .profileIds(List.of(1, 2, 3))
+                .build();
+        UserDTO response = new UserDTO();
+        response.setUserId("a@b.it");
+        response.setName("a");
+        response.setSurname("b");
+        response.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        response.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
+
+        when(userService.insertWithProfiles(any())).thenReturn(Uni.createFrom().item(response));
+
+        UserDTO result = given()
+                .header(authHeader)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .when().post("/api/v1/console-service/user/insert-with-profiles")
                 .then()
                 .statusCode(200)
                 .extract()

@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceCreationDto;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceFrontEndDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.ResourceMultipleCreationDtoJSON;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.NoDeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
@@ -16,6 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 @RegisterRestClient(configKey = "resource-client")
 public interface ResourceWebClient {
@@ -37,6 +39,12 @@ public interface ResourceWebClient {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     Uni<ResourceDTO> createResource(@RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto);
+
+    @POST
+    @Path("/multiple")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<List<String>> createResourceMultiple(@RequestBody(required = true) ResourceMultipleCreationDtoJSON resourceMultipleCreationDto);
 
     @PUT
     @Path("/{uuid}")
