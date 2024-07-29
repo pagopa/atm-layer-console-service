@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.14%               |
-| :heavy_check_mark: Number of Lines Covered | 375    |
-| :x: Number of Lines Missed  | 41     |
-| Total Number of Lines   | 416     |
+| Code Coverage %         | 91.88%               |
+| :heavy_check_mark: Number of Lines Covered | 441    |
+| :x: Number of Lines Missed  | 39     |
+| Total Number of Lines   | 480     |
 
 
 ## Details:
@@ -112,11 +112,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: ResourceResource.java
+:x: ResourceResource.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -395,9 +395,17 @@
         
 #### Lines Missed:
         
-- Line #46
+- Line #52
 ```
         }catch (Exception exception){
+```
+- Line #74
+```
+        } catch (IOException e) {
+```
+- Line #76
+```
+        }
 ```
 </details>
 
@@ -499,6 +507,26 @@
 <details>
     <summary>
 :x: ResourceCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceMultipleCreationDtoJSON.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceMultipleCreationDto.java
     </summary>
 
         
@@ -864,11 +892,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: ResourceServiceImpl.java
+:x: ResourceServiceImpl.java
     </summary>
 
         
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -882,10 +910,6 @@
         
 #### Lines Missed:
         
-- Line #63
-```
-                .transform(userProfile -> {
-```
 </details>
 
     
