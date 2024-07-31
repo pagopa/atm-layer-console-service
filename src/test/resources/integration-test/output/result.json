@@ -6,11 +6,11 @@
     },
     "item": [
       {
-        "id": "c2e174bc-2075-430c-a295-81e828069a2e",
+        "id": "fe8304c3-ec91-4991-9ba1-01b73b04fbc6",
         "name": "BPMN",
         "item": [
           {
-            "id": "33b76258-0b3a-4b08-93f7-1ca14b0cb07a",
+            "id": "44f79826-15b8-49fc-83f0-b3084bd3d53c",
             "name": "Lista BPMN filtrati",
             "request": {
               "url": {
@@ -47,7 +47,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7b195a9b-a8eb-40c7-9716-260b90a75481",
+                  "id": "35302cc9-1c2e-43e5-a0cf-e2847ced4a4a",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status code is 200\", function () {\r",
@@ -58,13 +58,13 @@
                     "    pm.expect(1, jsonData.itemsFound);\r",
                     "});"
                   ],
-                  "_lastExecutionId": "e0ebe7e8-d1d5-4a69-ab15-38c2fd5f438f"
+                  "_lastExecutionId": "d4933a77-b65b-4ee9-b8e2-e7324404edd8"
                 }
               }
             ]
           },
           {
-            "id": "dfba3cca-45fd-4aad-919a-b3f93b157355",
+            "id": "6969aba5-bddf-48a4-8a30-81f9179c935e",
             "name": "Lista BPMN filtrati non trovati",
             "request": {
               "url": {
@@ -101,7 +101,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "64e0465d-d599-4456-8d61-691272a3abd9",
+                  "id": "550ef7c1-e88b-48e4-a398-d23c915b3caf",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -114,25 +114,25 @@
                     "    pm.expect(0, jsonData.itemsFound);\r",
                     "});"
                   ],
-                  "_lastExecutionId": "e6698cad-5182-458d-a76e-5914985be9d8"
+                  "_lastExecutionId": "6566fbf0-fd28-4ff0-bc05-19443de33a35"
                 }
               },
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "3ee4fac4-7dc7-4c2b-ab7b-b8a9927e7aa5",
+                  "id": "291f6b84-56f3-40c9-9a1f-78fb11a99953",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
                     "pm.collectionVariables.set(\"functionType\", \"TEST\");"
                   ],
-                  "_lastExecutionId": "1b282fa3-09e2-40a2-859f-b485083837e1"
+                  "_lastExecutionId": "e3d468ed-6c92-4807-bc9d-e32dc3adcb14"
                 }
               }
             ]
           },
           {
-            "id": "b4442ec9-7394-4663-8554-6175fef172a3",
+            "id": "3f56b423-a37e-400c-994b-a87357d3bcc9",
             "name": "Creazione BPMN OK",
             "request": {
               "url": {
@@ -175,7 +175,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e3773bdb-a6be-4e1d-8d40-1d9d7822a383",
+                  "id": "58e0c292-a459-4a6b-a84b-b520ef4dadfa",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -186,13 +186,13 @@
                     "    pm.collectionVariables.set(\"bpmn_id\", jsonData.bpmnId);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "0090fbbf-b2cd-413d-bda0-f5d28b5c2f96"
+                  "_lastExecutionId": "ce2ca205-98cf-4678-8448-1b0b9a9f8ffc"
                 }
               },
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "c294acb0-fb78-4423-b74a-7c07ef74a13e",
+                  "id": "7a8496ad-1fc8-4e4c-a7c8-ce0ff5c2179f",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -214,13 +214,13 @@
                     "   \r",
                     "});"
                   ],
-                  "_lastExecutionId": "b2f0b19b-b4ac-414e-b34f-63ae8140a362"
+                  "_lastExecutionId": "c6e33790-1a60-45c7-860f-59b9d8df3a56"
                 }
               }
             ]
           },
           {
-            "id": "13b6321e-faa3-402c-9257-a3ff3d16982a",
+            "id": "3fdd2812-ac25-48d9-a582-121ce1ff4fdb",
             "name": "Creazione BPMN KO",
             "request": {
               "url": {
@@ -263,7 +263,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "34cefd5b-0607-4504-8e71-597222cdde37",
+                  "id": "ca6e12fc-c185-4114-9ce9-f82ed4dd39d5",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -276,13 +276,13 @@
                     "    pm.expect(\"ATMLM_4000012\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "a349cb44-300e-4afc-9add-34b7a35a108a"
+                  "_lastExecutionId": "2acbacc5-63fe-4093-a13f-7836256e9409"
                 }
               }
             ]
           },
           {
-            "id": "05dcdefd-0554-4c65-aa2d-aa1fee4ca452",
+            "id": "bb67b87c-70ef-45f7-b2b6-ccd45f6229dd",
             "name": "Creazione Associazione BPMN OK",
             "request": {
               "url": {
@@ -329,7 +329,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "f6d8c3b8-624c-4f0e-ad74-ea0b5bd3396d",
+                  "id": "987e4de8-8449-41a2-b07d-a12ba3ab8708",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -338,13 +338,13 @@
                     "    var jsonData = JSON.parse(responseBody);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "bee31d53-280c-4ecc-9d12-def60510b44e"
+                  "_lastExecutionId": "59e36ac7-cbdc-49a8-89f9-419b922caaf2"
                 }
               }
             ]
           },
           {
-            "id": "f6112df1-38f1-4257-bea4-0bef2c5b024a",
+            "id": "595d96ba-4c00-4001-b27c-f5647e35f542",
             "name": "Creazione Associazione BPMN KO",
             "request": {
               "url": {
@@ -391,7 +391,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b6789119-0b9f-4e18-a0aa-f809eb517559",
+                  "id": "9e1713eb-167b-4ff1-8f90-958c7e4f811b",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -404,13 +404,13 @@
                     "    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "8d3d6818-aabe-4fc4-9687-d24e488b0c98"
+                  "_lastExecutionId": "9ce02dd4-d57d-47b7-ad8a-b32cdcbf4e0e"
                 }
               }
             ]
           },
           {
-            "id": "00035785-5a62-4302-bdb3-0e1b5ad5d0a0",
+            "id": "694b0bbe-379d-4486-a7bd-543adec2dccf",
             "name": "Modifica Associazione BPMN OK",
             "request": {
               "url": {
@@ -457,7 +457,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "559a81ef-42a0-4142-b209-4e42f8395638",
+                  "id": "79e51a0f-3cde-4fc9-a43f-9539b756b925",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -466,13 +466,13 @@
                     "    var jsonData = JSON.parse(responseBody);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "e90ad98a-4352-4762-9dc1-1ac91a3f3f73"
+                  "_lastExecutionId": "d340fb2e-1c0a-4d10-928b-0382efe225d1"
                 }
               }
             ]
           },
           {
-            "id": "b8c98394-55f6-48b0-ab9f-e5c5033ab352",
+            "id": "f2f37a54-bab1-49f5-838f-926c51255813",
             "name": "Modifica Associazione BPMN KO",
             "request": {
               "url": {
@@ -519,7 +519,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "1445ee10-02c8-4de3-9d4a-e67649791787",
+                  "id": "efb077f7-0b98-4692-a9f4-e6eba9c8115c",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -532,13 +532,13 @@
                     "    pm.expect(\"ATMLM_4000003\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "b3d7a355-5afe-4614-8d2c-27b54eabaf13"
+                  "_lastExecutionId": "1079d184-5ed2-46aa-b2ae-90dcf2c595fc"
                 }
               }
             ]
           },
           {
-            "id": "a18f9bdd-0d5c-490b-9803-a35eb5df9eb5",
+            "id": "8247eff8-ee88-46a0-8f34-8f9d84ec05ab",
             "name": "Lista Associazioni BPMN",
             "request": {
               "url": {
@@ -594,7 +594,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "e48d02c7-4225-4b20-91c5-e4cd823863dd",
+                  "id": "8cad2e8c-718c-4a20-b919-c209a493a238",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -607,7 +607,7 @@
                     "    pm.expect(1, jsonData.itemsFound);\r",
                     "});"
                   ],
-                  "_lastExecutionId": "ea8e6e5a-a7d0-4e70-8556-6b2755d72bd9"
+                  "_lastExecutionId": "0d1135be-2e13-49a5-a4bd-df2a39168654"
                 }
               }
             ],
@@ -616,7 +616,7 @@
             }
           },
           {
-            "id": "3ee9559e-722f-40e0-a211-3c808d724f65",
+            "id": "5e9dad7e-7974-4942-b159-b50cb2e41537",
             "name": "Elimina Associazione BPMN OK",
             "request": {
               "url": {
@@ -668,7 +668,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "4a75f17c-e524-4650-b150-2ebe040164b3",
+                  "id": "a86a0da7-2f8f-4b05-ac62-22d51f21e0b0",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -676,13 +676,13 @@
                     "    pm.response.to.have.status(204);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "b5c13a3f-5ef1-468c-8327-68d62f0bc389"
+                  "_lastExecutionId": "7da14f9c-f63e-45ce-9561-6305356587df"
                 }
               }
             ]
           },
           {
-            "id": "9e93e31d-72ee-4275-b3cc-45eee2031711",
+            "id": "14bec166-968b-4f58-afd9-77222b070bd5",
             "name": "Elimina Associazione BPMN KO",
             "request": {
               "url": {
@@ -734,7 +734,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ebb217d1-0e16-401c-9fdc-4c5be10118e4",
+                  "id": "d68e057f-3b9b-4785-ae92-960951002b5a",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -747,25 +747,25 @@
                     "    pm.expect(\"ATMLM_4000048\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "fc1ab222-ed12-46b0-bf16-89ace6eabcb8"
+                  "_lastExecutionId": "1477104a-e57f-4673-a4b1-77c9a5cd1cff"
                 }
               },
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "76554d7a-1d98-44da-95d0-ffd4b0f94a9e",
+                  "id": "3bd9b2b9-0bf5-41e7-bda7-c865d6bcbcdb",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
                     ""
                   ],
-                  "_lastExecutionId": "380683ed-a7f7-4dfe-a6fc-4607da0608a3"
+                  "_lastExecutionId": "22f27e5d-19cd-46ad-8de6-7164708dadc7"
                 }
               }
             ]
           },
           {
-            "id": "8f252ff6-c638-4f73-914d-fb0f605b4979",
+            "id": "05a45fee-f664-41bb-99b1-821330c2114b",
             "name": "Deploy BPMN OK",
             "request": {
               "url": {
@@ -807,7 +807,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5f514b5a-043c-4cc0-807b-7950eacbe0b7",
+                  "id": "5affcd83-a740-48ea-8b25-a150f7a4ad72",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -818,13 +818,13 @@
                     "    pm.collectionVariables.set(\"bpmn_id_deployed\", jsonData.bpmnId);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "443f86b5-55fd-4b51-b84a-9f83339849e8"
+                  "_lastExecutionId": "5bf0798b-3b7d-4368-82e3-2c5f4057ae04"
                 }
               }
             ]
           },
           {
-            "id": "db06b380-1e5c-4729-b8e4-285921dd2288",
+            "id": "f11fe617-daa9-4ff1-9088-c4edd2c19458",
             "name": "Deploy BPMN KO",
             "request": {
               "url": {
@@ -866,7 +866,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "b889db7c-aae0-4916-9bfc-7826b0237ce6",
+                  "id": "fbc86bbc-3cc7-4ca7-aa91-61defbce4de7",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -881,25 +881,25 @@
                     "})\r",
                     ""
                   ],
-                  "_lastExecutionId": "5e0e6d95-a3d8-4623-a156-856e514b9849"
+                  "_lastExecutionId": "74b1262a-25cb-4bec-aa78-a8da159b3fbd"
                 }
               },
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "6c425799-6f69-4709-97e8-120a8c0e2724",
+                  "id": "8fa5769f-20e5-4a36-9082-c3a69c9ea2d1",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
                     ""
                   ],
-                  "_lastExecutionId": "ec579fab-b949-49b2-ba0f-27563c62002e"
+                  "_lastExecutionId": "173ee09f-79a2-4e38-a79b-a7d505ebc0d4"
                 }
               }
             ]
           },
           {
-            "id": "cc995bec-ee12-4898-98b2-e94ba5588f88",
+            "id": "291798e8-2901-45c5-b7a2-18ad8c4d0f55",
             "name": "Disabilita BPMN OK",
             "request": {
               "url": {
@@ -941,7 +941,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5162b9b5-c9be-4452-89e2-775528ce7787",
+                  "id": "3125a1c3-a8b4-469d-8478-d495e1236cba",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -949,13 +949,13 @@
                     "    pm.response.to.have.status(204);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "464eb30e-9b8b-464d-8446-fb4815a14a4f"
+                  "_lastExecutionId": "44b1d081-ce52-461b-b82f-56fc2a25414c"
                 }
               }
             ]
           },
           {
-            "id": "5b64bffc-e368-40bb-9ff0-1f6d6f2824a1",
+            "id": "c4d65235-d4b6-4fba-a122-9b5be2525d61",
             "name": "Disabilita BPMN KO",
             "request": {
               "url": {
@@ -997,7 +997,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "fc8e1876-f43c-44a2-a028-3b9da19e42d2",
+                  "id": "8665a4d9-68f9-4e75-806b-0705c26626e3",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1011,13 +1011,13 @@
                     "    pm.expect(\"ATMLM_4000004\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "c8c4f636-007d-440d-85dd-c3e094f7b8db"
+                  "_lastExecutionId": "72e51a53-845f-4e16-bb1f-ec23c4475ff7"
                 }
               }
             ]
           },
           {
-            "id": "0e897eea-dbcc-46f7-bb69-07045edd64c8",
+            "id": "a2e62b4c-39da-4cfd-a4dc-a2f17710df12",
             "name": "Download file frontend OK",
             "request": {
               "url": {
@@ -1055,7 +1055,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "7a441ade-f206-4a6f-9816-59da92399006",
+                  "id": "376b3deb-8a2b-42f0-960c-7ed5e6e2cfc0",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1063,13 +1063,13 @@
                     "    pm.response.to.have.status(200);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "bb23d17a-949b-48f9-8cba-81c35c4139d0"
+                  "_lastExecutionId": "96a12660-dc6b-422f-90e3-bfaaa6619346"
                 }
               }
             ]
           },
           {
-            "id": "7c768acb-3850-4823-b902-5aa1eb89c142",
+            "id": "b8be7813-81ef-47e8-a772-9f62aa07c51d",
             "name": "Download file frontend KO",
             "request": {
               "url": {
@@ -1107,7 +1107,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "a78cf751-a5f0-48d8-95e7-a4423a34470f",
+                  "id": "2c6e5dd2-ea7d-43c0-b72e-d6039908086c",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1121,13 +1121,13 @@
                     "    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "349cd475-262e-47a2-bf1b-8981f205b417"
+                  "_lastExecutionId": "7ad67f93-39d1-45b0-9867-3398b6c2d622"
                 }
               }
             ]
           },
           {
-            "id": "be93b6b3-6a11-4782-ab89-dc80488e09a9",
+            "id": "e2c9ffdd-f110-453d-8e1e-ff13241fbc78",
             "name": "Upgrade file BPMN OK",
             "request": {
               "url": {
@@ -1176,7 +1176,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "8d9f37a2-997f-471b-8581-7575a412e00e",
+                  "id": "5693de1f-3a6d-494a-b2d6-e182f2811dad",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1184,13 +1184,13 @@
                     "    pm.response.to.have.status(200);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "3f56ee43-7cef-43b4-895a-0269245f0af0"
+                  "_lastExecutionId": "c028ff0f-ad08-4444-9bb5-b10f6ce96745"
                 }
               }
             ]
           },
           {
-            "id": "248b98d1-3f83-4392-a20d-079cdf94ff89",
+            "id": "61b69ec1-b4c8-4e8f-931b-0e5301f2ef6d",
             "name": "Upgrade file BPMN KO",
             "request": {
               "url": {
@@ -1239,7 +1239,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "c4588328-0538-4774-a7d6-093682760503",
+                  "id": "fffa6642-a909-4be5-9759-c4cfd0835b4d",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1252,7 +1252,7 @@
                     "    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "abdcb5ce-ba08-4543-b50d-86e56f5ccf55"
+                  "_lastExecutionId": "9ee9aa62-9add-4df3-839e-bd290e2e5f26"
                 }
               }
             ]
@@ -1261,11 +1261,11 @@
         "event": []
       },
       {
-        "id": "dc6bc7eb-c008-4ce6-9863-0eb38a3e58d9",
+        "id": "98cb2b7b-5420-4e31-b257-09c9d91eff46",
         "name": "INFO",
         "item": [
           {
-            "id": "3df8c5dc-314a-4d31-ac69-0e2dac4c53d1",
+            "id": "68fbb591-d44b-4175-850f-b5dcb488d142",
             "name": "Info utente",
             "request": {
               "url": {
@@ -1289,7 +1289,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ba8e6df0-7762-4016-8657-2ef785c35eec",
+                  "id": "9887aff8-f38e-44f2-850f-36eb7838afd6",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1297,7 +1297,7 @@
                     "    pm.response.to.have.status(200);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "24610dfd-6d37-4b6d-8c38-57e4d1f6765b"
+                  "_lastExecutionId": "4f33ded9-6d6c-486e-b4a3-895645ddbea4"
                 }
               }
             ]
@@ -1306,11 +1306,11 @@
         "event": []
       },
       {
-        "id": "8f923acb-3275-4764-8604-e5b490ca4af1",
+        "id": "7bc82cce-1434-4d0d-836f-0d4d940ad2ba",
         "name": "RESOURCE",
         "item": [
           {
-            "id": "6ade0660-8364-4e5b-927d-4c3a8ac7a12d",
+            "id": "86f017f8-3831-4a64-8201-b29b2440d9f7",
             "name": "Creazione RESOURCE OK",
             "request": {
               "url": {
@@ -1353,7 +1353,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "5c40152c-e2e4-4cd1-a9d3-2959c0dac1af",
+                  "id": "c64e3d4b-bb72-44ff-8d5f-387fee4d727e",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1364,13 +1364,13 @@
                     "    pm.collectionVariables.set(\"resource_id\", jsonData.resourceId);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "fcf2b5fb-b5ae-472a-b6c8-9ac004289cd5"
+                  "_lastExecutionId": "4dab361f-c4c8-47f5-b624-41266514aef1"
                 }
               }
             ]
           },
           {
-            "id": "55c74518-1a6e-4501-a05b-6e46ec4a637b",
+            "id": "c9622d93-0b78-4a0c-996d-3e2be10dfebe",
             "name": "Creazione RESOURCE KO",
             "request": {
               "url": {
@@ -1413,7 +1413,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "9a01e4a9-bbde-4920-930d-15be6eef6619",
+                  "id": "9ddf9da6-7b6a-4625-9e5e-d5fbd25327bf",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1426,13 +1426,13 @@
                     "    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "e1c56757-ad7d-492a-a7c6-74de02bcca03"
+                  "_lastExecutionId": "02dc09b3-a5a4-4746-a3a0-0a6395cfd63e"
                 }
               }
             ]
           },
           {
-            "id": "3e5bcc2e-0a7d-4755-9a2c-c8652dd5edfd",
+            "id": "698ef6b1-2451-4369-a141-5fdeb6147fa3",
             "name": "Lista RESOURCE filtrati",
             "request": {
               "url": {
@@ -1469,7 +1469,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "aaab2804-a140-420b-aa7c-30d2a47c1716",
+                  "id": "7478682c-67f0-4cef-b12d-06d05a1552fd",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1481,13 +1481,13 @@
                     "    pm.expect(5, jsonData.itemsFound);\r",
                     "});"
                   ],
-                  "_lastExecutionId": "59959f40-f590-45df-8836-d2a6692c93b9"
+                  "_lastExecutionId": "60ba3e24-6eb1-4874-b2ec-d7278c34599e"
                 }
               }
             ]
           },
           {
-            "id": "889d5e68-dbe0-4766-921b-2e847eaae985",
+            "id": "24adec98-6d25-40e1-a051-ac7d1180476f",
             "name": "Lista RESOURCE filtrati non trovati",
             "request": {
               "url": {
@@ -1524,7 +1524,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "0672b4e6-3fa0-41b3-8811-64d81b9fd575",
+                  "id": "1888a8c1-f1c1-45df-9260-46b44d2e0f2c",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1536,25 +1536,25 @@
                     "    pm.expect(0, jsonData.itemsFound);\r",
                     "});"
                   ],
-                  "_lastExecutionId": "3664790d-f318-4ffe-b661-f3dda94db1a7"
+                  "_lastExecutionId": "30bb8410-3410-4e91-9efd-382a3c3d305a"
                 }
               },
               {
                 "listen": "prerequest",
                 "script": {
-                  "id": "f5242d6c-e5bf-45c3-8896-f1bb0d272f92",
+                  "id": "49311d70-c0a4-4c06-9932-fd8aae27d85d",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
                     ""
                   ],
-                  "_lastExecutionId": "92ad3720-763a-4dc7-905d-5bd7f259cdfd"
+                  "_lastExecutionId": "813f5839-739b-4d19-aa79-25e80a2fe9a2"
                 }
               }
             ]
           },
           {
-            "id": "ab75bf74-f8a7-49b5-a8ed-168d2ff4ef91",
+            "id": "57e837d6-428c-4c44-8eaa-8ec799c2c3db",
             "name": "Disabilita RESOURCE OK",
             "request": {
               "url": {
@@ -1589,7 +1589,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "28d75964-d7bd-4847-bc47-93e67ea00534",
+                  "id": "cab944b4-345a-431d-8a39-afe4505d48a0",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1597,13 +1597,13 @@
                     "    pm.response.to.have.status(204);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "ad7cff1c-6188-41aa-9bde-fbdfb4585b55"
+                  "_lastExecutionId": "d9778ad2-2f7c-459e-8ab8-028f6fec71ef"
                 }
               }
             ]
           },
           {
-            "id": "53b9c128-96be-455b-b2a4-302fc11f9d88",
+            "id": "a585b643-bfb8-49b9-a87f-829fd2423f98",
             "name": "Disabilita RESOURCE KO",
             "request": {
               "url": {
@@ -1638,7 +1638,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "c2d3ab93-6b5e-480d-8343-7f4df3597476",
+                  "id": "66daa09c-1d29-43bc-9b9a-c7940905356d",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1652,13 +1652,13 @@
                     "    pm.expect(\"ATMLM_4000029\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "78fd8bdf-cd75-4398-b5e3-8f25c172098f"
+                  "_lastExecutionId": "c90cc677-6be4-4857-a482-c86048552aaf"
                 }
               }
             ]
           },
           {
-            "id": "ce9334ef-c885-47c0-bfbe-b9e88b0661cb",
+            "id": "4641c529-efd9-4154-8d5c-d580a762b75d",
             "name": "Aggiorna RESOURCE OK",
             "request": {
               "url": {
@@ -1698,7 +1698,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "ecd13f6e-489c-4994-b3e2-0fa5ffcbb723",
+                  "id": "f9f835d7-cb15-4c1f-8baa-d2ee6fc620e1",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1706,13 +1706,13 @@
                     "    pm.response.to.have.status(200);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "8a479d5e-82de-4804-9bd9-619b2a7cb8f0"
+                  "_lastExecutionId": "1420a83f-d97e-447b-8737-333119077256"
                 }
               }
             ]
           },
           {
-            "id": "9d3e4d9c-0028-48bf-9bd3-fa6821dac70e",
+            "id": "204f7bf2-8642-4e78-8296-98b45fa25303",
             "name": "Aggiorna RESOURCE KO",
             "request": {
               "url": {
@@ -1752,7 +1752,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "79f3ad44-a378-4712-96fe-0e30be7cdb18",
+                  "id": "dd60865e-30b8-4598-b0e9-284515fa4858",
                   "type": "text/javascript",
                   "packages": {},
                   "exec": [
@@ -1765,7 +1765,7 @@
                     "    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
                     "})"
                   ],
-                  "_lastExecutionId": "f5146b15-b234-4b36-94a6-7d9d88b26ba1"
+                  "_lastExecutionId": "b4e37425-ca23-4585-ad8c-2500df31af2f"
                 }
               }
             ]
@@ -1788,23 +1788,23 @@
       {
         "listen": "prerequest",
         "script": {
-          "id": "b80ffe45-8f17-4971-bb5a-a533dccc95c6",
+          "id": "44e5264c-145d-4b07-83b9-2862da32644e",
           "type": "text/javascript",
           "exec": [
             ""
           ],
-          "_lastExecutionId": "7738a921-181e-480f-8a15-9c802353e0c0"
+          "_lastExecutionId": "8199188a-2eb3-484f-83b9-f74a51b8fab6"
         }
       },
       {
         "listen": "test",
         "script": {
-          "id": "94db4e68-e604-401a-91d7-70c3506057f8",
+          "id": "e0bd95b2-4065-495d-9f0e-b2253b577af3",
           "type": "text/javascript",
           "exec": [
             ""
           ],
-          "_lastExecutionId": "9c72212d-fd90-496a-8ccb-1c86e73dcc1b"
+          "_lastExecutionId": "d239bd3a-9dfa-44c1-9d45-27609f6b03be"
         }
       }
     ],
@@ -1936,7 +1936,7 @@
     }
   },
   "environment": {
-    "id": "da01c646-8732-4cd5-825d-b22600447510",
+    "id": "16225577-79bc-453f-8bab-d323a7ff70b9",
     "values": [
       {
         "type": "any",
@@ -1946,7 +1946,7 @@
     ]
   },
   "globals": {
-    "id": "eff6d02f-da73-4904-a519-17406db59b3f",
+    "id": "d644b428-551c-4e03-a0ad-1a2115f1f5ca",
     "values": []
   },
   "run": {
@@ -1998,10 +1998,10 @@
       }
     },
     "timings": {
-      "responseAverage": 38.13793103448276,
+      "responseAverage": 38.44827586206897,
       "responseMin": 10,
-      "responseMax": 344,
-      "responseSd": 60.84333989445751,
+      "responseMax": 311,
+      "responseSd": 53.46322371622194,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -2010,8 +2010,8 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1722427840696,
-      "completed": 1722427843272
+      "started": 1722433574293,
+      "completed": 1722433576872
     },
     "executions": [
       {
@@ -2024,11 +2024,11 @@
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "6f2c539a-2876-4bb7-96db-59738b049cd8",
-          "httpRequestId": "d0412bc5-e976-4453-a911-bb70cdf24735"
+          "ref": "918a0784-ead5-4e00-a497-cd8c4174caed",
+          "httpRequestId": "e70874e1-5d30-430a-8b48-ac16a3dd2618"
         },
         "item": {
-          "id": "33b76258-0b3a-4b08-93f7-1ca14b0cb07a",
+          "id": "44f79826-15b8-49fc-83f0-b3084bd3d53c",
           "name": "Lista BPMN filtrati",
           "request": {
             "url": {
@@ -2065,7 +2065,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "7b195a9b-a8eb-40c7-9716-260b90a75481",
+                "id": "35302cc9-1c2e-43e5-a0cf-e2847ced4a4a",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {\r",
@@ -2076,7 +2076,7 @@
                   "    pm.expect(1, jsonData.itemsFound);\r",
                   "});"
                 ],
-                "_lastExecutionId": "e0ebe7e8-d1d5-4a69-ab15-38c2fd5f438f"
+                "_lastExecutionId": "d4933a77-b65b-4ee9-b8e2-e7324404edd8"
               }
             }
           ]
@@ -2136,7 +2136,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "97fa85c3-1e20-4d57-a79d-08d1c1d0ef73",
+              "value": "ff388634-a05f-498f-b063-18e1b42fc4e6",
               "system": true
             },
             {
@@ -2168,7 +2168,7 @@
           }
         },
         "response": {
-          "id": "f8f79ec7-5ad8-481a-85bb-341f53176a37",
+          "id": "84b52f2c-ac46-4e56-80f5-018bc481b4fb",
           "status": "OK",
           "code": 200,
           "header": [
@@ -2267,10 +2267,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 344,
+          "responseTime": 311,
           "responseSize": 64
         },
-        "id": "33b76258-0b3a-4b08-93f7-1ca14b0cb07a",
+        "id": "44f79826-15b8-49fc-83f0-b3084bd3d53c",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -2284,15 +2284,15 @@
       },
       {
         "cursor": {
-          "ref": "64773f07-b8b1-4d36-8724-60361b8f82ba",
+          "ref": "4ba340cb-807e-41e5-ad9f-469225632e7d",
           "length": 28,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "1b8ed012-f263-470c-85ad-4cea2bdc59a1"
+          "httpRequestId": "c5efba77-75f9-4951-81be-0f2d34f446fb"
         },
         "item": {
-          "id": "dfba3cca-45fd-4aad-919a-b3f93b157355",
+          "id": "6969aba5-bddf-48a4-8a30-81f9179c935e",
           "name": "Lista BPMN filtrati non trovati",
           "request": {
             "url": {
@@ -2329,7 +2329,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "64e0465d-d599-4456-8d61-691272a3abd9",
+                "id": "550ef7c1-e88b-48e4-a398-d23c915b3caf",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -2342,19 +2342,19 @@
                   "    pm.expect(0, jsonData.itemsFound);\r",
                   "});"
                 ],
-                "_lastExecutionId": "e6698cad-5182-458d-a76e-5914985be9d8"
+                "_lastExecutionId": "6566fbf0-fd28-4ff0-bc05-19443de33a35"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "3ee4fac4-7dc7-4c2b-ab7b-b8a9927e7aa5",
+                "id": "291f6b84-56f3-40c9-9a1f-78fb11a99953",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
                   "pm.collectionVariables.set(\"functionType\", \"TEST\");"
                 ],
-                "_lastExecutionId": "1b282fa3-09e2-40a2-859f-b485083837e1"
+                "_lastExecutionId": "e3d468ed-6c92-4807-bc9d-e32dc3adcb14"
               }
             }
           ]
@@ -2414,7 +2414,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "1a880f69-261a-4495-9198-67ca9e57737b",
+              "value": "02373d6d-46cb-45ea-9e36-094de0909490",
               "system": true
             },
             {
@@ -2446,7 +2446,7 @@
           }
         },
         "response": {
-          "id": "d7faf434-3e60-4fd6-bf56-3b957dd91bfa",
+          "id": "cbd0cb83-abf1-4ec9-bf92-75802a921e73",
           "status": "OK",
           "code": 200,
           "header": [
@@ -2545,10 +2545,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 25,
+          "responseTime": 28,
           "responseSize": 64
         },
-        "id": "dfba3cca-45fd-4aad-919a-b3f93b157355",
+        "id": "6969aba5-bddf-48a4-8a30-81f9179c935e",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -2562,15 +2562,15 @@
       },
       {
         "cursor": {
-          "ref": "78102b33-726d-4dd3-8e99-af925b50826c",
+          "ref": "5315387b-f73d-4661-8227-6b4140a7949f",
           "length": 28,
           "cycles": 1,
           "position": 2,
           "iteration": 0,
-          "httpRequestId": "eea61d1a-790b-4e12-9a53-03ad6a71e1f4"
+          "httpRequestId": "7eafbe09-3bb5-4ac4-bf31-047b28316c72"
         },
         "item": {
-          "id": "b4442ec9-7394-4663-8554-6175fef172a3",
+          "id": "3f56b423-a37e-400c-994b-a87357d3bcc9",
           "name": "Creazione BPMN OK",
           "request": {
             "url": {
@@ -2613,7 +2613,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "e3773bdb-a6be-4e1d-8d40-1d9d7822a383",
+                "id": "58e0c292-a459-4a6b-a84b-b520ef4dadfa",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -2624,13 +2624,13 @@
                   "    pm.collectionVariables.set(\"bpmn_id\", jsonData.bpmnId);\r",
                   "})"
                 ],
-                "_lastExecutionId": "0090fbbf-b2cd-413d-bda0-f5d28b5c2f96"
+                "_lastExecutionId": "ce2ca205-98cf-4678-8448-1b0b9a9f8ffc"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "c294acb0-fb78-4423-b74a-7c07ef74a13e",
+                "id": "7a8496ad-1fc8-4e4c-a7c8-ce0ff5c2179f",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -2652,7 +2652,7 @@
                   "   \r",
                   "});"
                 ],
-                "_lastExecutionId": "b2f0b19b-b4ac-414e-b34f-63ae8140a362"
+                "_lastExecutionId": "c6e33790-1a60-45c7-860f-59b9d8df3a56"
               }
             }
           ]
@@ -2698,7 +2698,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "25e615ef-25c5-42b4-8c77-313ff67aba5d",
+              "value": "a11e4508-d800-4ff7-aa23-2680842f154e",
               "system": true
             },
             {
@@ -2718,7 +2718,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "2734",
+              "value": "2731",
               "system": true
             }
           ],
@@ -2728,7 +2728,7 @@
             "formdata": [
               {
                 "key": "file",
-                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"magnam_1722427842054\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"sit_1722433575564\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
                 "type": "text"
               },
               {
@@ -2755,7 +2755,7 @@
           }
         },
         "response": {
-          "id": "01b790e4-e812-4f2d-9e08-60c4240a7a73",
+          "id": "07b3484d-6b22-444b-9f6e-ab2c407841ef",
           "status": "OK",
           "code": 200,
           "header": [
@@ -3564,10 +3564,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 81,
+          "responseTime": 82,
           "responseSize": 774
         },
-        "id": "b4442ec9-7394-4663-8554-6175fef172a3",
+        "id": "3f56b423-a37e-400c-994b-a87357d3bcc9",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -3577,15 +3577,15 @@
       },
       {
         "cursor": {
-          "ref": "78102b33-726d-4dd3-8e99-af925b50826c",
+          "ref": "5315387b-f73d-4661-8227-6b4140a7949f",
           "length": 28,
           "cycles": 1,
           "position": 2,
           "iteration": 0,
-          "httpRequestId": "eea61d1a-790b-4e12-9a53-03ad6a71e1f4"
+          "httpRequestId": "7eafbe09-3bb5-4ac4-bf31-047b28316c72"
         },
         "item": {
-          "id": "b4442ec9-7394-4663-8554-6175fef172a3",
+          "id": "3f56b423-a37e-400c-994b-a87357d3bcc9",
           "name": "Creazione BPMN OK",
           "request": {
             "url": {
@@ -3628,7 +3628,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "e3773bdb-a6be-4e1d-8d40-1d9d7822a383",
+                "id": "58e0c292-a459-4a6b-a84b-b520ef4dadfa",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -3639,13 +3639,13 @@
                   "    pm.collectionVariables.set(\"bpmn_id\", jsonData.bpmnId);\r",
                   "})"
                 ],
-                "_lastExecutionId": "0090fbbf-b2cd-413d-bda0-f5d28b5c2f96"
+                "_lastExecutionId": "ce2ca205-98cf-4678-8448-1b0b9a9f8ffc"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "c294acb0-fb78-4423-b74a-7c07ef74a13e",
+                "id": "7a8496ad-1fc8-4e4c-a7c8-ce0ff5c2179f",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -3667,7 +3667,7 @@
                   "   \r",
                   "});"
                 ],
-                "_lastExecutionId": "b2f0b19b-b4ac-414e-b34f-63ae8140a362"
+                "_lastExecutionId": "c6e33790-1a60-45c7-860f-59b9d8df3a56"
               }
             }
           ]
@@ -3713,7 +3713,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "25e615ef-25c5-42b4-8c77-313ff67aba5d",
+              "value": "a11e4508-d800-4ff7-aa23-2680842f154e",
               "system": true
             },
             {
@@ -3733,7 +3733,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "2734",
+              "value": "2731",
               "system": true
             }
           ],
@@ -3743,7 +3743,7 @@
             "formdata": [
               {
                 "key": "file",
-                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"magnam_1722427842054\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"sit_1722433575564\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
                 "type": "text"
               },
               {
@@ -3770,7 +3770,7 @@
           }
         },
         "response": {
-          "id": "01b790e4-e812-4f2d-9e08-60c4240a7a73",
+          "id": "07b3484d-6b22-444b-9f6e-ab2c407841ef",
           "status": "OK",
           "code": 200,
           "header": [
@@ -4579,10 +4579,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 81,
+          "responseTime": 82,
           "responseSize": 774
         },
-        "id": "b4442ec9-7394-4663-8554-6175fef172a3",
+        "id": "3f56b423-a37e-400c-994b-a87357d3bcc9",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -4592,15 +4592,15 @@
       },
       {
         "cursor": {
-          "ref": "7befe89e-6a62-4670-b4ef-b791596c9d79",
+          "ref": "fc07e3b7-38db-4ed3-9469-2e2d2c9b2277",
           "length": 28,
           "cycles": 1,
           "position": 3,
           "iteration": 0,
-          "httpRequestId": "7e4994f7-7750-436b-8c03-152b1102d815"
+          "httpRequestId": "aac39a8a-7ccb-4f3c-ad44-f4e1aa0ceeb1"
         },
         "item": {
-          "id": "13b6321e-faa3-402c-9257-a3ff3d16982a",
+          "id": "3fdd2812-ac25-48d9-a582-121ce1ff4fdb",
           "name": "Creazione BPMN KO",
           "request": {
             "url": {
@@ -4643,7 +4643,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "34cefd5b-0607-4504-8e71-597222cdde37",
+                "id": "ca6e12fc-c185-4114-9ce9-f82ed4dd39d5",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -4656,7 +4656,7 @@
                   "    pm.expect(\"ATMLM_4000012\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "a349cb44-300e-4afc-9add-34b7a35a108a"
+                "_lastExecutionId": "2acbacc5-63fe-4093-a13f-7836256e9409"
               }
             }
           ]
@@ -4702,7 +4702,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "b8ede687-161b-48f0-a7e7-117d1746d7a3",
+              "value": "aded0706-68b9-4f15-8c89-c531045f3b8c",
               "system": true
             },
             {
@@ -4722,7 +4722,7 @@
             },
             {
               "key": "Content-Length",
-              "value": "2738",
+              "value": "2735",
               "system": true
             }
           ],
@@ -4732,7 +4732,7 @@
             "formdata": [
               {
                 "key": "file",
-                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"magnam_1722427842054\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
+                "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:modeler=\"http://camunda.org/schema/modeler/1.0\" id=\"Definitions_0hfksvi\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"5.16.0\" modeler:executionPlatform=\"Camunda Platform\" modeler:executionPlatformVersion=\"7.20.0\">\n  <bpmn:process id=\"sit_1722433575564\" isExecutable=\"true\" camunda:historyTimeToLive=\"180\">\n    <bpmn:startEvent id=\"StartEvent_1\">\n      <bpmn:outgoing>Flow_0rtxipq</bpmn:outgoing>\n    </bpmn:startEvent>\n    <bpmn:task id=\"Activity_0hsnyv1\" name=\"Esempio 2\">\n      <bpmn:incoming>Flow_0rtxipq</bpmn:incoming>\n      <bpmn:outgoing>Flow_0d1f1hn</bpmn:outgoing>\n    </bpmn:task>\n    <bpmn:sequenceFlow id=\"Flow_0rtxipq\" sourceRef=\"StartEvent_1\" targetRef=\"Activity_0hsnyv1\" />\n    <bpmn:endEvent id=\"Event_0gcfha5\">\n      <bpmn:incoming>Flow_0d1f1hn</bpmn:incoming>\n    </bpmn:endEvent>\n    <bpmn:sequenceFlow id=\"Flow_0d1f1hn\" sourceRef=\"Activity_0hsnyv1\" targetRef=\"Event_0gcfha5\" />\n  </bpmn:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"demo_0611_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds x=\"179\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Activity_0hsnyv1_di\" bpmnElement=\"Activity_0hsnyv1\">\n        <dc:Bounds x=\"270\" y=\"77\" width=\"100\" height=\"80\" />\n        <bpmndi:BPMNLabel />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape id=\"Event_0gcfha5_di\" bpmnElement=\"Event_0gcfha5\">\n        <dc:Bounds x=\"432\" y=\"99\" width=\"36\" height=\"36\" />\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge id=\"Flow_0rtxipq_di\" bpmnElement=\"Flow_0rtxipq\">\n        <di:waypoint x=\"215\" y=\"117\" />\n        <di:waypoint x=\"270\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge id=\"Flow_0d1f1hn_di\" bpmnElement=\"Flow_0d1f1hn\">\n        <di:waypoint x=\"370\" y=\"117\" />\n        <di:waypoint x=\"432\" y=\"117\" />\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn:definitions>\n",
                 "type": "text"
               },
               {
@@ -4759,7 +4759,7 @@
           }
         },
         "response": {
-          "id": "94c12c98-76b6-40a5-a6d2-898ce01ab9d4",
+          "id": "93cc2bce-9fac-45f1-9cee-ab73a7769eb1",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -4934,10 +4934,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 44,
+          "responseTime": 43,
           "responseSize": 144
         },
-        "id": "13b6321e-faa3-402c-9257-a3ff3d16982a",
+        "id": "3fdd2812-ac25-48d9-a582-121ce1ff4fdb",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -4951,15 +4951,15 @@
       },
       {
         "cursor": {
-          "ref": "d9f5d603-d330-4188-8ff5-aadf86af2cdd",
+          "ref": "fe2ebae2-9e14-421d-8b5f-e2d838c19bdc",
           "length": 28,
           "cycles": 1,
           "position": 4,
           "iteration": 0,
-          "httpRequestId": "bb52fad9-879b-45f3-bed0-d7a009c0acaa"
+          "httpRequestId": "b05d9323-a8b0-4d27-9763-584c1a9329f5"
         },
         "item": {
-          "id": "05dcdefd-0554-4c65-aa2d-aa1fee4ca452",
+          "id": "bb67b87c-70ef-45f7-b2b6-ccd45f6229dd",
           "name": "Creazione Associazione BPMN OK",
           "request": {
             "url": {
@@ -5006,7 +5006,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "f6d8c3b8-624c-4f0e-ad74-ea0b5bd3396d",
+                "id": "987e4de8-8449-41a2-b07d-a12ba3ab8708",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -5015,7 +5015,7 @@
                   "    var jsonData = JSON.parse(responseBody);\r",
                   "})"
                 ],
-                "_lastExecutionId": "bee31d53-280c-4ecc-9d12-def60510b44e"
+                "_lastExecutionId": "59e36ac7-cbdc-49a8-89f9-419b922caaf2"
               }
             }
           ]
@@ -5070,7 +5070,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "acdc6e3b-7802-47fc-ba42-62289f34c499",
+              "value": "ebcd8ecf-90d5-4ae2-b925-71d55d2e533c",
               "system": true
             },
             {
@@ -5116,7 +5116,7 @@
           }
         },
         "response": {
-          "id": "a98ba067-b8b5-437c-b579-c001a4550941",
+          "id": "a2d63b8c-11fb-4733-bbf5-dbf798f10d8b",
           "status": "OK",
           "code": 200,
           "header": [
@@ -5447,10 +5447,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 30,
+          "responseTime": 31,
           "responseSize": 296
         },
-        "id": "05dcdefd-0554-4c65-aa2d-aa1fee4ca452",
+        "id": "bb67b87c-70ef-45f7-b2b6-ccd45f6229dd",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -5460,15 +5460,15 @@
       },
       {
         "cursor": {
-          "ref": "eaaa3440-1bf7-4a9d-bb8c-22e4be2ba34a",
+          "ref": "56f96431-7c0d-4578-ab26-6b2a9659b339",
           "length": 28,
           "cycles": 1,
           "position": 5,
           "iteration": 0,
-          "httpRequestId": "eb5f9a63-ad54-4f9a-9232-7aa6536a8c86"
+          "httpRequestId": "d73af718-ed85-4645-a08b-5fce4acb7df9"
         },
         "item": {
-          "id": "f6112df1-38f1-4257-bea4-0bef2c5b024a",
+          "id": "595d96ba-4c00-4001-b27c-f5647e35f542",
           "name": "Creazione Associazione BPMN KO",
           "request": {
             "url": {
@@ -5515,7 +5515,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b6789119-0b9f-4e18-a0aa-f809eb517559",
+                "id": "9e1713eb-167b-4ff1-8f90-958c7e4f811b",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -5528,7 +5528,7 @@
                   "    pm.expect(\"ATMLM_4000047\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "8d3d6818-aabe-4fc4-9687-d24e488b0c98"
+                "_lastExecutionId": "9ce02dd4-d57d-47b7-ad8a-b32cdcbf4e0e"
               }
             }
           ]
@@ -5583,7 +5583,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "9a8b0420-3e1a-4b05-a12f-5eef11c147dd",
+              "value": "d4c6b7bc-98fc-400e-92b0-6ee8b980d720",
               "system": true
             },
             {
@@ -5629,7 +5629,7 @@
           }
         },
         "response": {
-          "id": "e3007e44-b87e-44f1-af6c-8de71793e070",
+          "id": "d1e7b215-d8f2-457d-a840-3884007a28fc",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -5824,10 +5824,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 20,
+          "responseTime": 25,
           "responseSize": 164
         },
-        "id": "f6112df1-38f1-4257-bea4-0bef2c5b024a",
+        "id": "595d96ba-4c00-4001-b27c-f5647e35f542",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -5841,15 +5841,15 @@
       },
       {
         "cursor": {
-          "ref": "b8a0a05d-f249-4cad-ab9f-3bc846ebfa2a",
+          "ref": "76e9ae36-a018-49da-9a72-b6b407e93dd8",
           "length": 28,
           "cycles": 1,
           "position": 6,
           "iteration": 0,
-          "httpRequestId": "0224b122-0e04-46de-931a-6ed8b9fd6658"
+          "httpRequestId": "73337b2c-b598-428f-beb0-2f0c3d5016f9"
         },
         "item": {
-          "id": "00035785-5a62-4302-bdb3-0e1b5ad5d0a0",
+          "id": "694b0bbe-379d-4486-a7bd-543adec2dccf",
           "name": "Modifica Associazione BPMN OK",
           "request": {
             "url": {
@@ -5896,7 +5896,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "559a81ef-42a0-4142-b209-4e42f8395638",
+                "id": "79e51a0f-3cde-4fc9-a43f-9539b756b925",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -5905,7 +5905,7 @@
                   "    var jsonData = JSON.parse(responseBody);\r",
                   "})"
                 ],
-                "_lastExecutionId": "e90ad98a-4352-4762-9dc1-1ac91a3f3f73"
+                "_lastExecutionId": "d340fb2e-1c0a-4d10-928b-0382efe225d1"
               }
             }
           ]
@@ -5960,7 +5960,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e0c5dc88-b45a-4829-aa6d-0a53950dda16",
+              "value": "b160303f-5612-4470-976f-79c1a9cdf5a2",
               "system": true
             },
             {
@@ -6006,7 +6006,7 @@
           }
         },
         "response": {
-          "id": "4e0fb41b-bb00-47eb-9216-d313791490ae",
+          "id": "87dbc243-4fc1-41ce-9c12-18dbc3d3380a",
           "status": "OK",
           "code": 200,
           "header": [
@@ -6337,10 +6337,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 21,
+          "responseTime": 23,
           "responseSize": 296
         },
-        "id": "00035785-5a62-4302-bdb3-0e1b5ad5d0a0",
+        "id": "694b0bbe-379d-4486-a7bd-543adec2dccf",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -6350,15 +6350,15 @@
       },
       {
         "cursor": {
-          "ref": "733ebda4-bf0f-4e28-b35b-8a386516083f",
+          "ref": "14f61317-55f9-4321-841a-2427581e1e93",
           "length": 28,
           "cycles": 1,
           "position": 7,
           "iteration": 0,
-          "httpRequestId": "67a3fc25-c88b-42e4-a2f5-a0970096045d"
+          "httpRequestId": "65b07881-a829-4d29-9c80-0408c37bb64c"
         },
         "item": {
-          "id": "b8c98394-55f6-48b0-ab9f-e5c5033ab352",
+          "id": "f2f37a54-bab1-49f5-838f-926c51255813",
           "name": "Modifica Associazione BPMN KO",
           "request": {
             "url": {
@@ -6405,7 +6405,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "1445ee10-02c8-4de3-9d4a-e67649791787",
+                "id": "efb077f7-0b98-4692-a9f4-e6eba9c8115c",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -6418,7 +6418,7 @@
                   "    pm.expect(\"ATMLM_4000003\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "b3d7a355-5afe-4614-8d2c-27b54eabaf13"
+                "_lastExecutionId": "1079d184-5ed2-46aa-b2ae-90dcf2c595fc"
               }
             }
           ]
@@ -6473,7 +6473,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e6ce5a7c-e3fb-43a8-a165-6d929aa42db7",
+              "value": "ff00018e-60eb-4a4f-b0a1-11f892ddc573",
               "system": true
             },
             {
@@ -6519,7 +6519,7 @@
           }
         },
         "response": {
-          "id": "f6be5689-e4f7-4bde-9db2-0dbe95c0541e",
+          "id": "8272ecbf-6c0f-4f88-a521-1510368af38f",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -6682,10 +6682,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 20,
+          "responseTime": 24,
           "responseSize": 132
         },
-        "id": "b8c98394-55f6-48b0-ab9f-e5c5033ab352",
+        "id": "f2f37a54-bab1-49f5-838f-926c51255813",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -6699,15 +6699,15 @@
       },
       {
         "cursor": {
-          "ref": "64ed7dfb-f109-4384-b30a-8e4ffbed10ee",
+          "ref": "e655ff3e-1b96-4ca7-9777-b81b5437509d",
           "length": 28,
           "cycles": 1,
           "position": 8,
           "iteration": 0,
-          "httpRequestId": "12a0ac27-a80d-421b-9ef3-210ae908812b"
+          "httpRequestId": "41851de5-8295-4411-a5a7-230089af2ae9"
         },
         "item": {
-          "id": "a18f9bdd-0d5c-490b-9803-a35eb5df9eb5",
+          "id": "8247eff8-ee88-46a0-8f34-8f9d84ec05ab",
           "name": "Lista Associazioni BPMN",
           "request": {
             "url": {
@@ -6763,7 +6763,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "e48d02c7-4225-4b20-91c5-e4cd823863dd",
+                "id": "8cad2e8c-718c-4a20-b919-c209a493a238",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -6776,7 +6776,7 @@
                   "    pm.expect(1, jsonData.itemsFound);\r",
                   "});"
                 ],
-                "_lastExecutionId": "ea8e6e5a-a7d0-4e70-8556-6b2755d72bd9"
+                "_lastExecutionId": "0d1135be-2e13-49a5-a4bd-df2a39168654"
               }
             }
           ],
@@ -6843,7 +6843,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "4ab92230-aea8-41cc-ba7d-e50da94a01b5",
+              "value": "24d62598-4ac5-44cb-aced-c3d2ef3c5c92",
               "system": true
             },
             {
@@ -6889,7 +6889,7 @@
           }
         },
         "response": {
-          "id": "8c7ee7ee-2a4d-40aa-9ade-1afcff174176",
+          "id": "be2900d1-833c-4ab8-a107-50941387e091",
           "status": "OK",
           "code": 200,
           "header": [
@@ -7283,10 +7283,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 24,
+          "responseTime": 26,
           "responseSize": 359
         },
-        "id": "a18f9bdd-0d5c-490b-9803-a35eb5df9eb5",
+        "id": "8247eff8-ee88-46a0-8f34-8f9d84ec05ab",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -7300,15 +7300,15 @@
       },
       {
         "cursor": {
-          "ref": "d8b84f56-7e15-4285-826a-8c7b6cd03ba7",
+          "ref": "e72d8c60-a203-4c4c-869c-229d4c1d0872",
           "length": 28,
           "cycles": 1,
           "position": 9,
           "iteration": 0,
-          "httpRequestId": "61132c1d-971e-4e47-a4c5-63a179e93c0f"
+          "httpRequestId": "2491d637-2ced-4a55-a66e-7a4fc1552817"
         },
         "item": {
-          "id": "3ee9559e-722f-40e0-a211-3c808d724f65",
+          "id": "5e9dad7e-7974-4942-b159-b50cb2e41537",
           "name": "Elimina Associazione BPMN OK",
           "request": {
             "url": {
@@ -7360,7 +7360,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "4a75f17c-e524-4650-b150-2ebe040164b3",
+                "id": "a86a0da7-2f8f-4b05-ac62-22d51f21e0b0",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -7368,7 +7368,7 @@
                   "    pm.response.to.have.status(204);\r",
                   "})"
                 ],
-                "_lastExecutionId": "b5c13a3f-5ef1-468c-8327-68d62f0bc389"
+                "_lastExecutionId": "7da14f9c-f63e-45ce-9561-6305356587df"
               }
             }
           ]
@@ -7423,7 +7423,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "b9259f82-6d33-4080-9ba2-6354e55be227",
+              "value": "b26e133a-422a-4c96-a14d-512d60a3fd0f",
               "system": true
             },
             {
@@ -7464,7 +7464,7 @@
           }
         },
         "response": {
-          "id": "6c3c62f8-4ce1-4dba-8ddc-7cab5f0179cd",
+          "id": "77eb05e4-1afb-4203-b793-0a5ddee521aa",
           "status": "No Content",
           "code": 204,
           "header": [
@@ -7490,10 +7490,10 @@
             "data": []
           },
           "cookie": [],
-          "responseTime": 18,
+          "responseTime": 21,
           "responseSize": 0
         },
-        "id": "3ee9559e-722f-40e0-a211-3c808d724f65",
+        "id": "5e9dad7e-7974-4942-b159-b50cb2e41537",
         "assertions": [
           {
             "assertion": "Status code is 204",
@@ -7503,15 +7503,15 @@
       },
       {
         "cursor": {
-          "ref": "ef43860b-a32a-481c-bbc3-f56cea8251bc",
+          "ref": "65ac091e-4253-45cf-9b93-88957cd7f3c2",
           "length": 28,
           "cycles": 1,
           "position": 10,
           "iteration": 0,
-          "httpRequestId": "f1223aaa-3b69-4d5f-b4f9-029e33e446ef"
+          "httpRequestId": "f5719148-3907-4f7c-bb59-f9159796ad75"
         },
         "item": {
-          "id": "9e93e31d-72ee-4275-b3cc-45eee2031711",
+          "id": "14bec166-968b-4f58-afd9-77222b070bd5",
           "name": "Elimina Associazione BPMN KO",
           "request": {
             "url": {
@@ -7563,7 +7563,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "ebb217d1-0e16-401c-9fdc-4c5be10118e4",
+                "id": "d68e057f-3b9b-4785-ae92-960951002b5a",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -7576,19 +7576,19 @@
                   "    pm.expect(\"ATMLM_4000048\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "fc1ab222-ed12-46b0-bf16-89ace6eabcb8"
+                "_lastExecutionId": "1477104a-e57f-4673-a4b1-77c9a5cd1cff"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "76554d7a-1d98-44da-95d0-ffd4b0f94a9e",
+                "id": "3bd9b2b9-0bf5-41e7-bda7-c865d6bcbcdb",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
                   ""
                 ],
-                "_lastExecutionId": "380683ed-a7f7-4dfe-a6fc-4607da0608a3"
+                "_lastExecutionId": "22f27e5d-19cd-46ad-8de6-7164708dadc7"
               }
             }
           ]
@@ -7643,7 +7643,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "eaf63be6-2a43-4463-ad52-f26b7f42458f",
+              "value": "102e39ec-412b-4de4-81b2-a94273968c94",
               "system": true
             },
             {
@@ -7684,7 +7684,7 @@
           }
         },
         "response": {
-          "id": "f9f59d29-802c-431d-8806-736d7d602069",
+          "id": "9a1de663-dd14-4773-9ffe-70a15f9864fb",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -8058,10 +8058,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 19,
+          "responseTime": 23,
           "responseSize": 343
         },
-        "id": "9e93e31d-72ee-4275-b3cc-45eee2031711",
+        "id": "14bec166-968b-4f58-afd9-77222b070bd5",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -8075,15 +8075,15 @@
       },
       {
         "cursor": {
-          "ref": "11580c26-9353-436b-9e7a-23bc33213d70",
+          "ref": "cc993d85-b78a-442b-96ca-2aaf64fcefa1",
           "length": 28,
           "cycles": 1,
           "position": 11,
           "iteration": 0,
-          "httpRequestId": "4ac7c335-e3f5-45c1-a3ff-346e8082d5c8"
+          "httpRequestId": "ba22085d-d5a0-4cd6-be23-71e84dd86dd5"
         },
         "item": {
-          "id": "8f252ff6-c638-4f73-914d-fb0f605b4979",
+          "id": "05a45fee-f664-41bb-99b1-821330c2114b",
           "name": "Deploy BPMN OK",
           "request": {
             "url": {
@@ -8125,7 +8125,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "5f514b5a-043c-4cc0-807b-7950eacbe0b7",
+                "id": "5affcd83-a740-48ea-8b25-a150f7a4ad72",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -8136,7 +8136,7 @@
                   "    pm.collectionVariables.set(\"bpmn_id_deployed\", jsonData.bpmnId);\r",
                   "})"
                 ],
-                "_lastExecutionId": "443f86b5-55fd-4b51-b84a-9f83339849e8"
+                "_lastExecutionId": "5bf0798b-3b7d-4368-82e3-2c5f4057ae04"
               }
             }
           ]
@@ -8186,7 +8186,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "5d9b37c6-7436-44cb-b298-0f88eb48f725",
+              "value": "9c126c68-2f72-4c99-b17c-55b3de5baec8",
               "system": true
             },
             {
@@ -8227,7 +8227,7 @@
           }
         },
         "response": {
-          "id": "99930f33-3638-4260-a5d1-ab35190fc26f",
+          "id": "9ce833fc-fdb0-47e3-9eff-6a771c44e5a3",
           "status": "OK",
           "code": 200,
           "header": [
@@ -9036,10 +9036,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 20,
+          "responseTime": 23,
           "responseSize": 774
         },
-        "id": "8f252ff6-c638-4f73-914d-fb0f605b4979",
+        "id": "05a45fee-f664-41bb-99b1-821330c2114b",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -9049,15 +9049,15 @@
       },
       {
         "cursor": {
-          "ref": "bff12bee-d1cb-49f1-b55d-9d985621b08b",
+          "ref": "70112251-96ef-4f8f-91e6-516bab41d4c7",
           "length": 28,
           "cycles": 1,
           "position": 12,
           "iteration": 0,
-          "httpRequestId": "9cbcd4b0-cc2a-458f-8b65-cd47b91782e6"
+          "httpRequestId": "caa1da9b-e815-40f0-93e8-6f3bddfd5865"
         },
         "item": {
-          "id": "db06b380-1e5c-4729-b8e4-285921dd2288",
+          "id": "f11fe617-daa9-4ff1-9088-c4edd2c19458",
           "name": "Deploy BPMN KO",
           "request": {
             "url": {
@@ -9099,7 +9099,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "b889db7c-aae0-4916-9bfc-7826b0237ce6",
+                "id": "fbc86bbc-3cc7-4ca7-aa91-61defbce4de7",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -9114,19 +9114,19 @@
                   "})\r",
                   ""
                 ],
-                "_lastExecutionId": "5e0e6d95-a3d8-4623-a156-856e514b9849"
+                "_lastExecutionId": "74b1262a-25cb-4bec-aa78-a8da159b3fbd"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "6c425799-6f69-4709-97e8-120a8c0e2724",
+                "id": "8fa5769f-20e5-4a36-9082-c3a69c9ea2d1",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
                   ""
                 ],
-                "_lastExecutionId": "ec579fab-b949-49b2-ba0f-27563c62002e"
+                "_lastExecutionId": "173ee09f-79a2-4e38-a79b-a7d505ebc0d4"
               }
             }
           ]
@@ -9176,7 +9176,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "915b3e14-cc65-41ab-8b46-0b07641b6853",
+              "value": "42f8190a-2d5c-48a9-890c-6e7a5f6957fd",
               "system": true
             },
             {
@@ -9217,7 +9217,7 @@
           }
         },
         "response": {
-          "id": "69e08ff3-8069-4e73-abc8-6b59399b965a",
+          "id": "87130b61-2682-431e-ae2f-db4bfa5e8a23",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -9412,10 +9412,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 18,
+          "responseTime": 20,
           "responseSize": 164
         },
-        "id": "db06b380-1e5c-4729-b8e4-285921dd2288",
+        "id": "f11fe617-daa9-4ff1-9088-c4edd2c19458",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -9429,15 +9429,15 @@
       },
       {
         "cursor": {
-          "ref": "dc54e27a-898b-406e-ae1f-9b1ac830d878",
+          "ref": "607794e5-3157-4b94-a6ff-5ab1a8eb7972",
           "length": 28,
           "cycles": 1,
           "position": 13,
           "iteration": 0,
-          "httpRequestId": "478c5c0d-8e97-4ce9-b5a2-d3fd33a4af03"
+          "httpRequestId": "27f84f06-fa3e-4549-85c6-b13958ceeb77"
         },
         "item": {
-          "id": "cc995bec-ee12-4898-98b2-e94ba5588f88",
+          "id": "291798e8-2901-45c5-b7a2-18ad8c4d0f55",
           "name": "Disabilita BPMN OK",
           "request": {
             "url": {
@@ -9479,7 +9479,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "5162b9b5-c9be-4452-89e2-775528ce7787",
+                "id": "3125a1c3-a8b4-469d-8478-d495e1236cba",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -9487,7 +9487,7 @@
                   "    pm.response.to.have.status(204);\r",
                   "})"
                 ],
-                "_lastExecutionId": "464eb30e-9b8b-464d-8446-fb4815a14a4f"
+                "_lastExecutionId": "44b1d081-ce52-461b-b82f-56fc2a25414c"
               }
             }
           ]
@@ -9537,7 +9537,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "2336de98-a1b8-41c9-ba1f-266605e199ec",
+              "value": "c9257074-fe7e-4fee-91bf-de2210a4c767",
               "system": true
             },
             {
@@ -9578,7 +9578,7 @@
           }
         },
         "response": {
-          "id": "083fe13f-ee32-4ecc-89be-af71e61bd2b7",
+          "id": "75f94021-ba52-4380-9a45-7f636e973979",
           "status": "No Content",
           "code": 204,
           "header": [
@@ -9607,7 +9607,7 @@
           "responseTime": 18,
           "responseSize": 0
         },
-        "id": "cc995bec-ee12-4898-98b2-e94ba5588f88",
+        "id": "291798e8-2901-45c5-b7a2-18ad8c4d0f55",
         "assertions": [
           {
             "assertion": "Status code is 204",
@@ -9617,15 +9617,15 @@
       },
       {
         "cursor": {
-          "ref": "7bda04d3-bbcd-4e75-bf57-5b2149246036",
+          "ref": "c6fbd6eb-35e1-4feb-a141-d9f333ae6364",
           "length": 28,
           "cycles": 1,
           "position": 14,
           "iteration": 0,
-          "httpRequestId": "35e773a2-2c22-41c0-a69b-550a2bde1853"
+          "httpRequestId": "0a683a24-8b81-4e82-b918-2189f89a6de9"
         },
         "item": {
-          "id": "5b64bffc-e368-40bb-9ff0-1f6d6f2824a1",
+          "id": "c4d65235-d4b6-4fba-a122-9b5be2525d61",
           "name": "Disabilita BPMN KO",
           "request": {
             "url": {
@@ -9667,7 +9667,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "fc8e1876-f43c-44a2-a028-3b9da19e42d2",
+                "id": "8665a4d9-68f9-4e75-806b-0705c26626e3",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -9681,7 +9681,7 @@
                   "    pm.expect(\"ATMLM_4000004\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "c8c4f636-007d-440d-85dd-c3e094f7b8db"
+                "_lastExecutionId": "72e51a53-845f-4e16-bb1f-ec23c4475ff7"
               }
             }
           ]
@@ -9731,7 +9731,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "a8b81452-21db-41c1-8273-cf59f240ab06",
+              "value": "09f0c9b8-7b96-4a7b-9706-dc60409cb26a",
               "system": true
             },
             {
@@ -9772,7 +9772,7 @@
           }
         },
         "response": {
-          "id": "2312e63b-c1d7-42d4-9c4f-eec0b2c02c30",
+          "id": "eba4228b-ecbf-4700-8123-905fd56cf4a0",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -9947,10 +9947,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 18,
+          "responseTime": 22,
           "responseSize": 144
         },
-        "id": "5b64bffc-e368-40bb-9ff0-1f6d6f2824a1",
+        "id": "c4d65235-d4b6-4fba-a122-9b5be2525d61",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -9964,15 +9964,15 @@
       },
       {
         "cursor": {
-          "ref": "1856d21c-894d-4d14-9323-e738273be61f",
+          "ref": "0aa1146c-e898-436b-bce0-176c340abff6",
           "length": 28,
           "cycles": 1,
           "position": 15,
           "iteration": 0,
-          "httpRequestId": "c5964375-b55a-421d-a26d-3b2628317421"
+          "httpRequestId": "68291be0-e6d4-436d-b151-7d7269e105ac"
         },
         "item": {
-          "id": "0e897eea-dbcc-46f7-bb69-07045edd64c8",
+          "id": "a2e62b4c-39da-4cfd-a4dc-a2f17710df12",
           "name": "Download file frontend OK",
           "request": {
             "url": {
@@ -10010,7 +10010,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "7a441ade-f206-4a6f-9816-59da92399006",
+                "id": "376b3deb-8a2b-42f0-960c-7ed5e6e2cfc0",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -10018,7 +10018,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "})"
                 ],
-                "_lastExecutionId": "bb23d17a-949b-48f9-8cba-81c35c4139d0"
+                "_lastExecutionId": "96a12660-dc6b-422f-90e3-bfaaa6619346"
               }
             }
           ]
@@ -10068,7 +10068,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "a0711cfc-413b-4a2d-a91c-a6e3d5ae433b",
+              "value": "45a26a38-3bcd-42f4-960c-390b68d44188",
               "system": true
             },
             {
@@ -10100,7 +10100,7 @@
           }
         },
         "response": {
-          "id": "8967e65e-cd1d-4904-8c86-fe119ce916fe",
+          "id": "802ced67-1c49-406d-b317-16707e95e9ee",
           "status": "OK",
           "code": 200,
           "header": [
@@ -19985,10 +19985,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 25,
+          "responseTime": 27,
           "responseSize": 9850
         },
-        "id": "0e897eea-dbcc-46f7-bb69-07045edd64c8",
+        "id": "a2e62b4c-39da-4cfd-a4dc-a2f17710df12",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -19998,15 +19998,15 @@
       },
       {
         "cursor": {
-          "ref": "ae6a676b-5b09-4171-b063-e86cd2484e63",
+          "ref": "0ee04b0e-ed54-4a75-af88-1f920ff73f04",
           "length": 28,
           "cycles": 1,
           "position": 16,
           "iteration": 0,
-          "httpRequestId": "01e1ec5c-de70-4421-b742-96d110ce9afc"
+          "httpRequestId": "614cb223-f515-4760-a59f-fe3719a69cb3"
         },
         "item": {
-          "id": "7c768acb-3850-4823-b902-5aa1eb89c142",
+          "id": "b8be7813-81ef-47e8-a772-9f62aa07c51d",
           "name": "Download file frontend KO",
           "request": {
             "url": {
@@ -20044,7 +20044,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "a78cf751-a5f0-48d8-95e7-a4423a34470f",
+                "id": "2c6e5dd2-ea7d-43c0-b72e-d6039908086c",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -20058,7 +20058,7 @@
                   "    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "349cd475-262e-47a2-bf1b-8981f205b417"
+                "_lastExecutionId": "7ad67f93-39d1-45b0-9867-3398b6c2d622"
               }
             }
           ]
@@ -20108,7 +20108,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "01ed4176-9b54-4afd-93ac-52139d04e8a2",
+              "value": "59187181-eeae-474c-8765-204b580a308b",
               "system": true
             },
             {
@@ -20140,7 +20140,7 @@
           }
         },
         "response": {
-          "id": "302dbc9f-5abd-41fe-9469-9f97ba0d3c1c",
+          "id": "b50b1bcd-9d88-428d-9a78-16f7775de29c",
           "status": "Not Found",
           "code": 404,
           "header": [
@@ -20312,10 +20312,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 17,
+          "responseTime": 18,
           "responseSize": 141
         },
-        "id": "7c768acb-3850-4823-b902-5aa1eb89c142",
+        "id": "b8be7813-81ef-47e8-a772-9f62aa07c51d",
         "assertions": [
           {
             "assertion": "Status code is 404",
@@ -20329,15 +20329,15 @@
       },
       {
         "cursor": {
-          "ref": "d2d37d71-905f-4a51-bd40-cef014d122b0",
+          "ref": "a84bc9e3-05a4-45d4-9adc-def768c5e9dc",
           "length": 28,
           "cycles": 1,
           "position": 17,
           "iteration": 0,
-          "httpRequestId": "758910ba-58be-492e-88e7-bb1c87349194"
+          "httpRequestId": "10ad4165-9088-4e8f-9652-6950a01764df"
         },
         "item": {
-          "id": "be93b6b3-6a11-4782-ab89-dc80488e09a9",
+          "id": "e2c9ffdd-f110-453d-8e1e-ff13241fbc78",
           "name": "Upgrade file BPMN OK",
           "request": {
             "url": {
@@ -20386,7 +20386,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "8d9f37a2-997f-471b-8581-7575a412e00e",
+                "id": "5693de1f-3a6d-494a-b2d6-e182f2811dad",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -20394,7 +20394,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "})"
                 ],
-                "_lastExecutionId": "3f56ee43-7cef-43b4-895a-0269245f0af0"
+                "_lastExecutionId": "c028ff0f-ad08-4444-9bb5-b10f6ce96745"
               }
             }
           ]
@@ -20441,7 +20441,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "15748038-6b96-431a-a922-4402c9217660",
+              "value": "777b8c37-70e9-4ebd-8974-de7115598eb2",
               "system": true
             },
             {
@@ -20503,7 +20503,7 @@
           }
         },
         "response": {
-          "id": "89a48127-277f-4e8b-b9ae-02afd0d79a85",
+          "id": "85ba5f2e-611f-4666-a1a2-bf198125e8e5",
           "status": "OK",
           "code": 200,
           "header": [
@@ -21312,10 +21312,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 26,
+          "responseTime": 30,
           "responseSize": 774
         },
-        "id": "be93b6b3-6a11-4782-ab89-dc80488e09a9",
+        "id": "e2c9ffdd-f110-453d-8e1e-ff13241fbc78",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -21325,15 +21325,15 @@
       },
       {
         "cursor": {
-          "ref": "2d7155ec-2240-424c-ab6c-08f1934c37ce",
+          "ref": "8d5927a4-9871-46d2-9e9f-9dd4aae548e2",
           "length": 28,
           "cycles": 1,
           "position": 18,
           "iteration": 0,
-          "httpRequestId": "206df40e-ab9c-41c5-ae74-72cfe46e5d45"
+          "httpRequestId": "be42258d-0b89-4422-a6f7-430dfeabc813"
         },
         "item": {
-          "id": "248b98d1-3f83-4392-a20d-079cdf94ff89",
+          "id": "61b69ec1-b4c8-4e8f-931b-0e5301f2ef6d",
           "name": "Upgrade file BPMN KO",
           "request": {
             "url": {
@@ -21382,7 +21382,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "c4588328-0538-4774-a7d6-093682760503",
+                "id": "fffa6642-a909-4be5-9759-c4cfd0835b4d",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -21395,7 +21395,7 @@
                   "    pm.expect(\"ATMLM_4000002\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "abdcb5ce-ba08-4543-b50d-86e56f5ccf55"
+                "_lastExecutionId": "9ee9aa62-9add-4df3-839e-bd290e2e5f26"
               }
             }
           ]
@@ -21442,7 +21442,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "811983ee-f270-46a6-ae97-90916061069b",
+              "value": "70c0c0e5-3390-4e19-93fc-f438194d1066",
               "system": true
             },
             {
@@ -21504,7 +21504,7 @@
           }
         },
         "response": {
-          "id": "1732b6db-8c75-4259-a43d-0c21113dad72",
+          "id": "e197d40a-f3a6-4ba1-a230-b4d055c38a5e",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -21698,10 +21698,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 25,
+          "responseTime": 64,
           "responseSize": 163
         },
-        "id": "248b98d1-3f83-4392-a20d-079cdf94ff89",
+        "id": "61b69ec1-b4c8-4e8f-931b-0e5301f2ef6d",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -21715,15 +21715,15 @@
       },
       {
         "cursor": {
-          "ref": "6b0a4d2b-6d31-4797-9b05-298b418554d1",
+          "ref": "aa827b1e-8c44-46ed-8d5e-21852d2dc7d2",
           "length": 28,
           "cycles": 1,
           "position": 19,
           "iteration": 0,
-          "httpRequestId": "33ff48f7-c667-4b03-8db5-6f70d1bcd798"
+          "httpRequestId": "bd2195c0-a1d5-48ab-896b-60c27dec10d3"
         },
         "item": {
-          "id": "3df8c5dc-314a-4d31-ac69-0e2dac4c53d1",
+          "id": "68fbb591-d44b-4175-850f-b5dcb488d142",
           "name": "Info utente",
           "request": {
             "url": {
@@ -21747,7 +21747,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "ba8e6df0-7762-4016-8657-2ef785c35eec",
+                "id": "9887aff8-f38e-44f2-850f-36eb7838afd6",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -21755,7 +21755,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "})"
                 ],
-                "_lastExecutionId": "24610dfd-6d37-4b6d-8c38-57e4d1f6765b"
+                "_lastExecutionId": "4f33ded9-6d6c-486e-b4a3-895645ddbea4"
               }
             }
           ]
@@ -21802,7 +21802,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "9de4225b-d04b-48aa-9a8c-5ecea1e3aa09",
+              "value": "93e23045-2595-4c8f-9d16-73ab88736d5b",
               "system": true
             },
             {
@@ -21834,7 +21834,7 @@
           }
         },
         "response": {
-          "id": "e07d8d8a-8a3a-4b21-aba7-1123ec341924",
+          "id": "73f7eb3d-2f5a-4160-8c7f-620190e9d151",
           "status": "OK",
           "code": 200,
           "header": [
@@ -21911,7 +21911,7 @@
           "responseTime": 10,
           "responseSize": 39
         },
-        "id": "3df8c5dc-314a-4d31-ac69-0e2dac4c53d1",
+        "id": "68fbb591-d44b-4175-850f-b5dcb488d142",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -21921,15 +21921,15 @@
       },
       {
         "cursor": {
-          "ref": "a1e47f2b-22b0-47bc-887a-57a749f323fb",
+          "ref": "ed3a2c56-ddec-45af-a05a-9a5c5847fb50",
           "length": 28,
           "cycles": 1,
           "position": 20,
           "iteration": 0,
-          "httpRequestId": "8a2833da-48a2-4879-bec7-a84729c568a8"
+          "httpRequestId": "d78a58b2-f3d6-46c1-a6aa-a3c8dd44f08f"
         },
         "item": {
-          "id": "6ade0660-8364-4e5b-927d-4c3a8ac7a12d",
+          "id": "86f017f8-3831-4a64-8201-b29b2440d9f7",
           "name": "Creazione RESOURCE OK",
           "request": {
             "url": {
@@ -21972,7 +21972,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "5c40152c-e2e4-4cd1-a9d3-2959c0dac1af",
+                "id": "c64e3d4b-bb72-44ff-8d5f-387fee4d727e",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -21983,7 +21983,7 @@
                   "    pm.collectionVariables.set(\"resource_id\", jsonData.resourceId);\r",
                   "})"
                 ],
-                "_lastExecutionId": "fcf2b5fb-b5ae-472a-b6c8-9ac004289cd5"
+                "_lastExecutionId": "4dab361f-c4c8-47f5-b624-41266514aef1"
               }
             }
           ]
@@ -22029,7 +22029,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "73681941-aad8-4655-88e9-0c1855694a8d",
+              "value": "0a09752c-57ca-45af-a934-52cfebe7ab90",
               "system": true
             },
             {
@@ -22086,7 +22086,7 @@
           }
         },
         "response": {
-          "id": "32114af4-3479-4f7c-aa21-23c172cbbabc",
+          "id": "c7e0e845-4381-48f6-8573-cb87b26a8286",
           "status": "OK",
           "code": 200,
           "header": [
@@ -22808,10 +22808,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 37,
+          "responseTime": 41,
           "responseSize": 687
         },
-        "id": "6ade0660-8364-4e5b-927d-4c3a8ac7a12d",
+        "id": "86f017f8-3831-4a64-8201-b29b2440d9f7",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -22821,15 +22821,15 @@
       },
       {
         "cursor": {
-          "ref": "e627f8f2-1937-4230-a01c-12d3eb381792",
+          "ref": "b4cf3342-65d1-420d-9d47-0d8e33db96ee",
           "length": 28,
           "cycles": 1,
           "position": 21,
           "iteration": 0,
-          "httpRequestId": "694531e7-7373-4df1-a6b9-cc54895334ca"
+          "httpRequestId": "2ea477bb-a96b-43c6-9e12-05265f074abd"
         },
         "item": {
-          "id": "55c74518-1a6e-4501-a05b-6e46ec4a637b",
+          "id": "c9622d93-0b78-4a0c-996d-3e2be10dfebe",
           "name": "Creazione RESOURCE KO",
           "request": {
             "url": {
@@ -22872,7 +22872,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "9a01e4a9-bbde-4920-930d-15be6eef6619",
+                "id": "9ddf9da6-7b6a-4625-9e5e-d5fbd25327bf",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -22885,7 +22885,7 @@
                   "    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "e1c56757-ad7d-492a-a7c6-74de02bcca03"
+                "_lastExecutionId": "02dc09b3-a5a4-4746-a3a0-0a6395cfd63e"
               }
             }
           ]
@@ -22931,7 +22931,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "1ddad2d3-5543-4a37-8618-19ba0b1d3685",
+              "value": "13f3f0a7-4922-4675-bac9-533d04c1c1aa",
               "system": true
             },
             {
@@ -22988,7 +22988,7 @@
           }
         },
         "response": {
-          "id": "9c4b8134-52d5-4196-b368-f1925e67944f",
+          "id": "65c0fd64-6e6e-4040-a655-01266bb78ecf",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -23158,7 +23158,7 @@
           "responseTime": 25,
           "responseSize": 136
         },
-        "id": "55c74518-1a6e-4501-a05b-6e46ec4a637b",
+        "id": "c9622d93-0b78-4a0c-996d-3e2be10dfebe",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -23172,15 +23172,15 @@
       },
       {
         "cursor": {
-          "ref": "f26116ac-a32a-4d8e-93ca-98ea1fcbfe21",
+          "ref": "5bda516a-3cd4-43a2-adbd-603f1179289c",
           "length": 28,
           "cycles": 1,
           "position": 22,
           "iteration": 0,
-          "httpRequestId": "fd765769-9ddd-4bdc-bae7-a43cf2f310f8"
+          "httpRequestId": "9046c752-ddca-463c-b6a3-6d549cb7967b"
         },
         "item": {
-          "id": "3e5bcc2e-0a7d-4755-9a2c-c8652dd5edfd",
+          "id": "698ef6b1-2451-4369-a141-5fdeb6147fa3",
           "name": "Lista RESOURCE filtrati",
           "request": {
             "url": {
@@ -23217,7 +23217,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "aaab2804-a140-420b-aa7c-30d2a47c1716",
+                "id": "7478682c-67f0-4cef-b12d-06d05a1552fd",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -23229,7 +23229,7 @@
                   "    pm.expect(5, jsonData.itemsFound);\r",
                   "});"
                 ],
-                "_lastExecutionId": "59959f40-f590-45df-8836-d2a6692c93b9"
+                "_lastExecutionId": "60ba3e24-6eb1-4874-b2ec-d7278c34599e"
               }
             }
           ]
@@ -23289,7 +23289,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "6877ef71-8a8c-4738-a63c-d2fbb1842049",
+              "value": "9965363c-755e-4349-850e-abf1903d381e",
               "system": true
             },
             {
@@ -23321,7 +23321,7 @@
           }
         },
         "response": {
-          "id": "6e344467-7dff-4bce-b92a-12d44d88c60b",
+          "id": "5d56748b-37da-459a-bd72-1d1ff0d701b2",
           "status": "OK",
           "code": 200,
           "header": [
@@ -24133,10 +24133,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 26,
+          "responseTime": 30,
           "responseSize": 777
         },
-        "id": "3e5bcc2e-0a7d-4755-9a2c-c8652dd5edfd",
+        "id": "698ef6b1-2451-4369-a141-5fdeb6147fa3",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -24150,15 +24150,15 @@
       },
       {
         "cursor": {
-          "ref": "3ee4bb27-30de-40f5-8556-e6ad1ed12a7b",
+          "ref": "44fdfcf7-22db-4b89-ba2c-c2da1d3e5dea",
           "length": 28,
           "cycles": 1,
           "position": 23,
           "iteration": 0,
-          "httpRequestId": "06677656-5126-4465-a38e-342833eb11a2"
+          "httpRequestId": "b817818d-da58-4817-b4e3-06125560dbfb"
         },
         "item": {
-          "id": "889d5e68-dbe0-4766-921b-2e847eaae985",
+          "id": "24adec98-6d25-40e1-a051-ac7d1180476f",
           "name": "Lista RESOURCE filtrati non trovati",
           "request": {
             "url": {
@@ -24195,7 +24195,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "0672b4e6-3fa0-41b3-8811-64d81b9fd575",
+                "id": "1888a8c1-f1c1-45df-9260-46b44d2e0f2c",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -24207,19 +24207,19 @@
                   "    pm.expect(0, jsonData.itemsFound);\r",
                   "});"
                 ],
-                "_lastExecutionId": "3664790d-f318-4ffe-b661-f3dda94db1a7"
+                "_lastExecutionId": "30bb8410-3410-4e91-9efd-382a3c3d305a"
               }
             },
             {
               "listen": "prerequest",
               "script": {
-                "id": "f5242d6c-e5bf-45c3-8896-f1bb0d272f92",
+                "id": "49311d70-c0a4-4c06-9932-fd8aae27d85d",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
                   ""
                 ],
-                "_lastExecutionId": "92ad3720-763a-4dc7-905d-5bd7f259cdfd"
+                "_lastExecutionId": "813f5839-739b-4d19-aa79-25e80a2fe9a2"
               }
             }
           ]
@@ -24279,7 +24279,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "191b7735-6874-4779-ac14-eb0065570373",
+              "value": "4d072ad7-f0c1-4acd-95cc-3c423a37602c",
               "system": true
             },
             {
@@ -24311,7 +24311,7 @@
           }
         },
         "response": {
-          "id": "ae6d51df-f9c9-4678-9617-bb74e34a09b0",
+          "id": "fa0252b4-e7cc-402e-bf91-32cb59918803",
           "status": "OK",
           "code": 200,
           "header": [
@@ -24410,10 +24410,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 21,
+          "responseTime": 24,
           "responseSize": 64
         },
-        "id": "889d5e68-dbe0-4766-921b-2e847eaae985",
+        "id": "24adec98-6d25-40e1-a051-ac7d1180476f",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -24427,15 +24427,15 @@
       },
       {
         "cursor": {
-          "ref": "ebbe5cca-f112-43aa-aa95-1c960fb36bca",
+          "ref": "ded0b5ab-b25d-4971-b7ad-b1f7bdf6e274",
           "length": 28,
           "cycles": 1,
           "position": 24,
           "iteration": 0,
-          "httpRequestId": "8b5e5d1a-e564-49f7-9d7e-105de0213bf2"
+          "httpRequestId": "0e5ba5d0-82b9-4a4d-a61f-84662690aa79"
         },
         "item": {
-          "id": "ab75bf74-f8a7-49b5-a8ed-168d2ff4ef91",
+          "id": "57e837d6-428c-4c44-8eaa-8ec799c2c3db",
           "name": "Disabilita RESOURCE OK",
           "request": {
             "url": {
@@ -24470,7 +24470,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "28d75964-d7bd-4847-bc47-93e67ea00534",
+                "id": "cab944b4-345a-431d-8a39-afe4505d48a0",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -24478,7 +24478,7 @@
                   "    pm.response.to.have.status(204);\r",
                   "})"
                 ],
-                "_lastExecutionId": "ad7cff1c-6188-41aa-9bde-fbdfb4585b55"
+                "_lastExecutionId": "d9778ad2-2f7c-459e-8ab8-028f6fec71ef"
               }
             }
           ]
@@ -24526,7 +24526,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "8d1e67e0-8d86-476a-9adf-cf11c35a89ad",
+              "value": "0f762d0e-dd26-42e8-82cb-ba22042ba933",
               "system": true
             },
             {
@@ -24567,7 +24567,7 @@
           }
         },
         "response": {
-          "id": "068835e9-3fe0-4b57-a332-c53d25af8ccf",
+          "id": "8f8c7c5f-7fca-40a1-b067-a6c11b7fcba4",
           "status": "No Content",
           "code": 204,
           "header": [
@@ -24593,10 +24593,10 @@
             "data": []
           },
           "cookie": [],
-          "responseTime": 17,
+          "responseTime": 23,
           "responseSize": 0
         },
-        "id": "ab75bf74-f8a7-49b5-a8ed-168d2ff4ef91",
+        "id": "57e837d6-428c-4c44-8eaa-8ec799c2c3db",
         "assertions": [
           {
             "assertion": "Status code is 204",
@@ -24606,15 +24606,15 @@
       },
       {
         "cursor": {
-          "ref": "87b8e597-e8ed-4797-9f3c-c8945039c9d1",
+          "ref": "103a88ab-7d99-46e3-93e2-789468cb095d",
           "length": 28,
           "cycles": 1,
           "position": 25,
           "iteration": 0,
-          "httpRequestId": "a4dec0d4-b8a7-4796-a0e7-5deaae18da6d"
+          "httpRequestId": "688157a8-2c49-4e10-a149-b21349f567cb"
         },
         "item": {
-          "id": "53b9c128-96be-455b-b2a4-302fc11f9d88",
+          "id": "a585b643-bfb8-49b9-a87f-829fd2423f98",
           "name": "Disabilita RESOURCE KO",
           "request": {
             "url": {
@@ -24649,7 +24649,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "c2d3ab93-6b5e-480d-8343-7f4df3597476",
+                "id": "66daa09c-1d29-43bc-9b9a-c7940905356d",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -24663,7 +24663,7 @@
                   "    pm.expect(\"ATMLM_4000029\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "78fd8bdf-cd75-4398-b5e3-8f25c172098f"
+                "_lastExecutionId": "c90cc677-6be4-4857-a482-c86048552aaf"
               }
             }
           ]
@@ -24711,7 +24711,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "c2d9aa43-4f89-4ffd-957e-db5ffa6c590e",
+              "value": "a759a49a-aa37-41fb-b8ff-4c5237f04f37",
               "system": true
             },
             {
@@ -24752,7 +24752,7 @@
           }
         },
         "response": {
-          "id": "3f60984c-3a12-4f36-801e-a5c13ce7db47",
+          "id": "2151abaf-76dc-4e6e-b3c1-069770aa2e32",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -24947,10 +24947,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 16,
+          "responseTime": 18,
           "responseSize": 164
         },
-        "id": "53b9c128-96be-455b-b2a4-302fc11f9d88",
+        "id": "a585b643-bfb8-49b9-a87f-829fd2423f98",
         "assertions": [
           {
             "assertion": "Status code is 400",
@@ -24964,15 +24964,15 @@
       },
       {
         "cursor": {
-          "ref": "935ab574-2e78-46a2-84f0-f714ffa17094",
+          "ref": "a10769f9-050e-4752-8166-d2e829feabe5",
           "length": 28,
           "cycles": 1,
           "position": 26,
           "iteration": 0,
-          "httpRequestId": "1b4e5d9d-117c-4e42-8a85-addb4ce8e22c"
+          "httpRequestId": "4552eeff-db91-42e3-8852-274ac1d02cd9"
         },
         "item": {
-          "id": "ce9334ef-c885-47c0-bfbe-b9e88b0661cb",
+          "id": "4641c529-efd9-4154-8d5c-d580a762b75d",
           "name": "Aggiorna RESOURCE OK",
           "request": {
             "url": {
@@ -25012,7 +25012,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "ecd13f6e-489c-4994-b3e2-0fa5ffcbb723",
+                "id": "f9f835d7-cb15-4c1f-8baa-d2ee6fc620e1",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -25020,7 +25020,7 @@
                   "    pm.response.to.have.status(200);\r",
                   "})"
                 ],
-                "_lastExecutionId": "8a479d5e-82de-4804-9bd9-619b2a7cb8f0"
+                "_lastExecutionId": "1420a83f-d97e-447b-8737-333119077256"
               }
             }
           ]
@@ -25067,7 +25067,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "675b6c14-c397-4081-b7aa-7d6ef247705f",
+              "value": "1fce5265-78cb-4a7b-bd86-1cf3e17fc282",
               "system": true
             },
             {
@@ -25114,7 +25114,7 @@
           }
         },
         "response": {
-          "id": "a9f3f6d6-522c-4ef8-bf1b-c36c5efc4bb6",
+          "id": "41094ab6-c8a2-4106-89ff-126afec4fa6f",
           "status": "OK",
           "code": 200,
           "header": [
@@ -25842,7 +25842,7 @@
           "responseTime": 20,
           "responseSize": 690
         },
-        "id": "ce9334ef-c885-47c0-bfbe-b9e88b0661cb",
+        "id": "4641c529-efd9-4154-8d5c-d580a762b75d",
         "assertions": [
           {
             "assertion": "Status code is 200",
@@ -25852,15 +25852,15 @@
       },
       {
         "cursor": {
-          "ref": "488d198f-65cf-4b4a-8660-0ef370f778d4",
+          "ref": "81e2f9b6-713d-448f-b02f-171588acfb5f",
           "length": 28,
           "cycles": 1,
           "position": 27,
           "iteration": 0,
-          "httpRequestId": "8f196de2-69ad-44b1-b1c7-a08df43b80d2"
+          "httpRequestId": "eea9bf66-fb88-4b61-890b-b2449caa274d"
         },
         "item": {
-          "id": "9d3e4d9c-0028-48bf-9bd3-fa6821dac70e",
+          "id": "204f7bf2-8642-4e78-8296-98b45fa25303",
           "name": "Aggiorna RESOURCE KO",
           "request": {
             "url": {
@@ -25900,7 +25900,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "79f3ad44-a378-4712-96fe-0e30be7cdb18",
+                "id": "dd60865e-30b8-4598-b0e9-284515fa4858",
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
@@ -25913,7 +25913,7 @@
                   "    pm.expect(\"ATMLM_4000019\", jsonData.errorCode);\r",
                   "})"
                 ],
-                "_lastExecutionId": "f5146b15-b234-4b36-94a6-7d9d88b26ba1"
+                "_lastExecutionId": "b4e37425-ca23-4585-ad8c-2500df31af2f"
               }
             }
           ]
@@ -25960,7 +25960,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "27ac9071-91d3-484f-b575-0928b6411a30",
+              "value": "53854473-bd98-42dc-8b54-b28ba6ebbe35",
               "system": true
             },
             {
@@ -26007,7 +26007,7 @@
           }
         },
         "response": {
-          "id": "4605e2c9-0fd8-40d9-ad34-2c44030c766a",
+          "id": "a0fbd66d-0893-4746-85d8-bf1aa267bdab",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -26154,10 +26154,10 @@
             ]
           },
           "cookie": [],
-          "responseTime": 18,
+          "responseTime": 20,
           "responseSize": 116
         },
-        "id": "9d3e4d9c-0028-48bf-9bd3-fa6821dac70e",
+        "id": "204f7bf2-8642-4e78-8296-98b45fa25303",
         "assertions": [
           {
             "assertion": "Status code is 400",
