@@ -12,7 +12,7 @@ image:
 
 namespace: pagopa
 
-imagePullSecrets: []
+imagePullSecrets: [ ]
 nameOverride: ""
 fullnameOverride: ""
 
@@ -28,6 +28,11 @@ consoleService:
 model:
   basePath: "http://pagopa-prod-atm-layer-model.pagopa.svc.cluster.local:8080"
   relativePath: "/api/v1/model"
+
+
+  userService:
+    basePath: "http://pagopa-prod-atm-layer-user-service.pagopa.svc.cluster.local:8080"
+    relativePath: "/api/v1/user-service"
 
 bpmnRouteBasePath: "/bpmn"
 
@@ -62,18 +67,18 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: pagopa-prod-atm-layer-console-service
 
-podAnnotations: {}
+podAnnotations: { }
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext: { }
+# fsGroup: 2000
 
-securityContext: {}
+securityContext: { }
   # capabilities:
   #   drop:
   #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
 
 deployment:
   name: pagopa-prod-atm-layer-console-service
@@ -90,7 +95,7 @@ ingress:
   enabled: true
   name: pagopa-prod-atm-layer-console-service
   className: ""
-  annotations: 
+  annotations:
     kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/scheme: "internal"
     alb.ingress.kubernetes.io/group.name: "alb-controller"
@@ -109,7 +114,7 @@ ingress:
       paths:
         - path: /api/v1/console-service
           pathType: Prefix
-  tls: []
+  tls: [ ]
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
@@ -133,11 +138,11 @@ autoscaling:
   targetCPUUtilizationPercentage: 40
   # targetMemoryUtilizationPercentage: 90
 
-nodeSelector: {}
+nodeSelector: { }
 
-tolerations: []
+tolerations: [ ]
 
-affinity: {}
+affinity: { }
 
 Release:
   Time:
