@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BankWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -20,12 +21,12 @@ public class BankServiceImpl implements BankService {
     BankWebClient bankWebClient;
 
     @Override
-    public Uni<BankDTO> insert(BankInsertionDTO bankInsertionDTO) {
+    public Uni<BankPresentationDTO> insert(BankInsertionDTO bankInsertionDTO) {
         return bankWebClient.insert(bankInsertionDTO);
     }
 
     @Override
-    public Uni<BankDTO> update(BankInsertionDTO bankInsertionDTO) {
+    public Uni<BankPresentationDTO> update(BankInsertionDTO bankInsertionDTO) {
         return bankWebClient.update(bankInsertionDTO);
     }
 
@@ -37,6 +38,11 @@ public class BankServiceImpl implements BankService {
     @Override
     public Uni<PageInfo<BankDTO>> search(int pageIndex, int pageSize, String acquirerId, String denomination, String clientId) {
         return bankWebClient.search(pageIndex, pageSize, acquirerId, denomination, clientId);
+    }
+
+    @Override
+    public Uni<BankPresentationDTO> findByAcquirerId(String acquirerId) {
+        return bankWebClient.findByAcquirerId(acquirerId);
     }
 
 }

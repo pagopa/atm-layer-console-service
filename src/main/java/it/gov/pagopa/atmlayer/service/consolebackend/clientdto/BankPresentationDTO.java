@@ -1,20 +1,29 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.clientdto;
-
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.QuotaPeriodType;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Range;
+
+import java.sql.Timestamp;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class BankInsertionDTO {
+public class BankPresentationDTO {
 
-    @NotBlank
     private String acquirerId;
-    @NotBlank
+
     private String denomination;
+
+    private String clientId;
+
+    private String clientSecret;
+
+    private String apiKeyId;
+
+    private String apiKeySecret;
+
+    private String usagePlanId;
 
     private Integer limit;
 
@@ -23,5 +32,9 @@ public class BankInsertionDTO {
     private Integer burstLimit;
 
     private Double rateLimit;
+
+    private Timestamp createdAt;
+
+    private Timestamp lastUpdatedAt;
 
 }

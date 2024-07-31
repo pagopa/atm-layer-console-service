@@ -3,6 +3,7 @@ package it.gov.pagopa.atmlayer.service.consolebackend.client;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -20,13 +21,13 @@ public interface BankWebClient {
     @Path("/insert")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<BankDTO> insert(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO);
+    Uni<BankPresentationDTO> insert(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO);
 
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<BankDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO);
+    Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO);
 
     @POST
     @Path("/disable/{acquirerId}")
@@ -41,4 +42,9 @@ public interface BankWebClient {
                                   @QueryParam("denomination") String denomination,
                                   @QueryParam("clientId") String clientId);
 
+
+    @GET
+    @Path("/{acquirerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    Uni<BankPresentationDTO> findByAcquirerId (@PathParam("acquirerId") String acquirerId);
 }

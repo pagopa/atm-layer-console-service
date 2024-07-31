@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -46,7 +47,7 @@ public class BankResource {
     @Path("/insert")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<BankDTO> insert(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
+    public Uni<BankPresentationDTO> insert(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
         return this.bankService.insert(bankInsertionDTO);
     }
 
@@ -54,7 +55,7 @@ public class BankResource {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<BankDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
+    public Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
         return this.bankService.update(bankInsertionDTO);
     }
 
@@ -80,6 +81,13 @@ public class BankResource {
                     }
                     return pagedList;
                 }));
+    }
+
+    @GET
+    @Path("/{acquirerId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<BankPresentationDTO> getBank(@PathParam("acquirerId") String acquirerId) {
+        return bankService.findByAcquirerId(acquirerId);
     }
 
 }
