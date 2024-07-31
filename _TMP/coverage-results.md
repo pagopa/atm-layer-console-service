@@ -1,15 +1,15 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 91.88%               |
-| :heavy_check_mark: Number of Lines Covered | 441    |
-| :x: Number of Lines Missed  | 39     |
-| Total Number of Lines   | 480     |
+| Code Coverage %         | 90.12%               |
+| :heavy_check_mark: Number of Lines Covered | 456    |
+| :x: Number of Lines Missed  | 50     |
+| Total Number of Lines   | 506     |
 
 
 ## Details:
@@ -76,18 +76,6 @@
 
 <details>
     <summary>
-:x: ProfileResource.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: WorkflowResource.java
     </summary>
 
@@ -105,6 +93,54 @@
 
         
 #### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BpmnResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileResource.java
+    </summary>
+
+        
+#### Lines Missed:
         
 </details>
 
@@ -136,18 +172,6 @@
 
 <details>
     <summary>
-:x: BpmnResource.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :heavy_check_mark: InfoResource.java
     </summary>
 
@@ -157,47 +181,23 @@
 </details>
 
     
-
-<details>
-    <summary>
-:x: UserResource.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
 ### it/gov/pagopa/atmlayer/service/consolebackend/enums
 
 <details>
     <summary>
-:heavy_check_mark: OutcomeEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: NoDeployableResourceType.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :heavy_check_mark: DeployableResourceType.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: QuotaPeriodType.java
     </summary>
 
         
@@ -221,47 +221,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: S3ResourceTypeEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: AppErrorCodeEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: UserProfileEnum.java
     </summary>
 
         
 #### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: Channel.java
-    </summary>
-
-        
-#### All Lines Covered!
         
 </details>
 
@@ -305,6 +269,66 @@
 
 <details>
     <summary>
+:heavy_check_mark: OutcomeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: NoDeployableResourceType.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: S3ResourceTypeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: AppErrorCodeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: Channel.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :heavy_check_mark: EppMode.java
     </summary>
 
@@ -329,6 +353,16 @@
 <details>
     <summary>
 :x: WorkflowService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankService.java
     </summary>
 
         
@@ -389,6 +423,16 @@
 
 <details>
     <summary>
+:x: ConstraintViolationMappingUtils.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: HeadersUtils.java
     </summary>
 
@@ -413,16 +457,6 @@
 
 <details>
     <summary>
-:x: ConstraintViolationMappingUtils.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :heavy_check_mark: ConstraintViolationMappingUtilsImpl.java
     </summary>
 
@@ -433,16 +467,6 @@
 
     
 ### it/gov/pagopa/atmlayer/service/consolebackend/clientdto
-
-<details>
-    <summary>
-:x: VerifyResponse.java
-    </summary>
-
-        
-</details>
-
-    
 
 <details>
     <summary>
@@ -466,27 +490,7 @@
 
 <details>
     <summary>
-:x: ResourceFrontEndDTO.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: WorkflowResourceCreationDto.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: BpmnVersionFrontEndDTO.java
     </summary>
 
         
@@ -526,26 +530,6 @@
 
 <details>
     <summary>
-:x: ResourceMultipleCreationDto.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: UserProfilesInsertionDTO.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: UserInsertionWithProfilesDTO.java
     </summary>
 
@@ -567,6 +551,92 @@
 <details>
     <summary>
 :x: UserProfilesDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceFileDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankConfigTripletDto.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+- Line #29
+```
+                bankConfigTripletDto.terminalId.equals(this.terminalId));
+```
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BpmEmulatorUpgradeDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: VerifyResponse.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceFrontEndDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BpmnVersionFrontEndDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceMultipleCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfilesInsertionDTO.java
     </summary>
 
         
@@ -606,7 +676,37 @@
 
 <details>
     <summary>
-:x: ResourceFileDTO.java
+:x: BankUpdateDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankPresentationDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankInsertionDTO.java
     </summary>
 
         
@@ -646,32 +746,6 @@
 
 <details>
     <summary>
-:x: BankConfigTripletDto.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-- Line #29
-```
-                bankConfigTripletDto.terminalId.equals(this.terminalId));
-```
-</details>
-
-    
-
-<details>
-    <summary>
-:x: BpmEmulatorUpgradeDto.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: UserInsertionDTO.java
     </summary>
 
@@ -696,16 +770,6 @@
 
 <details>
     <summary>
-:x: ATMLayerValidationErrorResponse.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: ATMLayerErrorResponse.java
     </summary>
 
@@ -717,6 +781,16 @@
 <details>
     <summary>
 :x: PageInfo.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ATMLayerValidationErrorResponse.java
     </summary>
 
         
@@ -745,26 +819,6 @@
 
         
 #### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: Task.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: Device.java
-    </summary>
-
         
 </details>
 
@@ -802,7 +856,7 @@
 
 <details>
     <summary>
-:x: Template.java
+:x: Scene.java
     </summary>
 
         
@@ -812,7 +866,27 @@
 
 <details>
     <summary>
-:x: Scene.java
+:x: Task.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: Device.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: Template.java
     </summary>
 
         
@@ -856,6 +930,42 @@
 
 <details>
     <summary>
+:heavy_check_mark: WorkflowServiceImpl.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: ProfileServiceImpl.java
     </summary>
 
@@ -880,31 +990,7 @@
 
 <details>
     <summary>
-:heavy_check_mark: WorkflowServiceImpl.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: ResourceServiceImpl.java
-    </summary>
-
-        
-#### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: UserServiceImpl.java
     </summary>
 
         
@@ -949,6 +1035,26 @@
 
 <details>
     <summary>
+:x: UserProfileWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: UserWebClient.java
     </summary>
 
@@ -969,7 +1075,7 @@
 
 <details>
     <summary>
-:x: UserProfileWebClient.java
+:x: BankWebClient.java
     </summary>
 
         
@@ -990,16 +1096,6 @@
 <details>
     <summary>
 :x: BpmnWebClient.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: ResourceWebClient.java
     </summary>
 
         
