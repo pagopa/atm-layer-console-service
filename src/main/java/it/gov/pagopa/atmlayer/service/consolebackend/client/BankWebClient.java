@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -27,7 +28,7 @@ public interface BankWebClient {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO);
+    Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankUpdateDTO bankUpdateDTO);
 
     @POST
     @Path("/disable/{acquirerId}")

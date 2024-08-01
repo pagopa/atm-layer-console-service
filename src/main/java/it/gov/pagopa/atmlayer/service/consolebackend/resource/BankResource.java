@@ -5,6 +5,7 @@ import io.smallrye.mutiny.unchecked.Unchecked;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -55,8 +56,8 @@ public class BankResource {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
-        return this.bankService.update(bankInsertionDTO);
+    public Uni<BankPresentationDTO> update(@RequestBody(required = true) @Valid BankUpdateDTO bankUpdateDTO) {
+        return this.bankService.update(bankUpdateDTO);
     }
 
     @POST

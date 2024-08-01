@@ -4,13 +4,14 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 
 public interface BankService {
 
     Uni<BankPresentationDTO> insert(BankInsertionDTO bankInsertionDTO);
 
-    Uni<BankPresentationDTO> update(BankInsertionDTO bankInsertionDTO);
+    Uni<BankPresentationDTO> update(BankUpdateDTO bankUpdateDTO);
 
     Uni<Void> disable(String acquirerId);
 

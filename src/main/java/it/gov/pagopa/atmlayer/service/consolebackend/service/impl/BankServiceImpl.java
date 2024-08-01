@@ -5,6 +5,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.client.BankWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BankService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -26,8 +27,8 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public Uni<BankPresentationDTO> update(BankInsertionDTO bankInsertionDTO) {
-        return bankWebClient.update(bankInsertionDTO);
+    public Uni<BankPresentationDTO> update(BankUpdateDTO bankUpdateDTO) {
+        return bankWebClient.update(bankUpdateDTO);
     }
 
     @Override
