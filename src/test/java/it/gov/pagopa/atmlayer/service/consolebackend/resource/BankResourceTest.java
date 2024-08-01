@@ -6,6 +6,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BankService;
 import jakarta.ws.rs.core.MediaType;
@@ -57,12 +58,11 @@ class BankResourceTest {
     @Test
     void testUpdate() {
         BankPresentationDTO expectedResponse = new BankPresentationDTO();
-        when(bankService.update(any(BankInsertionDTO.class)))
+        when(bankService.update(any(BankUpdateDTO.class)))
                 .thenReturn(Uni.createFrom().item(expectedResponse));
 
-        BankInsertionDTO requestDTO = new BankInsertionDTO();
+        BankUpdateDTO requestDTO = new BankUpdateDTO();
         requestDTO.setAcquirerId("12345");
-        requestDTO.setDenomination("Updated Bank");
 
         BankPresentationDTO actualResponse = given()
                 .contentType(MediaType.APPLICATION_JSON)
