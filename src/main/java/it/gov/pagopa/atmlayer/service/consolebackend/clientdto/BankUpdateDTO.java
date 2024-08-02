@@ -11,6 +11,8 @@ public class BankUpdateDTO {
     @NotBlank
     private String acquirerId;
 
+    private String denomination;
+
     private Integer limit;
 
     private QuotaPeriodType period;
