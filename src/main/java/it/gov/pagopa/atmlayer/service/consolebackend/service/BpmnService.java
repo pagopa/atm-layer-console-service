@@ -21,5 +21,4 @@ public interface BpmnService {
     Uni<BpmnDTO> deployBPMN(UUID uuid, Long version);
     Uni<Void> disableBPMN(UUID bpmnId, Long version);
     Uni<BpmnDTO> upgradeBPMN(BpmnUpgradeDto bpmnUpgradeDto);
-
 }
