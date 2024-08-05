@@ -1,15 +1,15 @@
 
 # Coverage Report: JaCoCo
 
-* FileS3DtoTest (QuarkusTest)
+* IntegrationTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.12%               |
-| :heavy_check_mark: Number of Lines Covered | 456    |
+| Code Coverage %         | 90.35%               |
+| :heavy_check_mark: Number of Lines Covered | 468    |
 | :x: Number of Lines Missed  | 50     |
-| Total Number of Lines   | 506     |
+| Total Number of Lines   | 518     |
 
 
 ## Details:
@@ -141,6 +141,18 @@
 
         
 #### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: TransactionResource.java
+    </summary>
+
+        
+#### All Lines Covered!
         
 </details>
 
@@ -419,6 +431,16 @@
 </details>
 
     
+
+<details>
+    <summary>
+:x: TransactionService.java
+    </summary>
+
+        
+</details>
+
+    
 ### it/gov/pagopa/atmlayer/service/consolebackend/utils
 
 <details>
@@ -462,6 +484,37 @@
 
         
 #### All Lines Covered!
+        
+</details>
+
+    
+### it/gov/pagopa/atmlayer/service/consolebackend/clientdto/transactiondto
+
+<details>
+    <summary>
+:x: TransactionInsertionDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionUpdateDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionDTO.java
+    </summary>
+
         
 </details>
 
@@ -1011,6 +1064,18 @@
 </details>
 
     
+
+<details>
+    <summary>
+:heavy_check_mark: TransactionServiceImpl.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
 ### it/gov/pagopa/atmlayer/service/consolebackend/client
 
 <details>
@@ -1036,6 +1101,16 @@
 <details>
     <summary>
 :x: UserProfileWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionWebClient.java
     </summary>
 
         
