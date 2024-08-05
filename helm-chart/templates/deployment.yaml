@@ -80,6 +80,10 @@ spec:
               value: "{{ .Values.userService.basePath }}"
             - name: USER_SERVICE_RELATIVE_PATH
               value: "{{ .Values.userService.relativePath }}"
+            - name: TRANSACTION_SERVICE_BASE_PATH
+              value: "{{ .Values.transactionService.basePath}}"
+            - name: TRANSACTION_SERVICE_RELATIVE_PATH
+              value: "{{ .Values.transactionService.relativePath}}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline
