@@ -68,8 +68,8 @@ public class WorkflowResource {
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@Context ContainerRequestContext containerRequestContext,
                                                                           @QueryParam("pageIndex") @DefaultValue("0")
-                                                                          @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) Integer pageIndex,
-                                                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "100")) Integer pageSize,
+                                                                          @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) Integer pageIndex,
+                                                                          @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) Integer pageSize,
                                                                           @QueryParam("status") @Schema(implementation = String.class, type = SchemaType.STRING, enumeration = {"CREATED", "WAITING_DEPLOY", "UPDATED_BUT_NOT_DEPLOYED", "DEPLOYED", "DEPLOY_ERROR"}) StatusEnum status,
                                                                           @QueryParam("workflowResourceId") UUID workflowResourceId,
                                                                           @QueryParam("deployedFileName") @Schema(format = "byte", maxLength = 255) String deployedFileName,

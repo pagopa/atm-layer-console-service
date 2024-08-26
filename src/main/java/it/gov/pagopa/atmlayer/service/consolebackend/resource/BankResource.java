@@ -115,8 +115,8 @@ public class BankResource {
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     public Uni<PageInfo<BankDTO>> search(@Context ContainerRequestContext containerRequestContext,
-                                         @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) int pageIndex,
-                                         @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "100")) int pageSize,
+                                         @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) int pageIndex,
+                                         @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize,
                                          @QueryParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId,
                                          @QueryParam("denomination") @Schema(format = "byte", maxLength = 255) String denomination,
                                          @QueryParam("clientId") @Schema(format = "byte", maxLength = 255) String clientId) {

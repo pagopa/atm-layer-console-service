@@ -65,7 +65,7 @@ public class BpmnResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     public Uni<PageInfo<BpmnVersionFrontEndDTO>> getBpmnFiltered(@Context ContainerRequestContext containerRequestContext,
                                                                  @QueryParam("pageIndex") @DefaultValue("0")
-                                                                 @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) int pageIndex,
+                                                                 @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) int pageIndex,
                                                                  @QueryParam("pageSize") @DefaultValue("10")
                                                                  @Parameter(required = true, schema = @Schema(minimum="1", maximum="100") ) int pageSize,
                                                                  @QueryParam("functionType") @Schema(format = "byte", maxLength = 255) String functionType,
@@ -120,9 +120,9 @@ public class BpmnResource {
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<BpmnBankConfigDTO>> getAssociationsByBpmn(@Context ContainerRequestContext containerRequestContext,
-                                                                  @PathParam("uuid") UUID uuid, @PathParam("version") Long version,
-                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) int pageIndex,
-                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "100")) int pageSize) {
+                                                                  @PathParam("uuid") UUID uuid, @PathParam("version") @Schema(minimum = "1", maximum = "10000")  Long version,
+                                                                  @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) int pageIndex,
+                                                                  @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.bpmnService.getAssociationsByBpmn(pageIndex, pageSize, uuid, version)
@@ -148,7 +148,7 @@ public class BpmnResource {
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<BpmnBankConfigDTO> addSingleAssociation(@Context ContainerRequestContext containerRequestContext,
                                                        @PathParam("uuid") UUID bpmnId,
-                                                       @PathParam("version") Long version,
+                                                       @PathParam("version") @Schema(minimum = "1", maximum = "10000") Long version,
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
@@ -166,7 +166,7 @@ public class BpmnResource {
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Void> deleteSingleAssociation(@Context ContainerRequestContext containerRequestContext,
                                              @PathParam("uuid") UUID bpmnId,
-                                             @PathParam("version") Long version,
+                                             @PathParam("version") @Schema(minimum = "1", maximum = "10000") Long version,
                                              @QueryParam("acquirerId") @Schema(format = "byte", maxLength = 255) @NotEmpty String acquirerId,
                                              @QueryParam("branchId") @Schema(format = "byte", maxLength = 255) String branchId,
                                              @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId) {

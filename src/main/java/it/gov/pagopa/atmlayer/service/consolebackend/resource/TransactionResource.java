@@ -87,8 +87,8 @@ public class TransactionResource {
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<PageInfo<TransactionDTO>> searchTransaction(@Context ContainerRequestContext containerRequestContext,
-                                                           @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0",maximum = "10000")) int pageIndex,
-                                                @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1",maximum = "100")) int pageSize,
+                                                           @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(minimum = "0",maximum = "10000")) int pageIndex,
+                                                @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(minimum = "1",maximum = "100")) int pageSize,
                                                 @QueryParam("transactionId") @Schema(format = "byte", maxLength = 255) String transactionId,
                                                 @QueryParam("functionType") @Schema(format = "byte", maxLength = 255) String functionType,
                                                 @QueryParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId,
