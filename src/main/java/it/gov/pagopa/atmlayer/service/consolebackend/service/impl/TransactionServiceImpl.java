@@ -30,10 +30,6 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionWebClient.searchTransaction(pageIndex, pageSize, transactionId, functionType, acquirerId, branchId, terminalId, transactionStatus, startTime, endTime);
     }
 
-    public Uni<List<TransactionDTO>> getAllTransaction() {
-        return transactionWebClient.getAllTransaction();
-    }
-
     public Uni<TransactionDTO> update(TransactionUpdateDTO transactionUpdateDTO) {
         return transactionWebClient.update(transactionUpdateDTO);
     }

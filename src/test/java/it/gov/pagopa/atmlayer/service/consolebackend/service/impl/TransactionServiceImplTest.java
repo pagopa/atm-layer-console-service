@@ -64,16 +64,6 @@ public class TransactionServiceImplTest {
         assertEquals(pageInfo, result.await().indefinitely());
     }
 
-    @Test
-    public void testGetAllTransaction() {
-        List<TransactionDTO> transactionList = List.of(new TransactionDTO());
-
-        when(transactionWebClient.getAllTransaction()).thenReturn(Uni.createFrom().item(transactionList));
-
-        Uni<List<TransactionDTO>> result = transactionService.getAllTransaction();
-
-        assertEquals(transactionList, result.await().indefinitely());
-    }
 
     @Test
     public void testUpdate() {

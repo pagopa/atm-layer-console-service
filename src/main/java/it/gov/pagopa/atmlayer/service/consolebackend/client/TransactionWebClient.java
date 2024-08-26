@@ -40,10 +40,6 @@ public interface TransactionWebClient {
                                                 @QueryParam("startTime") @Schema(example = "yyyy-mm-dd hh:mm:ss") Timestamp startTime,
                                                 @QueryParam("endTime") @Schema(example = "yyyy-mm-dd hh:mm:ss") Timestamp endTime);
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    Uni<List<TransactionDTO>> getAllTransaction();
-
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)

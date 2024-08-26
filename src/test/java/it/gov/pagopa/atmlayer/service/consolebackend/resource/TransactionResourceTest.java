@@ -9,23 +9,26 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.transactiondto.Tr
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.transactiondto.TransactionUpdateDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.TransactionService;
+import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @QuarkusTest
 public class TransactionResourceTest {
     @InjectMock
     TransactionService transactionService;
+
+    @InjectMock
+    UserService userService;
     Header authHeader;
     private TransactionDTO transactionDTO;
     private TransactionInsertionDTO transactionInsertionDTO;
@@ -68,6 +71,7 @@ public class TransactionResourceTest {
     @Test
     public void testInsert() {
         when(transactionService.insert(transactionInsertionDTO)).thenReturn(Uni.createFrom().item(transactionDTO));
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
         TransactionDTO result = given()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -84,6 +88,7 @@ public class TransactionResourceTest {
     public void testSearchTransaction() {
         when(transactionService.searchTransaction(0, 10, "txn123", "funcType", "acq123", "branch123", "term123", "completed", null, null))
                 .thenReturn(Uni.createFrom().item(pageInfo));
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
         PageInfo result = given()
                 .header(authHeader)
@@ -104,31 +109,12 @@ public class TransactionResourceTest {
 
         assertEquals(result.getItemsFound(), pageInfo.getItemsFound());
     }
-    @Test
-    public void testGetAll() {
-        // Mock del servizio
-        when(transactionService.getAllTransaction()).thenReturn(Uni.createFrom().item(Arrays.asList(transactionDTO)));
-
-        // Esecuzione della chiamata REST e estrazione del risultato
-        List<TransactionDTO> result = given()
-                .header(authHeader)
-                .when()
-                .get("/api/v1/console-service/transactions")
-                .then()
-                .statusCode(200)
-                .extract()
-                .body()
-                .jsonPath()
-                .getList(".", TransactionDTO.class);
-
-        // Confronto utilizzando le date formattate
-        assertEquals(result.size(), 1); // Assicurati che ci sia un solo elemento nella lista risultante
-    }
 
 
     @Test
     public void testUpdate() {
         when(transactionService.update(transactionUpdateDTO)).thenReturn(Uni.createFrom().item(transactionDTO));
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
         TransactionDTO result = given()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -146,6 +132,7 @@ public class TransactionResourceTest {
     @Test
     public void testDelete() {
         when(transactionService.delete("txn123")).thenReturn(Uni.createFrom().voidItem());
+        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
         given()
                 .header(authHeader)

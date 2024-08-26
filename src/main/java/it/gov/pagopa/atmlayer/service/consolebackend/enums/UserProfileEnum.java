@@ -14,7 +14,9 @@ public enum UserProfileEnum {
     WRITE_GESTIONE_FLUSSI(2, "Gestione flussi in scrittura"),
     DEPLOY_BPMN(3, "Rilascio BPM"),
     EMULATOR(4, "Emulator"),
-    GESTIONE_UTENTI(5, "Gestione utenti");
+    GESTIONE_UTENTI(5, "Gestione utenti"),
+    GESTIONE_BANCHE(6, "Gestione banche"),
+    GESTIONE_TRANSAZIONI(7, "Gestione transazioni");
 
     private final int value;
     private final String description;

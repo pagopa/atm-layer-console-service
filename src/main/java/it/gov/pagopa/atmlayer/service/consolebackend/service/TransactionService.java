@@ -14,8 +14,6 @@ public interface TransactionService {
 
     Uni<PageInfo<TransactionDTO>> searchTransaction(int pageIndex, int pageSize, String transactionId, String functionType, String acquirerId, String branchId, String terminalId, String transactionStatus, Timestamp startTime, Timestamp endTime);
 
-    Uni<List<TransactionDTO>> getAllTransaction();
-
     Uni<TransactionDTO> update(TransactionUpdateDTO transactionUpdateDTO);
 
     Uni<Void> delete(String transactionId);
