@@ -18,11 +18,14 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
@@ -53,6 +56,13 @@ public class BankResource {
     @Path("/insert")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "insertBank",
+            description = "inserimento banca"
+    )
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BankPresentationDTO.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<BankPresentationDTO> insert(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
@@ -64,6 +74,13 @@ public class BankResource {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "updateBank",
+            description = "Aggiorna banca"
+    )
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Banca aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BankPresentationDTO.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<BankPresentationDTO> update(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) @Valid BankUpdateDTO bankUpdateDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
@@ -73,8 +90,15 @@ public class BankResource {
 
     @POST
     @Path("/disable/{acquirerId}")
+    @Operation(
+            operationId = "disableBank",
+            description = "Disabilita una banca"
+    )
+    @APIResponse(responseCode = "204", description = "Operazione eseguita con successo.")
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
-                             @PathParam("acquirerId") String acquirerId) {
+                             @PathParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
                 .transformToUni(voidItem -> this.bankService.disable(acquirerId));
@@ -83,12 +107,19 @@ public class BankResource {
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "searchBanks",
+            description = "Esegue la GET delle banche filtrando sui campi desiderati gestendo la paginazione"
+    )
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     public Uni<PageInfo<BankDTO>> search(@Context ContainerRequestContext containerRequestContext,
-                                         @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
-                                         @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
-                                         @QueryParam("acquirerId") String acquirerId,
-                                         @QueryParam("denomination") String denomination,
-                                         @QueryParam("clientId") String clientId) {
+                                         @QueryParam("pageIndex") @DefaultValue("0") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) int pageIndex,
+                                         @QueryParam("pageSize") @DefaultValue("10") @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "100")) int pageSize,
+                                         @QueryParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId,
+                                         @QueryParam("denomination") @Schema(format = "byte", maxLength = 255) String denomination,
+                                         @QueryParam("clientId") @Schema(format = "byte", maxLength = 255) String clientId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
                 .transformToUni(voidItem -> this.bankService.search(pageIndex, pageSize, acquirerId, denomination, clientId)
@@ -104,8 +135,15 @@ public class BankResource {
     @GET
     @Path("/{acquirerId}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "getBank",
+            description = "Recupera una banca specifica"
+    )
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Banca aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BankPresentationDTO.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<BankPresentationDTO> getBank(@Context ContainerRequestContext containerRequestContext,
-                                            @PathParam("acquirerId") String acquirerId) {
+                                            @PathParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
                 .transformToUni(voidItem -> bankService.findByAcquirerId(acquirerId));

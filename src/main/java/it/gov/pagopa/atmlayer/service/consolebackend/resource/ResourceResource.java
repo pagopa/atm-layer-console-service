@@ -70,9 +70,9 @@ public class ResourceResource {
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@Context ContainerRequestContext containerRequestContext,
                                                                   @QueryParam("pageIndex") @DefaultValue("0")
-                                                                  @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0")) int pageIndex,
+                                                                  @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "0", maximum = "10000")) int pageIndex,
                                                                   @QueryParam("pageSize") @DefaultValue("10")
-                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageSize,
+                                                                  @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100")) int pageSize,
                                                                   @QueryParam("resourceId") UUID resourceId,
                                                                   @QueryParam("sha256") @Schema(format = "byte", maxLength = 255) String sha256,
                                                                   @QueryParam("noDeployableResourceType") NoDeployableResourceType noDeployableResourceType,

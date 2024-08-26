@@ -9,10 +9,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 public class UserInsertionDTO {
     @NotBlank
     @Email(message = "must be an email address in the correct format")
-    @Schema(required = true, example = "email@domain.com")
+    @Schema(required = true, example = "email@domain.com", maxLength = 255)
     private String userId;
     @NotBlank
+    @Schema(format = "byte", maxLength = 255)
     private String name;
     @NotBlank
+    @Schema(format = "byte", maxLength = 255)
     private String surname;
 }

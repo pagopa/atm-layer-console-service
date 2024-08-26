@@ -80,7 +80,7 @@ public class TaskResource {
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<Response> createNextScene(@Context ContainerRequestContext containerRequestContext,
-            @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") String transactionId,
+            @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") @Schema(format = "byte", maxLength = 255) String transactionId,
             @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
