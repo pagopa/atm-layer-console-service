@@ -18,7 +18,5 @@ public class BankInsertionDTO {
     @Schema(minimum = "1", maximum = "10000")
     private Integer limit;
     private QuotaPeriodType period;
-    @Schema(minimum = "1", maximum = "10000")
-    private Integer burstLimit;
     private Double rateLimit;
 }
