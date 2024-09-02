@@ -72,8 +72,8 @@ public class UserResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            operationId = "deleteBpmn",
-            description = "Elimina BPMN"
+            operationId = "deleteUser",
+            description = "Elimina User"
     )
     @APIResponse(responseCode = "204", description = "Ok")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
