@@ -1,15 +1,15 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.37%               |
-| :heavy_check_mark: Number of Lines Covered | 488    |
+| Code Coverage %         | 90.44%               |
+| :heavy_check_mark: Number of Lines Covered | 492    |
 | :x: Number of Lines Missed  | 52     |
-| Total Number of Lines   | 540     |
+| Total Number of Lines   | 544     |
 
 
 ## Details:
@@ -37,13 +37,9 @@
         
 #### All Lines Covered!
         
-- Line #13
+- Line #20
 ```
-        String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
-```
-- Line #15
-```
-        String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
+                : null;
 ```
 </details>
 
