@@ -76,7 +76,7 @@ public class ResourceResource {
                                                                   @QueryParam("resourceId") UUID resourceId,
                                                                   @QueryParam("sha256") @Schema(format = "byte", maxLength = 255) String sha256,
                                                                   @QueryParam("noDeployableResourceType") NoDeployableResourceType noDeployableResourceType,
-                                                                  @QueryParam("fileName") @Schema(format = "byte", maxLength = 255) String fileName,
+                                                                  @QueryParam("fileName") @Schema(format = "byte", maxLength = 60) String fileName,
                                                                   @QueryParam("storageKey") @Schema(format = "byte", maxLength = 255) String storageKey,
                                                                   @QueryParam("extension") @Schema(format = "byte", maxLength = 255) String extension){
 

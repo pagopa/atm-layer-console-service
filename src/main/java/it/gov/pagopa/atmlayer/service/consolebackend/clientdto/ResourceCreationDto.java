@@ -8,6 +8,7 @@ import jakarta.ws.rs.FormParam;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.File;
 
@@ -23,7 +24,8 @@ public class ResourceCreationDto {
   @NotNull(message = "filename  is required")
   @Pattern(regexp = "^[a-zA-Z0-9_-]+\\.[a-zA-Z]+$", message = "it must be of form ${regexp}")
   @Schema(description = "Description of the filename parameter: example_filename.txt",
-      required = true, pattern = "^[a-zA-Z0-9_-]+\\.[a-zA-Z]+$", format = "byte", maxLength = 255)
+      required = true, pattern = "^[a-zA-Z0-9_-]+\\.[a-zA-Z]+$", format = "byte", maxLength = 60)
+  @Length(max = 60)
   private String filename;
 
   @FormParam("resourceType")
