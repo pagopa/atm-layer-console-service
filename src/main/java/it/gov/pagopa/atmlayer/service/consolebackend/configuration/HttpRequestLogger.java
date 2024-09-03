@@ -6,8 +6,9 @@ import jakarta.ws.rs.ext.Provider;
 import lombok.extern.slf4j.Slf4j;
 import org.owasp.encoder.Encode;
 
-import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Provider
 @Slf4j
@@ -20,7 +21,7 @@ public class HttpRequestLogger implements ContainerRequestFilter {
 
         String method = requestContext.getMethod();
 
-        Map<String, List<String>> headersMap = requestContext.getHeaders();
+        Map<String, List<String>> headersMap = new HashMap<>(requestContext.getHeaders());
 
         headersMap.remove("Authorization");
 

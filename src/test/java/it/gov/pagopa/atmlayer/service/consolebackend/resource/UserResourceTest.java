@@ -135,7 +135,6 @@ class UserResourceTest {
 
     @Test
     void testGetUserFiltered() {
-        // Set up the UserDTO object
         UserDTO user = new UserDTO();
         user.setUserId("a@b.it");
         user.setName("a");
@@ -144,10 +143,8 @@ class UserResourceTest {
         user.setLastUpdatedAt(new Timestamp(System.currentTimeMillis()));
         user.setProfiles(List.of(new ProfileDTO(1, "Admin", new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()))));
 
-        // Set up the expected response
         PageInfo<UserDTO> expectedResponse = new PageInfo<>(0, 10, 1, 1, List.of(user));
 
-        // Mock the service call
         when(userService.getUserFiltered(
                 ArgumentMatchers.anyInt(),
                 ArgumentMatchers.anyInt(),
@@ -156,7 +153,6 @@ class UserResourceTest {
                 ArgumentMatchers.anyString())
         ).thenReturn(Uni.createFrom().item(expectedResponse));
 
-        // Perform the request and get the response
         PageInfo<UserDTO> result = given()
                 .header(authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -172,7 +168,6 @@ class UserResourceTest {
                 .body()
                 .as(new TypeRef<PageInfo<UserDTO>>() {});
 
-        // Assert the expected and actual values
         Assertions.assertEquals(expectedResponse, result);
     }
 

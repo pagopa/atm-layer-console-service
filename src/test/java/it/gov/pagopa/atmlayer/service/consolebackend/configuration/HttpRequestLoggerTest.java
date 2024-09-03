@@ -18,7 +18,7 @@ import java.net.URI;
 import static org.mockito.Mockito.*;
 
 @QuarkusTest
-public class HttpRequestLoggerTest {
+class HttpRequestLoggerTest {
 
     @Mock
     ContainerRequestContext requestContext;
@@ -35,7 +35,7 @@ public class HttpRequestLoggerTest {
     }
 
     @Test
-    public void testLogRequest() {
+    void testLogRequest() {
         Logger logger = mock(Logger.class);
         when(requestContext.getUriInfo()).thenReturn(uriInfo);
         when(uriInfo.getAbsolutePath()).thenReturn(URI.create("test-uri"));
@@ -46,11 +46,11 @@ public class HttpRequestLoggerTest {
         when(requestContext.getHeaders()).thenReturn(headers);
         httpRequestLogger.logRequest(requestContext);
         verify(requestContext, times(2)).getUriInfo();
-        verify(requestContext, times(2)).getHeaders();
+        verify(requestContext, times(1)).getHeaders();
     }
 
     @Test
-    public void testFilter() {
+    void testFilter() {
         Logger logger = mock(Logger.class);
         when(requestContext.getUriInfo()).thenReturn(uriInfo);
         when(requestContext.getUriInfo().getAbsolutePath()).thenReturn(URI.create("test-uri"));
@@ -61,7 +61,7 @@ public class HttpRequestLoggerTest {
         when(requestContext.getHeaders()).thenReturn(headers);
         httpRequestLogger.filter(requestContext);
         verify(requestContext, times(3)).getUriInfo();
-        verify(requestContext, times(2)).getHeaders();
+        verify(requestContext, times(1)).getHeaders();
 
     }
 }
