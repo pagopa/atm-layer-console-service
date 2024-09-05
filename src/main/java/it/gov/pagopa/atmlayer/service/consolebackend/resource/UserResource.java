@@ -64,7 +64,7 @@ public class UserResource {
                                @RequestBody(required = true) @Valid UserInsertionDTO userInsertionDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> this.userService.createUser(userInsertionDTO));
+                .transformToUni(voidItem -> userService.createUser(userInsertionDTO));
     }
 
     @DELETE
@@ -82,7 +82,7 @@ public class UserResource {
                             @PathParam("userId") @Schema(format = "byte", maxLength = 255) String userId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> this.userService.deleteUser(userId));
+                .transformToUni(voidItem -> userService.deleteUser(userId));
     }
 
     @GET
@@ -96,7 +96,7 @@ public class UserResource {
                                     @PathParam("userId") @Schema(format = "byte", maxLength = 255) String userId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> this.userService.getUserById(userId));
+                .transformToUni(voidItem -> userService.getUserById(userId));
     }
 
     @GET
@@ -111,7 +111,7 @@ public class UserResource {
     public Uni<List<UserDTO>> getAll(@Context ContainerRequestContext containerRequestContext) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> this.userService.getAllUsers());
+                .transformToUni(voidItem -> userService.getAllUsers());
     }
 
     @GET
@@ -123,7 +123,8 @@ public class UserResource {
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperati Utenti cercati.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
-    public Uni<PageInfo<UserDTO>> getUserFiltered(@QueryParam("pageIndex") @DefaultValue("0")
+    public Uni<PageInfo<UserDTO>> getUserFiltered(@Context ContainerRequestContext containerRequestContext,
+                                                  @QueryParam("pageIndex") @DefaultValue("0")
                                                   @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "100000")) int pageIndex,
                                                   @QueryParam("pageSize") @DefaultValue("10")
                                                   @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize,
@@ -131,14 +132,16 @@ public class UserResource {
                                                   @QueryParam("surname") @Schema(format = "byte", maxLength = 255) String surname,
                                                   @QueryParam("userId") @Schema(format = "byte", maxLength = 255) String userId,
                                                   @QueryParam("profileId") int profileId) {
-        return this.userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId)
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
+                .onItem()
+                .transformToUni(voidItem -> userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
                     if (pagedList.getResults().isEmpty()) {
                         log.info("No User record meets the applied filters");
                     }
                     return pagedList;
-                }));
+                })));
     }
 
     @POST
@@ -161,8 +164,10 @@ public class UserResource {
     @APIResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
-    public Uni<UserDTO> updateWithProfiles(@RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
-        return this.userService.updateWithProfiles(userInsertionWithProfilesDTO);
+    public Uni<UserDTO> updateWithProfiles(@Context ContainerRequestContext containerRequestContext, @RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
+                .onItem()
+                .transformToUni(voidItem -> userService.updateWithProfiles(userInsertionWithProfilesDTO));
     }
 
     @POST
@@ -173,7 +178,9 @@ public class UserResource {
     @APIResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
-    public Uni<UserDTO> insertWithProfiles(@RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
-        return this.userService.insertWithProfiles(userInsertionWithProfilesDTO);
+    public Uni<UserDTO> insertWithProfiles(@Context ContainerRequestContext containerRequestContext, @RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
+        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
+                .onItem()
+                .transformToUni(voidItem -> userService.insertWithProfiles(userInsertionWithProfilesDTO));
     }
 }
