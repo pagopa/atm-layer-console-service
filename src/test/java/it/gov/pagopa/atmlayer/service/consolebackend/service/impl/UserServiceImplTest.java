@@ -84,12 +84,12 @@ class UserServiceImplTest {
     void testGetUserFiltered() {
         List<UserDTO> userDTOList = List.of(new UserDTO());
         PageInfo<UserDTO> pageInfo = new PageInfo<>(0, 10, 1, 1, userDTOList);
-        when(userWebClient.getUserFiltered(anyInt(), anyInt(), anyString(), anyString(), anyString())).thenReturn(Uni.createFrom().item(pageInfo));
+        when(userWebClient.getUserFiltered(anyInt(), anyInt(), anyString(), anyString(), anyString(), anyInt())).thenReturn(Uni.createFrom().item(pageInfo));
 
-        Uni<PageInfo<UserDTO>> result = userServiceImpl.getUserFiltered(0, 10, "John", "Doe", "test-user-id");
+        Uni<PageInfo<UserDTO>> result = userServiceImpl.getUserFiltered(0, 10, "John", "Doe", "test-user-id", 1);
 
         assertEquals(pageInfo, result.await().indefinitely());
-        verify(userWebClient).getUserFiltered(0, 10, "John", "Doe", "test-user-id");
+        verify(userWebClient).getUserFiltered(0, 10, "John", "Doe", "test-user-id", 1);
     }
 
     @Test

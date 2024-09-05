@@ -31,7 +31,8 @@ public interface UserWebClient {
                                                           @Parameter(required = true, schema = @Schema(type = SchemaType.INTEGER, minimum = "1")) int pageSize,
                                                           @QueryParam("name") String name,
                                                           @QueryParam("surname") String surname,
-                                                          @QueryParam("userId") String userId);
+                                                          @QueryParam("userId") String userId,
+                                                        @QueryParam("profileId") int profileId);
 
     @POST
     @Path("/insert")

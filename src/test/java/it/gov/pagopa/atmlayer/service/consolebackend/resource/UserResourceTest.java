@@ -22,6 +22,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
@@ -150,7 +151,8 @@ class UserResourceTest {
                 ArgumentMatchers.anyInt(),
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.anyString(),
-                ArgumentMatchers.anyString())
+                ArgumentMatchers.anyString(),
+                anyInt())
         ).thenReturn(Uni.createFrom().item(expectedResponse));
 
         PageInfo<UserDTO> result = given()

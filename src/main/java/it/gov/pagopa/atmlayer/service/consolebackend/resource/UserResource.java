@@ -129,8 +129,9 @@ public class UserResource {
                                                   @Parameter(required = true, schema = @Schema(minimum = "1", maximum = "100")) int pageSize,
                                                   @QueryParam("name") @Schema(format = "byte", maxLength = 255) String name,
                                                   @QueryParam("surname") @Schema(format = "byte", maxLength = 255) String surname,
-                                                  @QueryParam("userId") @Schema(format = "byte", maxLength = 255) String userId) {
-        return this.userService.getUserFiltered(pageIndex, pageSize, name, surname, userId)
+                                                  @QueryParam("userId") @Schema(format = "byte", maxLength = 255) String userId,
+                                                  @QueryParam("profileId") int profileId) {
+        return this.userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
                     if (pagedList.getResults().isEmpty()) {
