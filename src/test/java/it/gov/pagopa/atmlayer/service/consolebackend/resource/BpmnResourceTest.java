@@ -8,6 +8,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
+import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,7 +82,7 @@ public class BpmnResourceTest {
     void testCreateBpmn() {
         BpmnDTO response= new BpmnDTO();
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(bpmnService.createBpmn(any(BpmnCreationDto.class)))
+        when(bpmnService.createBpmn(any(ContainerRequestContext.class),any(BpmnCreationDto.class)))
                 .thenReturn(Uni.createFrom().item(response));
         BpmnDTO result = given()
                 .header(authHeader)

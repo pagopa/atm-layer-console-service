@@ -106,7 +106,7 @@ public class BpmnResource {
     public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext,
                                    @RequestBody(required = true) @Valid BpmnCreationDto bpmnCreationDto) {
         userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
-        return this.bpmnService.createBpmn(bpmnCreationDto);
+        return this.bpmnService.createBpmn(containerRequestContext, bpmnCreationDto);
     }
 
     @GET

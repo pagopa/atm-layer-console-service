@@ -9,8 +9,11 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
+import it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -35,12 +38,18 @@ public class BpmnServiceImpl implements BpmnService {
     }
 
     @Override
-    public Uni<BpmnDTO> createBpmn(BpmnCreationDto bpmnCreationDto) {
+    public Uni<BpmnDTO> createBpmn(@Context ContainerRequestContext containerRequestContext, BpmnCreationDto bpmnCreationDto) {
         return Uni.createFrom().item(bpmnCreationDto)
                 .flatMap(bpmnDto -> {
                     VerifyResponse verify = camundaWebClient.verifyBpmn(bpmnCreationDto.getFile());
                     if (verify.getIsVerified()) {
-                        return bpmnWebClient.createBpmn(bpmnDto);
+                        return bpmnWebClient.createBpmn(bpmnDto)
+                                .onItem()
+                                .invoke(createdBPMN -> {
+                                    String email = HeadersUtils.getEmailJWT(containerRequestContext);
+                                    log.info("Operazione: Inserimento BPMN eseguita con successo da utente: {}", email);
+                                });
+
                     } else {
                         return Uni.createFrom().failure(new AtmLayerException("Il file Bpmn non è valido " + verify.getMessage(), Response.Status.NOT_ACCEPTABLE, AppErrorCodeEnum.FILE_NOT_VALID));
                     }
