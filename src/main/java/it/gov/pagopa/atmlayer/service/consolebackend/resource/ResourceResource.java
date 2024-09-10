@@ -117,6 +117,9 @@ public class ResourceResource {
             operationId = "createResourceMultiple",
             description = "Creazione di molteplici file"
     )
+    @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa crete.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceMultipleCreationDto.class)))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<List<String>> createResourceMultiple(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) ResourceMultipleCreationDto resourceMultipleCreationDto){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
@@ -136,7 +139,7 @@ public class ResourceResource {
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<ResourceDTO> updateResource(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @FormParam("file") File file,
+                                           @RequestBody(required = true) @FormParam("file") @Schema(format = "binary", maxLength = 5000) File file,
                                            @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()

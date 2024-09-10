@@ -105,7 +105,7 @@ public class UserResource {
             operationId = "getAllUsers",
             description = "Recupera tutti gli user"
     )
-    @APIResponse(responseCode = "200", description = "Ok")
+    @APIResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = List.class, maxItems = 1000)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<List<UserDTO>> getAll(@Context ContainerRequestContext containerRequestContext) {

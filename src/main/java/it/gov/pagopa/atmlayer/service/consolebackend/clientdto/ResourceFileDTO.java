@@ -15,6 +15,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode
 public class ResourceFileDTO implements Serializable {
+    @Schema(format = "byte", maxLength = 36)
     private UUID id;
     private S3ResourceTypeEnum resourceType;
     @Schema(format = "byte", maxLength = 255)

@@ -19,6 +19,7 @@ public class BpmnCreationDto {
     @FormParam("file")
     @PartType(MediaType.APPLICATION_XML)
     @NotNull(message = "bpmn file is required")
+    @Schema(format = "binary", maxLength = 5000)
     private File file;
 
     @FormParam("filename")

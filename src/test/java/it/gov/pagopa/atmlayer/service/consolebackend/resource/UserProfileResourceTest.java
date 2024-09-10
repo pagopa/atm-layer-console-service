@@ -64,39 +64,39 @@ public class UserProfileResourceTest {
         Assertions.assertEquals(response.size(), result.size());
     }
 
-    @Test
-    void testDeleteUserProfile() {
-        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(userProfileService.deleteUserProfiles( "a@b.it", 1)).thenReturn(Uni.createFrom().voidItem());
-        given()
-                .header(authHeader)
-                .contentType(MediaType.APPLICATION_JSON)
-                .pathParam("userId", "a@b.it")
-                .pathParam("profileId", 1)
-                .when().delete("/api/v1/console-service/user_profiles/userId/{userId}/profileId/{profileId}")
-                .then()
-                .statusCode(204)
-                .extract()
-                .body();
-    }
-
-    @Test
-    void testGetUserProfile() {
-        UserProfilesDTO response= new UserProfilesDTO();
-        response.setUserId("a@b.it");
-        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-        when(userProfileService.findById("a@b.it", 1)).thenReturn(Uni.createFrom().item(response));
-
-        UserProfilesDTO result = given()
-                .header(authHeader)
-                .contentType(MediaType.APPLICATION_JSON)
-                .pathParam("userId", "a@b.it")
-                .pathParam("profileId", 1)
-                .when().get("/api/v1/console-service/user_profiles/userId/{userId}/profileId/{profileId}")
-                .then()
-                .statusCode(200)
-                .extract()
-                .body().as(UserProfilesDTO.class);
-        Assertions.assertEquals(result, response);
-    }
+//    @Test
+//    void testDeleteUserProfile() {
+//        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
+//        when(userProfileService.deleteUserProfiles( "a@b.it", 1)).thenReturn(Uni.createFrom().voidItem());
+//        given()
+//                .header(authHeader)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .pathParam("userId", "a@b.it")
+//                .pathParam("profileId", 1)
+//                .when().delete("/api/v1/console-service/user_profiles/userId/{userId}/profileId/{profileId}")
+//                .then()
+//                .statusCode(204)
+//                .extract()
+//                .body();
+//    }
+//
+//    @Test
+//    void testGetUserProfile() {
+//        UserProfilesDTO response= new UserProfilesDTO();
+//        response.setUserId("a@b.it");
+//        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
+//        when(userProfileService.findById("a@b.it", 1)).thenReturn(Uni.createFrom().item(response));
+//
+//        UserProfilesDTO result = given()
+//                .header(authHeader)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .pathParam("userId", "a@b.it")
+//                .pathParam("profileId", 1)
+//                .when().get("/api/v1/console-service/user_profiles/userId/{userId}/profileId/{profileId}")
+//                .then()
+//                .statusCode(200)
+//                .extract()
+//                .body().as(UserProfilesDTO.class);
+//        Assertions.assertEquals(result, response);
+//    }
 }

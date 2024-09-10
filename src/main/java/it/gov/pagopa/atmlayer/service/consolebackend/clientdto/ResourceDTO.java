@@ -11,6 +11,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class ResourceDTO {
+    @Schema(format = "byte", maxLength = 36)
     private UUID resourceId;
     @Schema(format = "byte", maxLength = 255)
     private String sha256;

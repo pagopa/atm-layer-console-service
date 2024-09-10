@@ -19,11 +19,13 @@ public class BpmnUpgradeDto {
 
     @FormParam("uuid")
     @NotNull(message = "uuid is required")
+    @Schema(format = "byte", maxLength = 36)
     private UUID uuid;
 
     @FormParam("file")
     @PartType(MediaType.APPLICATION_XML)
     @NotNull(message = "bpmn file is required")
+    @Schema(format = "binary", maxLength = 5000)
     private File file;
 
     @FormParam("filename")

@@ -174,7 +174,7 @@ public class WorkflowResource {
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
     @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
     public Uni<WorkflowResourceDTO> update(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") File file,
+                                           @RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") @Schema(format = "binary", maxLength = 5000) File file,
                                     @PathParam("uuid") UUID uuid){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()

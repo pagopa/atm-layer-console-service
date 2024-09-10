@@ -18,6 +18,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class BpmnDTO implements Serializable {
 
+    @Schema(format = "byte", maxLength = 36)
     private UUID bpmnId;
     @Schema(minimum = "1", maximum = "10000")
     private Long modelVersion;

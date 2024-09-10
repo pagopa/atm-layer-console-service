@@ -16,6 +16,7 @@ import java.util.UUID;
 @ToString
 @EqualsAndHashCode
 public class WorkflowResourceDTO {
+    @Schema(format = "byte", maxLength = 36)
     private UUID workflowResourceId;
     @Schema(format = "byte", maxLength = 255)
     private String deployedFileName;

@@ -18,6 +18,7 @@ public class ResourceCreationDto {
 
   @FormParam("file")
   @NotNull(message = "resource file is required")
+  @Schema(format = "binary", maxLength = 5000)
   private File file;
 
   @FormParam("filename")

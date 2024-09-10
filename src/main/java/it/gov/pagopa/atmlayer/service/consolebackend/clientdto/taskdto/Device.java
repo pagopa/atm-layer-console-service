@@ -54,6 +54,7 @@ public class Device {
     @Schema(description = "Timestamp della richiesta",
             format = "date-time",
             pattern = "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$",
+            maxLength = 20,
             example = "2023-10-31T17:30:00")
     private Date opTimestamp;
 

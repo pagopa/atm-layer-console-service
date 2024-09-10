@@ -20,6 +20,7 @@ public class WorkflowResourceCreationDto {
     @FormParam("file")
     @PartType(MediaType.APPLICATION_XML)
     @NotNull(message = "Workflow Resource file is required")
+    @Schema(format = "binary", maxLength = 5000)
     private File file;
 
     @FormParam("filename")
