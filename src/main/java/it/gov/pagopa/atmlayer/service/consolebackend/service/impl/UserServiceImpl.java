@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Uni<PageInfo<UserDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId, int profileId) {
-        return userWebClient.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId);
+    public Uni<PageInfo<UserDTO>> getUserFiltered(int pageIndex, int pageSize, String name, String surname, String userId, int profileNumber) {
+        return userWebClient.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileNumber);
     }
 
     @Override

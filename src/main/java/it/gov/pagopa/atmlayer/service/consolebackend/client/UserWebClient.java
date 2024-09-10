@@ -32,7 +32,7 @@ public interface UserWebClient {
                                                           @QueryParam("name") String name,
                                                           @QueryParam("surname") String surname,
                                                           @QueryParam("userId") String userId,
-                                                        @QueryParam("profileId") int profileId);
+                                                        @QueryParam("profileNumber") int profileNumber);
 
     @POST
     @Path("/insert")

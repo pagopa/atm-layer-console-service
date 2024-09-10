@@ -131,10 +131,10 @@ public class UserResource {
                                                   @QueryParam("name") @Schema(format = "byte", maxLength = 255) String name,
                                                   @QueryParam("surname") @Schema(format = "byte", maxLength = 255) String surname,
                                                   @QueryParam("userId") @Schema(format = "byte", maxLength = 255) String userId,
-                                                  @QueryParam("profileId") int profileId) {
+                                                  @QueryParam("profileNumber") int profileNumber) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileId)
+                .transformToUni(voidItem -> userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileNumber)
                 .onItem()
                 .transform(Unchecked.function(pagedList -> {
                     if (pagedList.getResults().isEmpty()) {
