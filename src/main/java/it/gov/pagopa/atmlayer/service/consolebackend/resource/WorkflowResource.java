@@ -125,7 +125,7 @@ public class WorkflowResource {
                                            @RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.workflowService.create(workflowResourceCreationDto));
+                .transformToUni(voidItem -> this.workflowService.create(workflowResourceCreationDto, containerRequestContext));
     }
 
     @POST
@@ -142,7 +142,7 @@ public class WorkflowResource {
                                            @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
                 .onItem()
-                .transformToUni(voidItem -> this.workflowService.deploy(uuid));
+                .transformToUni(voidItem -> this.workflowService.deploy(uuid, containerRequestContext));
     }
 
     @PUT
@@ -159,7 +159,7 @@ public class WorkflowResource {
                                              @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.workflowService.rollback(uuid));
+                .transformToUni(voidItem -> this.workflowService.rollback(uuid, containerRequestContext));
     }
 
     @PUT
@@ -178,7 +178,7 @@ public class WorkflowResource {
                                     @PathParam("uuid") UUID uuid){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.workflowService.update(file, uuid));
+                .transformToUni(voidItem -> this.workflowService.update(file, uuid, containerRequestContext));
     }
 
     @POST
@@ -194,6 +194,6 @@ public class WorkflowResource {
                              @PathParam("uuid") UUID uuid){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.workflowService.disable(uuid));
+                .transformToUni(voidItem -> this.workflowService.disable(uuid, containerRequestContext));
     }
 }

@@ -106,7 +106,7 @@ public class ResourceResource {
                                            @RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.resourceService.createResource(resourceCreationDto));
+                .transformToUni(voidItem -> this.resourceService.createResource(resourceCreationDto, containerRequestContext));
     }
 
     @POST
@@ -124,7 +124,7 @@ public class ResourceResource {
                                            @RequestBody(required = true) ResourceMultipleCreationDto resourceMultipleCreationDto){
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.resourceService.createResourceMultiple(resourceMultipleCreationDto));
+                .transformToUni(voidItem -> this.resourceService.createResourceMultiple(resourceMultipleCreationDto, containerRequestContext));
     }
 
     @PUT
@@ -143,7 +143,7 @@ public class ResourceResource {
                                            @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> resourceService.updateResource(file, uuid));
+                .transformToUni(voidItem -> resourceService.updateResource(file, uuid, containerRequestContext));
     }
 
     @POST
@@ -159,6 +159,6 @@ public class ResourceResource {
                              @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> resourceService.disable(uuid));
+                .transformToUni(voidItem -> resourceService.disable(uuid, containerRequestContext));
     }
 }

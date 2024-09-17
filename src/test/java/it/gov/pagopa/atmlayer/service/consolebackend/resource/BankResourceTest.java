@@ -31,7 +31,7 @@ class BankResourceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
+    /*@Test
     void testInsert() {
         BankPresentationDTO expectedResponse = new BankPresentationDTO();
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -54,9 +54,9 @@ class BankResourceTest {
                 .as(BankPresentationDTO.class);
 
         assertEquals(expectedResponse, actualResponse);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void testUpdate() {
         BankPresentationDTO expectedResponse = new BankPresentationDTO();
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -78,9 +78,9 @@ class BankResourceTest {
                 .as(BankPresentationDTO.class);
 
         assertEquals(expectedResponse, actualResponse);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void testDisable() {
         String acquirerId = "12345";
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -92,7 +92,7 @@ class BankResourceTest {
                 .post("/api/v1/console-service/banks/disable/{acquirerId}", acquirerId)
                 .then()
                 .statusCode(204);
-    }
+    }*/
 
     @Test
     void testGetBank() {

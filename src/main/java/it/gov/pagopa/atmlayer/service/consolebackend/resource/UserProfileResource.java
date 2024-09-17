@@ -62,7 +62,7 @@ public class UserProfileResource {
                                              @RequestBody(required = true) @Valid UserProfilesInsertionDTO userProfilesInsertionDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> this.userProfileService.insertUserProfiles(userProfilesInsertionDTO));
+                .transformToUni(voidItem -> this.userProfileService.insertUserProfiles(userProfilesInsertionDTO, containerRequestContext));
     }
 
 //    @GET

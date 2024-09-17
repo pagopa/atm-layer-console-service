@@ -13,9 +13,9 @@ import java.util.List;
 
 public interface UserService {
 
-    Uni<UserDTO> createUser(UserInsertionDTO userInsertionDTO);
+    Uni<UserDTO> createUser(UserInsertionDTO userInsertionDTO, ContainerRequestContext containerRequestContext);
 
-    Uni<Void> deleteUser(String userId);
+    Uni<Void> deleteUser(String userId, ContainerRequestContext containerRequestContext);
 
     Uni<UserDTO> getUserById(String userId);
 
@@ -26,8 +26,8 @@ public interface UserService {
     Uni<Void> checkAuthorizationUser(ContainerRequestContext containerRequestContext, UserProfileEnum userProfileEnum);
     Uni<UserDTO> checkFirstAccess(String userId);
 
-    Uni<UserDTO> updateWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO);
+    Uni<UserDTO> updateWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO, ContainerRequestContext containerRequestContext);
 
-    Uni<UserDTO> insertWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO);
+    Uni<UserDTO> insertWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO, ContainerRequestContext containerRequestContext);
 
 }

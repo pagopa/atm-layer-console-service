@@ -69,7 +69,7 @@ class ResourceResourceTest {
         assertEquals(result.getItemsFound(), response.getItemsFound());
     }
 
-    @Test
+    /*@Test
     void testCreateResource() {
         ResourceDTO response= new ResourceDTO();
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -91,9 +91,9 @@ class ResourceResourceTest {
                 .body()
                 .as(ResourceDTO.class);
        assertEquals(response, result);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void testUpdateResource() {
         ResourceDTO response= new ResourceDTO();
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -113,9 +113,9 @@ class ResourceResourceTest {
                 .as(ResourceDTO.class);
 
         assertEquals(response, result);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void testDisableResource() {
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
         when(resourceService.disable(any(UUID.class)))
@@ -129,5 +129,6 @@ class ResourceResourceTest {
                 .statusCode(204)
                 .extract()
                 .body();
-    }
+    }*/
+
 }

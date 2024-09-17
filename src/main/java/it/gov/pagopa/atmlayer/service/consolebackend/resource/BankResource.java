@@ -58,7 +58,7 @@ public class BankResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             operationId = "insertBank",
-            description = "inserimento banca"
+            description = "Inserimento banca"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = BankPresentationDTO.class)))
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
@@ -67,7 +67,7 @@ public class BankResource {
                                            @RequestBody(required = true) @Valid BankInsertionDTO bankInsertionDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
-                .transformToUni(voidItem -> this.bankService.insert(bankInsertionDTO));
+                .transformToUni(voidItem -> this.bankService.insert(bankInsertionDTO, containerRequestContext));
     }
 
     @PUT
@@ -85,7 +85,7 @@ public class BankResource {
                                            @RequestBody(required = true) @Valid BankUpdateDTO bankUpdateDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
-                .transformToUni(voidItem -> this.bankService.update(bankUpdateDTO));
+                .transformToUni(voidItem -> this.bankService.update(bankUpdateDTO, containerRequestContext));
     }
 
     @POST
@@ -101,7 +101,7 @@ public class BankResource {
                              @PathParam("acquirerId") @Schema(format = "byte", maxLength = 255) String acquirerId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_BANCHE)
                 .onItem()
-                .transformToUni(voidItem -> this.bankService.disable(acquirerId));
+                .transformToUni(voidItem -> this.bankService.disable(acquirerId, containerRequestContext));
     }
 
     @GET

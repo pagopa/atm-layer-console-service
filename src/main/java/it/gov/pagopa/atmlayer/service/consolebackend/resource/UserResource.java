@@ -64,7 +64,7 @@ public class UserResource {
                                @RequestBody(required = true) @Valid UserInsertionDTO userInsertionDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> userService.createUser(userInsertionDTO));
+                .transformToUni(voidItem -> userService.createUser(userInsertionDTO, containerRequestContext));
     }
 
     @DELETE
@@ -73,7 +73,7 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             operationId = "deleteUser",
-            description = "Elimina User"
+            description = "Cancellazione User"
     )
     @APIResponse(responseCode = "204", description = "Ok")
     @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
@@ -82,7 +82,7 @@ public class UserResource {
                             @PathParam("userId") @Schema(format = "byte", maxLength = 255) String userId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> userService.deleteUser(userId));
+                .transformToUni(voidItem -> userService.deleteUser(userId, containerRequestContext));
     }
 
     @GET
@@ -167,7 +167,7 @@ public class UserResource {
     public Uni<UserDTO> updateWithProfiles(@Context ContainerRequestContext containerRequestContext, @RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> userService.updateWithProfiles(userInsertionWithProfilesDTO));
+                .transformToUni(voidItem -> userService.updateWithProfiles(userInsertionWithProfilesDTO, containerRequestContext));
     }
 
     @POST
@@ -181,6 +181,6 @@ public class UserResource {
     public Uni<UserDTO> insertWithProfiles(@Context ContainerRequestContext containerRequestContext, @RequestBody(required = true) @Valid UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
-                .transformToUni(voidItem -> userService.insertWithProfiles(userInsertionWithProfilesDTO));
+                .transformToUni(voidItem -> userService.insertWithProfiles(userInsertionWithProfilesDTO, containerRequestContext));
     }
 }

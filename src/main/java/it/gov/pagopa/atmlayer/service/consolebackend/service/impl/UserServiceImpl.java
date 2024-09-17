@@ -11,6 +11,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
+import it.gov.pagopa.atmlayer.service.consolebackend.utils.LogUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -32,13 +33,15 @@ public class UserServiceImpl implements UserService {
     UserWebClient userWebClient;
 
     @Override
-    public Uni<UserDTO> createUser(UserInsertionDTO userInsertionDTO) {
-        return userWebClient.createUser(userInsertionDTO);
+    public Uni<UserDTO> createUser(UserInsertionDTO userInsertionDTO, ContainerRequestContext containerRequestContext) {
+        return userWebClient.createUser(userInsertionDTO)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Inserimento utente"));
     }
 
     @Override
-    public Uni<Void> deleteUser(String userId) {
-        return userWebClient.delete(userId);
+    public Uni<Void> deleteUser(String userId, ContainerRequestContext containerRequestContext) {
+        return userWebClient.delete(userId)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Cancellazione utente"));
     }
 
     @Override
@@ -74,13 +77,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Uni<UserDTO> updateWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
-        return userWebClient.updateWithProfiles(userInsertionWithProfilesDTO);
+    public Uni<UserDTO> updateWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO, ContainerRequestContext containerRequestContext) {
+        return userWebClient.updateWithProfiles(userInsertionWithProfilesDTO)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Aggiornamento utente con profili"));
     }
 
     @Override
-    public Uni<UserDTO> insertWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO) {
-        return userWebClient.insertWithProfiles(userInsertionWithProfilesDTO);
+    public Uni<UserDTO> insertWithProfiles(UserInsertionWithProfilesDTO userInsertionWithProfilesDTO, ContainerRequestContext containerRequestContext) {
+        return userWebClient.insertWithProfiles(userInsertionWithProfilesDTO)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Inserimento utente con profili"));
     }
 
 }
