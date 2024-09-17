@@ -152,7 +152,7 @@ public class BpmnResource {
                                                        @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto));
+                .transformToUni(voidItem -> this.bpmnService.addSingleAssociation(bpmnId, version, bankConfigTripletDto, containerRequestContext));
     }
 
     @DELETE
@@ -172,7 +172,7 @@ public class BpmnResource {
                                              @QueryParam("terminalId") @Schema(format = "byte", maxLength = 255) String terminalId) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId));
+                .transformToUni(voidItem -> this.bpmnService.deleteSingleAssociation(bpmnId, version, acquirerId, branchId, terminalId, containerRequestContext));
     }
 
     @PUT
@@ -192,7 +192,7 @@ public class BpmnResource {
                                                            @RequestBody(required = true) BankConfigTripletDto bankConfigTripletDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto));
+                .transformToUni(voidItem -> this.bpmnService.replaceSingleAssociation(bpmnId, version, bankConfigTripletDto, containerRequestContext));
     }
 
     @POST
@@ -210,7 +210,7 @@ public class BpmnResource {
                                    @PathParam("version") @Schema(minimum = "1", maximum = "10000") Long version) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
                 .onItem()
-                .transformToUni(voidItem -> this.bpmnService.deployBPMN(uuid, version));
+                .transformToUni(voidItem -> this.bpmnService.deployBPMN(uuid, version, containerRequestContext));
     }
 
     @GET
@@ -245,7 +245,7 @@ public class BpmnResource {
                                  @PathParam("version") @Schema(minimum = "1", maximum = "10000") Long version) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
-                .transformToUni(voidItem -> this.bpmnService.disableBPMN(bpmnId, version));
+                .transformToUni(voidItem -> this.bpmnService.disableBPMN(bpmnId, version, containerRequestContext));
     }
 
     @POST
@@ -263,6 +263,6 @@ public class BpmnResource {
     public Uni<BpmnDTO> upgradeBPMN(@Context ContainerRequestContext containerRequestContext,
                                     @Valid BpmnUpgradeDto bpmnUpgradeDto) {
         userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI);
-        return this.bpmnService.upgradeBPMN(bpmnUpgradeDto);
+        return this.bpmnService.upgradeBPMN(bpmnUpgradeDto, containerRequestContext);
     }
 }
