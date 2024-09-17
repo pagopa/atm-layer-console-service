@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 
 @QuarkusTest
-public class BpmnServiceImplTest {
+class BpmnServiceImplTest {
 
     @Mock
     private BpmnWebClient bpmnWebClient;
