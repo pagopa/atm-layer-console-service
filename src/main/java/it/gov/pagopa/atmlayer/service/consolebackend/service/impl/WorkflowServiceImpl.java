@@ -10,8 +10,10 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceTyp
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.WorkflowService;
+import it.gov.pagopa.atmlayer.service.consolebackend.utils.LogUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.container.ContainerRequestContext;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -39,27 +41,32 @@ public class WorkflowServiceImpl implements WorkflowService {
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> deploy(UUID uuid) {
-        return workflowWebClient.deploy(uuid);
+    public Uni<WorkflowResourceDTO> deploy(UUID uuid, ContainerRequestContext containerRequestContext) {
+        return workflowWebClient.deploy(uuid)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Rilascio risorsa aggiuntiva per processo"));
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> rollback(UUID uuid) {
-        return workflowWebClient.rollback(uuid);
+    public Uni<WorkflowResourceDTO> rollback(UUID uuid, ContainerRequestContext containerRequestContext) {
+        return workflowWebClient.rollback(uuid)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Rollback risorsa aggiuntiva per processo"));
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> update(File file, UUID uuid) {
-        return workflowWebClient.update(file, uuid);
+    public Uni<WorkflowResourceDTO> update(File file, UUID uuid, ContainerRequestContext containerRequestContext) {
+        return workflowWebClient.update(file, uuid)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Aggiornamento risorsa aggiuntiva per processo"));
     }
 
     @Override
-    public Uni<Void> disable(UUID uuid) {
-        return workflowWebClient.disable(uuid);
+    public Uni<Void> disable(UUID uuid, ContainerRequestContext containerRequestContext) {
+        return workflowWebClient.disable(uuid)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Disabilita risorsa aggiuntiva per processo"));
     }
 
     @Override
-    public Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto) {
-        return workflowWebClient.create(workflowResourceCreationDto);
+    public Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto, ContainerRequestContext containerRequestContext) {
+        return workflowWebClient.create(workflowResourceCreationDto)
+                .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Inserimento risorsa aggiuntiva per processo"));
     }
 }

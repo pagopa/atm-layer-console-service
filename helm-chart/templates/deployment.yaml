@@ -66,6 +66,8 @@ spec:
               value: "{{ .Values.resourceRouteBasePath }}"
             - name: USERS_ROUTE_BASE_PATH
               value: "{{ .Values.usersRouteBasePath }}"
+            - name: BANK_ROUTE_BASE_PATH
+              value: "{{ .Values.bankRouteBasePath }}"
             - name: MODEL_EMULATOR_BASE_PATH
               value: "{{ .Values.modelEmulatorBasePath }}"
             - name: TASK_BASE_PATH
@@ -74,6 +76,14 @@ spec:
               value: "{{ .Values.task.relativePath }}"
             - name: CAMUNDA_BASE_PATH
               value: "{{ .Values.camundaBasePath }}"
+            - name: USER_SERVICE_BASE_PATH
+              value: "{{ .Values.userService.basePath }}"
+            - name: USER_SERVICE_RELATIVE_PATH
+              value: "{{ .Values.userService.relativePath }}"
+            - name: TRANSACTION_SERVICE_BASE_PATH
+              value: "{{ .Values.transactionService.basePath}}"
+            - name: TRANSACTION_SERVICE_RELATIVE_PATH
+              value: "{{ .Values.transactionService.relativePath}}"
           volumeMounts:
           {{- if .Values.secretProviderClass.enabled }}
           - name: secrets-store-inline

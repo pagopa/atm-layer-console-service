@@ -16,14 +16,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @RegisterForReflection
 @SuperBuilder
 public class ATMLayerErrorResponse {
-
+    @Schema(format = "byte", maxLength = 255)
     private String errorCode;
 
-    @Schema(example = "Validation Error")
+    @Schema(example = "Validation Error", maxLength = 255)
     private String type;
 
-    @Schema(example = "500")
+    @Schema(example = "500", minimum = "1", maximum = "999")
     private int statusCode;
 
+    @Schema(format = "byte", maxLength = 255)
     private String message;
 }

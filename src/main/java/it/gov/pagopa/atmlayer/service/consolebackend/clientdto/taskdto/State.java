@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;
@@ -19,20 +20,20 @@ public class State {
     @Schema(required = true)
     private Device device;
 
-    @Schema(description = "ID del task che da completato")
+    @Schema(description = "ID del task che da completato", maxLength = 255)
     private String taskId;
 
-    @Schema(description = "Mappa delle variabili inviate dal Device")
+    @Schema(description = "Mappa delle variabili inviate dal Device", maxProperties = 100)
     private Map<String, Object> data;
 
     @Schema(hidden = true)
     private String transactionId;
 
 
-    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)")
+    @Schema(description = "Codice Fiscale dell'utente (dato sensibile)", maxLength = 100)
     private String fiscalCode;
 
-    @Schema(description = "Informazioni del pan (dato sensibile)")
+    @Schema(description = "Informazioni del pan (dato sensibile)", type = SchemaType.ARRAY, maxItems = 50)
     private List<PanInfo> panInfo;
 
 }

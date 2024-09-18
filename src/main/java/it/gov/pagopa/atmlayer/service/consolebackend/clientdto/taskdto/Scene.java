@@ -13,10 +13,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @RegisterForReflection
 public class Scene {
 
-    @Schema(required = false, description = "Task e le sue proprietà")
+    @Schema(required = false, description = "Task e le sue proprietà", implementation = Task.class)
     private Task task;
 
-    @Schema(required = true, description = "ID della transazione. Può essere generato dal Device alla richiesta della prima scena oppure generato dal server alla risposta della prima scena. Resta invariato fino al termine della funzione.", example = "b197bbd0-0459-4d0f-9d4a-45cdd369c018")
+    @Schema(required = true, description = "ID della transazione. Può essere generato dal Device alla richiesta della prima scena oppure generato dal server alla risposta della prima scena. Resta invariato fino al termine della funzione.", example = "b197bbd0-0459-4d0f-9d4a-45cdd369c018", maxLength = 255)
     private String transactionId;
 
     @Schema(required = true, description = "Esito dell' operazione")

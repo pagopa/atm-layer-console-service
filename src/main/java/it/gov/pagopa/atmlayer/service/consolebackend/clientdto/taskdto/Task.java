@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;
@@ -20,36 +21,36 @@ import java.util.Map;
 @Schema(description = "Oggetto che rappresenta un task")
 public class Task {
 
-    @Schema(required = true, description = "Identificativo del Task")
+    @Schema(required = true, description = "Identificativo del Task", format = "byte", maxLength = 255)
     private String id;
 
-    @Schema(description = "Mappa delle variabili generiche")
+    @Schema(description = "Mappa delle variabili generiche", maxProperties = 100)
     private Map<String, Object> data;
 
-    @Schema(description = "Mappa delle variabili da consultare in caso di errore")
+    @Schema(description = "Mappa delle variabili da consultare in caso di errore", maxProperties = 100)
     private Map<String, Object> onError;
 
-    @Schema(description = "Valore di durata prima di andare in timeout")
+    @Schema(description = "Valore di durata prima di andare in timeout", minimum = "0", maximum = "600000")
     private int timeout;
 
-    @Schema(description = "Mappa delle variabili da consultare in caso di timeout")
+    @Schema(description = "Mappa delle variabili da consultare in caso di timeout", maxProperties = 100)
     private Map<String, Object> onTimeout;
 
     @Schema(description = "Template html")
     private Template template;
 
-    @Schema(description = "Comando da eseguire")
+    @Schema(description = "Comando da eseguire", implementation = Command.class)
     private Command command;
 
-    @Schema(description = "Template dello scontrino")
+    @Schema(description = "Template dello scontrino",format = "byte", maxLength = 1000)
     private String receiptTemplate;
 
-    @Schema(description = "Nome della variabile in cui il Device setterà l'esito del Command")
+    @Schema(description = "Nome della variabile in cui il Device setterà l'esito del Command", format = "byte", maxLength = 255)
     private String outcomeVarName;
 
-    @Schema(description = "Modalità dell'epp")
+    @Schema(description = "Modalità dell'epp", implementation = EppMode.class)
     private EppMode eppMode;
 
-    @Schema(description = "Lista dei bottoni")
+    @Schema(description = "Lista dei bottoni", maxItems = 100)
     private List<Button> buttons;
 }
