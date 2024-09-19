@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LogUtils {
 
     public static void logOperation(ContainerRequestContext containerRequestContext, String operationName) {
-        String email = HeadersUtils.getEmailJWT(containerRequestContext);
-        log.info("Utente: {} ha eseguito l'operazione: {}", email, operationName);
+        String userId = HeadersUtils.getUserIdJWT(containerRequestContext);
+        log.info("Utente: {} ha eseguito l'operazione: {}", userId, operationName);
     }
 
 }

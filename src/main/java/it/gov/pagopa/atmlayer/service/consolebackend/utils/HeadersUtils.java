@@ -22,8 +22,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class HeadersUtils {
 
-    private static final String  HEADER_AUTHORIZATION = "Authorization";
+    private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String CLAIM_EMAIL = "email";
+    private static final String CLAIM_IDENTITIES = "identities";
+    private static final String CLAIM_USERID = "userId";
 
     public static String extractTokenMiddlePart(String token) {
         String[] parts = token.split("\\.");
@@ -49,10 +51,26 @@ public class HeadersUtils {
         String middlePart = extractTokenMiddlePart(containerRequestContext.getHeaderString(HEADER_AUTHORIZATION));
         try {
             return getPayload(middlePart).get(CLAIM_EMAIL).asText();
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
         }
+    }
 
+    public static String getUserIdJWT(ContainerRequestContext containerRequestContext) {
+        String middlePart = extractTokenMiddlePart(containerRequestContext.getHeaderString(HEADER_AUTHORIZATION));
+        try {
+            JsonNode identities = getPayload(middlePart).get(CLAIM_IDENTITIES);
+            if (identities != null && identities.isArray()) {
+                for (JsonNode identity : identities) {
+                    if (identity.has(CLAIM_USERID)) {
+                        return identity.get(CLAIM_USERID).asText();
+                    }
+                }
+            }
+            throw new AtmLayerException("userId non trovato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+        } catch (Exception e) {
+            throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);
+        }
     }
 
     public static boolean havePermission(UserDTO userDTO, UserProfileEnum vision) {
@@ -63,7 +81,7 @@ public class HeadersUtils {
                 .anyMatch(profile -> profile.getProfileId() == vision.getValue());
     }
 
-    public static List<String> fromFileListToStringList(List<File> fileList){
+    public static List<String> fromFileListToStringList(List<File> fileList) {
         return fileList.stream().map(HeadersUtils::fromFileToString).collect(Collectors.toList());
     }
 
