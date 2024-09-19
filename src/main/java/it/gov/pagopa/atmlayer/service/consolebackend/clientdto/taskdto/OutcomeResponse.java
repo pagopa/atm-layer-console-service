@@ -14,10 +14,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @RegisterForReflection
 public class OutcomeResponse {
 
-    @Schema(required = true, description = "Risultato dell'operazione")
+    @Schema(required = true, description = "Risultato dell'operazione", format = "byte", maxLength = 1000)
     private String result;
 
-    @Schema(required = true, description = "Descrizione dell'esito dell'operazione")
+    @Schema(required = true, description = "Descrizione dell'esito dell'operazione", format = "byte", maxLength = 1000)
     private String description;
 
     @JsonIgnore

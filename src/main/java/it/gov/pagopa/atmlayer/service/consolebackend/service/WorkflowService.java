@@ -8,6 +8,7 @@ import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.WorkflowResourceF
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.DeployableResourceType;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
+import jakarta.ws.rs.container.ContainerRequestContext;
 
 import java.io.File;
 import java.util.UUID;
@@ -20,13 +21,13 @@ public interface WorkflowService {
 
     Uni<FileS3Dto> downloadFrontEnd (UUID workflowResourceId);
 
-    Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto);
+    Uni<WorkflowResourceDTO> create(WorkflowResourceCreationDto workflowResourceCreationDto, ContainerRequestContext containerRequestContext);
 
-    Uni<WorkflowResourceDTO> deploy(UUID uuid);
+    Uni<WorkflowResourceDTO> deploy(UUID uuid, ContainerRequestContext containerRequestContext);
 
-    Uni<WorkflowResourceDTO> rollback(UUID uuid);
+    Uni<WorkflowResourceDTO> rollback(UUID uuid, ContainerRequestContext containerRequestContext);
 
-    Uni<WorkflowResourceDTO> update(File file, UUID uuid);
+    Uni<WorkflowResourceDTO> update(File file, UUID uuid, ContainerRequestContext containerRequestContext);
 
-    Uni<Void> disable( UUID uuid);
+    Uni<Void> disable( UUID uuid, ContainerRequestContext containerRequestContext);
 }

@@ -52,12 +52,12 @@ public interface WorkflowWebClient {
     @Path("/deploy/{uuid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid);
+    Uni<WorkflowResourceDTO> deploy(@PathParam("uuid") UUID uuid);
 
     @PUT
     @Path("/rollback/{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
+    Uni<WorkflowResourceDTO> rollback(@PathParam("uuid") UUID uuid);
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)

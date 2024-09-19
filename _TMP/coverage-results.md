@@ -6,10 +6,11 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 96.29%               |
-| :heavy_check_mark: Number of Lines Covered | 337    |
-| :x: Number of Lines Missed  | 13     |
-| Total Number of Lines   | 350     |
+| Code Coverage %         | 90.05%               |
+| :heavy_check_mark: Number of Lines Covered | 525    |
+| :x: Number of Lines Missed  | 58     |
+| Total Number of Lines   | 583     |
+
 
 ## Details:
 
@@ -36,13 +37,9 @@
         
 #### All Lines Covered!
         
-- Line #13
+- Line #20
 ```
-        String uri = requestContext.getUriInfo().getAbsolutePath() != null ? Encode.forJava(requestContext.getUriInfo().getAbsolutePath().toString()) : null;
-```
-- Line #15
-```
-        String headers = requestContext.getHeaders() != null ? Encode.forJava(requestContext.getHeaders().toString()) : null;
+                : null;
 ```
 </details>
 
@@ -87,19 +84,7 @@
 
 <details>
     <summary>
-:heavy_check_mark: ResourceResource.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: TaskResource.java
+:heavy_check_mark: UserProfileResource.java
     </summary>
 
         
@@ -123,6 +108,78 @@
 
 <details>
     <summary>
+:x: UserResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: TransactionResource.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceResource.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: TaskResource.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :heavy_check_mark: InfoResource.java
     </summary>
 
@@ -136,31 +193,19 @@
 
 <details>
     <summary>
-:heavy_check_mark: OutcomeEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: NoDeployableResourceType.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :heavy_check_mark: DeployableResourceType.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: QuotaPeriodType.java
     </summary>
 
         
@@ -184,47 +229,11 @@
 
 <details>
     <summary>
-:heavy_check_mark: AppErrorCodeEnum.java
+:x: UserProfileEnum.java
     </summary>
 
         
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: S3ResourceTypeEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: UserProfileEnum.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: Channel.java
-    </summary>
-
-        
-#### All Lines Covered!
+#### Lines Missed:
         
 </details>
 
@@ -257,6 +266,66 @@
 <details>
     <summary>
 :heavy_check_mark: AppErrorType.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: OutcomeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: NoDeployableResourceType.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: S3ResourceTypeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: AppErrorCodeEnum.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: Channel.java
     </summary>
 
         
@@ -301,6 +370,26 @@
 
 <details>
     <summary>
+:x: BankService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfileService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: ResourceService.java
     </summary>
 
@@ -321,7 +410,27 @@
 
 <details>
     <summary>
+:x: ProfileService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: BpmnService.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionService.java
     </summary>
 
         
@@ -332,11 +441,9 @@
 
 <details>
     <summary>
-:heavy_check_mark: HeadersUtils.java
+:x: ConstraintViolationMappingUtils.java
     </summary>
 
-        
-#### All Lines Covered!
         
 </details>
 
@@ -344,10 +451,32 @@
 
 <details>
     <summary>
-:x: ConstraintViolationMappingUtils.java
+:x: HeadersUtils.java
     </summary>
 
         
+#### Lines Missed:
+        
+- Line #54
+```
+        } catch (Exception exception) {
+```
+- Line #68
+```
+                }
+```
+- Line #71
+```
+        } catch (Exception e) {
+```
+- Line #92
+```
+        } catch (IOException e) {
+```
+- Line #94
+```
+        }
+```
 </details>
 
     
@@ -363,17 +492,50 @@
 </details>
 
     
-### it/gov/pagopa/atmlayer/service/consolebackend/clientdto
 
 <details>
     <summary>
-:x: VerifyResponse.java
+:x: LogUtils.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+### it/gov/pagopa/atmlayer/service/consolebackend/clientdto/transactiondto
+
+<details>
+    <summary>
+:x: TransactionInsertionDTO.java
     </summary>
 
         
 </details>
 
     
+
+<details>
+    <summary>
+:x: TransactionUpdateDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionDTO.java
+    </summary>
+
+        
+</details>
+
+    
+### it/gov/pagopa/atmlayer/service/consolebackend/clientdto
 
 <details>
     <summary>
@@ -397,16 +559,6 @@
 
 <details>
     <summary>
-:x: ResourceFrontEndDTO.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: WorkflowResourceCreationDto.java
     </summary>
 
@@ -417,7 +569,7 @@
 
 <details>
     <summary>
-:x: BpmnVersionFrontEndDTO.java
+:x: ProfileDTO.java
     </summary>
 
         
@@ -437,7 +589,17 @@
 
 <details>
     <summary>
-:x: UserProfileDto.java
+:x: ResourceMultipleCreationDtoJSON.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserInsertionWithProfilesDTO.java
     </summary>
 
         
@@ -448,6 +610,102 @@
 <details>
     <summary>
 :x: BpmnCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfilesDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceFileDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankConfigTripletDto.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+- Line #29
+```
+                bankConfigTripletDto.terminalId.equals(this.terminalId));
+```
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BpmEmulatorUpgradeDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: VerifyResponse.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceFrontEndDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BpmnVersionFrontEndDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceMultipleCreationDto.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserProfilesInsertionDTO.java
     </summary>
 
         
@@ -487,7 +745,37 @@
 
 <details>
     <summary>
-:x: ResourceFileDTO.java
+:x: BankUpdateDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankPresentationDTO.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankInsertionDTO.java
     </summary>
 
         
@@ -517,23 +805,17 @@
 
 <details>
     <summary>
-:x: BankConfigTripletDto.java
+:x: UserDTO.java
     </summary>
 
         
-#### Lines Missed:
-        
-- Line #25
-```
-                bankConfigTripletDto.terminalId.equals(this.terminalId));
-```
 </details>
 
     
 
 <details>
     <summary>
-:x: BpmEmulatorUpgradeDto.java
+:x: UserInsertionDTO.java
     </summary>
 
         
@@ -557,16 +839,6 @@
 
 <details>
     <summary>
-:x: ATMLayerValidationErrorResponse.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
 :x: ATMLayerErrorResponse.java
     </summary>
 
@@ -578,6 +850,16 @@
 <details>
     <summary>
 :x: PageInfo.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ATMLayerValidationErrorResponse.java
     </summary>
 
         
@@ -606,26 +888,6 @@
 
         
 #### Lines Missed:
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: Task.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: Device.java
-    </summary>
-
         
 </details>
 
@@ -663,7 +925,7 @@
 
 <details>
     <summary>
-:x: Template.java
+:x: Scene.java
     </summary>
 
         
@@ -673,7 +935,27 @@
 
 <details>
     <summary>
-:x: Scene.java
+:x: Task.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: Device.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: Template.java
     </summary>
 
         
@@ -729,35 +1011,83 @@
 
 <details>
     <summary>
-:heavy_check_mark: ResourceServiceImpl.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:heavy_check_mark: UserServiceImpl.java
-    </summary>
-
-        
-#### All Lines Covered!
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: TaskServiceImpl.java
+:x: BankServiceImpl.java
     </summary>
 
         
 #### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: UserServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: UserProfileServiceImpl.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceServiceImpl.java
+    </summary>
+
+        
+#### Lines Missed:
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: TaskServiceImpl.java
+    </summary>
+
+        
+#### All Lines Covered!
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:heavy_check_mark: TransactionServiceImpl.java
+    </summary>
+
+        
+#### All Lines Covered!
         
 </details>
 
@@ -786,7 +1116,57 @@
 
 <details>
     <summary>
+:x: UserProfileWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: TransactionWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ResourceWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
 :x: UserWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: ProfileWebClient.java
+    </summary>
+
+        
+</details>
+
+    
+
+<details>
+    <summary>
+:x: BankWebClient.java
     </summary>
 
         
@@ -807,16 +1187,6 @@
 <details>
     <summary>
 :x: BpmnWebClient.java
-    </summary>
-
-        
-</details>
-
-    
-
-<details>
-    <summary>
-:x: ResourceWebClient.java
     </summary>
 
         

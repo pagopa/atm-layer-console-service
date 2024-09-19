@@ -1,6 +1,7 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.appdto;
 
 import lombok.*;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Getter
 @Setter
@@ -10,5 +11,7 @@ import lombok.*;
 @Builder
 @EqualsAndHashCode
 public class FileS3Dto {
+
+    @Schema (format = "byte", maxLength = 5000)
     String fileContent;
 }

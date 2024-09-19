@@ -2,8 +2,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.quarkus.test.junit.QuarkusTest;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfileDto;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import org.junit.jupiter.api.Test;
 
@@ -70,39 +68,5 @@ public class HeadersUtilsTest {
         assertThrows(NullPointerException.class, () -> {
             HeadersUtils.getEmailJWT(containerRequestContext);
         });
-    }
-
-    @Test
-    void testHavePermission_NullUserProfileDto() {
-        assertFalse(HeadersUtils.havePermission(null, UserProfileEnum.GUEST));
-        assertFalse(HeadersUtils.havePermission(null, UserProfileEnum.OPERATOR));
-        assertFalse(HeadersUtils.havePermission(null, UserProfileEnum.ADMIN));
-    }
-
-    @Test
-    void testHavePermission_GuestProfile() {
-        UserProfileDto userProfileDto = new UserProfileDto();
-        userProfileDto.setProfile(UserProfileEnum.GUEST);
-        assertTrue(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.GUEST));
-        assertFalse(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.OPERATOR));
-        assertFalse(HeadersUtils.havePermission(userProfileDto, UserProfileEnum.ADMIN));
-    }
-
-    @Test
-    void testHavePermission_OperatorProfile() {
-        UserProfileDto operatorDto = new UserProfileDto();
-        operatorDto.setProfile(UserProfileEnum.OPERATOR);
-        assertTrue(HeadersUtils.havePermission(operatorDto, UserProfileEnum.GUEST));
-        assertTrue(HeadersUtils.havePermission(operatorDto, UserProfileEnum.OPERATOR));
-        assertFalse(HeadersUtils.havePermission(operatorDto, UserProfileEnum.ADMIN));
-    }
-
-    @Test
-    void testHavePermission_AdminProfile() {
-        UserProfileDto adminDto = new UserProfileDto();
-        adminDto.setProfile(UserProfileEnum.ADMIN);
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.GUEST));
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.OPERATOR));
-        assertTrue(HeadersUtils.havePermission(adminDto, UserProfileEnum.ADMIN));
     }
 }
