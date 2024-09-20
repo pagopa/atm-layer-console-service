@@ -5,6 +5,7 @@ import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.BankWebClient;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BankPresentationDTO;
+import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesDTO;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,21 @@ class BankServiceImplTest {
         assertNull(result.await().indefinitely());
 
         verify(containerRequestContext).getHeaderString("Authorization");
+    }
+
+    @Test
+    void testFindByAcquirerId() {
+        String acquirerId = "bank-123";
+
+        BankPresentationDTO bankPresentationDTO = new BankPresentationDTO();
+        bankPresentationDTO.setAcquirerId(acquirerId);
+        bankPresentationDTO.setDenomination("Test Bank");
+
+        when(bankWebClient.findByAcquirerId(anyString())).thenReturn(Uni.createFrom().item(bankPresentationDTO));
+
+        Uni<BankPresentationDTO> result = bankService.findByAcquirerId(acquirerId);
+        assertEquals(bankPresentationDTO, result.await().indefinitely());
+        verify(bankWebClient).findByAcquirerId(acquirerId);
     }
 
 }

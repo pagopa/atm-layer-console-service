@@ -30,7 +30,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class WorkflowServiceImplTest {
+class WorkflowServiceImplTest {
     @Mock
     private WorkflowWebClient workflowWebClient;
 
@@ -133,4 +133,5 @@ public class WorkflowServiceImplTest {
         assertNotNull(result);
         assertNull(result.await().indefinitely());
     }
+
 }
