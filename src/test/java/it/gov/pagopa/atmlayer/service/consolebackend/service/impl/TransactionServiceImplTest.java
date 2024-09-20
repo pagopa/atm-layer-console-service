@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class TransactionServiceImplTest {
+class TransactionServiceImplTest {
 
     @InjectMocks
     TransactionServiceImpl transactionService;
@@ -36,7 +36,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testInsert() {
+    void testInsert() {
         TransactionDTO transactionDTO = new TransactionDTO();
         TransactionInsertionDTO transactionInsertionDTO = new TransactionInsertionDTO();
 
@@ -48,7 +48,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testSearchTransaction() {
+    void testSearchTransaction() {
         int pageIndex = 0, pageSize = 10;
         String transactionId = "txn123", functionType = "funcType", acquirerId = "acq123", branchId = "branch123", terminalId = "term123", transactionStatus = "completed";
         Timestamp startTime = new Timestamp(System.currentTimeMillis()), endTime = new Timestamp(System.currentTimeMillis() + 1000);
@@ -66,7 +66,7 @@ public class TransactionServiceImplTest {
 
 
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         TransactionDTO transactionDTO = new TransactionDTO();
         TransactionUpdateDTO transactionUpdateDTO = new TransactionUpdateDTO();
 
@@ -78,7 +78,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testDelete() {
+    void testDelete() {
 
         when(transactionWebClient.delete(anyString())).thenReturn(Uni.createFrom().voidItem());
 
@@ -86,4 +86,5 @@ public class TransactionServiceImplTest {
 
         assertEquals(result, Uni.createFrom().voidItem());
     }
+
 }
