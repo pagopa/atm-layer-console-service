@@ -1,14 +1,14 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.05%               |
-| :heavy_check_mark: Number of Lines Covered | 525    |
-| :x: Number of Lines Missed  | 58     |
+| Code Coverage %         | 90.22%               |
+| :heavy_check_mark: Number of Lines Covered | 526    |
+| :x: Number of Lines Missed  | 57     |
 | Total Number of Lines   | 583     |
 
 
