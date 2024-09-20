@@ -5,7 +5,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.client.UserProfileWebClient
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesInsertionDTO;
 import jakarta.ws.rs.container.ContainerRequestContext;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,10 +26,6 @@ class UserProfileServiceImplTest {
 
     @InjectMocks
     UserProfileServiceImpl userProfileServiceImpl;
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     void testInsertUserProfiles() {
@@ -71,5 +66,6 @@ class UserProfileServiceImplTest {
         assertNull(result.await().indefinitely());
         verify(userProfileWebClient).deleteUserProfiles(userId, profileId);
     }
+
 }
 
