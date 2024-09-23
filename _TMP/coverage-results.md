@@ -6,10 +6,10 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.22%               |
-| :heavy_check_mark: Number of Lines Covered | 526    |
-| :x: Number of Lines Missed  | 57     |
-| Total Number of Lines   | 583     |
+| Code Coverage %         | 92.25%               |
+| :heavy_check_mark: Number of Lines Covered | 536    |
+| :x: Number of Lines Missed  | 45     |
+| Total Number of Lines   | 581     |
 
 
 ## Details:
@@ -1011,11 +1011,11 @@
 
 <details>
     <summary>
-:x: BankServiceImpl.java
+:heavy_check_mark: BankServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
