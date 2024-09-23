@@ -5,7 +5,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.Header;
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.*;
-import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
@@ -125,27 +124,6 @@ class BpmnResourceTest {
         assertEquals(result.getItemsFound(), response.getItemsFound());
     }
 
-//    @Test
-//    void testAddAssociation() {
-//        UUID uuid = UUID.randomUUID();
-//        BpmnBankConfigDTO response = new BpmnBankConfigDTO();
-//        BankConfigTripletDto inputDto = new BankConfigTripletDto(any(), any(), any());
-//        when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
-//        when(bpmnService.addSingleAssociation( uuid, 1L, inputDto)).thenReturn(Uni.createFrom().item(response));
-//        BpmnBankConfigDTO result = given()
-//                .header(authHeader)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .pathParam("uuid", uuid.toString())
-//                .pathParam("version", 1)
-//                .when().post("/api/v1/console-service/bpmn/associations/{uuid}/version/{version}")
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .body()
-//                .as(BpmnBankConfigDTO.class);
-//        assertEquals(result, response);
-//    }
-
     @Test
     void testDeleteAssociation() {
         UUID uuid = UUID.randomUUID();
@@ -167,27 +145,6 @@ class BpmnResourceTest {
                 .extract()
                 .body();
     }
-
-//    @Test
-//    void testReplaceSingleAssociation() {
-//        UUID uuid = UUID.randomUUID();
-//        BpmnBankConfigDTO response = new BpmnBankConfigDTO();
-//        BankConfigTripletDto inputDto = new BankConfigTripletDto(any(), any(), any());
-//        when(userService.checkAuthorizationUser(any(ContainerRequestContext.class), any(UserProfileEnum.class))).thenReturn(Uni.createFrom().voidItem());
-//        when(bpmnService.replaceSingleAssociation( any(), anyLong(), any())).thenReturn(Uni.createFrom().item(response));
-//        BpmnBankConfigDTO result = given()
-//                .header(authHeader)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .pathParam("uuid", uuid.toString())
-//                .pathParam("version", 1)
-//                .when().put("/api/v1/console-service/bpmn/associations/{uuid}/version/{version}")
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .body()
-//                .as(BpmnBankConfigDTO.class);
-//        assertEquals(result, response);
-//    }
 
     @Test
     void testDeployBpmn() {

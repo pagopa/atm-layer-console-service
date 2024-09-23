@@ -28,13 +28,4 @@ public class UserProfileServiceImpl implements UserProfileService {
                 .onItem().invoke(createdBPMN -> LogUtils.logOperation(containerRequestContext, "Inserimento associazione tra utente e profili"));
     }
 
-    @Override
-    public Uni<UserProfilesDTO> findById(String userId, int profileId) {
-        return userProfileWebClient.getById(userId, profileId);
-    }
-
-    @Override
-    public Uni<Void> deleteUserProfiles(String userId, int profileId) {
-        return userProfileWebClient.deleteUserProfiles(userId, profileId);
-    }
 }

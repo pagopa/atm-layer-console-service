@@ -7,9 +7,6 @@ import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-/**
- * Model class for the error response
- */
 @Getter
 @Jacksonized
 @JsonPropertyOrder({"type", "errorCode", "status", "message"})

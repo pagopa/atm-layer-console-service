@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class TaskResourceTest {
+class TaskResourceTest {
 
     @InjectMock
     TaskService taskService;

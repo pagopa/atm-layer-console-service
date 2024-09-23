@@ -9,7 +9,6 @@ import it.gov.pagopa.atmlayer.service.consolebackend.enums.StatusEnum;
 import it.gov.pagopa.atmlayer.service.consolebackend.exception.AtmLayerException;
 import it.gov.pagopa.atmlayer.service.consolebackend.model.PageInfo;
 import it.gov.pagopa.atmlayer.service.consolebackend.service.BpmnService;
-import it.gov.pagopa.atmlayer.service.consolebackend.utils.HeadersUtils;
 import it.gov.pagopa.atmlayer.service.consolebackend.utils.LogUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

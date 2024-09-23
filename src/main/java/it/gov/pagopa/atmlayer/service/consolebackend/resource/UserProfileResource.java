@@ -1,7 +1,6 @@
 package it.gov.pagopa.atmlayer.service.consolebackend.resource;
 
 import io.smallrye.mutiny.Uni;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserProfilesInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.enums.UserProfileEnum;
@@ -10,7 +9,10 @@ import it.gov.pagopa.atmlayer.service.consolebackend.service.UserService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -65,35 +67,4 @@ public class UserProfileResource {
                 .transformToUni(voidItem -> this.userProfileService.insertUserProfiles(userProfilesInsertionDTO, containerRequestContext));
     }
 
-//    @GET
-//    @Path("/userId/{userId}/profileId/{profileId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Operation(operationId = "getUserProfile", description = "Restituisce lo user e il profilo associato")
-//    @APIResponse(responseCode = "200", description = "Ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserProfilesDTO.class)))
-//    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
-//    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
-//    public Uni<UserProfilesDTO> getById(@Context ContainerRequestContext containerRequestContext,
-//                                        @PathParam("userId") @Schema(format = "byte", maxLength = 255) String userId,
-//                                        @PathParam("profileId") @Schema(example = "5", minimum = "1", maximum = "30") int profileId) {
-//        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
-//                .onItem()
-//                .transformToUni(voidItem -> this.userProfileService.findById(userId, profileId));
-//    }
-
-//    @DELETE
-//    @Path("/userId/{userId}/profileId/{profileId}")
-//    @Operation(
-//            operationId = "deleteUserProfile",
-//            description = "Cancella lo userProfile dal database"
-//    )
-//    @APIResponse(responseCode = "204", description = "Ok")
-//    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
-//    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"Si è verificato un errore imprevisto, vedere i log per ulteriori informazioni\", \"errorCode\":\"ATMLCB_500\"}"))
-//    public Uni<Void> deleteUserProfiles(@Context ContainerRequestContext containerRequestContext,
-//                                        @PathParam("userId") @Schema(format = "byte", maxLength = 255) String userId,
-//                                        @PathParam("profileId") @Schema(example = "5", minimum = "1", maximum = "30") int profileId) {
-//        return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
-//                .onItem()
-//                .transformToUni(voidItem -> this.userProfileService.deleteUserProfiles(userId, profileId));
-//    }
 }

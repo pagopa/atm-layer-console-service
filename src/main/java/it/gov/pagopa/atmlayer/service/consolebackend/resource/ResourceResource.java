@@ -20,7 +20,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -54,6 +53,7 @@ public class ResourceResource {
         this.resourceService = resourceService;
         this.userService = userService;
     }
+
     private final ResourceService resourceService;
 
     private final UserService userService;
@@ -66,8 +66,8 @@ public class ResourceResource {
             description = "Filtra tra tutti i Resource file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Recuperate risorse cercate.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<PageInfo<ResourceFrontEndDTO>> getResourceFiltered(@Context ContainerRequestContext containerRequestContext,
                                                                   @QueryParam("pageIndex") @DefaultValue("0")
                                                                   @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) int pageIndex,
@@ -78,18 +78,18 @@ public class ResourceResource {
                                                                   @QueryParam("noDeployableResourceType") NoDeployableResourceType noDeployableResourceType,
                                                                   @QueryParam("fileName") @Schema(format = "byte", maxLength = 60) String fileName,
                                                                   @QueryParam("storageKey") @Schema(format = "byte", maxLength = 255) String storageKey,
-                                                                  @QueryParam("extension") @Schema(format = "byte", maxLength = 255) String extension){
+                                                                  @QueryParam("extension") @Schema(format = "byte", maxLength = 255) String extension) {
 
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.resourceService.getResourceFiltered(pageIndex, pageSize, resourceId, sha256, noDeployableResourceType, fileName, storageKey, extension)
-                .onItem()
-                .transform(Unchecked.function(pagedList -> {
-                    if (pagedList.getResults().isEmpty()) {
-                        log.info("No Resources meets the applied filters");
-                    }
-                    return pagedList;
-                })));
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No Resources meets the applied filters");
+                            }
+                            return pagedList;
+                        })));
     }
 
     @POST
@@ -100,10 +100,10 @@ public class ResourceResource {
             description = "Creazione file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa creata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<ResourceDTO> createResource(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto){
+                                           @RequestBody(required = true) @Valid ResourceCreationDto resourceCreationDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.resourceService.createResource(resourceCreationDto, containerRequestContext));
@@ -118,10 +118,10 @@ public class ResourceResource {
             description = "Creazione di molteplici file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa crete.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceMultipleCreationDto.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<List<String>> createResourceMultiple(@Context ContainerRequestContext containerRequestContext,
-                                           @RequestBody(required = true) ResourceMultipleCreationDto resourceMultipleCreationDto){
+                                                    @RequestBody(required = true) ResourceMultipleCreationDto resourceMultipleCreationDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.resourceService.createResourceMultiple(resourceMultipleCreationDto, containerRequestContext));
@@ -136,8 +136,8 @@ public class ResourceResource {
             description = "Aggiorna file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<ResourceDTO> updateResource(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) @FormParam("file") @Schema(format = "binary", maxLength = 5000) File file,
                                            @PathParam("uuid") UUID uuid) {
@@ -153,8 +153,8 @@ public class ResourceResource {
             description = "Disabilita file"
     )
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Risorsa disabilitata.")
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
                              @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
