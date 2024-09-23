@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @QuarkusTest
-public class TransactionResourceTest {
+class TransactionResourceTest {
     @InjectMock
     TransactionService transactionService;
 
@@ -69,7 +69,7 @@ public class TransactionResourceTest {
         pageInfo = new PageInfo<>(0, 10, 1, 1, Arrays.asList(transactionDTO));
     }
     @Test
-    public void testInsert() {
+    void testInsert() {
         when(transactionService.insert(transactionInsertionDTO)).thenReturn(Uni.createFrom().item(transactionDTO));
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
@@ -84,8 +84,9 @@ public class TransactionResourceTest {
                 .body().as(TransactionDTO.class);
         assertEquals(result, transactionDTO);
     }
+
     @Test
-    public void testSearchTransaction() {
+    void testSearchTransaction() {
         when(transactionService.searchTransaction(0, 10, "txn123", "funcType", "acq123", "branch123", "term123", "completed", null, null))
                 .thenReturn(Uni.createFrom().item(pageInfo));
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
@@ -110,9 +111,8 @@ public class TransactionResourceTest {
         assertEquals(result.getItemsFound(), pageInfo.getItemsFound());
     }
 
-
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         when(transactionService.update(transactionUpdateDTO)).thenReturn(Uni.createFrom().item(transactionDTO));
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 
@@ -130,7 +130,7 @@ public class TransactionResourceTest {
         assertEquals(result, transactionDTO);
     }
     @Test
-    public void testDelete() {
+    void testDelete() {
         when(transactionService.delete("txn123")).thenReturn(Uni.createFrom().voidItem());
         when(userService.checkAuthorizationUser(any(), any())).thenReturn(Uni.createFrom().voidItem());
 

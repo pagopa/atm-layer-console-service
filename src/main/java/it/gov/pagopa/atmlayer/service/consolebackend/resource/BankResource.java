@@ -19,7 +19,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -43,6 +42,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 })
 @SecurityRequirement(name = "bearerAuth")
 public class BankResource {
+
     @Inject
     public BankResource(BankService bankService, UserService userService) {
         this.bankService = bankService;

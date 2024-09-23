@@ -12,7 +12,6 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @ApplicationScoped
 public class TransactionServiceImpl implements TransactionService {
@@ -34,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
         return transactionWebClient.update(transactionUpdateDTO);
     }
 
-    public Uni<Void> delete (String transactionId) {
+    public Uni<Void> delete(String transactionId) {
         return transactionWebClient.delete(transactionId);
     }
 }

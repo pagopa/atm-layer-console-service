@@ -12,6 +12,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @EqualsAndHashCode
 public class FileS3Dto {
 
-    @Schema (format = "byte", maxLength = 5000)
+    @Schema(format = "byte", maxLength = 5000)
     String fileContent;
 }
