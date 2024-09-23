@@ -6,9 +6,9 @@
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 92.25%               |
-| :heavy_check_mark: Number of Lines Covered | 536    |
-| :x: Number of Lines Missed  | 45     |
+| Code Coverage %         | 95.18%               |
+| :heavy_check_mark: Number of Lines Covered | 553    |
+| :x: Number of Lines Missed  | 28     |
 | Total Number of Lines   | 581     |
 
 
@@ -457,25 +457,13 @@
         
 #### Lines Missed:
         
-- Line #54
-```
-        } catch (Exception exception) {
-```
 - Line #68
 ```
                 }
 ```
-- Line #71
-```
-        } catch (Exception e) {
-```
 - Line #92
 ```
         } catch (IOException e) {
-```
-- Line #94
-```
-        }
 ```
 </details>
 
@@ -1059,11 +1047,11 @@
 
 <details>
     <summary>
-:x: ResourceServiceImpl.java
+:heavy_check_mark: ResourceServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
