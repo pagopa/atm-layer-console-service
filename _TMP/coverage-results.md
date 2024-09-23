@@ -1,15 +1,15 @@
 
 # Coverage Report: JaCoCo
 
-* IntegrationTest (QuarkusTest)
+* FileS3DtoTest (QuarkusTest)
       
       
 | Outcome                 | Value                                                               |
 |-------------------------|---------------------------------------------------------------------|
-| Code Coverage %         | 90.22%               |
-| :heavy_check_mark: Number of Lines Covered | 526    |
-| :x: Number of Lines Missed  | 57     |
-| Total Number of Lines   | 583     |
+| Code Coverage %         | 95.18%               |
+| :heavy_check_mark: Number of Lines Covered | 553    |
+| :x: Number of Lines Missed  | 28     |
+| Total Number of Lines   | 581     |
 
 
 ## Details:
@@ -457,25 +457,13 @@
         
 #### Lines Missed:
         
-- Line #54
-```
-        } catch (Exception exception) {
-```
 - Line #68
 ```
                 }
 ```
-- Line #71
-```
-        } catch (Exception e) {
-```
 - Line #92
 ```
         } catch (IOException e) {
-```
-- Line #94
-```
-        }
 ```
 </details>
 
@@ -1011,11 +999,11 @@
 
 <details>
     <summary>
-:x: BankServiceImpl.java
+:heavy_check_mark: BankServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
@@ -1059,11 +1047,11 @@
 
 <details>
     <summary>
-:x: ResourceServiceImpl.java
+:heavy_check_mark: ResourceServiceImpl.java
     </summary>
 
         
-#### Lines Missed:
+#### All Lines Covered!
         
 </details>
 
