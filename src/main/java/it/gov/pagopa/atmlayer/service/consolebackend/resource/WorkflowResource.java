@@ -55,6 +55,7 @@ public class WorkflowResource {
         this.workflowService = workflowService;
         this.userService = userService;
     }
+
     private final WorkflowService workflowService;
 
     private final UserService userService;
@@ -64,8 +65,8 @@ public class WorkflowResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Restituisce i Workflow filtrati paginati")
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Il processo è terminato.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = PageInfo.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<PageInfo<WorkflowResourceFrontEndDTO>> getWorkflowFiltered(@Context ContainerRequestContext containerRequestContext,
                                                                           @QueryParam("pageIndex") @DefaultValue("0")
                                                                           @Parameter(required = true, schema = @Schema(minimum = "0", maximum = "10000")) Integer pageIndex,
@@ -85,13 +86,13 @@ public class WorkflowResource {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.getWorkflowResourceFiltered(pageIndex, pageSize, status, workflowResourceId, deployedFileName, definitionKey, resourceType, sha256, definitionVersionCamunda, camundaDefinitionId, description, resource, deploymentId, fileName)
-                 .onItem()
-                 .transform(Unchecked.function(pagedList -> {
-                     if (pagedList.getResults().isEmpty()) {
-                         log.info("No Workflow resources meets the applied filters");
-                     }
-                     return pagedList;
-                 })));
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No Workflow resources meets the applied filters");
+                            }
+                            return pagedList;
+                        })));
     }
 
     @GET
@@ -102,10 +103,10 @@ public class WorkflowResource {
             description = "Scarica file front-end"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa scaricata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = FileS3Dto.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<FileS3Dto> downloadFrontEnd(@Context ContainerRequestContext containerRequestContext,
-                                           @PathParam("uuid") UUID uuid){
+                                           @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.READ_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.downloadFrontEnd(uuid));
@@ -119,8 +120,8 @@ public class WorkflowResource {
             description = "Creazione file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa creata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<WorkflowResourceDTO> create(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) @Valid WorkflowResourceCreationDto workflowResourceCreationDto) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
@@ -136,8 +137,8 @@ public class WorkflowResource {
             description = "rilascia file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa deployata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<WorkflowResourceDTO> deploy(@Context ContainerRequestContext containerRequestContext,
                                            @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.DEPLOY_BPMN)
@@ -153,8 +154,8 @@ public class WorkflowResource {
             description = "Rollback"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Versione precedente ripristinata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<WorkflowResourceDTO> rollback(@Context ContainerRequestContext containerRequestContext,
                                              @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
@@ -171,11 +172,11 @@ public class WorkflowResource {
             description = "Aggiorna file"
     )
     @APIResponse(responseCode = "200", description = "Operazione eseguita con successo. Risorsa aggiornata.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = WorkflowResourceDTO.class)))
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<WorkflowResourceDTO> update(@Context ContainerRequestContext containerRequestContext,
                                            @RequestBody(required = true) @FormParam("file") @NotNull(message = "input file is required") @Schema(format = "binary", maxLength = 5000) File file,
-                                    @PathParam("uuid") UUID uuid){
+                                           @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.update(file, uuid, containerRequestContext));
@@ -188,10 +189,10 @@ public class WorkflowResource {
             description = "Disabilita file"
     )
     @APIResponse(responseCode = "204", description = "Operazione eseguita con successo. Risorsa disabilitata.")
-    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}" ))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "4XX", description = "Bad Request", content = @Content(example = "{\"type\":\"BAD_REQUEST\", \"statusCode\":\"4XX\", \"message\":\"Messaggio di errore\", \"errorCode\":\"ATMLM_4000XXX\"}"))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<Void> disable(@Context ContainerRequestContext containerRequestContext,
-                             @PathParam("uuid") UUID uuid){
+                             @PathParam("uuid") UUID uuid) {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.WRITE_GESTIONE_FLUSSI)
                 .onItem()
                 .transformToUni(voidItem -> this.workflowService.disable(uuid, containerRequestContext));

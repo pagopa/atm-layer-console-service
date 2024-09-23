@@ -135,13 +135,13 @@ public class UserResource {
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.GESTIONE_UTENTI)
                 .onItem()
                 .transformToUni(voidItem -> userService.getUserFiltered(pageIndex, pageSize, name, surname, userId, profileNumber)
-                .onItem()
-                .transform(Unchecked.function(pagedList -> {
-                    if (pagedList.getResults().isEmpty()) {
-                        log.info("No User record meets the applied filters");
-                    }
-                    return pagedList;
-                })));
+                        .onItem()
+                        .transform(Unchecked.function(pagedList -> {
+                            if (pagedList.getResults().isEmpty()) {
+                                log.info("No User record meets the applied filters");
+                            }
+                            return pagedList;
+                        })));
     }
 
     @POST

@@ -9,9 +9,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import static it.gov.pagopa.atmlayer.service.consolebackend.enums.AppErrorCodeEnum.ATMLCB_500;
 
-/**
- * Base exception for PDF receipts service exceptions
- */
+
 @Getter
 public class AtmLayerException extends WebApplicationException {
 

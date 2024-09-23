@@ -30,22 +30,21 @@ public class GlobalExceptionMapperImpl {
     private final ConstraintViolationMappingUtils constraintViolationMappingUtils;
 
     @Inject
-    public GlobalExceptionMapperImpl(ConstraintViolationMappingUtils constraintViolationMappingUtils){
+    public GlobalExceptionMapperImpl(ConstraintViolationMappingUtils constraintViolationMappingUtils) {
         this.constraintViolationMappingUtils = constraintViolationMappingUtils;
     }
 
 
     private final Logger logger = LoggerFactory.getLogger(GlobalExceptionMapperImpl.class);
-    private final String MODEL_EXCEPTION_TYPE="type";
-    private final String MODEL_EXCEPTION_ERROR_CODE="errorCode";
-    private final String MODEL_EXCEPTION_MESSAGE="message";
-    private final String MODEL_EXCEPTION_STATUS_CODE="statusCode";
+    private final String MODEL_EXCEPTION_TYPE = "type";
+    private final String MODEL_EXCEPTION_ERROR_CODE = "errorCode";
+    private final String MODEL_EXCEPTION_MESSAGE = "message";
+    private final String MODEL_EXCEPTION_STATUS_CODE = "statusCode";
 
     private final String TASK_STATUS = "status";
     private final String TASK_ERROR_CODE = "errorCode";
     private final String TASK_DESCRIPTION = "description";
     private final String TASK_EXCEPTION = "TASK_EXCEPTION";
-
 
 
     @ServerExceptionMapper

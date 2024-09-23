@@ -27,15 +27,14 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private final UserService userService;
 
     @Inject
-    public AuthorizationFilter(UserService userService){
+    public AuthorizationFilter(UserService userService) {
         this.userService = userService;
     }
 
 
-
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        if(enableAuthorization){
+        if (enableAuthorization) {
             userService.getUserById(getEmailJWT(requestContext)).onItem().transform(userProfile -> {
                 if (!havePermission(userProfile, UserProfileEnum.READ_GESTIONE_FLUSSI)) {
                     throw new AtmLayerException("Accesso negato!", Response.Status.UNAUTHORIZED, AppErrorCodeEnum.ATMLCB_401);

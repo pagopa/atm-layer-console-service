@@ -11,8 +11,4 @@ public interface UserProfileService {
 
     Uni<List<UserProfilesDTO>> insertUserProfiles(UserProfilesInsertionDTO userProfilesInsertionDTO, ContainerRequestContext containerRequestContext);
 
-    Uni<UserProfilesDTO> findById(String userId, int profileId);
-
-    Uni<Void> deleteUserProfiles(String userId, int profileId);
-
 }

@@ -46,6 +46,7 @@ public class TaskResource {
         this.taskService = taskService;
         this.userService = userService;
     }
+
     private final TaskService taskService;
     private final UserService userService;
 
@@ -59,9 +60,9 @@ public class TaskResource {
     @APIResponse(responseCode = "202", description = "Operazione eseguita con successo. Il processo è in esecuzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Scene.class)))
     @APIResponse(responseCode = "209", description = "Errore durante l'elaborazione del flusso della funzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<Response> createMainScene(@Context ContainerRequestContext containerRequestContext,
-            @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
+                                         @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
                 .onItem()
@@ -78,10 +79,10 @@ public class TaskResource {
     @APIResponse(responseCode = "202", description = "Operazione eseguita con successo. Il processo è in esecuzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Scene.class)))
     @APIResponse(responseCode = "209", description = "Errore durante l'elaborazione del flusso della funzione.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
     @APIResponse(responseCode = "400", description = "Richiesta malformata, la descrizione può fornire dettagli sull'errore.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ATMLayerErrorResponse.class)))
-    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}" ))
+    @APIResponse(responseCode = "500", description = "Internal Server Error", content = @Content(example = "{\"type\":\"GENERIC\", \"statusCode\":\"500\", \"message\":\"An unexpected error has occurred, see logs for more info\", \"errorCode\":\"ATMLCB_500\"}"))
     public Uni<Response> createNextScene(@Context ContainerRequestContext containerRequestContext,
-            @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") @Schema(format = "byte", maxLength = 255) String transactionId,
-            @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
+                                         @Parameter(name = "transactionId", description = "ID della transazione") @NotNull @PathParam("transactionId") @Schema(format = "byte", maxLength = 255) String transactionId,
+                                         @RequestBody(name = "state", description = "Il body della richiesta con lo stato del dispositivo, delle periferiche e dei tesk eseguiti") @NotNull State state) {
 
         return userService.checkAuthorizationUser(containerRequestContext, UserProfileEnum.EMULATOR)
                 .onItem()

@@ -2,7 +2,6 @@ package it.gov.pagopa.atmlayer.service.consolebackend.service.impl;
 
 import io.smallrye.mutiny.Uni;
 import it.gov.pagopa.atmlayer.service.consolebackend.client.UserWebClient;
-import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.BpmnVersionFrontEndDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionDTO;
 import it.gov.pagopa.atmlayer.service.consolebackend.clientdto.UserInsertionWithProfilesDTO;
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Uni<UserDTO> checkFirstAccess(String userId){
+    public Uni<UserDTO> checkFirstAccess(String userId) {
         return userWebClient.firstAccess(userId);
     }
 
