@@ -41,7 +41,7 @@ public class ResourceMultipleCreationDto {
     @Pattern(regexp = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", message = "String must not start or end with '/' and must not contain white spaces and special characters")
     @DefaultValue("")
     @Schema(description = "Description of the path parameter: example/path",
-            pattern = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", format = "byte", maxLength = 255)
+            pattern = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", format = "byte", maxLength = 150)
     @PartType("text/plain")
     @Length(max = 150)
     private String path;
