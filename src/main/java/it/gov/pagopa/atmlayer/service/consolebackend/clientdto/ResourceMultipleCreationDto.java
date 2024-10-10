@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.validator.constraints.Length;
 import org.jboss.resteasy.reactive.PartType;
 
 import java.io.File;
@@ -40,11 +41,13 @@ public class ResourceMultipleCreationDto {
     @Pattern(regexp = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", message = "String must not start or end with '/' and must not contain white spaces and special characters")
     @DefaultValue("")
     @Schema(description = "Description of the path parameter: example/path",
-            pattern = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", format = "byte", maxLength = 255)
+            pattern = "(^$)|(^(?!/)[a-zA-Z0-9/]+(?<!/)$)", format = "byte", maxLength = 150)
     @PartType("text/plain")
+    @Length(max = 150)
     private String path;
     @FormParam("description")
     @PartType("text/plain")
     @Schema(format = "byte", maxLength = 255)
+    @Length(max = 255)
     private String description;
 }
