@@ -17,12 +17,12 @@ public class BankPresentationDTO {
     private String denomination;
     @Schema(format = "byte", maxLength = 255)
     private String clientId;
-    @Schema(format = "byte", maxLength = 255)
-    private String clientSecret;
-    @Schema(format = "byte", maxLength = 255)
-    private String apiKeyId;
-    @Schema(format = "byte", maxLength = 255)
-    private String apiKeySecret;
+//    @Schema(format = "byte", maxLength = 255)
+//    private String clientSecret;
+//    @Schema(format = "byte", maxLength = 255)
+//    private String apiKeyId;
+//    @Schema(format = "byte", maxLength = 255)
+//    private String apiKeySecret;
     @Schema(format = "byte", maxLength = 255)
     private String usagePlanId;
     @Schema(minimum = "1", maximum = "10000")
